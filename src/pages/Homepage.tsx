@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '@material-ui/core/Button';
 
 interface Props {
   
@@ -6,10 +7,10 @@ interface Props {
 
 const Homepage = (props: Props) => {
   return (
-    <div>
+    <Button variant='contained' color='primary'>
       Hello World
-    </div>
-  )
+    </Button>
+  );
 }
 
 export default Homepage
