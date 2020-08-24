@@ -1,11 +1,10 @@
 import React from 'react';
 import Directory from 'components/Directory';
-import MainMenu from 'components/MainMenu';
 
 interface Props {}
 
 const Homepage = (props: Props) => {
-  return <MainMenu />;
+  return <Directory />;
 };
 
 export default Homepage;
