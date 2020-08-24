@@ -1,16 +1,11 @@
-import React from 'react'
-import Button from '@material-ui/core/Button';
+import React from 'react';
+import Directory from 'components/Directory';
+import MainMenu from 'components/MainMenu';
 
-interface Props {
-  
-}
+interface Props {}
 
 const Homepage = (props: Props) => {
-  return (
-    <Button variant='contained' color='primary'>
-      Hello World
-    </Button>
-  );
-}
+  return <MainMenu />;
+};
 
-export default Homepage
+export default Homepage;

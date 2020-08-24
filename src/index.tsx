@@ -7,7 +7,7 @@ import Album from './pages/Album';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Album />
+    <Homepage />
   </React.StrictMode>,
   document.getElementById('root')
 );
