@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
       position: 'absolute',
+      pointerEvents: 'none'
     },
   })
 );

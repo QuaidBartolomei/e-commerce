@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { ShopItemData } from 'pages/Shop';
+import { ShopItemData } from 'pages/Shop/Shop';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

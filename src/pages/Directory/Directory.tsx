@@ -1,13 +1,14 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import hat_img from 'assets/hat.jpg';
+import hats_img from 'assets/hats.jpg';
 import jeans_img from 'assets/jeans.jpg';
 import mens_img from 'assets/mens-sweaters.jpg';
 import womens_img from 'assets/woman-skirt.jpg';
 import shoes_img from 'assets/shoes.jpg';
 import accessory_img from 'assets/accessory.jpg';
 import DirectoryItem, { DirectoryItemProps } from './DirectoryItem';
+import { navbarHeight } from 'components/Navbar';
 
 const topRowItems: DirectoryItemProps[] = [
   {
@@ -23,8 +24,8 @@ const topRowItems: DirectoryItemProps[] = [
 
 const bottomRowItems: DirectoryItemProps[] = [
   {
-    img: hat_img,
-    title: 'Hat',
+    img: hats_img,
+    title: 'Hats',
   },
   {
     img: jeans_img,
@@ -45,8 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      minHeight: '100vh',
-      margin: '0 8px',
+      minHeight: `calc(100vh - ${navbarHeight})`,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
