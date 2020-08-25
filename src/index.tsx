@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import Homepage from './pages/Homepage';
-import Album from './pages/Album';
+import Router from 'Router';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Homepage />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Router />
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

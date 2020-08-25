@@ -6,6 +6,7 @@ import jeans_img from 'assets/jeans.jpg';
 import mens_img from 'assets/mens-sweaters.jpg';
 import womens_img from 'assets/woman-skirt.jpg';
 import shoes_img from 'assets/shoes.jpg';
+import accessory_img from 'assets/accessory.jpg';
 import DirectoryItem, { DirectoryItemProps } from './DirectoryItem';
 
 const topRowItems: DirectoryItemProps[] = [
@@ -34,8 +35,9 @@ const bottomRowItems: DirectoryItemProps[] = [
     title: 'Shoes',
   },
   {
-    img: shoes_img,
-    title: 'Shoes',
+    img: accessory_img,
+    title: 'Accessories',
+    posY: 'bottom',
   },
 ];
 
@@ -63,11 +65,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const MainMenu = () => {
+const Directory = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
+      {/* Top Row */}
       <Grid container spacing={2} className={classes.topRow}>
         {topRowItems.map((item: DirectoryItemProps, i) => (
           <Grid key={i} item xs={6}>
@@ -75,6 +78,7 @@ const MainMenu = () => {
           </Grid>
         ))}
       </Grid>
+      {/* Bottom Row */}
       <Grid container spacing={2} className={classes.bottomRow}>
         {bottomRowItems.map((item: DirectoryItemProps, i) => (
           <Grid key={i} item xs={3}>
@@ -86,5 +90,4 @@ const MainMenu = () => {
   );
 };
 
-
-export default MainMenu;
+export default Directory;

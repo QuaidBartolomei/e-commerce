@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 export interface DirectoryItemProps {
   img: string;
@@ -12,30 +14,32 @@ export interface DirectoryItemProps {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    directoryItem: {
-      backgroundSize: 'cover',
-      backgroundPositionY: 'center',
-      backgroundPositionX: 'center',
+    container: {
+      height: '100%',
       width: '100%',
       border: 'black 2px solid',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      overflow: 'hidden',
+    },
+    directoryItem: {
       height: '100%',
+      width: '100%',
+      backgroundSize: 'cover',
+      backgroundPositionX: 'center',
       '&:hover': {
         cursor: 'pointer',
       },
     },
     itemLabel: {
       border: 'black 2px solid',
-      backgroundColor: 'rgba(255,255,255,0.5)',
       width: '96px',
       height: '64px',
-      textAlign: 'center',
-      verticalAlign: 'center',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      position: 'absolute',
     },
   })
 );
@@ -46,15 +50,23 @@ const DirectoryItem = (item: DirectoryItemProps) => {
   const classes = useStyles();
 
   return (
-    <div
-      className={classes.directoryItem}
-      style={{
-        backgroundImage: `url(${item.img})`,
-        backgroundPositionY: item.posY || 'center',
-      }}
-      onMouseOver={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-    >
+    <Link className={classes.container} to='/hats'>
+      <motion.div
+        className={classes.directoryItem}
+        style={{
+          backgroundImage: `url(${item.img})`,
+          backgroundPositionY: item.posY || 'center',
+        }}
+        onMouseOver={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+        whileHover={{
+          scale: 1.1,
+          transition: {
+            duration: 6,
+            ease: [0.25, 0.45, 0.45, 0.95],
+          },
+        }}
+      />
       <div
         className={classes.itemLabel}
         style={{
@@ -63,7 +75,7 @@ const DirectoryItem = (item: DirectoryItemProps) => {
       >
         {item.title}
       </div>
-    </div>
+    </Link>
   );
 };
 
