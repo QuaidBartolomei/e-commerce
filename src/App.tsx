@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
 import Router from 'Router';
 import { BrowserRouter } from 'react-router-dom';
 import Navbar, { navbarHeight } from 'components/Navbar';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
+import { UserProvider } from 'UserContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,12 +26,14 @@ const App = () => {
   return (
     <BrowserRouter>
       <CssBaseline />
-      <Navbar />
-      <div className={classes.content}>
-        <Router />
-      </div>
+      <UserProvider>
+        <Navbar />
+        <div className={classes.content}>
+          <Router />
+        </div>
+      </UserProvider>
     </BrowserRouter>
   );
-}
+};
 
-export default App
+export default App;

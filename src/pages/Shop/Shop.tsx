@@ -1,11 +1,10 @@
 import React from 'react';
-import Navbar from 'components/Navbar';
 import { hatData } from 'assets/hats/hats';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid/Grid';
 import ShopItem from 'pages/Shop/ShopItem';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
       width: '100vw',

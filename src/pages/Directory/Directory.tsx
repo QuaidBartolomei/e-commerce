@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import hats_img from 'assets/hats.jpg';
 import jeans_img from 'assets/jeans.jpg';
@@ -42,7 +42,7 @@ const bottomRowItems: DirectoryItemProps[] = [
   },
 ];
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       flexGrow: 1,

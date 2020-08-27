@@ -1,12 +1,15 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo_img from 'assets/logo.svg';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import UserContext from 'UserContext';
+import Button from '@material-ui/core/Button/Button';
+import { auth } from 'firebase.utils';
 
-export const navbarHeight = '48px';
+export const navbarHeight = '64px';
 
 const FlexCenter = {
   display: 'flex',
@@ -19,11 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
     container: {
       ...FlexCenter,
       height: navbarHeight,
-      padding: '0 8px',
-      background: '#888',
+      padding: '8px',
     },
     logo: {
-      height: '90%',
+      height: '100%',
     },
     navLinks: {
       ...FlexCenter,
@@ -38,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Navbar = () => {
   const classes = useStyles();
+  const userContext = useContext(UserContext);
   return (
     <div className={classes.container}>
       <Link
@@ -47,12 +50,16 @@ const Navbar = () => {
           ...FlexCenter,
         }}
       >
-        <img src={logo_img} className={classes.logo} />
+        <img src={logo_img} className={classes.logo} alt='logo' />
       </Link>
       <div className={classes.navLinks}>
         <Link to='#'>Shop</Link>
         <Link to='#'>Contact</Link>
-        <Link to='/signin'>Sign In</Link>
+        {userContext.isAuth ? (
+          <SignOutButton />
+        ) : (
+          <Link to='/signin'>Sign In</Link>
+        )}
         <Link to='#'>
           <ShoppingCart />
         </Link>
@@ -62,3 +69,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const SignOutButton = () => {
+  return <Button onClick={() => auth.signOut()}>Sign Out</Button>;
+};
