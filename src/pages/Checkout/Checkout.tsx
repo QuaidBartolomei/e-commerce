@@ -13,24 +13,6 @@ const useStyles = makeStyles((theme) =>
       justifyContent: 'center',
       textAlign: 'center',
     },
-    checkoutMenu: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      width: 'fit-content',
-    },
-    checkoutItem: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      width: '100%',
-      textAlign: 'center',
-      '&>*': {
-        width: '120px',
-      },
-    },
     cartItemRow: {
       height: '120px',
       '&>*': {
@@ -40,6 +22,7 @@ const useStyles = makeStyles((theme) =>
         justifyContent: 'center',
       },
     },
+    cartItemImage: { maxHeight: '100%', maxWidth: '100%' },
   })
 );
 
@@ -61,10 +44,14 @@ const cartItems: ShopItemData[] = [
 
 const Checkout = () => {
   const classes = useStyles();
+
+  const cartTotal = cartItems.reduce((total, x) => total + x.price, 0);
+
   return (
     <div className={classes.container}>
       <Grid container spacing={1} direction='column'>
         <CheckoutHeader />
+
         <CheckoutDivider />
 
         {cartItems.map((x, i) => (
@@ -75,41 +62,30 @@ const Checkout = () => {
             spacing={1}
             className={classes.cartItemRow}
           >
-            <Grid item xs>
-                <img src={x.img} alt='img' style={{ maxHeight: '100%', maxWidth: '100%' }} />
+            <Grid item xs={3}>
+              <img src={x.img} alt='img' className={classes.cartItemImage} />
             </Grid>
-            <Grid item xs>
+            <Grid item xs={3}>
               <Typography>{x.name}</Typography>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={2}>
               <Typography>{x.quantity}</Typography>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={2}>
               <Typography>${x.price}</Typography>
             </Grid>
-            <Grid item xs>
-              <Button
-                style={{
-                  width: '100%',
-                }}
-              >
-                <Typography variant='h5'>x</Typography>
+            <Grid item xs={2}>
+              <Button>
+                <Typography>x</Typography>
               </Button>
             </Grid>
           </Grid>
         ))}
 
         <CheckoutDivider />
+
         <Grid item>
-          <Typography
-            style={{
-              width: '100%',
-              textAlign: 'right',
-            }}
-            variant='h4'
-          >
-            Total: ${cartItems.reduce((total, x) => total + x.price, 0)}
-          </Typography>
+          <Typography align='right'>Total: ${cartTotal}</Typography>
         </Grid>
       </Grid>
     </div>
@@ -118,12 +94,20 @@ const Checkout = () => {
 
 export default Checkout;
 
+const headerData = [
+  { name: 'Product', size: 3 },
+  { name: 'Description', size: 3 },
+  { name: 'Quantity', size: 2 },
+  { name: 'Price', size: 2 },
+  { name: 'Remove', size: 2 },
+] as { name: string; size: 2 | 3 }[];
+
 const CheckoutHeader = () => {
   return (
     <Grid item container spacing={1}>
-      {['Product', 'Description', 'Quantity', 'Price', 'Remove'].map((x, i) => (
-        <Grid key={i} item xs>
-          <Typography style={{ fontSize: '3vw' }}>{x}</Typography>
+      {headerData.map((x, i) => (
+        <Grid key={i} item xs={x.size}>
+          <Typography style={{ fontSize: '3vw' }}>{x.name}</Typography>
         </Grid>
       ))}
     </Grid>
