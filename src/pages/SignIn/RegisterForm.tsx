@@ -5,14 +5,14 @@ import Button from '@material-ui/core/Button/Button';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid/Grid';
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    container: {},
-  })
-);
+// const useStyles = makeStyles((theme) =>
+//   createStyles({
+//     container: {},
+//   })
+// );
+//   const classes = useStyles();
 
 const RegisterForm = () => {
-  const classes = useStyles();
   return (
     <div>
       <Typography component='h1' variant='h5'>
@@ -54,7 +54,7 @@ const RegisterForm = () => {
           label='Confirm Password'
           type='password'
         />
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{ marginTop: '8px' }}>
           <Grid item xs={6}>
             <Button
               fullWidth

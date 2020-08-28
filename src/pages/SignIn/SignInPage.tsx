@@ -1,19 +1,16 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { navbarHeight } from 'components/Navbar';
 import SignInForm from './SignInForm';
 import RegisterForm from './RegisterForm';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
-      flexGrow: 1,
-      minHeight: `calc(100vh - ${navbarHeight})`,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      margin: '0 8px',
+      padding: '0 8px',
     },
     gridItem: {},
   })

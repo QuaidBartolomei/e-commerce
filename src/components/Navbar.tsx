@@ -8,6 +8,7 @@ import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import UserContext from 'UserContext';
 import Button from '@material-ui/core/Button/Button';
 import { auth } from 'firebase.utils';
+import { Routes } from 'Router';
 
 export const navbarHeight = '64px';
 
@@ -44,7 +45,7 @@ const Navbar = () => {
   return (
     <div className={classes.container}>
       <Link
-        to='/'
+        to={Routes.Homepage}
         style={{
           height: '100%',
           ...FlexCenter,
@@ -53,12 +54,12 @@ const Navbar = () => {
         <img src={logo_img} className={classes.logo} alt='logo' />
       </Link>
       <div className={classes.navLinks}>
-        <Link to='#'>Shop</Link>
-        <Link to='#'>Contact</Link>
+        <Link to={Routes.Shop}>Shop</Link>
+        <Link to={Routes.Checkout}>Checkout</Link>
         {userContext.isAuth ? (
           <SignOutButton />
         ) : (
-          <Link to='/signin'>Sign In</Link>
+          <Link to={Routes.SignIn}>Sign In</Link>
         )}
         <Link to='#'>
           <ShoppingCart />

@@ -14,8 +14,9 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       margin: '0 8px',
+      position: 'relative',
       '&>*': {
-        height: '100%',
+        minHeight: `calc(100vh - ${navbarHeight})`,
         width: '100%',
       },
     },
