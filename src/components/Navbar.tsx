@@ -9,6 +9,7 @@ import UserContext from 'UserContext';
 import Button from '@material-ui/core/Button/Button';
 import { auth } from 'firebase.utils';
 import { Routes } from 'Router';
+import ShoppingCartIcon from './ShoppingCartIcon';
 
 export const navbarHeight = '64px';
 
@@ -63,7 +64,7 @@ const Navbar = () => {
           <Link to={Routes.SignIn}>Sign In</Link>
         )}
         <Link to='#'>
-          <ShoppingCart />
+          <ShoppingCartIcon />
         </Link>
       </div>
     </div>
