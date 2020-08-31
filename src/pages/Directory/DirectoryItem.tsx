@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Routes } from 'Router';
 
 export interface DirectoryItemProps {
   img: string;
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden',
+      position: 'relative',
     },
     directoryItem: {
       height: '100%',
@@ -33,14 +35,19 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     itemLabel: {
-      border: 'black 2px solid',
-      width: '96px',
-      height: '64px',
+      position: 'absolute',
+      pointerEvents: 'none',
+
+      height: '80%',
+      width: '90%',
+      maxWidth: '140px',
+      maxHeight: '64px',
+
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      position: 'absolute',
-      pointerEvents: 'none'
+      border: 'black 2px solid',
+      fontSize:'min(3vw, 1.5rem)'
     },
   })
 );
@@ -51,7 +58,7 @@ const DirectoryItem = (item: DirectoryItemProps) => {
   const classes = useStyles();
 
   return (
-    <Link className={classes.container} to='/hats'>
+    <Link className={classes.container} to={Routes.Shop}>
       <motion.div
         className={classes.directoryItem}
         style={{
@@ -71,7 +78,7 @@ const DirectoryItem = (item: DirectoryItemProps) => {
       <div
         className={classes.itemLabel}
         style={{
-          backgroundColor: `rgba(255,255,255,${isHover ? '0.8' : '0.5'})`,
+          backgroundColor: `rgba(255,255,255,${isHover ? '0.9' : '0.7'})`,
         }}
       >
         {item.title}

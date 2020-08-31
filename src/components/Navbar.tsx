@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
     container: {
       ...FlexCenter,
       height: navbarHeight,
-      padding: '8px',
+      padding: '8px 8px 0',
+      fontSize: '1rem'
     },
     logo: {
       height: '100%',

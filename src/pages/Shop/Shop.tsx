@@ -1,5 +1,5 @@
 import React from 'react';
-import { hatData } from 'assets/hats/hats';
+import { hatData } from 'data/hats';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid/Grid';
 import ShopItem from 'pages/Shop/ShopItem';
@@ -7,7 +7,6 @@ import ShopItem from 'pages/Shop/ShopItem';
 const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
-      width: '100vw',
     },
     content: {
     },
@@ -24,7 +23,7 @@ const Shop = () => {
         <h1>Hats</h1>
         <Grid container className={classes.carousel} spacing={2}>
           {hatData.slice(0, 4).map((item: ShopItemData, key) => (
-            <Grid item key={key} xs={3}>
+            <Grid item key={key} xs={6} sm={3} md={2}>
               <ShopItem {...item} />
             </Grid>
           ))}

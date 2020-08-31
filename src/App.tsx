@@ -13,10 +13,10 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: '100%',
       display: 'flex',
       flexDirection: 'column',
-      margin: '0 8px',
       position: 'relative',
       '&>*': {
         minHeight: `calc(100vh - ${navbarHeight})`,
+        padding: '8px',
         width: '100%',
       },
     },

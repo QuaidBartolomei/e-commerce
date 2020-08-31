@@ -71,7 +71,7 @@ const Directory = () => {
   return (
     <div className={classes.root}>
       {/* Top Row */}
-      <Grid container spacing={2} className={classes.topRow}>
+      <Grid container spacing={1} className={classes.topRow}>
         {topRowItems.map((item: DirectoryItemProps, i) => (
           <Grid key={i} item xs={6}>
             <DirectoryItem {...item}></DirectoryItem>
@@ -79,9 +79,9 @@ const Directory = () => {
         ))}
       </Grid>
       {/* Bottom Row */}
-      <Grid container spacing={2} className={classes.bottomRow}>
+      <Grid container spacing={1} className={classes.bottomRow}>
         {bottomRowItems.map((item: DirectoryItemProps, i) => (
-          <Grid key={i} item xs={3}>
+          <Grid key={i} item xs={6} md={3}>
             <DirectoryItem {...item}></DirectoryItem>
           </Grid>
         ))}

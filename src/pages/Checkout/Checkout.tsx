@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography/Typography';
 import Grid from '@material-ui/core/Grid/Grid';
-import fedora from 'assets/hats/fedora.jpg';
 import Button from '@material-ui/core/Button/Button';
+import UserContext from 'UserContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -23,29 +23,35 @@ const useStyles = makeStyles((theme) =>
       },
     },
     cartItemImage: { maxHeight: '100%', maxWidth: '100%' },
+    headerText: { fontSize: 'min(3vw, 1.5rem)' },
   })
 );
 
-interface ShopItemData {
-  img: string;
-  name: string;
-  quantity: number;
-  price: number;
-}
-
-const cartItems: ShopItemData[] = [
-  {
-    img: fedora,
-    name: 'Fedora',
-    quantity: 1,
-    price: 12,
-  },
-];
-
 const Checkout = () => {
   const classes = useStyles();
-
+  const userState = useContext(UserContext);
+  let cartItems = userState.shoppingCart;
   const cartTotal = cartItems.reduce((total, x) => total + x.price, 0);
+
+  const headerData = [
+    { name: 'Product', size: 3 },
+    { name: 'Description', size: 3 },
+    { name: 'Quantity', size: 2 },
+    { name: 'Price', size: 2 },
+    { name: 'Remove', size: 2 },
+  ] as { name: string; size: 2 | 3 }[];
+
+  const CheckoutHeader = () => {
+    return (
+      <Grid item container spacing={1}>
+        {headerData.map((x, i) => (
+          <Grid key={i} item xs={x.size}>
+            <Typography className={classes.headerText}>{x.name}</Typography>
+          </Grid>
+        ))}
+      </Grid>
+    );
+  };
 
   return (
     <div className={classes.container}>
@@ -93,26 +99,6 @@ const Checkout = () => {
 };
 
 export default Checkout;
-
-const headerData = [
-  { name: 'Product', size: 3 },
-  { name: 'Description', size: 3 },
-  { name: 'Quantity', size: 2 },
-  { name: 'Price', size: 2 },
-  { name: 'Remove', size: 2 },
-] as { name: string; size: 2 | 3 }[];
-
-const CheckoutHeader = () => {
-  return (
-    <Grid item container spacing={1}>
-      {headerData.map((x, i) => (
-        <Grid key={i} item xs={x.size}>
-          <Typography style={{ fontSize: '3vw' }}>{x.name}</Typography>
-        </Grid>
-      ))}
-    </Grid>
-  );
-};
 
 const CheckoutDivider = () => (
   <Grid item>
