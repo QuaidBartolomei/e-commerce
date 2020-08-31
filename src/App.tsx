@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Router from 'Router';
 import { BrowserRouter } from 'react-router-dom';
 import Navbar, { navbarHeight } from 'components/Navbar';
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 const App = () => {
+  
   const classes = useStyles();
   return (
     <BrowserRouter>

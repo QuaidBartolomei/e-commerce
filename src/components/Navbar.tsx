@@ -4,12 +4,11 @@ import logo_img from 'assets/logo.svg';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import ShoppingCart from '@material-ui/icons/ShoppingCart';
-import UserContext from 'UserContext';
 import Button from '@material-ui/core/Button/Button';
 import { auth } from 'firebase.utils';
 import { Routes } from 'Router';
 import ShoppingCartIcon from './ShoppingCartIcon';
+import { useUserState } from 'UserContext';
 
 export const navbarHeight = '64px';
 
@@ -43,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Navbar = () => {
   const classes = useStyles();
-  const userContext = useContext(UserContext);
+  const user = useUserState();
   return (
     <div className={classes.container}>
       <Link
@@ -58,7 +57,7 @@ const Navbar = () => {
       <div className={classes.navLinks}>
         <Link to={Routes.Shop}>Shop</Link>
         <Link to={Routes.Checkout}>Checkout</Link>
-        {userContext.isAuth ? (
+        {user.isAuth ? (
           <SignOutButton />
         ) : (
           <Link to={Routes.SignIn}>Sign In</Link>

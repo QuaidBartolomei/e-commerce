@@ -1,37 +1,78 @@
-import React, { useEffect, useState } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { createContext } from 'react';
-import { auth } from 'firebase.utils';
 import CartItemData from 'interfaces/ShopItemData.interface';
+import { auth } from 'firebase.utils';
 
-export interface UserState {
+type Action = { type: 'add_item'; payload: CartItemData } | { type: 'login' };
+type Dispatch = (action: Action) => void;
+type State = {
   isAuth: boolean;
   shoppingCart: CartItemData[];
-}
-
-const defaultState: UserState = {
-  isAuth: false,
-  shoppingCart: [],
 };
 
-const UserContext = createContext(defaultState);
+const UserStateContext = createContext<State | undefined>(undefined);
+const UserDispatchContext = createContext<Dispatch | undefined>(undefined);
 
-export default UserContext;
+function userReducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'add_item': {
+      let item = action.payload;
+      let existingItem = state.shoppingCart.find((x) => x.img === item.img);
+      if (existingItem) {
+        existingItem.quantity++;
+        return {...state};
+      }
+      return {
+        ...state,
+        shoppingCart: [...state.shoppingCart, { ...item, quantity: 1 }],
+      };
+    }
+    case 'login': {
+      return { ...state, isAuth: true };
+    }
+    default: {
+      throw new Error(`Unhandled action type`);
+    }
+  }
+}
 
 export const UserProvider: React.FC = (props) => {
-  const [isAuth, setIsAuth] = useState(auth.currentUser !== null);
-  const [shoppingCart, setShoppingCart] = useState([])
+  const [state, dispatch] = useReducer(userReducer, {
+    isAuth: false,
+    shoppingCart: [],
+  });
+
   useEffect(() => {
-    let unsub = auth.onAuthStateChanged(async (userAuth) => {
+    let unsub = auth.onAuthStateChanged((userAuth) => {
       console.log('user auth: ', userAuth);
-      setIsAuth(userAuth !== null);
+      dispatch({ type: 'login' });
     });
     return () => {
       unsub();
     };
   }, []);
+
   return (
-    <UserContext.Provider value={{ isAuth, shoppingCart }}>
-      {props.children}
-    </UserContext.Provider>
+    <UserStateContext.Provider value={state}>
+      <UserDispatchContext.Provider value={dispatch}>
+        {props.children}
+      </UserDispatchContext.Provider>
+    </UserStateContext.Provider>
   );
 };
+
+export function useUserState() {
+  const context = React.useContext(UserStateContext);
+  if (context === undefined) {
+    throw new Error('useUserState must be used within a UserProvider');
+  }
+  return context;
+}
+
+export function useUserDispatch() {
+  const context = React.useContext(UserDispatchContext);
+  if (context === undefined) {
+    throw new Error('useUserDispatch must be used within a CountProvider');
+  }
+  return context;
+}

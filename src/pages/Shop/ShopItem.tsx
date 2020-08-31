@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ShopItemData } from 'pages/Shop/Shop';
 import Button from '@material-ui/core/Button/Button';
-import UserContext from 'UserContext';
+import { useUserDispatch, useUserState } from 'UserContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,12 +25,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ShopItem = (item: ShopItemData) => {
   const classes = useStyles();
-  const user = useContext(UserContext);
-  const addItemToCart = () => {
-    let existingItem = user.shoppingCart.find((x) => x.img === item.img);
-    if (existingItem) return existingItem.quantity++;
-    user.shoppingCart = [...user.shoppingCart, { ...item, quantity: 1 }];
-  };
+  const userDispatch = useUserDispatch();
+  const addItemToCart = () =>
+    userDispatch({
+      type: 'add_item',
+      payload: { ...item, quantity: 1 },
+    });
   return (
     <div>
       <div

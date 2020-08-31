@@ -3,7 +3,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography/Typography';
 import Grid from '@material-ui/core/Grid/Grid';
 import Button from '@material-ui/core/Button/Button';
-import UserContext from 'UserContext';
+import { useUserState } from 'UserContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -29,9 +29,8 @@ const useStyles = makeStyles((theme) =>
 
 const Checkout = () => {
   const classes = useStyles();
-  const userState = useContext(UserContext);
-  let cartItems = userState.shoppingCart;
-  const cartTotal = cartItems.reduce((total, x) => total + x.price, 0);
+  const user = useUserState();
+  const cartTotal = user.shoppingCart.reduce((total, x) => total + x.price, 0);
 
   const headerData = [
     { name: 'Product', size: 3 },
@@ -60,7 +59,7 @@ const Checkout = () => {
 
         <CheckoutDivider />
 
-        {cartItems.map((x, i) => (
+        {user.shoppingCart.map((x, i) => (
           <Grid
             key={i}
             item
