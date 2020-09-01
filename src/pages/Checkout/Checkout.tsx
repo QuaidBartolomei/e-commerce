@@ -3,7 +3,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography/Typography';
 import Grid from '@material-ui/core/Grid/Grid';
 import Button from '@material-ui/core/Button/Button';
-import { useUserState } from 'UserContext';
+import { useUserState, useUserDispatch } from 'UserContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) =>
 const Checkout = () => {
   const classes = useStyles();
   const user = useUserState();
+  const userDispatch = useUserDispatch();
   const cartTotal = user.shoppingCart.reduce((total, x) => total + x.price, 0);
 
   const headerData = [
@@ -80,7 +81,12 @@ const Checkout = () => {
               <Typography>${x.price}</Typography>
             </Grid>
             <Grid item xs={2}>
-              <Button>
+              <Button
+                onClick={() => userDispatch({
+                  type: 'remove_item',
+                  payload: x.id,
+                })}
+              >
                 <Typography>x</Typography>
               </Button>
             </Grid>

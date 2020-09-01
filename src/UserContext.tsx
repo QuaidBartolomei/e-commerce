@@ -2,8 +2,12 @@ import React, { useReducer, useEffect } from 'react';
 import { createContext } from 'react';
 import CartItemData from 'interfaces/ShopItemData.interface';
 import { auth } from 'firebase.utils';
+import { ShopItemData } from 'pages/Shop/Shop';
 
-type Action = { type: 'add_item'; payload: CartItemData } | { type: 'login' };
+type Action =
+  | { type: 'add_item'; payload: CartItemData }
+  | { type: 'login' }
+  | { type: 'remove_item'; payload: string };
 type Dispatch = (action: Action) => void;
 type State = {
   isAuth: boolean;
@@ -17,14 +21,20 @@ function userReducer(state: State, action: Action): State {
   switch (action.type) {
     case 'add_item': {
       let item = action.payload;
-      let existingItem = state.shoppingCart.find((x) => x.img === item.img);
+      let existingItem = state.shoppingCart.find((x) => x.id === item.id);
       if (existingItem) {
         existingItem.quantity++;
-        return {...state};
+        return { ...state };
       }
       return {
         ...state,
         shoppingCart: [...state.shoppingCart, { ...item, quantity: 1 }],
+      };
+    }
+    case 'remove_item': {
+      return {
+        ...state,
+        shoppingCart: state.shoppingCart.filter((x) => x.id !== action.payload),
       };
     }
     case 'login': {

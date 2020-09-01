@@ -3,4 +3,5 @@ export default interface CartItemData {
   name: string;
   quantity: number;
   price: number;
+  id: string;
 }
