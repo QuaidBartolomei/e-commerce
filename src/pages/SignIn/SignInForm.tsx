@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography/Typography';
 import Button from '@material-ui/core/Button/Button';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid/Grid';
-import { signInWithGoogle } from 'firebase.utils';
+import { useUserDispatch } from 'UserContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 const SignInForm = () => {
+  const userDispatch = useUserDispatch();
   const classes = useStyles();
   return (
     <div>
@@ -40,8 +41,8 @@ const SignInForm = () => {
           type='password'
           autoComplete='current-password'
         />
-        <Grid container spacing={2} style={{marginTop: '8px'}}>
-          <Grid item xs={6}>
+        <Grid container spacing={2} style={{ marginTop: '8px' }}>
+          <Grid item xs={12} sm={6}>
             <Button
               fullWidth
               type='submit'
@@ -52,13 +53,13 @@ const SignInForm = () => {
               Sign In
             </Button>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Button
               fullWidth
               variant='contained'
               color='secondary'
               className={classes.submit}
-              onClick={signInWithGoogle}
+              onClick={() => userDispatch({ type: 'login' })}
             >
               Sign In With Google
             </Button>

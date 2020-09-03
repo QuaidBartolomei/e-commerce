@@ -55,7 +55,7 @@ const RegisterForm = () => {
           type='password'
         />
         <Grid container spacing={2} style={{ marginTop: '8px' }}>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Button
               fullWidth
               type='submit'

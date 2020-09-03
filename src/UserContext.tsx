@@ -1,12 +1,13 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import { createContext } from 'react';
 import CartItemData from 'interfaces/ShopItemData.interface';
 import { auth } from 'firebase.utils';
-import { ShopItemData } from 'pages/Shop/Shop';
+import { signInWithGoogle } from 'firebase.utils';
 
 type Action =
   | { type: 'add_item'; payload: CartItemData }
   | { type: 'login' }
+  | { type: 'logout' }
   | { type: 'remove_item'; payload: string };
 type Dispatch = (action: Action) => void;
 type State = {
@@ -38,7 +39,12 @@ function userReducer(state: State, action: Action): State {
       };
     }
     case 'login': {
-      return { ...state, isAuth: true };
+      signInWithGoogle();
+      return state;
+    }
+    case 'logout': {
+      auth.signOut();
+      return state;
     }
     default: {
       throw new Error(`Unhandled action type`);
@@ -47,15 +53,30 @@ function userReducer(state: State, action: Action): State {
 }
 
 export const UserProvider: React.FC = (props) => {
+  const [isAuth, setIsAuth] = useState(false);
   const [state, dispatch] = useReducer(userReducer, {
-    isAuth: false,
+    isAuth,
     shoppingCart: [],
   });
 
   useEffect(() => {
-    let unsub = auth.onAuthStateChanged((userAuth) => {
-      console.log('user auth: ', userAuth);
-      dispatch({ type: 'login' });
+    let unsub = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        // ...
+        setIsAuth(true);
+      } else {
+        // User is signed out.
+        // ...
+        setIsAuth(false);
+      }
     });
     return () => {
       unsub();
@@ -63,7 +84,7 @@ export const UserProvider: React.FC = (props) => {
   }, []);
 
   return (
-    <UserStateContext.Provider value={state}>
+    <UserStateContext.Provider value={{ ...state, isAuth }}>
       <UserDispatchContext.Provider value={dispatch}>
         {props.children}
       </UserDispatchContext.Provider>

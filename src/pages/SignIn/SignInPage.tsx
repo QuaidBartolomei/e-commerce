@@ -10,7 +10,10 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '0 8px',
+      width: '100%',
+    },
+    grid: {
+      width: '100%',
     },
     gridItem: {},
   })
@@ -19,11 +22,11 @@ const SignIn = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <Grid container spacing={4}>
-        <Grid item xs={6}>
+      <Grid container spacing={4} className={classes.grid}>
+        <Grid item xs={12} sm={6}>
           <SignInForm />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <RegisterForm />
         </Grid>
       </Grid>

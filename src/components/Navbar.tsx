@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button/Button';
 import { auth } from 'firebase.utils';
 import { Routes } from 'Router';
 import ShoppingCartIcon from './ShoppingCartIcon';
-import { useUserState } from 'UserContext';
+import { useUserState, useUserDispatch } from 'UserContext';
 
 export const navbarHeight = '64px';
 
@@ -73,5 +73,6 @@ const Navbar = () => {
 export default Navbar;
 
 const SignOutButton = () => {
-  return <Button onClick={() => auth.signOut()}>Sign Out</Button>;
+  const userDispatch = useUserDispatch();
+  return <Button onClick={() => userDispatch({type: 'logout'})}>Sign Out</Button>;
 };
