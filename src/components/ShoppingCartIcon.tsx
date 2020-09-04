@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge/Badge';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import React, { useMemo } from 'react';
 import { useUserState } from 'UserContext';
 
 const useStyles = makeStyles((theme) =>
@@ -18,12 +18,10 @@ const useStyles = makeStyles((theme) =>
 const ShoppingCartIcon = () => {
   const classes = useStyles();
   const user = useUserState();
-  const getCartSize = () =>
-    user.shoppingCart.reduce((total, x) => total + x.quantity, 0);
-  const [cartSize, setCartSize] = useState(getCartSize());
-  useEffect(() => {
-    setCartSize(getCartSize());
-  }, [user]);
+  const cartSize = useMemo(
+    () => user.shoppingCart.reduce((total, x) => total + x.quantity, 0),
+    [user.shoppingCart]
+  );
   return (
     <div className={classes.container}>
       <Badge badgeContent={cartSize} color='secondary'>

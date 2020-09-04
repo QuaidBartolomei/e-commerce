@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Router from 'Router';
 import { BrowserRouter } from 'react-router-dom';
 import Navbar, { navbarHeight } from 'components/Navbar';

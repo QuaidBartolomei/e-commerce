@@ -1,14 +1,12 @@
-import React, { CSSProperties, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import logo_img from 'assets/logo.svg';
-import makeStyles from '@material-ui/core/styles/makeStyles';
-import createStyles from '@material-ui/core/styles/createStyles';
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import Button from '@material-ui/core/Button/Button';
-import { auth } from 'utils/firebase.utils';
+import createStyles from '@material-ui/core/styles/createStyles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import logo_img from 'assets/logo.svg';
+import React, { CSSProperties } from 'react';
+import { Link } from 'react-router-dom';
 import { Routes } from 'Router';
+import { useUserDispatch, useUserState } from 'UserContext';
 import ShoppingCartIcon from './ShoppingCartIcon';
-import { useUserState, useUserDispatch } from 'UserContext';
 
 export const navbarHeight = '64px';
 
@@ -18,7 +16,7 @@ const FlexCenter = {
   justifyContent: 'center',
 } as CSSProperties;
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     container: {
       ...FlexCenter,

@@ -31,7 +31,7 @@ const defaultHelperText = [
 ];
 
 const RegisterForm = () => {
-  const { register, handleSubmit, formState } = useForm<FormFields>();
+  const { register, handleSubmit } = useForm<FormFields>();
   const [passwordState, setPasswordState] = useState({
     error: false,
     helperText: defaultHelperText,
@@ -39,7 +39,6 @@ const RegisterForm = () => {
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  console.log('password', password);
 
   useEffect(() => {
     if (password === '' || passwordConfirm === '') return;
@@ -100,9 +99,9 @@ const RegisterForm = () => {
           inputRef={register}
           error={passwordState.error}
           helperText={
-            <div style={{ whiteSpace: 'pre-wrap' }}>
+            <span style={{ whiteSpace: 'pre-wrap' }}>
               {passwordState.helperText.join('\n')}
-            </div>
+            </span>
           }
           value={password}
           onChange={(e) => setPassword(e.currentTarget.value)}

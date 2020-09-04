@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ShopItemData } from 'pages/Shop/Shop';
 import Button from '@material-ui/core/Button/Button';
-import { useUserDispatch, useUserState } from 'UserContext';
+import { useUserDispatch } from 'UserContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
