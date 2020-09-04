@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField/TextField';
 
 import Typography from '@material-ui/core/Typography/Typography';
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) =>
 );
 const SignInForm = () => {
   const userDispatch = useUserDispatch();
-  const { register, handleSubmit } = useForm<FormFields>();
+  const { register, handleSubmit, formState } = useForm<FormFields>();
   const onSubmit = (data: FormFields) => {
     console.log('data', data);
   };

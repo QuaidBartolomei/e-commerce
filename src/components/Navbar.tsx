@@ -5,7 +5,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import Button from '@material-ui/core/Button/Button';
-import { auth } from 'firebase.utils';
+import { auth } from 'utils/firebase.utils';
 import { Routes } from 'Router';
 import ShoppingCartIcon from './ShoppingCartIcon';
 import { useUserState, useUserDispatch } from 'UserContext';

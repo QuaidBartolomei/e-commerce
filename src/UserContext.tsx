@@ -1,8 +1,8 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import { createContext } from 'react';
 import CartItemData from 'interfaces/ShopItemData.interface';
-import { auth } from 'firebase.utils';
-import { signInWithGoogle } from 'firebase.utils';
+import { auth } from 'utils/firebase.utils';
+import { signInWithGoogle } from 'utils/firebase.utils';
 
 type Action =
   | { type: 'add_item'; payload: CartItemData }

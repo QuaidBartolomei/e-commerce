@@ -21,7 +21,6 @@ const ShoppingCartIcon = () => {
   const getCartSize = () =>
     user.shoppingCart.reduce((total, x) => total + x.quantity, 0);
   const [cartSize, setCartSize] = useState(getCartSize());
-  console.log(user.shoppingCart);
   useEffect(() => {
     setCartSize(getCartSize());
   }, [user]);
