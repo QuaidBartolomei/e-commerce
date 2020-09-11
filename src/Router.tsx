@@ -4,12 +4,14 @@ import Homepage from 'pages/Homepage';
 import Shop from 'pages/Shop/Shop';
 import SignIn from 'pages/SignIn/SignInPage';
 import Checkout from 'pages/Checkout/Checkout';
+import ItemDetails from 'pages/ItemDetails/ItemDetails';
 
 export enum Routes {
   Homepage = '/',
   Shop = '/hats',
   SignIn = '/signin',
   Checkout = '/checkout',
+  Product = '/products'
 }
 
 const Router = () => {
@@ -19,6 +21,7 @@ const Router = () => {
         <Route path={Routes.Shop} component={Shop} />
         <Route path={Routes.SignIn} component={SignIn} />
         <Route path={Routes.Checkout} component={Checkout} />
+        <Route path={Routes.Product + '/:id'} component={ItemDetails} />
       </Switch>
   );
 }
