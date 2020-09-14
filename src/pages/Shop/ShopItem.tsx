@@ -6,9 +6,9 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { ShopItemData } from 'pages/Shop/Shop';
 import React, { useState } from 'react';
-import { useUserDispatch } from 'UserContext';
-import { Routes } from 'Router';
 import { Link } from 'react-router-dom';
+import { Routes } from 'Router';
+import { useUserDispatch } from 'UserContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundPosition: 'center',
     },
     image: {
       maxHeight: '200%',
@@ -47,16 +48,20 @@ const ShopItem = (item: ShopItemData) => {
       payload: { ...item, quantity: 1 },
     });
   return (
-    <Link to='#'>
+    <Link to={`${Routes.Product}/1`}>
       <Paper
         className={classes.container}
         elevation={isHover ? 1 : 0}
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
-        <div className={classes.imageContainer}>
-          <img className={classes.image} src={item.img} alt='Paella dish' />
-        </div>
+        <div
+          className={classes.imageContainer}
+          style={{
+            backgroundImage: `url(${item.imageUrl})`,
+            backgroundSize: 'cover',
+          }}
+        />
         <CardContent className={classes.label}>
           <span>{item.name}</span>
           <span>

@@ -1,5 +1,5 @@
 export default interface CartItemData {
-  img: string;
+  imageUrl: string;
   name: string;
   quantity: number;
   price: number;

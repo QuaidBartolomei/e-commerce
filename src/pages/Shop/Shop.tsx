@@ -1,48 +1,46 @@
-import React from 'react';
-import { hatData } from 'data/hats';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
+import Container from '@material-ui/core/Container/Container';
 import Grid from '@material-ui/core/Grid/Grid';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { hatData } from 'data/hats';
 import ShopItem from 'pages/Shop/ShopItem';
-import { firestore } from 'utils/firebase.utils';
+import React, { useEffect, useState } from 'react';
+import { getShopItems } from 'utils/db.utils';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    container: {},
+    container: {
+      padding: '32px',
+    },
     content: {},
     carousel: {},
   })
 );
 
 export interface ShopItemData {
-  img: string;
+  imageUrl: string;
   name: string;
   price: number;
   id: string;
 }
 
-// log shop items
-let shopItems = ['hello world'];
-firestore
-  .collection('items')
-  .get()
-  .then((x) => {
-    x.forEach((doc) => console.log(doc.data()));
-  });
-console.log('shopItems', shopItems);
-
 const Shop = () => {
   const classes = useStyles();
+  const [shopItems, setShopItems] = useState<ShopItemData[]>([]);
+  useEffect(() => {
+    getShopItems().then(setShopItems);
+  }, []);
   return (
-    <div className={classes.content}>
-      <h1>Hats</h1>
-      <Grid container className={classes.carousel} spacing={2}>
+    <Container maxWidth='lg' className={classes.container}>
+      <Typography variant='h1'>Hats</Typography>
+      <Grid container spacing={0}>
         {hatData.slice(0, 4).map((item: ShopItemData, key) => (
-          <Grid item key={key} xs={12} sm={6} md={3} >
+          <Grid item key={key} xs={12} sm={6} md={3}>
             <ShopItem {...item} />
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Container>
   );
 };
 

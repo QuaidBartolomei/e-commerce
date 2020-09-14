@@ -8,31 +8,31 @@ import shortid from 'shortid';
 
 export const hatData: ShopItemData[] = [
   {
-    img: fedora,
+    imageUrl: fedora,
     name: 'Fedora',
     price: 25,
     id: shortid.generate(),
   },
   {
-    img: orange_hat,
+    imageUrl: orange_hat,
     name: 'Fedora',
     price: 25,
     id: shortid.generate(),
   },
   {
-    img: ribbon_hat,
+    imageUrl: ribbon_hat,
     name: 'Fedora',
     price: 25,
     id: shortid.generate(),
   },
   {
-    img: cap,
+    imageUrl: cap,
     name: 'Fedora',
     price: 25,
     id: shortid.generate(),
   },
   {
-    img: striped_hat,
+    imageUrl: striped_hat,
     name: 'Fedora',
     price: 25,
     id: shortid.generate(),

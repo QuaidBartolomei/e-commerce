@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
+import ImageGallery from 'components/ImageGallery';
+import Container from '@material-ui/core/Container/Container';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -10,9 +12,13 @@ const useStyles = makeStyles((theme) =>
 
 const ItemDetails = () => {
   let { id } = useParams<{ id: string }>();
-  
+
   const classes = useStyles();
-  return <div className={classes.container}>Hello world</div>;
+  return (
+    <Container maxWidth='sm'>
+      <ImageGallery />
+    </Container>
+  );
 };
 
 export default ItemDetails;

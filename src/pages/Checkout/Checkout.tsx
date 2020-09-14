@@ -69,7 +69,7 @@ const Checkout = () => {
             className={classes.cartItemRow}
           >
             <Grid item xs={3}>
-              <img src={x.img} alt='img' className={classes.cartItemImage} />
+              <img src={x.imageUrl} alt='img' className={classes.cartItemImage} />
             </Grid>
             <Grid item xs={3}>
               <Typography>{x.name}</Typography>
