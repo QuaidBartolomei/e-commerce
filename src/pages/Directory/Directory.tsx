@@ -9,6 +9,8 @@ import shoes_img from 'assets/shoes.jpg';
 import accessory_img from 'assets/accessory.jpg';
 import DirectoryItem, { DirectoryItemProps } from './DirectoryItem';
 import { navbarHeight } from 'components/Navbar';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
 
 const topRowItems: DirectoryItemProps[] = [
   {
@@ -42,10 +44,11 @@ const bottomRowItems: DirectoryItemProps[] = [
   },
 ];
 
+const GridSpacing = 1;
+
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
       minHeight: `calc(100vh - ${navbarHeight})`,
       display: 'flex',
       flexDirection: 'column',
@@ -55,12 +58,16 @@ const useStyles = makeStyles((theme) =>
         margin: '0',
       },
     },
+    container: {
+      height: '100%',
+      padding: theme.spacing(GridSpacing),
+    },
     topRow: {
       flex: 2,
-      minHeight: '240px',
+      height: '70%'
     },
     bottomRow: {
-      height: '240px',
+      height: '30%'
     },
   })
 );
@@ -69,24 +76,24 @@ const Directory = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <Grid container spacing={GridSpacing} className={classes.container}>
       {/* Top Row */}
-      <Grid container spacing={1} className={classes.topRow}>
+      <Grid container item spacing={GridSpacing} className={classes.topRow} xs={12} >
         {topRowItems.map((item: DirectoryItemProps, i) => (
-          <Grid key={i} item xs={6}>
+          <Grid key={i} item xs={12} sm={6}>
             <DirectoryItem {...item}></DirectoryItem>
           </Grid>
         ))}
       </Grid>
       {/* Bottom Row */}
-      <Grid container spacing={1} className={classes.bottomRow}>
+      <Grid container item spacing={GridSpacing} className={classes.bottomRow} xs={12}>
         {bottomRowItems.map((item: DirectoryItemProps, i) => (
           <Grid key={i} item xs={6} md={3}>
             <DirectoryItem {...item}></DirectoryItem>
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Grid>
   );
 };
 

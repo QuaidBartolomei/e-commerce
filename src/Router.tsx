@@ -1,10 +1,10 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Homepage from 'pages/Homepage';
+import Checkout from 'pages/Checkout/Checkout';
+import Directory from 'pages/Directory/Directory';
+import ItemDetails from 'pages/ItemDetails/ItemDetails';
 import Shop from 'pages/Shop/Shop';
 import SignIn from 'pages/SignIn/SignInPage';
-import Checkout from 'pages/Checkout/Checkout';
-import ItemDetails from 'pages/ItemDetails/ItemDetails';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 export enum Routes {
   Homepage = '/',
@@ -17,7 +17,7 @@ export enum Routes {
 const Router = () => {
   return (
     <Switch>
-      <Route exact path={Routes.Homepage} component={Homepage} />
+      <Route exact path={Routes.Homepage} component={Directory} />
       <Route path={Routes.Shop} component={Shop} />
       <Route path={Routes.SignIn} component={SignIn} />
       <Route path={Routes.Checkout} component={Checkout} />

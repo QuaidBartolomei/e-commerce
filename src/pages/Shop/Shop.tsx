@@ -7,10 +7,12 @@ import ShopItem from 'pages/Shop/ShopItem';
 import React, { useEffect, useState } from 'react';
 import { getShopItems } from 'utils/db.utils';
 
+const Spacing = 1;
+
 const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
-      padding: '32px',
+      padding: theme.spacing(Spacing),
     },
     content: {},
     carousel: {},
@@ -31,9 +33,11 @@ const Shop = () => {
     getShopItems().then(setShopItems);
   }, []);
   return (
-    <Container maxWidth='lg' className={classes.container}>
-      <Typography variant='h1'>Hats</Typography>
-      <Grid container spacing={0}>
+    <Container maxWidth='lg' className={classes.container} disableGutters>
+      <Typography component='h1' variant='h3'>
+        Hats
+      </Typography>
+      <Grid container spacing={Spacing}>
         {hatData.slice(0, 4).map((item: ShopItemData, key) => (
           <Grid item key={key} xs={12} sm={6} md={3}>
             <ShopItem {...item} />

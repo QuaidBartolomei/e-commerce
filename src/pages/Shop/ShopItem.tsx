@@ -1,14 +1,10 @@
-import Button from '@material-ui/core/Button/Button';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Paper from '@material-ui/core/Paper/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { ShopItemData } from 'pages/Shop/Shop';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Routes } from 'Router';
-import { useUserDispatch } from 'UserContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,13 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ShopItem = (item: ShopItemData) => {
   const classes = useStyles();
-  const userDispatch = useUserDispatch();
   const [isHover, setIsHover] = useState(false);
-  const addItemToCart = () =>
-    userDispatch({
-      type: 'add_item',
-      payload: { ...item, quantity: 1 },
-    });
   return (
     <Link to={`${Routes.Product}/1`}>
       <Paper
@@ -69,23 +59,6 @@ const ShopItem = (item: ShopItemData) => {
             {item.price}
           </span>
         </CardContent>
-        <CardActions>
-          <Button onClick={addItemToCart} style={{ width: '100%' }}>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                verticalAlign: 'center',
-                width: '100%',
-              }}
-            >
-              <AddCircleOutlineIcon />
-              <span>Add To Cart</span>
-            </div>
-          </Button>
-        </CardActions>
       </Paper>
     </Link>
   );
