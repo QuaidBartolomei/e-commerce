@@ -1,35 +1,31 @@
-import CardContent from '@material-ui/core/CardContent';
+import { Typography } from '@material-ui/core';
+import Box from '@material-ui/core/Box/Box';
+import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { ShopItemData } from 'pages/Shop/Shop';
+import { ShopItemData } from 'interfaces/ShopItemData.interface';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Routes } from 'Router';
 
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      padding: '8px',
+      padding: theme.spacing(1),
+      width: '240px'
     },
     imageContainer: {
-      overflow: 'hidden',
       width: '100%',
       height: '240px',
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
       backgroundPosition: 'center',
-    },
-    image: {
-      maxHeight: '200%',
-      maxWidth: '200%',
+      backgroundSize: 'cover',
     },
     label: {
       display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      flexDirection: 'column',
+      textAlign: 'center',
+      padding: theme.spacing(1, 0),
     },
   })
 );
@@ -45,20 +41,16 @@ const ShopItem = (item: ShopItemData) => {
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
-        <div
+        <Box
           className={classes.imageContainer}
           style={{
             backgroundImage: `url(${item.imageUrl})`,
-            backgroundSize: 'cover',
           }}
-        />
-        <CardContent className={classes.label}>
-          <span>{item.name}</span>
-          <span>
-            {'$'}
-            {item.price}
-          </span>
-        </CardContent>
+        ></Box>
+        <Container className={classes.label}>
+          <Typography>{item.name}</Typography>
+          <Typography>{`$${item.price}`}</Typography>
+        </Container>
       </Paper>
     </Link>
   );

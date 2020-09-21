@@ -63,11 +63,10 @@ const useStyles = makeStyles((theme) =>
       padding: theme.spacing(GridSpacing),
     },
     topRow: {
-      flex: 2,
-      height: '70%'
+      height: '70%',
     },
     bottomRow: {
-      height: '30%'
+      height: '30%',
     },
   })
 );
@@ -76,9 +75,14 @@ const Directory = () => {
   const classes = useStyles();
 
   return (
-    <Grid container spacing={GridSpacing} className={classes.container}>
-      {/* Top Row */}
-      <Grid container item spacing={GridSpacing} className={classes.topRow} xs={12} >
+    <Grid container className={classes.container}>
+      <Grid
+        container
+        item
+        spacing={GridSpacing}
+        className={classes.topRow}
+        xs={12}
+      >
         {topRowItems.map((item: DirectoryItemProps, i) => (
           <Grid key={i} item xs={12} sm={6}>
             <DirectoryItem {...item}></DirectoryItem>
@@ -86,7 +90,13 @@ const Directory = () => {
         ))}
       </Grid>
       {/* Bottom Row */}
-      <Grid container item spacing={GridSpacing} className={classes.bottomRow} xs={12}>
+      <Grid
+        container
+        item
+        spacing={GridSpacing}
+        className={classes.bottomRow}
+        xs={12}
+      >
         {bottomRowItems.map((item: DirectoryItemProps, i) => (
           <Grid key={i} item xs={6} md={3}>
             <DirectoryItem {...item}></DirectoryItem>

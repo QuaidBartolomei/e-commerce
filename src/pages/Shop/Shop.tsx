@@ -1,9 +1,11 @@
 import { Typography } from '@material-ui/core';
+import Box from '@material-ui/core/Box/Box';
 import Container from '@material-ui/core/Container/Container';
-import Grid from '@material-ui/core/Grid/Grid';
+import Link from '@material-ui/core/Link/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Carousel from 'components/Carousel';
 import { hatData } from 'data/hats';
-import ShopItem from 'pages/Shop/ShopItem';
+import { ShopItemData } from 'interfaces/ShopItemData.interface';
 import React, { useEffect, useState } from 'react';
 import { getShopItems } from 'utils/db.utils';
 
@@ -16,15 +18,14 @@ const useStyles = makeStyles((theme) =>
     },
     content: {},
     carousel: {},
+    header: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-end',
+    },
   })
 );
-
-export interface ShopItemData {
-  imageUrl: string;
-  name: string;
-  price: number;
-  id: string;
-}
 
 const Shop = () => {
   const classes = useStyles();
@@ -34,16 +35,21 @@ const Shop = () => {
   }, []);
   return (
     <Container maxWidth='lg' className={classes.container} disableGutters>
-      <Typography component='h1' variant='h3'>
-        Hats
-      </Typography>
-      <Grid container spacing={Spacing}>
-        {hatData.slice(0, 4).map((item: ShopItemData, key) => (
-          <Grid item key={key} xs={12} sm={6} md={3}>
-            <ShopItem {...item} />
-          </Grid>
-        ))}
-      </Grid>
+      <Box className={classes.header}>
+        <Typography component='h1' variant='h3'>
+          Hats
+        </Typography>
+        <Link
+          href='#'
+          variant='h6'
+          style={{
+            verticalAlign: 'baseline',
+          }}
+        >
+          See all
+        </Link>
+      </Box>
+      <Carousel items={hatData} />
     </Container>
   );
 };

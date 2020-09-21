@@ -5,3 +5,13 @@ export default interface CartItemData {
   price: number;
   id: string;
 }
+
+export interface ShopItemData {
+  imageUrl: string;
+  name: string;
+  price: number;
+  id: string;
+}
+
+
+export type ClothingSize = 'S' | 'M' | 'L';

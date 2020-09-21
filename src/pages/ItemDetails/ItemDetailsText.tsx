@@ -6,8 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { ClothingSize, ShopItemData } from 'interfaces/ShopItemData.interface';
 import { loremIpsum } from 'lorem-ipsum';
-import { ShopItemData } from 'pages/Shop/Shop';
 import React from 'react';
 import { useUserDispatch } from 'UserContext';
 
@@ -20,10 +20,8 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-type Size = 'S' | 'M' | 'L';
-
 const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
-  const [size, setSize] = React.useState<Size>('S');
+  const [size, setSize] = React.useState<ClothingSize>('S');
   const classes = useStyles();
   const userDispatch = useUserDispatch();
   const addItemToCart = () =>
@@ -44,7 +42,7 @@ const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
           labelId='size_label'
           id='size'
           value={size}
-          onChange={(e) => setSize(e.target.value as Size)}
+          onChange={(e) => setSize(e.target.value as ClothingSize)}
         >
           <MenuItem value={'S'}>S</MenuItem>
           <MenuItem value={'M'}>M</MenuItem>
