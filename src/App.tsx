@@ -22,12 +22,8 @@ const App = () => {
     <BrowserRouter>
       <CssBaseline />
       <UserProvider>
-        <Container maxWidth='lg'>
-          <Navbar />
-          <Container className={classes.content} disableGutters>
-            <Router />
-          </Container>
-        </Container>
+        <Navbar />
+        <Router />
         <Footer />
       </UserProvider>
     </BrowserRouter>

@@ -1,7 +1,9 @@
 import Button from '@material-ui/core/Button/Button';
+import Container from '@material-ui/core/Container';
 import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import logo_img from 'assets/logo.svg';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import {ReactComponent as Logo} from 'assets/logo.svg';
 import React, { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { Routes } from 'Router';
@@ -10,29 +12,28 @@ import ShoppingCartIcon from './ShoppingCartIcon';
 
 export const navbarHeight = '64px';
 
-const FlexCenter = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-} as CSSProperties;
-
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
-      ...FlexCenter,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       height: navbarHeight,
-      padding: '8px 8px 0',
-      fontSize: '1rem'
+      fontSize: '1rem',
+      backgroundColor: theme.palette.primary.dark,
+      color: theme.palette.primary.contrastText,
     },
     logo: {
-      height: '100%',
+      height: '80%',
+      fill: theme.palette.primary.contrastText,
     },
     navLinks: {
-      ...FlexCenter,
+      display: 'flex',
+      alignItems: 'center',
       justifyContent: 'flex-end',
       width: '100%',
       '&>*': {
-        marginLeft: '16px',
+        marginLeft: theme.spacing(2),
       },
     },
   })
@@ -42,15 +43,17 @@ const Navbar = () => {
   const classes = useStyles();
   const user = useUserState();
   return (
-    <div className={classes.container}>
+    <Container maxWidth='lg' className={classes.container}>
       <Link
         to={Routes.Homepage}
         style={{
           height: '100%',
-          ...FlexCenter,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <img src={logo_img} className={classes.logo} alt='logo' />
+        <Logo className={classes.logo} stroke='white' strokeWidth={1} />
       </Link>
       <div className={classes.navLinks}>
         <Link to={Routes.Shop}>Shop</Link>
@@ -64,7 +67,7 @@ const Navbar = () => {
           <ShoppingCartIcon />
         </Link>
       </div>
-    </div>
+    </Container>
   );
 };
 
@@ -72,5 +75,7 @@ export default Navbar;
 
 const SignOutButton = () => {
   const userDispatch = useUserDispatch();
-  return <Button onClick={() => userDispatch({type: 'logout'})}>Sign Out</Button>;
+  return (
+    <Button onClick={() => userDispatch({ type: 'logout' })}>Sign Out</Button>
+  );
 };

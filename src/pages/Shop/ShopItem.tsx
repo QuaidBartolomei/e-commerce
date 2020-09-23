@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       padding: theme.spacing(1),
+      margin: theme.spacing(1),
       width: '240px'
     },
     imageContainer: {
@@ -37,7 +38,7 @@ const ShopItem = (item: ShopItemData) => {
     <Link to={`${Routes.Product}/1`}>
       <Paper
         className={classes.container}
-        elevation={isHover ? 1 : 0}
+        elevation={isHover ? 5 : 1}
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >

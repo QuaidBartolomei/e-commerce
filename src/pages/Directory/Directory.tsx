@@ -11,6 +11,7 @@ import DirectoryItem, { DirectoryItemProps } from './DirectoryItem';
 import { navbarHeight } from 'components/Navbar';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
+import Shop from 'pages/Shop/Shop';
 
 const topRowItems: DirectoryItemProps[] = [
   {
@@ -48,18 +49,8 @@ const GridSpacing = 1;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {
-      minHeight: `calc(100vh - ${navbarHeight})`,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      '&>*': {
-        margin: '0',
-      },
-    },
     container: {
-      height: '100%',
+      height: `calc(100vh - ${navbarHeight})`,
       padding: theme.spacing(GridSpacing),
     },
     topRow: {
@@ -75,35 +66,40 @@ const Directory = () => {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.container}>
-      <Grid
-        container
-        item
-        spacing={GridSpacing}
-        className={classes.topRow}
-        xs={12}
-      >
-        {topRowItems.map((item: DirectoryItemProps, i) => (
-          <Grid key={i} item xs={12} sm={6}>
-            <DirectoryItem {...item}></DirectoryItem>
-          </Grid>
-        ))}
+    <Container maxWidth='lg'>
+      <Grid container className={classes.container}>
+        <Grid
+          container
+          item
+          spacing={GridSpacing}
+          className={classes.topRow}
+          xs={12}
+        >
+          {topRowItems.map((item: DirectoryItemProps, i) => (
+            <Grid key={i} item xs={12} sm={6}>
+              <DirectoryItem {...item}></DirectoryItem>
+            </Grid>
+          ))}
+        </Grid>
+        {/* Bottom Row */}
+        <Grid
+          container
+          item
+          spacing={GridSpacing}
+          className={classes.bottomRow}
+          xs={12}
+        >
+          {bottomRowItems.map((item: DirectoryItemProps, i) => (
+            <Grid key={i} item xs={6} md={3}>
+              <DirectoryItem {...item}></DirectoryItem>
+            </Grid>
+          ))}
+        </Grid>
       </Grid>
-      {/* Bottom Row */}
-      <Grid
-        container
-        item
-        spacing={GridSpacing}
-        className={classes.bottomRow}
-        xs={12}
-      >
-        {bottomRowItems.map((item: DirectoryItemProps, i) => (
-          <Grid key={i} item xs={6} md={3}>
-            <DirectoryItem {...item}></DirectoryItem>
-          </Grid>
-        ))}
-      </Grid>
-    </Grid>
+      <Container>
+        <Shop />
+      </Container>
+    </Container>
   );
 };
 

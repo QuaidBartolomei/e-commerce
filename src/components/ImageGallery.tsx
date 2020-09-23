@@ -2,7 +2,7 @@ import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { hatData } from 'data/hats';
+import { hatData } from 'data/ShopItems';
 import React, { useState } from 'react';
 
 const useStyles = makeStyles((theme) =>

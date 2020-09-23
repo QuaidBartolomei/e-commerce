@@ -39,24 +39,22 @@ function Copyright() {
 
 const Footer = () => {
   const classes = useStyles();
-  const title = 'Footer';;
+  const title = 'Footer';
   const description = 'Something here to give the footer a purpose!';
   return (
     <footer className={classes.footer}>
-      <Container maxWidth='lg'>
-        <Typography variant='h6' align='center' gutterBottom>
-          {title}
-        </Typography>
-        <Typography
-          variant='subtitle1'
-          align='center'
-          color='textSecondary'
-          component='p'
-        >
-          {description}
-        </Typography>
-        <Copyright />
-      </Container>
+      <Typography variant='h6' align='center' gutterBottom>
+        {title}
+      </Typography>
+      <Typography
+        variant='subtitle1'
+        align='center'
+        color='textSecondary'
+        component='p'
+      >
+        {description}
+      </Typography>
+      <Copyright />
     </footer>
   );
 };

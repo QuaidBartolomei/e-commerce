@@ -1,13 +1,15 @@
-import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box/Box';
 import Container from '@material-ui/core/Container/Container';
 import Link from '@material-ui/core/Link/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import Carousel from 'components/Carousel';
-import { hatData } from 'data/hats';
+import { hatData } from 'data/ShopItems';
 import { ShopItemData } from 'interfaces/ShopItemData.interface';
 import React, { useEffect, useState } from 'react';
+import { Routes } from 'Router';
 import { getShopItems } from 'utils/db.utils';
+import { shirtData } from '../../data/ShopItems';
 
 const Spacing = 1;
 
@@ -15,6 +17,9 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
       padding: theme.spacing(Spacing),
+      "&>*": {
+        margin: theme.spacing(5, 0)
+      }
     },
     content: {},
     carousel: {},
@@ -35,12 +40,28 @@ const Shop = () => {
   }, []);
   return (
     <Container maxWidth='lg' className={classes.container} disableGutters>
+      <ShopItemCarousel title='Hats' items={hatData}></ShopItemCarousel>
+      <ShopItemCarousel title='Shirts' items={shirtData}></ShopItemCarousel>
+    </Container>
+  );
+};
+
+const ShopItemCarousel = ({
+  title,
+  items,
+}: {
+  title: string;
+  items: ShopItemData[];
+}) => {
+  const classes = useStyles();
+  return (
+    <Box>
       <Box className={classes.header}>
-        <Typography component='h1' variant='h3'>
-          Hats
+        <Typography component='h2' variant='h4'>
+          {title}
         </Typography>
         <Link
-          href='#'
+          href={`${Routes.Category}/hats`}
           variant='h6'
           style={{
             verticalAlign: 'baseline',
@@ -49,8 +70,8 @@ const Shop = () => {
           See all
         </Link>
       </Box>
-      <Carousel items={hatData} />
-    </Container>
+      <Carousel items={items} />
+    </Box>
   );
 };
 
