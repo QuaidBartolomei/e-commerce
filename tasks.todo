@@ -4,6 +4,11 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
 ✔ image gallery thumbnail sizing (too narrow when resizing) @done (9/23/2020, 10:41:11 PM)
 
 ✔ shop item routing @done (9/24/2020, 1:18:56 PM)
-☐ use item image for item details.
-☐ click image gallery main image to view full size
+✔ use item image for item details. @done (9/24/2020, 1:40:50 PM)
+
+✔ click image gallery main image to view full size @done (9/24/2020, 1:58:58 PM)
+✔ make fullsize image overlay relative to user viewport @done (9/24/2020, 2:10:14 PM)
+✔ make fullsize image overlay background semi transparent @done (9/24/2020, 2:10:24 PM)
+
+☐ clean up image gallery file
 ☐ category routing

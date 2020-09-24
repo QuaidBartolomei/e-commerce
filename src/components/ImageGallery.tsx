@@ -2,6 +2,7 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid/Grid';
+import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { hatData } from 'data/ShopItems';
 import React, { useState } from 'react';
@@ -48,43 +49,85 @@ const useStyles = makeStyles((theme) =>
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
+      '&:hover': {
+        cursor: 'pointer',
+      },
+    },
+    overlay: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      height: '100vh',
+      width: '100vw',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: `rgba(0,0,0,0.7)`,
+      zIndex: 2,
+    },
+    fullSizeImage: {
+      maxHeight: '100vh',
+      maxWidth: '100vw',
+      border: '2px black solid',
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      '&:hover': {
+        cursor: 'pointer',
+      },
     },
   })
 );
 
 const images: string[] = hatData.map((hat) => hat.imageUrl);
 
-const ImageGallery = () => {
+const ImageGallery = ({ mainImage }: { mainImage: string }) => {
   const classes = useStyles();
-  const [selectedImage, setSelectedImage] = useState(images[0] || '');
+  const [selectedImage, setSelectedImage] = useState(mainImage);
+  const thumbnailImages = [mainImage, ...images];
+  const [showFullsizeImage, setShowFullsizeImage] = useState(false);
   return (
-    <Container className={classes.container}>
+    <React.Fragment>
       <Box
-        className={classes.mainImageContainer}
-        style={{
-          backgroundImage: `url(${selectedImage})`,
-        }}
-      />
-      <Divider />
-      <Grid className={classes.thumbnailsContainer} container spacing={1}>
-        {images.map((image, key) => (
-          <Grid
-            key={key}
-            item
-            className={classes.thumbnail}
-            onClick={() => setSelectedImage(image)}
-            xs={3}
-          >
-            <Box
-              className={classes.thumbnailImage}
-              style={{
-                backgroundImage: `url(${image})`,
-              }}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+        className={classes.overlay}
+        style={{ visibility: showFullsizeImage ? 'visible' : 'hidden' }}
+      >
+        <img
+          className={classes.fullSizeImage}
+          src={selectedImage}
+          onClick={() => setShowFullsizeImage(false)}
+        />
+      </Box>
+
+      <Container className={classes.container}>
+        <Link onClick={() => setShowFullsizeImage(true)}>
+          <Box
+            className={classes.mainImageContainer}
+            style={{
+              backgroundImage: `url(${selectedImage})`,
+            }}
+          />
+        </Link>
+        <Divider />
+        <Grid className={classes.thumbnailsContainer} container spacing={1}>
+          {thumbnailImages.map((image, key) => (
+            <Grid
+              key={key}
+              item
+              className={classes.thumbnail}
+              onClick={() => setSelectedImage(image)}
+              xs={3}
+            >
+              <Box
+                className={classes.thumbnailImage}
+                style={{
+                  backgroundImage: `url(${image})`,
+                }}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </React.Fragment>
   );
 };
 

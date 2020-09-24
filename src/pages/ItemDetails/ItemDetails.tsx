@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const item: ShopItemData = {
+const defaultItem: ShopItemData = {
   id: '1',
   imageUrl: '',
   name: 'Dumb Hat',
@@ -36,17 +36,17 @@ const item: ShopItemData = {
 const ItemDetails = () => {
   let { id } = useParams<{ id: string }>();
 
-  let retrievedItem =
-    [...shirtData, ...hatData].find((x) => x.id === id) || item;
+  let item =
+    [...shirtData, ...hatData].find((x) => x.id === id) || defaultItem;
 
   const classes = useStyles();
   return (
     <Grid container item spacing={1} className={classes.container}>
       <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
-        <ImageGallery />
+        <ImageGallery mainImage={item.imageUrl} />
       </Grid>
       <Grid item sm={7} xs={12} className={classes.detailsContainer}>
-        <ItemDetailsText item={retrievedItem} />
+        <ItemDetailsText item={item} />
       </Grid>
     </Grid>
   );
