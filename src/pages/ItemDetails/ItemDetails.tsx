@@ -10,6 +10,7 @@ import ItemDetailsText from './ItemDetailsText';
 const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
+      width: '100%',
       '&>*': {},
     },
     imageGalleryContainer: {},

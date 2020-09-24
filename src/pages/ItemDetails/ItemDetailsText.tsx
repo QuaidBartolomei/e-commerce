@@ -1,5 +1,6 @@
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import Container from '@material-ui/core/Container';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -13,6 +14,13 @@ import { useUserDispatch } from 'UserContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      '&>*': {
+        margin: theme.spacing(1)
+      },
+    },
     formControl: {
       width: 'fit-content',
       minWidth: 120,
@@ -30,7 +38,7 @@ const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
       payload: { ...item, quantity: 1 },
     });
   return (
-    <React.Fragment>
+    <Container className={classes.container}>
       <Typography component='h1' variant='h3' style={{ margin: 0 }}>
         {item.name}
       </Typography>
@@ -57,7 +65,7 @@ const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
         Add To Cart
       </Button>
       <Typography>{loremIpsum({ count: 3, units: 'sentence' })}</Typography>
-    </React.Fragment>
+    </Container>
   );
 };
 
