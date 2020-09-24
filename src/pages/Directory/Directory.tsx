@@ -18,9 +18,7 @@ const Directory = () => {
 
   return (
     <Container maxWidth='lg'>
-      <Container>
         <Shop />
-      </Container>
     </Container>
   );
 };

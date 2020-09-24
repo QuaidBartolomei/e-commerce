@@ -2,6 +2,8 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
 
 ✔ fix user and shopping cart icon alignment in navbar @done (9/23/2020, 10:41:10 PM)
 ✔ image gallery thumbnail sizing (too narrow when resizing) @done (9/23/2020, 10:41:11 PM)
+
+✔ shop item routing @done (9/24/2020, 1:18:56 PM)
+☐ use item image for item details.
 ☐ click image gallery main image to view full size
 ☐ category routing
-☐ shop item routing

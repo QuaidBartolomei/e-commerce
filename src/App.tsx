@@ -1,7 +1,7 @@
 import Container from '@material-ui/core/Container/Container';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import CategoryMenu from 'components/CategoryMenu';
+import CategoryMenu from 'components/CategoryMenu/CategoryMenu';
 import Footer from 'components/Footer';
 import Navbar, { navbarHeight } from 'components/Navbar';
 import React from 'react';

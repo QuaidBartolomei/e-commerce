@@ -1,4 +1,4 @@
-import { ShopItemData } from 'interfaces/ShopItemData.interface';
+import { ShopItemCategory, ShopItemData } from 'interfaces/ShopItemData.interface';
 import { firestore } from 'utils/firebase.utils';
 
 enum Collections {
@@ -9,6 +9,7 @@ type ItemData = {
   imageUrl: string;
   name: string;
   price: number;
+  category: ShopItemCategory;
 };
 
 export async function getShopItems(): Promise<ShopItemData[]> {

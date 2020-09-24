@@ -35,7 +35,7 @@ const ShopItem = (item: ShopItemData) => {
   const classes = useStyles();
   const [isHover, setIsHover] = useState(false);
   return (
-    <Link to={`${Routes.Product}/1`}>
+    <Link to={`${Routes.Product}/${item.id}`}>
       <Paper
         className={classes.container}
         elevation={isHover ? 5 : 1}

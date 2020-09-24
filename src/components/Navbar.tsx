@@ -29,14 +29,17 @@ const useStyles = makeStyles((theme) =>
       },
       padding: theme.spacing(1, 4),
     },
-    logoContainer: {
-      height: '100%',
+    grid: {
       display: 'flex',
       alignItems: 'center',
+      justifyContent: 'center',
+      height: '100%',
+    },
+    logoContainer: {
+      height: '100%',
     },
     logo: {
-      height: '100%',
-      maxWidth: '100%',
+      height: 64,
       fill: theme.palette.primary.contrastText,
     },
     navLinks: {
@@ -78,7 +81,7 @@ const Navbar = () => {
   const UserButton = user.isAuth ? (
     <SignOutButton />
   ) : (
-    <Link to={Routes.SignIn} style={{height:24}}>
+    <Link to={Routes.SignIn} style={{ height: 24 }}>
       <AccountCircleIcon />
     </Link>
   );
@@ -91,8 +94,8 @@ const Navbar = () => {
 
   return (
     <Container maxWidth={false} className={classes.container}>
-      <Grid container>
-        <Grid item xs={4}>
+      <Grid container className={classes.grid}>
+        <Grid item xs={4} className={classes.logoContainer}>
           {LogoLink}
         </Grid>
         <Grid item xs={4} className={classes.titleContainer}>

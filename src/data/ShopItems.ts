@@ -17,33 +17,37 @@ export const hatData: ShopItemData[] = [
     name: 'Fedora',
     price: 25,
     id: shortid.generate(),
+    category: 'Hat',
   },
   {
     imageUrl: orange_hat,
     name: 'Fedora',
     price: 25,
     id: shortid.generate(),
+    category: 'Hat',
   },
   {
     imageUrl: ribbon_hat,
     name: 'Fedora',
     price: 25,
     id: shortid.generate(),
+    category: 'Hat',
   },
   {
     imageUrl: cap,
     name: 'Fedora',
     price: 25,
     id: shortid.generate(),
+    category: 'Hat',
   },
   {
     imageUrl: striped_hat,
     name: 'Fedora',
     price: 25,
     id: shortid.generate(),
+    category: 'Hat',
   },
 ];
-
 
 export const shirtData: ShopItemData[] = [
   {
@@ -51,29 +55,34 @@ export const shirtData: ShopItemData[] = [
     name: 'Black Shirt',
     price: 25,
     id: shortid.generate(),
+    category: 'Shirt',
   },
   {
     imageUrl: blue_shirt,
     name: 'Blue Shirt',
     price: 25,
     id: shortid.generate(),
+    category: 'Shirt',
   },
   {
     imageUrl: pink_shirt,
     name: 'Pink Shirt',
     price: 25,
     id: shortid.generate(),
+    category: 'Shirt',
   },
   {
     imageUrl: plaid_shirt,
     name: 'Plaid Shirt',
     price: 25,
     id: shortid.generate(),
+    category: 'Shirt',
   },
   {
     imageUrl: yellow_shirt,
     name: 'Yellow Shirt',
     price: 25,
     id: shortid.generate(),
+    category: 'Shirt',
   },
 ];

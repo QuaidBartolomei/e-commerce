@@ -11,7 +11,8 @@ export interface ShopItemData {
   name: string;
   price: number;
   id: string;
+  category: ShopItemCategory;
 }
 
-
 export type ClothingSize = 'S' | 'M' | 'L';
+export type ShopItemCategory = 'Hat' | 'Shirt';
