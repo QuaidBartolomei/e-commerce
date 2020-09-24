@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       flexDirection: 'column',
       '&>*': {
-        margin: theme.spacing(1),
+        marginBottom: theme.spacing(1),
       },
     },
   })
@@ -38,11 +38,11 @@ const ItemDetails = () => {
 
   const classes = useStyles();
   return (
-    <Grid container item spacing={2} className={classes.container}>
-      <Grid item md={5} xs={12} className={classes.imageGalleryContainer}>
+    <Grid container item spacing={1} className={classes.container}>
+      <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
         <ImageGallery />
       </Grid>
-      <Grid item md={7} xs={12} className={classes.detailsContainer}>
+      <Grid item sm={7} xs={12} className={classes.detailsContainer}>
         <ItemDetailsText item={item} />
       </Grid>
     </Grid>

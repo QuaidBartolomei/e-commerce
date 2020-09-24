@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { Routes } from 'Router';
 import { getShopItems } from 'utils/db.utils';
 import { shirtData } from '../../data/ShopItems';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 const Spacing = 1;
 
@@ -17,9 +18,9 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
       padding: theme.spacing(Spacing),
-      "&>*": {
-        margin: theme.spacing(5, 0)
-      }
+      '&>*': {
+        marginBottom: theme.spacing(5),
+      },
     },
     content: {},
     carousel: {},
@@ -65,9 +66,13 @@ const ShopItemCarousel = ({
           variant='h6'
           style={{
             verticalAlign: 'baseline',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          See all
+          {'See all'}
+          <NavigateNextIcon />
         </Link>
       </Box>
       <Carousel items={items} />

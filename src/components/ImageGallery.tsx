@@ -1,3 +1,4 @@
+import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid/Grid';
@@ -24,8 +25,11 @@ const useStyles = makeStyles((theme) =>
       justifyContent: 'center',
     },
     thumbnailImage: {
-      maxWidth: '100%',
+      width: '100%',
       height: '64px',
+      backgroundPosition: 'center',
+      backgroundSize: 'contain',
+      backgroundRepeat: 'no-repeat',
       '&:hover': {
         cursor: 'pointer',
         border: 'black 1px solid',
@@ -55,13 +59,12 @@ const ImageGallery = () => {
   const [selectedImage, setSelectedImage] = useState(images[0] || '');
   return (
     <Container className={classes.container}>
-      <Container
+      <Box
         className={classes.mainImageContainer}
         style={{
           backgroundImage: `url(${selectedImage})`,
         }}
-      >
-      </Container>
+      />
       <Divider />
       <Grid className={classes.thumbnailsContainer} container spacing={1}>
         {images.map((image, key) => (
@@ -72,7 +75,12 @@ const ImageGallery = () => {
             onClick={() => setSelectedImage(image)}
             xs={3}
           >
-            <img src={image} className={classes.thumbnailImage} />
+            <Box
+              className={classes.thumbnailImage}
+              style={{
+                backgroundImage: `url(${image})`,
+              }}
+            />
           </Grid>
         ))}
       </Grid>

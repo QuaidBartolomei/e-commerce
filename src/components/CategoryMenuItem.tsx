@@ -12,25 +12,25 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       padding: theme.spacing(1),
-      height: 180,
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-end',
       alignItems: 'center',
-      backgroundColor: 'transparent',
+      borderRadius: 4,
+      backgroundColor: theme.palette.grey[200],
+    },
+    image: {
+      height: 120,
+      width: 140,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       borderRadius: 4,
+      marginBottom: theme.spacing(1),
     },
     label: {
       display: 'flex',
       flexDirection: 'column',
       textAlign: 'center',
-      padding: theme.spacing(1, 0),
-      backgroundColor: theme.palette.background.default,
-      width: '60%',
-      border: '1px black solid',
-      borderRadius: 4,
     },
   })
 );
@@ -40,16 +40,19 @@ const CategoryMenuItem = (props: { name: string; image: string }) => {
   const classes = useStyles();
   const [isHover, setIsHover] = useState(false);
   return (
-    <Link to={`${Routes.Product}/1`}>
+    <Link to={`${Routes.Category}/1`}>
       <Paper
         className={classes.container}
         elevation={isHover ? 2 : 1}
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
-        style={{
-          backgroundImage: `url(${image})`,
-        }}
       >
+        <Box
+          className={classes.image}
+          style={{
+            backgroundImage: `url(${image})`,
+          }}
+        />
         <Container
           className={classes.label}
           style={{

@@ -12,7 +12,7 @@ import { useUserDispatch, useUserState } from 'UserContext';
 import ShoppingCartIcon from './ShoppingCartIcon';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-export const navbarHeight = '64px';
+export const navbarHeight = 96;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -63,7 +63,7 @@ const Navbar = () => {
 
   const LogoLink = (
     <Link to={Routes.Homepage} className={classes.logoContainer}>
-      <Logo className={classes.logo} stroke='white' strokeWidth={1} />
+      <Logo className={classes.logo} stroke='white' strokeWidth={2} />
     </Link>
   );
 
@@ -78,7 +78,7 @@ const Navbar = () => {
   const UserButton = user.isAuth ? (
     <SignOutButton />
   ) : (
-    <Link to={Routes.SignIn}>
+    <Link to={Routes.SignIn} style={{height:24}}>
       <AccountCircleIcon />
     </Link>
   );
