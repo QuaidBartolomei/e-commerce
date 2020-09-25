@@ -86,3 +86,5 @@ export const shirtData: ShopItemData[] = [
     category: 'Shirt',
   },
 ];
+
+export const shopItems = [...shirtData, ...hatData];

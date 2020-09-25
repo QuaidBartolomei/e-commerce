@@ -2,10 +2,10 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { ShopItemData } from 'interfaces/ShopItemData.interface';
+import { shopItems } from 'data/ShopItems';
 import ShopItem from 'pages/Shop/ShopItem';
 import React from 'react';
-import { hatData } from 'data/ShopItems';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -16,20 +16,22 @@ const useStyles = makeStyles((theme) =>
     shopItemsContainer: {
       display: 'flex',
       flexDirection: 'row',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
     },
   })
 );
 
-const ShopCategory = ({ items }: { items: ShopItemData[] }) => {
+const ShopCategory = () => {
+  let { id } = useParams<{ id: string }>();
   const classes = useStyles();
+  let items = shopItems.filter((x) => x.category.toString() === id);
   return (
     <Container className={classes.container}>
       <Typography component='h2' variant='h3'>
-        Hats
+        {id}
       </Typography>
       <Box className={classes.shopItemsContainer}>
-        {hatData.map((item, key) => (
+        {items.map((item, key) => (
           <ShopItem key={key} {...item} />
         ))}
       </Box>

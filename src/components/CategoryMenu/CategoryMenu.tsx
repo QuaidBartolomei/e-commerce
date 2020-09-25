@@ -1,7 +1,7 @@
-import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import hats_img from 'assets/categories/hats.jpg';
 import shirts_img from 'assets/shirts/black-shirt.jpg';
+import { ShopItemCategory } from 'interfaces/ShopItemData.interface';
 import React from 'react';
 import CategoryMenuItem from './CategoryMenuItem';
 
@@ -26,32 +26,39 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
+const data: { name: string; image: string; category: ShopItemCategory }[] = [
+  {
+    name: 'Hats',
+    image: hats_img,
+    category: 'Hat',
+  },
+  {
+    name: 'Hats',
+    image: hats_img,
+    category: 'Hat',
+  },
+  {
+    name: 'Hats',
+    image: hats_img,
+    category: 'Hat',
+  },
+  {
+    name: 'Hats',
+    image: hats_img,
+    category: 'Hat',
+  },
+  {
+    name: 'Shirts',
+    image: shirts_img,
+    category: 'Shirt',
+  },
+];
+
 const CategoryMenu = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      {[
-        {
-          name: 'Hats',
-          image: hats_img,
-        },
-        {
-          name: 'Hats',
-          image: hats_img,
-        },
-        {
-          name: 'Hats',
-          image: hats_img,
-        },
-        {
-          name: 'Hats',
-          image: hats_img,
-        },
-        {
-          name: 'Shirts',
-          image: shirts_img,
-        },
-      ].map((props, key) => (
+      {data.map((props, key) => (
         <CategoryMenuItem {...props} key={key} />
       ))}
     </div>
