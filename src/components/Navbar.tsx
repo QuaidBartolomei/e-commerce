@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) =>
       justifyContent: 'space-between',
       minHeight: navbarHeight,
       height: 'fit-content',
-      backgroundColor: theme.palette.grey[600],
+      backgroundColor: theme.palette.primary.main,
       color: theme.palette.primary.contrastText,
       '&>*': {
         height: '100%',

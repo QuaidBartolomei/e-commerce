@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) =>
     container: {
       padding: theme.spacing(1),
       width: '100%',
-      backgroundColor: theme.palette.grey[400],
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.primary.contrastText,
       marginBottom: theme.spacing(2),
       display: 'flex',
       flexDireciton: 'row',

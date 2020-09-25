@@ -10,6 +10,7 @@ import Router from 'Router';
 import { UserProvider } from 'UserContext';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import Box from '@material-ui/core/Box';
 
 const theme = createMuiTheme({
   palette: {
@@ -21,14 +22,20 @@ const theme = createMuiTheme({
     },
   },
 });
+
 const useStyles = makeStyles((theme) =>
   createStyles({
-    content: {
-      height: `calc(100vh - ${navbarHeight})`,
-      maxWidth: '100%',
+    page: {
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh',
+    },
+    mainContent: {
+      flexGrow: 1,
     },
   })
 );
+
 const App = () => {
   const classes = useStyles();
   return (
@@ -36,10 +43,13 @@ const App = () => {
       <CssBaseline />
       <UserProvider>
         <ThemeProvider theme={theme}>
-          <Navbar />
-          <CategoryMenu />
-          <Router />
-          <Footer />
+          <Box className={classes.page}>
+            <Navbar />
+            <Container className={classes.mainContent} disableGutters>
+              <Router />
+            </Container>
+            <Footer />
+          </Box>
         </ThemeProvider>
       </UserProvider>
     </BrowserRouter>

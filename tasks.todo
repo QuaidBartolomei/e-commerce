@@ -21,21 +21,24 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
 ✔ change full size image view to use material ui backdrop @done (9/25/2020, 11:28:01 AM)
 ✔ change theme palette @done (9/25/2020, 12:34:55 PM)
 
+✔ keep footer on page bottom @done (9/25/2020, 2:50:09 PM)
+
 ☐ fix signin page
-  ☐ change button colors
+  ✔ change button colors @done (9/25/2020, 1:55:50 PM)
 
 ☐ make category link icons look nicer
   ☐ find example
   ☐ make smaller
 
-☐ change navbar and category menu colors
-
+✔ change navbar and category menu colors @done (9/25/2020, 1:33:32 PM)
 
 ☐ improve shopping cart page
-
-☐ change checkout page to cart page
-  ☐ cleanup cart page
+  ✔ find example @done (9/25/2020, 1:53:39 PM)
+  ☐ 
 
 ☐ create checkout page
   ☐ address form
   ☐ stripes payment
+
+☐ add more shop item categories
+  ☐ pants

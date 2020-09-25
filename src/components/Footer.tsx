@@ -12,6 +12,8 @@ const useStyles = makeStyles((theme) =>
     footer: {
       backgroundColor: theme.palette.primary.light,
       padding: theme.spacing(6, 0),
+      bottom: 0,
+      width: '100%',
     },
     container: {
       display: 'flex',
