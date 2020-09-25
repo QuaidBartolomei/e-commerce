@@ -1,21 +1,9 @@
-import Box from '@material-ui/core/Box';
+import Backdrop from '@material-ui/core/Backdrop';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    overlay: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      height: '100vh',
-      width: '100vw',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: `rgba(0,0,0,0.7)`,
-      zIndex: 2,
-    },
     fullSizeImage: {
       maxHeight: '100vh',
       maxWidth: '100vw',
@@ -26,27 +14,31 @@ const useStyles = makeStyles((theme) =>
         cursor: 'pointer',
       },
     },
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: '#fff',
+      '&:hover': {
+        cursor: 'pointer',
+      },
+    },
   })
 );
 
 const FullsizeImage = (props: {
   image: string;
-  visible: boolean;
+  open: boolean;
   onClick: () => void;
 }) => {
-  const { image, visible, onClick } = props;
+  const { image, open, onClick } = props;
   const classes = useStyles();
   return (
-    <Box
-      className={classes.overlay}
-      style={{ visibility: visible ? 'visible' : 'hidden' }}
-    >
+    <Backdrop className={classes.backdrop} open={open} onClick={onClick}>
       <img
         className={classes.fullSizeImage}
         src={image}
         onClick={() => onClick()}
       />
-    </Box>
+    </Backdrop>
   );
 };
 

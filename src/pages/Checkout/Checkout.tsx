@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography/Typography';
 import Grid from '@material-ui/core/Grid/Grid';
 import Button from '@material-ui/core/Button/Button';
 import { useUserState, useUserDispatch } from 'UserContext';
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -54,7 +55,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className={classes.container}>
+    <Container className={classes.container}>
       <Grid container spacing={1} direction='column'>
         <CheckoutHeader />
 
@@ -69,7 +70,11 @@ const Checkout = () => {
             className={classes.cartItemRow}
           >
             <Grid item xs={3}>
-              <img src={x.imageUrl} alt='img' className={classes.cartItemImage} />
+              <img
+                src={x.imageUrl}
+                alt='img'
+                className={classes.cartItemImage}
+              />
             </Grid>
             <Grid item xs={3}>
               <Typography>{x.name}</Typography>
@@ -82,10 +87,12 @@ const Checkout = () => {
             </Grid>
             <Grid item xs={2}>
               <Button
-                onClick={() => userDispatch({
-                  type: 'remove_item',
-                  payload: x.id,
-                })}
+                onClick={() =>
+                  userDispatch({
+                    type: 'remove_item',
+                    payload: x.id,
+                  })
+                }
               >
                 <Typography>x</Typography>
               </Button>
@@ -99,7 +106,7 @@ const Checkout = () => {
           <Typography align='right'>Total: ${cartTotal}</Typography>
         </Grid>
       </Grid>
-    </div>
+    </Container>
   );
 };
 

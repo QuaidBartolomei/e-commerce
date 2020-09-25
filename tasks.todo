@@ -18,3 +18,24 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
 ✔ move ShopItemCarousel to seperate file @done (9/24/2020, 5:36:54 PM)
 ✔ category routing @done (9/24/2020, 5:44:17 PM)
 
+✔ change full size image view to use material ui backdrop @done (9/25/2020, 11:28:01 AM)
+✔ change theme palette @done (9/25/2020, 12:34:55 PM)
+
+☐ fix signin page
+  ☐ change button colors
+
+☐ make category link icons look nicer
+  ☐ find example
+  ☐ make smaller
+
+☐ change navbar and category menu colors
+
+
+☐ improve shopping cart page
+
+☐ change checkout page to cart page
+  ☐ cleanup cart page
+
+☐ create checkout page
+  ☐ address form
+  ☐ stripes payment

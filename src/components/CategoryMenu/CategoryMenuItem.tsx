@@ -1,8 +1,4 @@
 import { Typography } from '@material-ui/core';
-import Box from '@material-ui/core/Box/Box';
-import Container from '@material-ui/core/Container';
-import Fade from '@material-ui/core/Fade/Fade';
-import Paper from '@material-ui/core/Paper/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { ShopItemCategory } from 'interfaces/ShopItemData.interface';
 import React, { useState } from 'react';
@@ -36,35 +32,19 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const CategoryMenuItem = (props: { name: string; image: string, category: ShopItemCategory }) => {
+const CategoryMenuItem = (props: {
+  name: string;
+  image: string;
+  category: ShopItemCategory;
+}) => {
   const { name, image, category } = props;
   const classes = useStyles();
   const [isHover, setIsHover] = useState(false);
   return (
     <Link to={`${Routes.Category}/${category}`}>
-      <Paper
-        className={classes.container}
-        elevation={isHover ? 2 : 1}
-        onMouseOver={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
-      >
-        <Box
-          className={classes.image}
-          style={{
-            backgroundImage: `url(${image})`,
-          }}
-        />
-        <Container
-          className={classes.label}
-          style={{
-            opacity: isHover ? 0.9 : 0.7,
-          }}
-        >
-          <Typography component='h3' variant='h5'>
-            {name}
-          </Typography>
-        </Container>
-      </Paper>
+      <Typography component='h3' variant='h5'>
+        {name}
+      </Typography>
     </Link>
   );
 };

@@ -47,7 +47,7 @@ const ImageGallery = ({ mainImage }: { mainImage: string }) => {
   return (
     <React.Fragment>
       <FullsizeImage
-        visible={showFullsizeImage}
+        open={showFullsizeImage}
         onClick={() => setShowFullsizeImage(false)}
         image={selectedImage}
       />
