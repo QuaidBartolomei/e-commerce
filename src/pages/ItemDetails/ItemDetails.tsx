@@ -1,6 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import ImageGallery from 'components/ImageGallery';
+import ImageGallery from 'components/ImageGallery/ImageGallery';
 import { hatData, shirtData } from 'data/ShopItems';
 import { ShopItemData } from 'interfaces/ShopItemData.interface';
 import React from 'react';
@@ -36,8 +36,7 @@ const defaultItem: ShopItemData = {
 const ItemDetails = () => {
   let { id } = useParams<{ id: string }>();
 
-  let item =
-    [...shirtData, ...hatData].find((x) => x.id === id) || defaultItem;
+  let item = [...shirtData, ...hatData].find((x) => x.id === id) || defaultItem;
 
   const classes = useStyles();
   return (
