@@ -42,8 +42,8 @@ const images: string[] = hatData.map((hat) => hat.imageUrl);
 const ImageGallery = ({ mainImage }: { mainImage: string }) => {
   const classes = useStyles();
   const [selectedImage, setSelectedImage] = useState(mainImage);
-  const thumbnailImages = [mainImage, ...images];
   const [showFullsizeImage, setShowFullsizeImage] = useState(false);
+  const thumbnailImages = [mainImage, ...images];
   return (
     <React.Fragment>
       <FullsizeImage

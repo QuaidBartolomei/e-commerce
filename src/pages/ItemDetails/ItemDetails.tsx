@@ -4,7 +4,8 @@ import ImageGallery from 'components/ImageGallery/ImageGallery';
 import { hatData, shirtData } from 'data/ShopItems';
 import { ShopItemData } from 'interfaces/ShopItemData.interface';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { Routes } from 'Router';
 import ItemDetailsText from './ItemDetailsText';
 
 const useStyles = makeStyles((theme) =>
@@ -34,11 +35,16 @@ const defaultItem: ShopItemData = {
 };
 
 const ItemDetails = () => {
-  let { id } = useParams<{ id: string }>();
-
-  let item = [...shirtData, ...hatData].find((x) => x.id === id) || defaultItem;
-
   const classes = useStyles();
+  let { id } = useParams<{ id: string }>();
+  let history = useHistory();
+  let item = [...shirtData, ...hatData].find((x) => x.id === id);
+
+  if (!item) {
+    history.push(Routes.Homepage);
+    return <div></div>;
+  }
+
   return (
     <Grid container item spacing={1} className={classes.container}>
       <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
