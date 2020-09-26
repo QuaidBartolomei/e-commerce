@@ -1,40 +1,11 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-✔ fix user and shopping cart icon alignment in navbar @done (9/23/2020, 10:41:10 PM)
-✔ image gallery thumbnail sizing (too narrow when resizing) @done (9/23/2020, 10:41:11 PM)
+✔ add remove item link to shopping cart page items @done (9/26/2020, 2:42:35 PM)
 
-✔ shop item routing @done (9/24/2020, 1:18:56 PM)
-✔ use item image for item details. @done (9/24/2020, 1:40:50 PM)
-
-✔ click image gallery main image to view full size @done (9/24/2020, 1:58:58 PM)
-✔ make fullsize image overlay relative to user viewport @done (9/24/2020, 2:10:14 PM)
-✔ make fullsize image overlay background semi transparent @done (9/24/2020, 2:10:24 PM)
-
-✔ clean up image gallery file @done (9/24/2020, 5:16:19 PM)
-✔ move full size image overlay to new file @done (9/24/2020, 5:22:28 PM)
-
-✔ redirect invalid item id to homepage @done (9/24/2020, 5:21:06 PM)
-
-✔ move ShopItemCarousel to seperate file @done (9/24/2020, 5:36:54 PM)
-✔ category routing @done (9/24/2020, 5:44:17 PM)
-
-✔ change full size image view to use material ui backdrop @done (9/25/2020, 11:28:01 AM)
-✔ change theme palette @done (9/25/2020, 12:34:55 PM)
-
-✔ keep footer on page bottom @done (9/25/2020, 2:50:09 PM)
-
-✔ fix signin page @done (9/25/2020, 5:18:35 PM)
-  ✔ change button colors @done (9/25/2020, 1:55:50 PM)
-
-✔ change navbar and category menu colors @done (9/25/2020, 1:33:32 PM)
-
-✔ improve shopping cart page @done (9/25/2020, 7:43:01 PM)
-  ✔ find example @done (9/25/2020, 1:53:39 PM) 
-  
-☐ make category link icons look nicer
-  ☐ find example
-
-
+☐ add item removal and quantity changing functionality to shopping cart page
+☐ make quantity into input box
+☐ add update (submit quantity changes) and checkout buttons
+☐ add subtotal info
 
 ☐ create checkout page
   ☐ address form
@@ -44,3 +15,11 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
   ☐ pants
 
 ☐ create item thumbnail component for shopping cart
+
+☐ improve footer
+  ☐ find example
+  
+☐ make category link icons look nicer
+  ☐ find example
+
+  

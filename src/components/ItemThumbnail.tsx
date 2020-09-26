@@ -5,14 +5,11 @@ import Box from '@material-ui/core/Box';
 const useStyles = makeStyles((theme) =>
   createStyles({
     thumbnailImage: {
-      height: 64,
-      width: 64,
       backgroundPosition: 'center',
       backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
       '&:hover': {
         cursor: 'pointer',
-        border: 'black 1px solid',
       },
     },
   })
@@ -21,9 +18,11 @@ const useStyles = makeStyles((theme) =>
 const ItemThumbnail = ({
   image,
   onClick,
+  size,
 }: {
   image: string;
   onClick: () => void;
+  size: number;
 }) => {
   const classes = useStyles();
   return (
@@ -31,6 +30,8 @@ const ItemThumbnail = ({
       className={classes.thumbnailImage}
       style={{
         backgroundImage: `url(${image})`,
+        height: size,
+        width: size,
       }}
       onClick={onClick}
     />

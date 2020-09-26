@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
       width: '100%',
+      padding: theme.spacing(4,0),
       '&>*': {},
     },
     imageGalleryContainer: {},

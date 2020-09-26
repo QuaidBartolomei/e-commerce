@@ -1,4 +1,4 @@
-import React from 'react';
+import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -6,12 +6,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Container from '@material-ui/core/Container';
-import { useUserState, useUserDispatch } from 'UserContext';
-import ItemThumbnail from 'components/ItemThumbnail';
-import { Routes } from 'Router';
-import { useHistory, useParams } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { useUserDispatch, useUserState } from 'UserContext';
+import ShoppingCartItem from './ShoppingCartItem';
 
 const useStyles = makeStyles({
   table: {
@@ -21,11 +19,6 @@ const useStyles = makeStyles({
     minHeight: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-  },
-  productCell: {
-    display: 'flex',
-    flexDirection: 'row',
     alignItems: 'center',
   },
 });
@@ -40,15 +33,7 @@ function createData(
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export default function ShoppingCartPage() {
+export default function ShoppingCart() {
   const classes = useStyles();
   const user = useUserState();
   const userDispatch = useUserDispatch();
@@ -67,21 +52,7 @@ export default function ShoppingCartPage() {
         </TableHead>
         <TableBody>
           {user.shoppingCart.map((item) => (
-            <TableRow key={item.name}>
-              <TableCell
-                component='th'
-                scope='row'
-                className={classes.productCell}
-              >
-                <ItemThumbnail
-                  image={item.imageUrl}
-                  onClick={() => history.push(`${Routes.Product}/${item.id}`)}
-                />
-                {item.name}
-              </TableCell>
-              <TableCell align='right'>{item.quantity}</TableCell>
-              <TableCell align='right'>{item.price}</TableCell>
-            </TableRow>
+            <ShoppingCartItem {...item} />
           ))}
         </TableBody>
       </Table>
