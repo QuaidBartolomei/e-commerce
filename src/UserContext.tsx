@@ -9,7 +9,9 @@ type Action =
   | { type: 'add_item'; payload: CartItemData }
   | { type: 'login' }
   | { type: 'logout' }
-  | { type: 'remove_item'; payload: string };
+  | { type: 'remove_item'; payload: string }
+  | { type: 'update_cart'; payload: CartItemData[] }
+  | { type: 'change_item_quantity'; payload: { id: string; quantity: number } };
 type Dispatch = (action: Action) => void;
 type State = {
   isAuth: boolean;
@@ -20,6 +22,8 @@ const UserStateContext = createContext<State | undefined>(undefined);
 const UserDispatchContext = createContext<Dispatch | undefined>(undefined);
 
 function userReducer(state: State, action: Action): State {
+  const removeItemFromCart = (id: string) =>
+    state.shoppingCart.filter((x) => x.id !== id);
   switch (action.type) {
     case 'add_item': {
       let item = action.payload;
@@ -37,6 +41,28 @@ function userReducer(state: State, action: Action): State {
       return {
         ...state,
         shoppingCart: state.shoppingCart.filter((x) => x.id !== action.payload),
+      };
+    }
+    case 'update_cart': {
+      return {
+        ...state,
+        shoppingCart: action.payload
+      };
+    }
+    case 'change_item_quantity': {
+      let { quantity, id } = action.payload;
+      let item = state.shoppingCart.find((x) => x.id === action.payload.id);
+      if (!item) return { ...state };
+      let shoppingCart = removeItemFromCart(id);
+      if (quantity > 0) {
+        shoppingCart.push({
+          ...item,
+          quantity,
+        });
+      }
+      return {
+        ...state,
+        shoppingCart,
       };
     }
     case 'login': {

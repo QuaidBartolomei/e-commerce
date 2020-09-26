@@ -7,10 +7,12 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import ItemThumbnail from 'components/ItemThumbnail';
 import CartItemData from 'interfaces/ShopItemData.interface';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Routes } from 'Router';
 import { useUserDispatch } from 'UserContext';
+import TextField from '@material-ui/core/TextField';
+import { maxMin } from 'utils/number.utils';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -26,7 +28,10 @@ const ShoppingCartItem = (item: CartItemData) => {
   const classes = useStyles();
   const history = useHistory();
   const userDispatch = useUserDispatch();
-  
+
+  const [quantity, setQuantity] = useState(item.quantity);
+
+
   return (
     <TableRow key={item.name}>
       <TableCell component='th' scope='row' className={classes.productCell}>
@@ -51,8 +56,19 @@ const ShoppingCartItem = (item: CartItemData) => {
           </Button>
         </Container>
       </TableCell>
-      <TableCell align='right'>{item.quantity}</TableCell>
-      <TableCell align='right'>{item.price}</TableCell>
+      <TableCell align='right'>
+        <TextField
+          defaultValue={item.quantity}
+          value={quantity}
+          onChange={(e) => setQuantity(maxMin(Number(e.target.value), 99, 0))}
+          variant='outlined'
+          type='number'
+        />
+      </TableCell>
+      <TableCell align='right'>
+        {'$'}
+        {item.price.toFixed(2)}
+      </TableCell>
     </TableRow>
   );
 };

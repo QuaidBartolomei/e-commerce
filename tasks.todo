@@ -1,11 +1,14 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-✔ add remove item link to shopping cart page items @done (9/26/2020, 2:42:35 PM)
 
-☐ add item removal and quantity changing functionality to shopping cart page
-☐ make quantity into input box
-☐ add update (submit quantity changes) and checkout buttons
-☐ add subtotal info
+
+
+
+☐ add functionality to update cart button
+
+☐ improve shopping cart page mobile formatting
+
+☐ change cart total calculating to memoized value
 
 ☐ create checkout page
   ☐ address form
