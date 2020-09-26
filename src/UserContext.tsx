@@ -3,6 +3,7 @@ import { createContext } from 'react';
 import CartItemData from 'interfaces/ShopItemData.interface';
 import { auth } from 'utils/firebase.utils';
 import { signInWithGoogle } from 'utils/firebase.utils';
+import { hatData } from 'data/ShopItems';
 
 type Action =
   | { type: 'add_item'; payload: CartItemData }
@@ -52,11 +53,21 @@ function userReducer(state: State, action: Action): State {
   }
 }
 
+let defaultCart: CartItemData[] = [
+  {
+    name: 'Dumb item',
+    id: '1',
+    imageUrl: hatData[0].imageUrl,
+    price: 99,
+    quantity: 1,
+  },
+];
+
 export const UserProvider: React.FC = (props) => {
   const [isAuth, setIsAuth] = useState(false);
   const [state, dispatch] = useReducer(userReducer, {
     isAuth,
-    shoppingCart: [],
+    shoppingCart: defaultCart,
   });
 
   useEffect(() => {

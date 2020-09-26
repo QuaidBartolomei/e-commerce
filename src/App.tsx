@@ -32,6 +32,11 @@ const useStyles = makeStyles((theme) =>
     },
     mainContent: {
       flexGrow: 1,
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   })
 );
@@ -45,7 +50,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
           <Box className={classes.page}>
             <Navbar />
-            <Container className={classes.mainContent} disableGutters>
+            <Container className={classes.mainContent}>
               <Router />
             </Container>
             <Footer />

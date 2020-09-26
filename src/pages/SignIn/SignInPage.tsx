@@ -11,25 +11,24 @@ const useStyles = makeStyles((theme) =>
       padding: theme.spacing(8),
     },
     grid: {
+      padding: theme.spacing(4, 1),
       width: '100%',
     },
     gridItem: {},
   })
 );
-const SignIn = () => {
+const SignInPage = () => {
   const classes = useStyles();
   return (
-    <Container className={classes.container}>
-      <Grid container spacing={4} className={classes.grid}>
-        <Grid item xs={12} md={6}>
-          <SignInForm />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <RegisterForm />
-        </Grid>
+    <Grid container spacing={4} className={classes.grid}>
+      <Grid item xs={12} md={6}>
+        <SignInForm />
       </Grid>
-    </Container>
+      <Grid item xs={12} md={6}>
+        <RegisterForm />
+      </Grid>
+    </Grid>
   );
 };
 
-export default SignIn;
+export default SignInPage;
