@@ -17,7 +17,6 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) =>
   createStyles({
     table: {
-      minWidth: 650,
     },
     container: {
       marginTop: theme.spacing(4),
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme) =>
       flexDirection: 'row',
       justifyContent: 'center',
       '&>*': {
-        margin: theme.spacing(4),
+        margin: theme.spacing(4, 2),
       },
     },
     subtotal: {
