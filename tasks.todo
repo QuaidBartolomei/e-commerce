@@ -1,6 +1,13 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-☐ make add to cart button more reactive
+☐ deploy to vercel
+
+☐ make add to cart button link to cart page 
+
+☐ add clothing item size to cart display and data interface 
+
+☐ improve footer
+  ☐ find example
 
 ☐ change cart total calculating to memoized value
 
@@ -9,11 +16,7 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
     ☐ get pictures
 
 ☐ move item data to firestore
-
-☐ improve footer
-  ☐ find example
   
-☐ make category link icons look nicer
-  ☐ find example
+☐ make category link icons look nicer https://material-ui.com/components/buttons/#complex-buttons
 
 ☐ add stripe payments support https://stripe.com/docs/checkout/integration-builder

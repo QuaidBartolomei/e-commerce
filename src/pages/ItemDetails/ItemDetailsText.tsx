@@ -11,6 +11,8 @@ import { ClothingSize, ShopItemData } from 'interfaces/ShopItemData.interface';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
 import { useUserDispatch } from 'UserContext';
+import { Routes } from 'Router';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -61,6 +63,7 @@ const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
         variant='outlined'
         className={classes.formControl}
         onClick={addItemToCart}
+        startIcon={<AddShoppingCartIcon />}
       >
         Add To Cart
       </Button>
