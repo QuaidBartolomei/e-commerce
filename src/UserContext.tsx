@@ -46,24 +46,23 @@ function userReducer(state: State, action: Action): State {
     case 'update_cart': {
       return {
         ...state,
-        shoppingCart: action.payload
+        shoppingCart: action.payload,
       };
     }
     case 'change_item_quantity': {
       let { quantity, id } = action.payload;
-      let item = state.shoppingCart.find((x) => x.id === action.payload.id);
-      if (!item) return { ...state };
-      let shoppingCart = removeItemFromCart(id);
-      if (quantity > 0) {
-        shoppingCart.push({
-          ...item,
-          quantity,
-        });
-      }
-      return {
-        ...state,
-        shoppingCart,
-      };
+
+      let index = state.shoppingCart.findIndex(
+        (x) => x.id === action.payload.id
+      );
+      if (index < 0) return { ...state };
+      if (quantity === 0)
+        return {
+          ...state,
+          shoppingCart: state.shoppingCart.filter((x) => x.id !== id),
+        };
+      else state.shoppingCart[index].quantity = quantity;
+      return { ...state };
     }
     case 'login': {
       signInWithGoogle();
@@ -86,6 +85,7 @@ let defaultCart: CartItemData[] = [
     imageUrl: hatData[0].imageUrl,
     price: 99,
     quantity: 1,
+    category: 'Hat',
   },
 ];
 

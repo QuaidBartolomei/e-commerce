@@ -4,6 +4,7 @@ export default interface CartItemData {
   quantity: number;
   price: number;
   id: string;
+  category: ShopItemCategory;
 }
 
 export interface ShopItemData {

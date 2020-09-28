@@ -23,34 +23,48 @@ const useStyles = makeStyles((theme) =>
     },
     quantityTextField: {
       textAlign: 'right',
-      width: 64
+      maxWidth: 64,
     },
   })
 );
 
-const ShoppingCartItem = (item: CartItemData) => {
+const ShoppingCartItem = ({
+  item,
+  onRemoveItem,
+  onChangeQuantity,
+}: {
+  item: CartItemData;
+  onRemoveItem: () => void;
+  onChangeQuantity: (quantity: number) => void;
+}) => {
   const classes = useStyles();
   const history = useHistory();
-  const userDispatch = useUserDispatch();
 
-  const [quantity, setQuantity] = useState(item.quantity);
+  const DeleteItemButton = () => (
+    <Link
+      variant='body2'
+      component='button'
+      color='error'
+      onClick={onRemoveItem}
+    >
+      {'Remove from cart'}
+    </Link>
+  );
 
-  function DeleteItemButton() {
-    return (
-      <Link
-        variant='body2'
-        component='button'
-        color='error'
-        onClick={() =>
-          userDispatch({
-            type: 'remove_item',
-            payload: item.id,
-          })
-        }
-      >
-        {'Remove from cart'}
-      </Link>
-    );
+  const QuantityField = () => (
+    <TextField
+      className={classes.quantityTextField}
+      value={item.quantity}
+      onChange={(e) => changeItemQuantity(Number(e.target.value))}
+      variant='outlined'
+      type='number'
+      size='small'
+    />
+  );
+
+  function changeItemQuantity(quantity: number) {
+    quantity = maxMin(Number(quantity), 99, 0);
+    onChangeQuantity(quantity);
   }
 
   return (
@@ -69,15 +83,7 @@ const ShoppingCartItem = (item: CartItemData) => {
         </Container>
       </TableCell>
       <TableCell align='right'>
-        <TextField
-          className={classes.quantityTextField}
-          defaultValue={item.quantity}
-          value={quantity}
-          onChange={(e) => setQuantity(maxMin(Number(e.target.value), 99, 0))}
-          variant='outlined'
-          type='number'
-          size='small'
-        />
+        <QuantityField />
       </TableCell>
       <TableCell align='right'>
         {'$'}

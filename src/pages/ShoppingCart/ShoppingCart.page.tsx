@@ -16,6 +16,7 @@ import Button from '@material-ui/core/Button';
 import { Routes } from 'Router';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
+import CartItemData, { ShopItemData } from 'interfaces/ShopItemData.interface';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -45,8 +46,13 @@ export default function ShoppingCart() {
   const classes = useStyles();
   const user = useUserState();
   const userDispatch = useUserDispatch();
-  const cartTotal = user.shoppingCart.reduce((total, x) => total + x.price, 0);
   const history = useHistory();
+  const [cart, setCart] = React.useState<CartItemData[]>([]);
+
+  const cartTotal = cart.reduce((total, x) => total + x.price * x.quantity, 0);
+  React.useEffect(() => {
+    setCart(user.shoppingCart);
+  }, [user.shoppingCart]);
 
   function TableHeader() {
     return (
@@ -78,7 +84,7 @@ export default function ShoppingCart() {
         onClick={() => {
           userDispatch({
             type: 'update_cart',
-            payload: [],
+            payload: cart.filter((x) => x.quantity > 0),
           });
         }}
       >
@@ -100,8 +106,25 @@ export default function ShoppingCart() {
         <Table className={classes.table} aria-label='simple table'>
           <TableHeader />
           <TableBody>
-            {user.shoppingCart.map((item) => (
-              <ShoppingCartItem {...item} />
+            {cart.map((item: CartItemData) => (
+              <ShoppingCartItem
+                item={item}
+                onRemoveItem={() =>
+                  userDispatch({
+                    type: 'remove_item',
+                    payload: item.id,
+                  })
+                }
+                onChangeQuantity={(quantity) =>
+                  setCart([
+                    ...cart.filter((x) => x.id !== item.id),
+                    {
+                      ...item,
+                      quantity,
+                    },
+                  ])
+                }
+              />
             ))}
           </TableBody>
         </Table>
