@@ -30,7 +30,7 @@ function userReducer(state: State, action: Action): State {
       let existingItem = state.shoppingCart.find((x) => x.id === item.id);
       if (existingItem) {
         existingItem.quantity++;
-        return { ...state };
+        return { ...state, shoppingCart: [...state.shoppingCart] };
       }
       return {
         ...state,
