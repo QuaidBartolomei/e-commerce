@@ -24,7 +24,7 @@ const ShoppingCartIcon = () => {
   );
   return (
     <div className={classes.container}>
-      <Badge badgeContent={cartSize} color='secondary'>
+      <Badge badgeContent={cartSize} color='error'>
         <ShoppingCart />
       </Badge>
     </div>

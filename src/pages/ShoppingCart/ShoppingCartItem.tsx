@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       flexDirection: 'row',
     },
+    quantityTextField: {
+      textAlign: 'right',
+      width: 64
+    },
   })
 );
 
@@ -31,6 +35,23 @@ const ShoppingCartItem = (item: CartItemData) => {
 
   const [quantity, setQuantity] = useState(item.quantity);
 
+  function DeleteItemButton() {
+    return (
+      <Link
+        variant='body2'
+        component='button'
+        color='error'
+        onClick={() =>
+          userDispatch({
+            type: 'remove_item',
+            payload: item.id,
+          })
+        }
+      >
+        {'Remove from cart'}
+      </Link>
+    );
+  }
 
   return (
     <TableRow key={item.name}>
@@ -44,25 +65,18 @@ const ShoppingCartItem = (item: CartItemData) => {
           <Typography component='h5' variant='h5'>
             {item.name}
           </Typography>
-          <Button
-            onClick={() =>
-              userDispatch({
-                type: 'remove_item',
-                payload: item.id,
-              })
-            }
-          >
-            {'Delete'}
-          </Button>
+          <DeleteItemButton />
         </Container>
       </TableCell>
       <TableCell align='right'>
         <TextField
+          className={classes.quantityTextField}
           defaultValue={item.quantity}
           value={quantity}
           onChange={(e) => setQuantity(maxMin(Number(e.target.value), 99, 0))}
           variant='outlined'
           type='number'
+          size='small'
         />
       </TableCell>
       <TableCell align='right'>

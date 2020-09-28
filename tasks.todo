@@ -1,7 +1,5 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-☐ change delete item button color
-☐ improve cart page buttons appearance
 ☐ add functionality to update cart button
 ☐ change cart total calculating to memoized value
 
@@ -10,8 +8,6 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
     ☐ get pictures
 
 ☐ move item data to firestore
-
-☐ create item thumbnail component for shopping cart
 
 ☐ improve footer
   ☐ find example

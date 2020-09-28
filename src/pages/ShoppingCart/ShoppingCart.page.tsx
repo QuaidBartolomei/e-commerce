@@ -15,29 +15,28 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Routes } from 'Router';
 import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    table: {
-    },
+    table: {},
     container: {
       marginTop: theme.spacing(4),
       minHeight: '100%',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'flex-end',
+      alignItems: 'center',
     },
     buttonContainer: {
+      margin: theme.spacing(3, 0),
       width: '100%',
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'center',
-      '&>*': {
-        margin: theme.spacing(4, 2),
-      },
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
     },
-    subtotal: {
-      marginTop: theme.spacing(4),
+    checkoutButton: {
+      margin: theme.spacing(2, 0, 4),
     },
   })
 );
@@ -49,17 +48,57 @@ export default function ShoppingCart() {
   const cartTotal = user.shoppingCart.reduce((total, x) => total + x.price, 0);
   const history = useHistory();
 
+  function TableHeader() {
+    return (
+      <TableHead>
+        <TableRow>
+          <TableCell>Product</TableCell>
+          <TableCell align='right'>Quantity</TableCell>
+          <TableCell align='right'>Price</TableCell>
+        </TableRow>
+      </TableHead>
+    );
+  }
+  function CheckoutButton() {
+    return (
+      <Button
+        href={Routes.Checkout}
+        className={classes.checkoutButton}
+        variant='contained'
+        color='primary'
+      >
+        {'Proceed to Checkout'}
+      </Button>
+    );
+  }
+  function UpdateCartButton() {
+    return (
+      <Button
+        variant='outlined'
+        onClick={() => {
+          userDispatch({
+            type: 'update_cart',
+            payload: [],
+          });
+        }}
+      >
+        {'Update Cart'}
+      </Button>
+    );
+  }
+  function Subtotal() {
+    return (
+      <Typography variant='h6'>
+        {`Subtotal: $${cartTotal.toFixed(2)}`}
+      </Typography>
+    );
+  }
+
   return (
     <Container disableGutters className={classes.container}>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='simple table'>
-          <TableHead>
-            <TableRow>
-              <TableCell>Product</TableCell>
-              <TableCell align='right'>Quantity</TableCell>
-              <TableCell align='right'>Price</TableCell>
-            </TableRow>
-          </TableHead>
+          <TableHeader />
           <TableBody>
             {user.shoppingCart.map((item) => (
               <ShoppingCartItem {...item} />
@@ -67,26 +106,11 @@ export default function ShoppingCart() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Typography
-        variant='h5'
-        className={classes.subtotal}
-      >{`Subtotal: $${cartTotal.toFixed(2)}`}</Typography>
-      <Container className={classes.buttonContainer}>
-        <Button
-          variant='outlined'
-          onClick={() => {
-            userDispatch({
-              type: 'update_cart',
-              payload: [],
-            });
-          }}
-        >
-          Update Cart
-        </Button>
-        <Link  href={Routes.Checkout}>
-          Checkout
-        </Link>
-      </Container>
+      <Box className={classes.buttonContainer}>
+        <UpdateCartButton />
+        <Subtotal />
+      </Box>
+      <CheckoutButton />
     </Container>
   );
 }
