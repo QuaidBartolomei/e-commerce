@@ -1,4 +1,4 @@
-import Checkout from 'pages/Checkout/Checkout';
+import Checkout from 'pages/Checkout/Checkout.page';
 import Directory from 'pages/Directory/Directory';
 import ItemDetails from 'pages/ItemDetails/ItemDetails';
 import Shop from 'pages/Shop/Shop';
@@ -12,9 +12,10 @@ export enum Routes {
   Homepage = '/',
   Shop = '/hats',
   SignIn = '/signin',
-  Checkout = '/checkout',
+  ShoppingCart = '/cart',
   Product = '/products',
-  Category = '/category'
+  Category = '/category',
+  Checkout = '/checkout',
 }
 
 const Router = () => {
@@ -23,7 +24,8 @@ const Router = () => {
       <Route exact path={Routes.Homepage} component={Directory} />
       <Route path={Routes.Shop} component={Shop} />
       <Route path={Routes.SignIn} component={SignInPage} />
-      <Route path={Routes.Checkout} component={ShoppingCart} />
+      <Route path={Routes.ShoppingCart} component={ShoppingCart} />
+      <Route path={Routes.Checkout} component={Checkout} />
       <Route path={`${Routes.Product}/:id`} component={ItemDetails} />
       <Route path={`${Routes.Category}/:id`} component={ShopCategory} />
     </Switch>

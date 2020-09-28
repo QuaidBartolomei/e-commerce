@@ -1,18 +1,15 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-
-✔ improve shopping cart page mobile formatting @done (9/26/2020, 8:14:08 PM)
-
+☐ change delete item button color
 ☐ improve cart page buttons appearance
 ☐ add functionality to update cart button
 ☐ change cart total calculating to memoized value
 
-☐ create checkout page
-  ☐ address form
-  ☐ stripes payment
-
 ☐ add more shop item categories
   ☐ pants
+    ☐ get pictures
+
+☐ move item data to firestore
 
 ☐ create item thumbnail component for shopping cart
 
@@ -22,4 +19,4 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
 ☐ make category link icons look nicer
   ☐ find example
 
-  
+☐ add stripe payments support https://stripe.com/docs/checkout/integration-builder

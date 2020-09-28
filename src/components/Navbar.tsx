@@ -87,7 +87,7 @@ const Navbar = () => {
   );
 
   const ShoppingCartLink = (
-    <Link to={Routes.Checkout}>
+    <Link to={Routes.ShoppingCart}>
       <ShoppingCartIcon />
     </Link>
   );
