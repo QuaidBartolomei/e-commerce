@@ -1,8 +1,9 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-☐ deploy to vercel
-
 ☐ make add to cart button link to cart page 
+
+https://material-ui.com/components/progress/
+☐ animate add to cart button 
 
 ☐ add clothing item size to cart display and data interface 
 
@@ -17,6 +18,15 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
 
 ☐ move item data to firestore
   
-☐ make category link icons look nicer https://material-ui.com/components/buttons/#complex-buttons
+https://material-ui.com/components/buttons/#complex-buttons
+☐ make category link icons look nicer 
 
-☐ add stripe payments support https://stripe.com/docs/checkout/integration-builder
+https://stripe.com/docs/checkout/integration-builder
+☐ add stripe payments support 
+
+
+
+https://e-commerce-indol.vercel.app
+
+
+
