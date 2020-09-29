@@ -5,6 +5,7 @@ export default interface CartItemData {
   price: number;
   id: string;
   category: ShopItemCategory;
+  size: ClothingSize;
 }
 
 export interface ShopItemData {

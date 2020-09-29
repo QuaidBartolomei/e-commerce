@@ -86,6 +86,7 @@ let defaultCart: CartItemData[] = [
     price: 99,
     quantity: 1,
     category: 'Hat',
+    size: 'S',
   },
 ];
 

@@ -6,7 +6,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Carousel from 'components/Carousel';
 import {
   ShopItemCategory,
-  ShopItemData,
+  ShopItemData
 } from 'interfaces/ShopItemData.interface';
 import React from 'react';
 import { Routes } from 'Router';
@@ -14,7 +14,7 @@ import { Routes } from 'Router';
 const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
-      margin: theme.spacing(3,0),
+      margin: theme.spacing(3, 0),
     },
     header: {
       display: 'flex',

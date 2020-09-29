@@ -77,7 +77,7 @@ const ShoppingCartItem = ({
         />
         <Container>
           <Typography component='h5' variant='h5'>
-            {item.name}
+            {item.name} - ({item.size})
           </Typography>
           <DeleteItemButton />
         </Container>

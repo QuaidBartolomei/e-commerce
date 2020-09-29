@@ -1,17 +1,15 @@
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
+import Divider from '@material-ui/core/Divider';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import AddToCartButton from 'components/AddToCartButton';
 import { ClothingSize, ShopItemData } from 'interfaces/ShopItemData.interface';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
-import { Routes } from 'Router';
-import AddToCartButton from 'components/AddToCartButton';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -28,6 +26,7 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
+
 
 const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
   const [size, setSize] = React.useState<ClothingSize>('S');
@@ -52,7 +51,7 @@ const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
           <MenuItem value={'L'}>L</MenuItem>
         </Select>
       </FormControl>
-      <AddToCartButton {...{ ...item, quantity: 1 }} />
+      <AddToCartButton {...{ ...item, quantity: 1, size }} />
       <Typography>{loremIpsum({ count: 3, units: 'sentence' })}</Typography>
     </Container>
   );

@@ -2,7 +2,6 @@ import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import { hatData, shirtData } from 'data/ShopItems';
-import { ShopItemData } from 'interfaces/ShopItemData.interface';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Routes } from 'Router';
@@ -12,7 +11,7 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
       width: '100%',
-      padding: theme.spacing(4,0),
+      padding: theme.spacing(4, 0),
       '&>*': {},
     },
     imageGalleryContainer: {},
@@ -26,14 +25,6 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
-
-const defaultItem: ShopItemData = {
-  id: '1',
-  imageUrl: '',
-  name: 'Dumb Hat',
-  price: 99,
-  category: 'Hat',
-};
 
 const ItemDetails = () => {
   const classes = useStyles();
