@@ -1,16 +1,12 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-☐ make add to cart button link to cart page 
-
-https://material-ui.com/components/progress/
-☐ animate add to cart button 
+☐ gray out cart items with quantity == 0
 
 ☐ add clothing item size to cart display and data interface 
 
 ☐ improve footer
   ☐ find example
 
-☐ change cart total calculating to memoized value
 
 ☐ add more shop item categories
   ☐ pants
@@ -25,6 +21,8 @@ https://stripe.com/docs/checkout/integration-builder
 ☐ add stripe payments support 
 
 
+https://material-ui.com/components/progress/
+☐ animate add to cart button 
 
 https://e-commerce-indol.vercel.app
 

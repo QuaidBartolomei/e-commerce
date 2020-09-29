@@ -7,15 +7,10 @@ import { getShopItems } from 'utils/db.utils';
 import { shirtData } from '../../data/ShopItems';
 import ShopItemCarousel from './ShopItemCarousel';
 
-const Spacing = 1;
-
 const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
-      padding: theme.spacing(Spacing),
-      '&>*': {
-        marginBottom: theme.spacing(5),
-      },
+      padding: theme.spacing(1),
     },
     content: {},
     carousel: {},
@@ -30,16 +25,8 @@ const Shop = () => {
   }, []);
   return (
     <Container maxWidth='lg' className={classes.container} disableGutters>
-      <ShopItemCarousel
-        title='Hats'
-        items={hatData}
-        category={'Hat'}
-      ></ShopItemCarousel>
-      <ShopItemCarousel
-        title='Shirts'
-        items={shirtData}
-        category={'Shirt'}
-      ></ShopItemCarousel>
+      <ShopItemCarousel title='Hats' items={hatData} category={'Hat'} />
+      <ShopItemCarousel title='Shirts' items={shirtData} category={'Shirt'} />
     </Container>
   );
 };

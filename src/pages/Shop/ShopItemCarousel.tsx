@@ -4,12 +4,18 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Carousel from 'components/Carousel';
-import { ShopItemCategory, ShopItemData } from 'interfaces/ShopItemData.interface';
+import {
+  ShopItemCategory,
+  ShopItemData,
+} from 'interfaces/ShopItemData.interface';
 import React from 'react';
 import { Routes } from 'Router';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
+    container: {
+      margin: theme.spacing(3,0),
+    },
     header: {
       display: 'flex',
       flexDirection: 'row',
@@ -33,7 +39,7 @@ const ShopItemCarousel = (props: {
   const classes = useStyles();
   const { title, items, category } = props;
   return (
-    <Box>
+    <Box className={classes.container}>
       <Box className={classes.header}>
         <Typography component='h2' variant='h4'>
           {title}

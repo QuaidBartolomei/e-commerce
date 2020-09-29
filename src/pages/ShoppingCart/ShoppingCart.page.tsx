@@ -48,8 +48,9 @@ export default function ShoppingCart() {
   const userDispatch = useUserDispatch();
   const history = useHistory();
   const [cart, setCart] = React.useState<CartItemData[]>([]);
-
-  const cartTotal = cart.reduce((total, x) => total + x.price * x.quantity, 0);
+  const cartTotal = React.useMemo(() => {
+    return cart.reduce((total, x) => total + x.price * x.quantity, 0);
+  }, [cart]);
   React.useEffect(() => {
     setCart(user.shoppingCart);
   }, [user.shoppingCart]);

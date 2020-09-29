@@ -10,9 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import { ClothingSize, ShopItemData } from 'interfaces/ShopItemData.interface';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
-import { useUserDispatch } from 'UserContext';
 import { Routes } from 'Router';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import AddToCartButton from 'components/AddToCartButton';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       flexDirection: 'column',
       '&>*': {
-        margin: theme.spacing(1)
+        margin: theme.spacing(1),
       },
     },
     formControl: {
@@ -33,12 +32,6 @@ const useStyles = makeStyles((theme) =>
 const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
   const [size, setSize] = React.useState<ClothingSize>('S');
   const classes = useStyles();
-  const userDispatch = useUserDispatch();
-  const addItemToCart = () =>
-    userDispatch({
-      type: 'add_item',
-      payload: { ...item, quantity: 1 },
-    });
   return (
     <Container className={classes.container}>
       <Typography component='h1' variant='h3' style={{ margin: 0 }}>
@@ -59,14 +52,7 @@ const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
           <MenuItem value={'L'}>L</MenuItem>
         </Select>
       </FormControl>
-      <Button
-        variant='outlined'
-        className={classes.formControl}
-        onClick={addItemToCart}
-        startIcon={<AddShoppingCartIcon />}
-      >
-        Add To Cart
-      </Button>
+      <AddToCartButton {...{ ...item, quantity: 1 }} />
       <Typography>{loremIpsum({ count: 3, units: 'sentence' })}</Typography>
     </Container>
   );
