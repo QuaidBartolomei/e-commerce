@@ -1,12 +1,9 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
+
 ☐ clothing size needs to be stored in shop item data - each size of each item should be a unique id
 
 ☐ gray out cart items with quantity == 0
-
-☐ improve footer
-  ☐ find example
-
 
 ☐ add more shop item categories
   ☐ pants

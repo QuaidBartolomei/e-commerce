@@ -5,7 +5,11 @@ import Container from '@material-ui/core/Container/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import FacebookIcon from '@material-ui/icons/Facebook';
 import Link from '@material-ui/core/Link';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -14,6 +18,7 @@ const useStyles = makeStyles((theme) =>
       padding: theme.spacing(6, 0),
       bottom: 0,
       width: '100%',
+      textAlign: 'center',
     },
     container: {
       display: 'flex',
@@ -28,7 +33,7 @@ const useStyles = makeStyles((theme) =>
 
 function Copyright() {
   return (
-    <Typography variant='body2' color='textSecondary' align='center'>
+    <Typography variant='body2' color='textSecondary' >
       {'Copyright © '}
       <Link color='inherit' href='https://material-ui.com/'>
         Your Website
@@ -42,21 +47,18 @@ function Copyright() {
 const Footer = () => {
   const classes = useStyles();
   const title = 'Footer';
-  const description = 'Something here to give the footer a purpose!';
+  const history = useHistory();
   return (
     <footer className={classes.footer}>
-      <Typography variant='h6' align='center' gutterBottom>
-        {title}
-      </Typography>
-      <Typography
-        variant='subtitle1'
-        align='center'
-        color='textSecondary'
-        component='p'
-      >
-        {description}
-      </Typography>
       <Copyright />
+      <Container>
+        <IconButton onClick={() => window.open('http://twitter.com')}>
+          <TwitterIcon />
+        </IconButton>
+        <IconButton onClick={() => window.open('http://facebook.com')}>
+          <FacebookIcon />
+        </IconButton>
+      </Container>
     </footer>
   );
 };
