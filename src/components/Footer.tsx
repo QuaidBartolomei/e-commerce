@@ -1,15 +1,11 @@
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import logo_img from 'assets/logo.svg';
-import React from 'react';
 import Container from '@material-ui/core/Container/Container';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import { useHistory } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import React from 'react';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -36,7 +32,7 @@ function Copyright() {
     <Typography variant='body2' color='textSecondary' >
       {'Copyright © '}
       <Link color='inherit' href='https://material-ui.com/'>
-        Your Website
+        CAB Clothing
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -46,8 +42,6 @@ function Copyright() {
 
 const Footer = () => {
   const classes = useStyles();
-  const title = 'Footer';
-  const history = useHistory();
   return (
     <footer className={classes.footer}>
       <Copyright />

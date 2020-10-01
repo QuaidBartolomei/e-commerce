@@ -9,11 +9,12 @@ export default interface CartItemData {
 }
 
 export interface ShopItemData {
+  id: string;
   imageUrl: string;
   name: string;
   price: number;
-  id: string;
   category: ShopItemCategory;
+  size: ClothingSize;
 }
 
 export type ClothingSize = 'S' | 'M' | 'L';

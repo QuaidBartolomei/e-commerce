@@ -3,7 +3,6 @@ import { createContext } from 'react';
 import CartItemData from 'interfaces/ShopItemData.interface';
 import { auth } from 'utils/firebase.utils';
 import { signInWithGoogle } from 'utils/firebase.utils';
-import { hatData } from 'data/ShopItems';
 
 type Action =
   | { type: 'add_item'; payload: CartItemData }
@@ -82,7 +81,7 @@ let defaultCart: CartItemData[] = [
   {
     name: 'Dumb item',
     id: '1',
-    imageUrl: hatData[0].imageUrl,
+    imageUrl: '',
     price: 99,
     quantity: 1,
     category: 'Hat',

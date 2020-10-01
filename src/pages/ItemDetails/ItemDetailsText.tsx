@@ -31,6 +31,23 @@ const useStyles = makeStyles((theme) =>
 const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
   const [size, setSize] = React.useState<ClothingSize>('S');
   const classes = useStyles();
+
+  const SizeSelect = () => (
+    <FormControl className={classes.formControl}>
+      <InputLabel id='size_label'>Size</InputLabel>
+      <Select
+        labelId='size_label'
+        id='size'
+        value={size}
+        onChange={(e) => setSize(e.target.value as ClothingSize)}
+      >
+        <MenuItem value={'S'}>S</MenuItem>
+        <MenuItem value={'M'}>M</MenuItem>
+        <MenuItem value={'L'}>L</MenuItem>
+      </Select>
+    </FormControl>
+  );
+
   return (
     <Container className={classes.container}>
       <Typography component='h1' variant='h3' style={{ margin: 0 }}>
@@ -38,19 +55,7 @@ const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
       </Typography>
       <Typography>${item.price}</Typography>
       <Divider />
-      <FormControl className={classes.formControl}>
-        <InputLabel id='size_label'>Size</InputLabel>
-        <Select
-          labelId='size_label'
-          id='size'
-          value={size}
-          onChange={(e) => setSize(e.target.value as ClothingSize)}
-        >
-          <MenuItem value={'S'}>S</MenuItem>
-          <MenuItem value={'M'}>M</MenuItem>
-          <MenuItem value={'L'}>L</MenuItem>
-        </Select>
-      </FormControl>
+      <SizeSelect />
       <AddToCartButton {...{ ...item, quantity: 1, size }} />
       <Typography>{loremIpsum({ count: 3, units: 'sentence' })}</Typography>
     </Container>

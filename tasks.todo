@@ -1,7 +1,24 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
 
-☐ clothing size needs to be stored in shop item data - each size of each item should be a unique id
+☐ store clothing size in shop item data - each size of each item should be a unique id
+✔ add sample data to db @done (9/30/2020, 4:55:10 PM)
+✔ write function to load item data from db @done (9/30/2020, 6:30:29 PM)
+✔ use function on page load instead of filler data @done (9/30/2020, 6:30:31 PM)
+✔ write function to send new item data to db @done (9/30/2020, 6:44:40 PM)
+
+☐ create new item page with form to submit item data
+✔ add route @done (9/30/2020, 6:47:11 PM)
+✔ create page @done (9/30/2020, 6:47:17 PM)
+✔ copy form template @done (9/30/2020, 7:52:35 PM)
+☐ add upload image button
+☐ write function to send image to storage and get downloadurl
+
+
+
+
+
+☐ change carousel component to take children instead of item data prop
 
 ☐ gray out cart items with quantity == 0
 

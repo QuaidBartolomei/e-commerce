@@ -3,10 +3,15 @@ import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { hatData } from 'data/ShopItems';
 import React, { useState } from 'react';
 import FullsizeImage from './FullsizeImage';
 import ThumbnailGrid from './ThumbnailGrid';
+
+import black_shirt from 'assets/shirts/black-shirt.jpg';
+import blue_shirt from 'assets/shirts/blue-shirt.jpg';
+import pink_shirt from 'assets/shirts/pink-shirt.jpg';
+import plaid_shirt from 'assets/shirts/plaid-shirt.jpg';
+import yellow_shirt from 'assets/shirts/yellow-shirt.jpg';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -37,7 +42,13 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const images: string[] = hatData.map((hat) => hat.imageUrl);
+const images: string[] = [
+  black_shirt,
+  blue_shirt,
+  pink_shirt,
+  plaid_shirt,
+  yellow_shirt,
+];
 
 const ImageGallery = ({ mainImage }: { mainImage: string }) => {
   const classes = useStyles();

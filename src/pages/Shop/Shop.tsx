@@ -1,10 +1,8 @@
 import Container from '@material-ui/core/Container/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { hatData } from 'data/ShopItems';
 import { ShopItemData } from 'interfaces/ShopItemData.interface';
 import React, { useEffect, useState } from 'react';
 import { getShopItems } from 'utils/db.utils';
-import { shirtData } from '../../data/ShopItems';
 import ShopItemCarousel from './ShopItemCarousel';
 
 const useStyles = makeStyles((theme) =>
@@ -23,6 +21,12 @@ const Shop = () => {
   useEffect(() => {
     getShopItems().then(setShopItems);
   }, []);
+  let hatData = React.useMemo(() => {
+    return shopItems.filter((x) => x.category === 'Hat');
+  }, [shopItems]);
+  let shirtData = React.useMemo(() => {
+    return shopItems.filter((x) => x.category === 'Shirt');
+  }, [shopItems]);
   return (
     <Container maxWidth='lg' className={classes.container} disableGutters>
       <ShopItemCarousel title='Hats' items={hatData} category={'Hat'} />
