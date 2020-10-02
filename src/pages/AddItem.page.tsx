@@ -1,6 +1,10 @@
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -29,6 +33,11 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  formControl: {
+    width: 'fit-content',
+    minWidth: 120,
+    paddingLeft: theme.spacing(1),
+  },
 }));
 
 type ImageFile = { file: File; url: string };
@@ -36,7 +45,7 @@ type ImageFile = { file: File; url: string };
 export default function AddItem() {
   const classes = useStyles();
   const [name, setName] = React.useState('');
-  const [price, setPrice] = React.useState(0);
+  const [price, setPrice] = React.useState('');
   const [category, setCategory] = React.useState<ShopItemCategory>('Shirt');
   const [size, setSize] = React.useState<ClothingSize>('S');
   const [selectedImage, setSelectedImage] = React.useState('');
@@ -48,7 +57,7 @@ export default function AddItem() {
     let imageUrl = await addImageToStorage(imageFiles[0].file);
     let itemData: ShopItemData = {
       category,
-      price,
+      price: Number(price),
       name,
       size,
       imageUrl,
@@ -128,21 +137,25 @@ export default function AddItem() {
                 label='Price'
                 type='number'
                 value={price}
-                onChange={(e) => setPrice(Number(e.target.value))}
+                onChange={(e) => setPrice(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='category'
-                label='Category'
-                name='category'
-                onChange={(e) =>
-                  setCategory(e.target.value as ShopItemCategory)
-                }
-              />
+              <FormControl className={classes.formControl}>
+                <InputLabel id='category_label'>Category</InputLabel>
+                <Select
+                  required
+                  labelId='category_label'
+                  id='category'
+                  value={category}
+                  onChange={(e) => {
+                    setCategory(e.target.value as ShopItemCategory);
+                  }}
+                >
+                  <MenuItem value={'Hat'}>Hat</MenuItem>
+                  <MenuItem value={'Shirt'}>Shirt</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
               <SizeSelect onChange={setSize} />

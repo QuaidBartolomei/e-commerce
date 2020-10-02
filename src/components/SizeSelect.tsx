@@ -1,7 +1,7 @@
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ClothingSize } from 'interfaces/ShopItemData.interface';
 import React from 'react';
@@ -24,13 +24,14 @@ const SizeSelect = (props: { onChange: (size: ClothingSize) => void }) => {
     <FormControl className={classes.formControl}>
       <InputLabel id='size_label'>Size</InputLabel>
       <Select
+        required
         labelId='size_label'
         id='size'
-        value={size} 
+        value={size}
         onChange={(e) => {
           let newSize = e.target.value as ClothingSize;
-          setSize(newSize)
-          onChange(newSize)
+          setSize(newSize);
+          onChange(newSize);
         }}
       >
         <MenuItem value={'S'}>S</MenuItem>
