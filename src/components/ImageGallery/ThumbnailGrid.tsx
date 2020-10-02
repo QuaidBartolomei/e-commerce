@@ -29,25 +29,31 @@ const useStyles = makeStyles((theme) =>
 );
 
 const ThumbnailGrid = (props: {
-  thumbnailImages: string[];
+  imageUrls: string[];
   onSelectImage: (image: string) => void;
 }) => {
-  const { thumbnailImages, onSelectImage } = props;
+  const { imageUrls, onSelectImage } = props;
+  const [selectedImage, setSelectedImage] = React.useState('');
   const classes = useStyles();
   return (
     <Grid className={classes.thumbnailsContainer} container spacing={1}>
-      {thumbnailImages.map((image, key) => (
+      {imageUrls.map((image, key) => (
         <Grid
           key={key}
           item
           className={classes.thumbnail}
-          onClick={() => onSelectImage(image)}
+          onClick={() => {
+            let newSelectedImage = image === selectedImage ? '' : image;
+            setSelectedImage(newSelectedImage);
+            onSelectImage(newSelectedImage);
+          }}
           xs={3}
         >
           <Box
             className={classes.thumbnailImage}
             style={{
               backgroundImage: `url(${image})`,
+              border: image === selectedImage ? 'black 1px solid' : 'none',
             }}
           />
         </Grid>

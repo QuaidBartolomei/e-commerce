@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function UploadImageButton({
   onFileUpload,
 }: {
-  onFileUpload: (url: string) => void;
+  onFileUpload: (files: File[]) => void;
 }) {
   const classes = useStyles();
 
@@ -29,14 +29,14 @@ export default function UploadImageButton({
         accept='image/*'
         className={classes.input}
         id='contained-button-file'
-        multiple
         type='file'
+        multiple
         onChange={async (e) => {
           let files = e.target.files;
           if (!files) return;
-          let file = files[0];
-          await addImageToStorage(file);
-
+          let fileArray: File[] = [];
+          for (let i = 0; i < files.length; i++) fileArray.push(files[i]);
+          onFileUpload(fileArray);
         }}
       />
       <label htmlFor='contained-button-file'>

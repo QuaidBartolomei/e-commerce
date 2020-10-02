@@ -1,10 +1,10 @@
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import ThumbnailGrid from 'components/ImageGallery/ThumbnailGrid';
 import SizeSelect from 'components/SizeSelect';
 import UploadImageButton from 'components/UploadImageButton';
 import {
@@ -13,7 +13,7 @@ import {
   ShopItemData,
 } from 'interfaces/ShopItemData.interface';
 import React from 'react';
-import { addShopItem } from 'utils/db.utils';
+import { addImageToStorage, addShopItem } from 'utils/db.utils';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -31,23 +31,70 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+type ImageFile = { file: File; url: string };
+
 export default function AddItem() {
   const classes = useStyles();
   const [name, setName] = React.useState('');
-  const [imageUrl, setImageUrl] = React.useState('');
-  const [price, setPrice] = React.useState(99);
+  const [price, setPrice] = React.useState(0);
   const [category, setCategory] = React.useState<ShopItemCategory>('Shirt');
   const [size, setSize] = React.useState<ClothingSize>('S');
+  const [selectedImage, setSelectedImage] = React.useState('');
+  const [imageFiles, setImageFiles] = React.useState<ImageFile[]>([]);
 
-  function onSubmit() {
-    console.log('new item:', {
-      name,
-      price,
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    let imageUrl = await addImageToStorage(imageFiles[0].file);
+    let itemData: ShopItemData = {
       category,
+      price,
+      name,
       size,
       imageUrl,
-    });
+      id: '1',
+    };
+    addShopItem(itemData);
   }
+
+  function removeSelectedImage() {
+    if (selectedImage === '') return;
+    setImageFiles(imageFiles.filter((x) => x.url !== selectedImage));
+    setSelectedImage('');
+  }
+
+  function onFilesSelected(files: File[]) {
+    setImageFiles([
+      ...imageFiles,
+      ...files.map((file) => ({
+        file,
+        url: URL.createObjectURL(file),
+      })),
+    ]);
+  }
+
+  const DeleteImageButton = () => (
+    <Button
+      color='secondary'
+      variant='contained'
+      onClick={removeSelectedImage}
+      disabled={selectedImage === ''}
+    >
+      Delete Image
+    </Button>
+  );
+
+  const SubmitButton = () => (
+    <Button
+      fullWidth
+      variant='contained'
+      color='primary'
+      className={classes.submit}
+      type='submit'
+    >
+      Add Item
+    </Button>
+  );
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -55,18 +102,18 @@ export default function AddItem() {
         <Typography component='h1' variant='h5'>
           Add New Item
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={onSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                autoComplete='fname'
                 name='name'
                 variant='outlined'
                 required
                 fullWidth
+                autoFocus
                 id='name'
                 label='Name'
-                autoFocus
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </Grid>
@@ -75,10 +122,12 @@ export default function AddItem() {
                 variant='outlined'
                 required
                 fullWidth
+                autoFocus
                 id='price'
                 name='price'
                 label='Price'
                 type='number'
+                value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
               />
             </Grid>
@@ -99,18 +148,19 @@ export default function AddItem() {
               <SizeSelect onChange={setSize} />
             </Grid>
             <Grid item xs={3}>
-              <UploadImageButton onFileUpload={setImageUrl} />
+              <UploadImageButton onFileUpload={onFilesSelected} />
+            </Grid>
+            <Grid item xs={6}>
+              <DeleteImageButton />
+            </Grid>
+            <Grid item xs={12}>
+              <ThumbnailGrid
+                imageUrls={imageFiles.map((file) => file.url)}
+                onSelectImage={setSelectedImage}
+              />
             </Grid>
           </Grid>
-          <Button
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-            onClick={onSubmit}
-          >
-            Add Item
-          </Button>
+          <SubmitButton />
         </form>
       </div>
     </Container>

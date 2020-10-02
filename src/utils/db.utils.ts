@@ -43,10 +43,15 @@ export function addShopItem(itemData: ItemData) {
   firestore.collection(Collections.Items).doc(shortid.generate()).set(itemData);
 }
 
-export async function addImageToStorage(file: File) {
-  let ref = storage.ref().child(file.name);
+export async function addImageToStorage(file: File): Promise<string> {
+  let ref = storage.ref('images').child(shortid.generate());
   console.log(ref);
   let snapshot = await ref.put(file);
   let url = snapshot.ref.getDownloadURL();
   return url;
+}
+
+export async function removeImageFromStorage(url: string) {
+  let ref = storage.refFromURL(url);
+  await ref.delete();
 }

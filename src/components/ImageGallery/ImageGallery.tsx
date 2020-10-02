@@ -73,7 +73,7 @@ const ImageGallery = ({ mainImage }: { mainImage: string }) => {
         </Link>
         <Divider />
         <ThumbnailGrid
-          thumbnailImages={thumbnailImages}
+          imageUrls={thumbnailImages}
           onSelectImage={setSelectedImage}
         />
       </Container>
