@@ -51,10 +51,14 @@ const images: string[] = [
 ];
 
 const ImageGallery = ({ mainImage }: { mainImage: string }) => {
+  console.log('main image:', mainImage);
   const classes = useStyles();
-  const [selectedImage, setSelectedImage] = useState(mainImage);
+  const [selectedImage, setSelectedImage] = useState('');
   const [showFullsizeImage, setShowFullsizeImage] = useState(false);
   const thumbnailImages = [mainImage, ...images];
+  React.useEffect(() => {
+    setSelectedImage(mainImage);
+  }, [mainImage]);
   return (
     <React.Fragment>
       <FullsizeImage
@@ -75,6 +79,7 @@ const ImageGallery = ({ mainImage }: { mainImage: string }) => {
         <ThumbnailGrid
           imageUrls={thumbnailImages}
           onSelectImage={setSelectedImage}
+          defaultSelected={mainImage}
         />
       </Container>
     </React.Fragment>

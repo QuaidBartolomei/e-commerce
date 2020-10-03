@@ -75,7 +75,7 @@ export default function AddItem() {
   function onFilesSelected(files: File[]) {
     setImageFiles([
       ...imageFiles,
-      ...files.map((file) => ({
+      ...files.map(file => ({
         file,
         url: URL.createObjectURL(file),
       })),

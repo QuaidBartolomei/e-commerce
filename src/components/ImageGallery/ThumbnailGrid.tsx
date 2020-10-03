@@ -31,9 +31,12 @@ const useStyles = makeStyles((theme) =>
 const ThumbnailGrid = (props: {
   imageUrls: string[];
   onSelectImage: (image: string) => void;
+  defaultSelected?: string;
 }) => {
-  const { imageUrls, onSelectImage } = props;
-  const [selectedImage, setSelectedImage] = React.useState('');
+  const { imageUrls, onSelectImage, defaultSelected } = props;
+  const [selectedImage, setSelectedImage] = React.useState(
+    defaultSelected || ''
+  );
   const classes = useStyles();
   return (
     <Grid className={classes.thumbnailsContainer} container spacing={1}>
@@ -43,6 +46,7 @@ const ThumbnailGrid = (props: {
           item
           className={classes.thumbnail}
           onClick={() => {
+            console.log('selecting image');
             let newSelectedImage = image === selectedImage ? '' : image;
             setSelectedImage(newSelectedImage);
             onSelectImage(newSelectedImage);
