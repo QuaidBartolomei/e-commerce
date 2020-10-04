@@ -1,7 +1,5 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-☐ change carousel component to take children instead of item data prop
-
 ☐ gray out cart items with quantity == 0
 
 ☐ add more shop item categories

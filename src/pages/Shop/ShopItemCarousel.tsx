@@ -6,10 +6,11 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Carousel from 'components/Carousel';
 import {
   ShopItemCategory,
-  ShopItemData
+  ShopItemData,
 } from 'interfaces/ShopItemData.interface';
 import React from 'react';
 import { Routes } from 'Router';
+import ShopItem from './ShopItem';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -53,7 +54,11 @@ const ShopItemCarousel = (props: {
           <NavigateNextIcon />
         </Link>
       </Box>
-      <Carousel items={items} />
+      <Carousel>
+        {items.map((item, key) => (
+          <ShopItem key={key} {...item} />
+        ))}
+      </Carousel>
     </Box>
   );
 };

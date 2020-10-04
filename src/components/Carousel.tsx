@@ -1,8 +1,6 @@
-import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { ShopItemData } from 'interfaces/ShopItemData.interface';
 import Box from '@material-ui/core/Box';
-import ShopItem from 'pages/Shop/ShopItem';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -14,13 +12,11 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const Carousel = ({ items }: { items: ShopItemData[] }) => {
+const Carousel = (props: React.PropsWithChildren<{}>) => {
   const classes = useStyles();
   return (
     <Box className={classes.container}>
-      {items.map((item, key) => (
-        <ShopItem key={key} {...item} />
-      ))}
+      {props.children}
     </Box>
   );
 };
