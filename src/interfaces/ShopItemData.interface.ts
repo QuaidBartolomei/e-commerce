@@ -17,5 +17,10 @@ export interface ShopItemData {
   size: ClothingSize;
 }
 
+export interface UserData {
+  _id: string,
+  cart: CartItemData[]
+}
+
 export type ClothingSize = 'S' | 'M' | 'L';
 export type ShopItemCategory = 'Hat' | 'Shirt';

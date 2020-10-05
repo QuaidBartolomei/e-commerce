@@ -1,9 +1,8 @@
-import React from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import SignInForm from './SignInForm';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import RegisterForm from './RegisterForm';
-import Container from '@material-ui/core/Container';
+import SignInForm from './SignInForm';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

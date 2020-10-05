@@ -2,13 +2,10 @@ import {
   ClothingSize,
   ShopItemCategory,
   ShopItemData,
+  UserData,
 } from 'interfaces/ShopItemData.interface';
 import shortid from 'shortid';
-import { firestore, storage } from 'utils/firebase.utils';
-
-enum Collections {
-  Items = 'items',
-}
+import { Collections, firestore, storage } from 'utils/firebase.utils';
 
 type ItemData = {
   imageUrl: string;
@@ -51,7 +48,22 @@ export async function addImageToStorage(file: File): Promise<string> {
   return url;
 }
 
-export async function removeImageFromStorage(url: string) {
-  let ref = storage.refFromURL(url);
-  await ref.delete();
+async function addUserToDB(userId: string) {
+  return await firestore.collection(Collections.Users).add({
+    _id: userId,
+    cart: [],
+  } as UserData);
+}
+
+export async function getUserData(userId: string): Promise<UserData> {
+  let ref = firestore.collection(Collections.Users).doc(userId);
+  let doc = await ref.get();
+  if (!doc.exists) {
+    ref.set({
+      _id: userId,
+      cart: [],
+    });
+    doc = await ref.get();
+  }
+  return doc.data() as UserData;
 }

@@ -1,5 +1,11 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
+☐ sign in page redirects after sign in
+
+☐ enable signing in without google
+
+☐ save user cart items to db
+
 ☐ gray out cart items with quantity == 0
 
 ☐ add more shop item categories

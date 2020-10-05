@@ -4,7 +4,7 @@ import Directory from 'pages/Directory/Directory';
 import ItemDetails from 'pages/ItemDetails/ItemDetails.page';
 import Shop from 'pages/Shop/Shop';
 import ShoppingCart from 'pages/ShoppingCart/ShoppingCart.page';
-import SignInPage from 'pages/SignIn/SignInPage';
+import SignInPage from 'pages/SignIn/SignIn,page';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 

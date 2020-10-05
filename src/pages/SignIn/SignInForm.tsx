@@ -1,12 +1,12 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField/TextField';
-
-import Typography from '@material-ui/core/Typography/Typography';
 import Button from '@material-ui/core/Button/Button';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid/Grid';
-import { useUserDispatch } from 'UserContext';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField/TextField';
+import Typography from '@material-ui/core/Typography/Typography';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useUserDispatch } from 'UserContext';
+import { signInWithGoogle } from 'utils/firebase.utils';
 
 type FormFields = {
   email: string;
@@ -19,12 +19,12 @@ const useStyles = makeStyles(() =>
   })
 );
 const SignInForm = () => {
-  const userDispatch = useUserDispatch();
   const { register, handleSubmit } = useForm<FormFields>();
   const onSubmit = (data: FormFields) => {
     console.log('data', data);
   };
   const classes = useStyles();
+
   return (
     <div>
       <Typography component='h1' variant='h5'>
@@ -72,7 +72,7 @@ const SignInForm = () => {
               variant='contained'
               color='secondary'
               className={classes.submit}
-              onClick={() => userDispatch({ type: 'login' })}
+              onClick={signInWithGoogle}
             >
               Sign In With Google
             </Button>

@@ -1,8 +1,13 @@
 import firebase from 'firebase/app';
-import 'firebase/storage'
-
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
+import { UserData } from 'interfaces/ShopItemData.interface';
+
+export enum Collections {
+  Users = 'users',
+  Items = 'items',
+}
 
 const config = {
   apiKey: 'AIzaSyAzr57JspGRdqqpOTsBSxPHYZVraSGzrvA',
@@ -22,6 +27,13 @@ export const storage = firebase.storage();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export async function signInWithGoogle() {
+  auth.signInWithPopup(provider);
+}
+
+export function signOut() {
+  auth.signOut();
+}
 
 export default firebase;

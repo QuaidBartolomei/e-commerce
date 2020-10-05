@@ -49,8 +49,8 @@ export default function ShoppingCart() {
     return cart.reduce((total, x) => total + x.price * x.quantity, 0);
   }, [cart]);
   React.useEffect(() => {
-    setCart(user.shoppingCart);
-  }, [user.shoppingCart]);
+    setCart(user.cart);
+  }, [user.cart]);
 
   const TableHeader = () => (
     <TableHead>

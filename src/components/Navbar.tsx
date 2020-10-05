@@ -11,6 +11,7 @@ import { Routes } from 'Router';
 import { useUserDispatch, useUserState } from 'UserContext';
 import ShoppingCartIcon from './ShoppingCartIcon';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import SignOutButton from './SignOutButton';
 
 export const navbarHeight = 96;
 
@@ -78,7 +79,7 @@ const Navbar = () => {
     </Link>
   );
 
-  const UserButton = user.isAuth ? (
+  const UserButton = user._id !== '' ? (
     <SignOutButton />
   ) : (
     <Link to={Routes.SignIn} style={{ height: 24 }}>
@@ -112,9 +113,3 @@ const Navbar = () => {
 
 export default Navbar;
 
-const SignOutButton = () => {
-  const userDispatch = useUserDispatch();
-  return (
-    <Button onClick={() => userDispatch({ type: 'logout' })}>Sign Out</Button>
-  );
-};

@@ -19,8 +19,8 @@ const ShoppingCartIcon = () => {
   const classes = useStyles();
   const user = useUserState();
   const cartSize = useMemo(
-    () => user.shoppingCart.reduce((total, x) => total + x.quantity, 0),
-    [user.shoppingCart]
+    () => user.cart.reduce((total, x) => total + x.quantity, 0),
+    [user.cart]
   );
   return (
     <div className={classes.container}>
