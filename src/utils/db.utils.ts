@@ -1,11 +1,11 @@
-import {
+import CartItemData, {
   ClothingSize,
   ShopItemCategory,
   ShopItemData,
   UserData,
 } from 'interfaces/ShopItemData.interface';
 import shortid from 'shortid';
-import { Collections, firestore, storage } from 'utils/firebase.utils';
+import { auth, Collections, firestore, storage } from 'utils/firebase.utils';
 
 type ItemData = {
   imageUrl: string;
@@ -66,4 +66,14 @@ export async function getUserData(userId: string): Promise<UserData> {
     doc = await ref.get();
   }
   return doc.data() as UserData;
+}
+
+export async function updateCart(cart: CartItemData[]) {
+  let user = auth.currentUser;
+  if (!user) return;
+  let id = user.uid;
+  firestore.collection(Collections.Users).doc(id).set({
+    _id: id,
+    cart,
+  });
 }

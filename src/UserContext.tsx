@@ -1,9 +1,7 @@
-import React, { useReducer, useEffect, useState } from 'react';
-import { createContext } from 'react';
 import CartItemData, { UserData } from 'interfaces/ShopItemData.interface';
+import React, { createContext, useEffect, useReducer } from 'react';
+import { getUserData, updateCart } from 'utils/db.utils';
 import { auth } from 'utils/firebase.utils';
-import { signInWithGoogle } from 'utils/firebase.utils';
-import { getUserData } from 'utils/db.utils';
 
 let defaultCart: CartItemData[] = [
   {
@@ -105,6 +103,10 @@ export const UserProvider: React.FC = (props) => {
       unsub();
     };
   }, []);
+
+  useEffect(() => {
+    updateCart(state.cart);
+  }, [state.cart]);
 
   return (
     <UserStateContext.Provider value={state}>
