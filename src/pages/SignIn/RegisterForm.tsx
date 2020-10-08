@@ -1,11 +1,21 @@
 import Button from '@material-ui/core/Button/Button';
-import Grid from '@material-ui/core/Grid/Grid';
+import Container from '@material-ui/core/Container';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
 import * as EmailValidator from 'email-validator';
-import React, { useEffect, useState, useMemo } from 'react';
-import { useForm } from 'react-hook-form';
-import { passwordValidator, defaultHelperText } from 'utils/password.utils';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { registerNewUser } from 'utils/firebase.utils';
+import { passwordValidator } from 'utils/password.utils';
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    submitButton: {
+      margin: theme.spacing(2, 0),
+    },
+  })
+);
 
 type FormFields = {
   email: string;
@@ -14,110 +24,126 @@ type FormFields = {
 };
 
 const RegisterForm = () => {
-  const { register, handleSubmit } = useForm<FormFields>();
+  const classes = useStyles();
+  const { register, handleSubmit, watch, control, errors } = useForm<
+    FormFields
+  >({
+    mode: 'all',
+    defaultValues: {
+      email: '',
+      password: '',
+      passwordConfirm: '',
+    },
+  });
 
-  const [emailIsValid, setEmailIsValid] = useState(true);
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [passFieldFocus, setPassFieldFocus] = useState(false);
+  const { password, passwordConfirm } = watch();
 
-  const passwordState = useMemo<{
-    error: boolean;
-    helperText: string[];
-  }>(() => {
-    if (password === '')
-      return {
-        error: false,
-        helperText: defaultHelperText,
-      };
-    if (password !== passwordConfirm && passwordConfirm !== '')
-      return {
-        error: true,
-        helperText: ['Passwords do not match'],
-      };
-    let validation = passwordValidator(password, {
-      minLength: 8,
-      maxLength: 60,
-    });
-    return {
-      error: validation.error,
-      helperText: validation.errorMessages,
-    };
-  }, [password, passwordConfirm]);
-
-  const onSubmit = (data: FormFields) => {
+  const onSubmit = handleSubmit(async (data: FormFields) => {
     console.log('data', data);
-    setEmailIsValid(EmailValidator.validate(data.email)); // true
-  };
-  return (
-    <div>
+    await registerNewUser(data.email, data.password);
+  });
+
+  function validatePassword() {
+    return passwordValidator(password, { maxLength: 99, minLength: 8 }).error;
+  }
+
+  const Head = () => (
+    <React.Fragment>
       <Typography component='h1' variant='h5'>
         I don't have an account
       </Typography>
       <Typography>Sign up with your email and password</Typography>
+    </React.Fragment>
+  );
 
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+  const EmailField = (
+    <Controller
+      name='email'
+      control={control}
+      rules={{
+        validate: EmailValidator.validate,
+        required: true,
+      }}
+      render={() => (
         <TextField
-          margin='normal'
-          required
-          fullWidth
           label='Email'
-          name='email'
           autoComplete='email'
-          autoFocus
-          inputRef={register}
-          error={!emailIsValid}
-        />
-        <TextField
           margin='normal'
-          required
           fullWidth
-          name='password'
+          autoFocus
+          helperText={errors.email && errors.email.message}
+        />
+      )}
+    />
+  );
+
+  const PasswordField = (
+    <Controller
+      name='password'
+      control={control}
+      rules={{
+        required: 'You must specify a password',
+        validate: validatePassword,
+      }}
+      render={({ name }) => (
+        <TextField
           label='Password'
           type='password'
-          inputRef={register}
-          error={passwordState.error}
-          onFocus={() => setPassFieldFocus(true)}
-          onBlur={() => setPassFieldFocus(false)}
-          helperText={
-            passFieldFocus ? (
-              <span style={{ whiteSpace: 'pre-wrap' }}>
-                {passwordState.helperText.join('\n')}
-              </span>
-            ) : (
-              ''
-            )
-          }
-          value={password}
-          onChange={(e) => setPassword(e.currentTarget.value)}
-        />
-        <TextField
           margin='normal'
-          required
           fullWidth
-          disabled={!password}
-          name='passwordConfirm'
-          label='Confirm Password'
-          type='password'
-          inputRef={register}
-          error={passwordState.error}
-          value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.currentTarget.value)}
+          helperText={errors.password && errors.password.message}
         />
-        <Grid container spacing={2} style={{ marginTop: '8px' }}>
-          <Grid item xs={12} sm={6}>
-            <Button
-              fullWidth
-              type='submit'
-              variant='contained'
-              color='secondary'
-            >
-              Sign Up
-            </Button>
-          </Grid>
-        </Grid>
+      )}
+    />
+  );
+
+  const PasswordConfirmField = (
+    <Controller
+      name='passwordConfirm'
+      control={control}
+      rules={{
+        required: 'You must specify a password',
+        validate: (value) => {
+          if (value === password) {
+            return true;
+          } else {
+            return 'The passwords do not match';
+          }
+        },
+      }}
+      render={({ name }) => (
+        <TextField
+          type='password'
+          label='Confirm Password'
+          margin='normal'
+          fullWidth
+          helperText={errors.passwordConfirm && errors.passwordConfirm.message}
+        />
+      )}
+    />
+  );
+
+  const SubmitButton = (
+    <Button
+      type='submit'
+      variant='contained'
+      color='secondary'
+      className={classes.submitButton}
+    >
+      Sign Up
+    </Button>
+  );
+
+  return (
+    <Container>
+      <Head />
+      <form onSubmit={onSubmit}>
+        {EmailField}
+        {PasswordField}
+        {PasswordConfirmField}
+        {SubmitButton}
       </form>
-    </div>
+    </Container>
   );
 };
 
