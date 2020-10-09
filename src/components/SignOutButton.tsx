@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) =>
 );
 
 const SignOutButton = () => {
-  return <Button onClick={signOut}>Sign Out</Button>;
+  const classes = useStyles();
+  return <Button onClick={signOut} className={classes.container}>Sign Out</Button>;
 };
 
 export default SignOutButton;

@@ -5,7 +5,6 @@ import TextField from '@material-ui/core/TextField/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useUserDispatch } from 'UserContext';
 import { signInWithGoogle } from 'utils/firebase.utils';
 
 type FormFields = {

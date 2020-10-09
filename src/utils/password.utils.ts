@@ -1,41 +1,35 @@
-export const HelperText = {
-  lowercase: 'Passwords must contain at least 1 lowercase letter.',
-  uppercase: 'Passwords must contain at least 1 uppercase letter.',
-  number: 'Passwords must contain at least 1 number.',
-  characters:
-    'Passwords may only use the following special characters !@#$%^&*.?',
-  length: 'Passwords must be between 8 and 60 characters long',
-};
-export const defaultHelperText = [
-  HelperText.lowercase,
-  HelperText.uppercase,
-  HelperText.number,
-  HelperText.characters,
+const errorTypes = [
+  {
+    type: 'hasUppercase',
+    message: 'Passwords must contain at least 1 uppercase letter.',
+    validation: /[A-Z]/,
+  },
+  {
+    type: 'hasLowercase',
+    message: 'Passwords must contain at least 1 lowercase letter.',
+    validation: /[a-z]/,
+  },
+  {
+    type: 'hasNumber',
+    message: 'Passwords must contain at least 1 number.',
+    validation: /[0-9]/,
+  },
+  {
+    type: 'hasCorrectCharacters',
+    message:
+      'Passwords may only use the following special characters !@#$%^&*.?',
+    validation: /^[a-zA-Z0-9!@#$%^&*.?]*$/,
+  },
+  {
+    type: 'isCorrectLength',
+    message: 'Passwords must be between 8 and 60 characters long',
+    validation: /^.{8,60}$/,
+  },
 ];
 
-export function passwordValidator(
-  password: string,
-  options: { minLength: number; maxLength: number }
-) {
-  let errorMessages: string[] = [];
-  let validation = {
-    hasUppercase: /[A-Z]/.test(password),
-    hasLowercase: /[a-z]/.test(password),
-    hasNumber: /[0-9]/.test(password),
-    hasCorrectCharacters: /^[a-zA-Z0-9!@#$%^&*.?]*$/.test(password),
-    isCorrectLength:
-      password.length >= options.minLength &&
-      password.length <= options.maxLength,
-  };
-  if (!validation.hasLowercase) errorMessages.push(HelperText.lowercase);
-  if (!validation.hasUppercase) errorMessages.push(HelperText.uppercase);
-  if (!validation.hasNumber) errorMessages.push(HelperText.number);
-  if (!validation.isCorrectLength) errorMessages.push(HelperText.length);
-  if (!validation.hasCorrectCharacters)
-    errorMessages.push(HelperText.characters);
-  return {
-    ...validation,
-    errorMessages,
-    error: errorMessages.length > 0,
-  };
+export function passwordValidator(password: string): string {
+  return errorTypes
+    .filter((x) => !x.validation.test(password))
+    .map((x) => x.message)
+    .join('\n');
 }

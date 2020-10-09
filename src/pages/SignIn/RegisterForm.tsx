@@ -4,10 +4,16 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
 import * as EmailValidator from 'email-validator';
-import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import React, { FormEvent, useState } from 'react';
 import { registerNewUser } from 'utils/firebase.utils';
 import { passwordValidator } from 'utils/password.utils';
+
+interface FieldData {
+  state: [string, React.Dispatch<React.SetStateAction<string>>];
+  name: string;
+  errorMessage: (value: string) => string;
+  password?: boolean;
+}
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -16,132 +22,101 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
-
-type FormFields = {
-  email: string;
-  password: string;
-  passwordConfirm: string;
-};
-
 const RegisterForm = () => {
   const classes = useStyles();
-  const { register, handleSubmit, watch, control, errors } = useForm<
-    FormFields
-  >({
-    mode: 'all',
-    defaultValues: {
-      email: '',
-      password: '',
-      passwordConfirm: '',
+  const [showErrors, setShowErrors] = useState(false);
+
+  const fieldData: {
+    email: FieldData;
+    password: FieldData;
+    passwordConfirm: FieldData;
+  } = {
+    email: {
+      name: 'Email',
+      errorMessage: (value: string) =>
+        EmailValidator.validate(value) ? '' : 'Enter a valid Email',
+      state: useState(''),
     },
-  });
+    password: {
+      name: 'Password',
+      errorMessage: passwordValidator,
+      password: true,
+      state: useState(''),
+    },
+    passwordConfirm: {
+      name: 'Confirm Password',
+      errorMessage: validateConfirmPassword,
+      password: true,
+      state: useState(''),
+    },
+  };
 
-  const { password, passwordConfirm } = watch();
+  const fields: FieldData[] = [
+    fieldData.email,
+    fieldData.password,
+    fieldData.passwordConfirm,
+  ];
 
-  const onSubmit = handleSubmit(async (data: FormFields) => {
-    console.log('data', data);
-    await registerNewUser(data.email, data.password);
-  });
+  const Fields = fields.map(
+    ({ name, errorMessage, password, state: [value, setValue] }, key) => (
+      <TextField
+        margin='normal'
+        required
+        fullWidth
+        type={(password && 'password') || 'text'}
+        label={name}
+        {...{ name, value, key }}
+        error={showErrors && errorMessage(value) !== ''}
+        helperText={
+          showErrors && (
+            <span style={{ whiteSpace: 'pre-wrap' }}>
+              {errorMessage(value)}
+            </span>
+          )
+        }
+        onChange={(e) => setValue(e.currentTarget.value)}
+      />
+    )
+  );
 
-  function validatePassword() {
-    return passwordValidator(password, { maxLength: 99, minLength: 8 }).error;
+  function validateConfirmPassword() {
+    return fieldData.password.state[0] === fieldData.passwordConfirm.state[0]
+      ? ''
+      : 'Passwords do not match';
   }
 
-  const Head = () => (
-    <React.Fragment>
-      <Typography component='h1' variant='h5'>
-        I don't have an account
-      </Typography>
-      <Typography>Sign up with your email and password</Typography>
-    </React.Fragment>
-  );
+  function checkForErrors(): boolean {
+    return fields.find((x) => x.errorMessage(x.state[0]) !== '') !== undefined;
+  }
 
-  const EmailField = (
-    <Controller
-      name='email'
-      control={control}
-      rules={{
-        validate: EmailValidator.validate,
-        required: true,
-      }}
-      render={() => (
-        <TextField
-          label='Email'
-          autoComplete='email'
-          margin='normal'
-          fullWidth
-          autoFocus
-          helperText={errors.email && errors.email.message}
-        />
-      )}
-    />
-  );
-
-  const PasswordField = (
-    <Controller
-      name='password'
-      control={control}
-      rules={{
-        required: 'You must specify a password',
-        validate: validatePassword,
-      }}
-      render={({ name }) => (
-        <TextField
-          label='Password'
-          type='password'
-          margin='normal'
-          fullWidth
-          helperText={errors.password && errors.password.message}
-        />
-      )}
-    />
-  );
-
-  const PasswordConfirmField = (
-    <Controller
-      name='passwordConfirm'
-      control={control}
-      rules={{
-        required: 'You must specify a password',
-        validate: (value) => {
-          if (value === password) {
-            return true;
-          } else {
-            return 'The passwords do not match';
-          }
-        },
-      }}
-      render={({ name }) => (
-        <TextField
-          type='password'
-          label='Confirm Password'
-          margin='normal'
-          fullWidth
-          helperText={errors.passwordConfirm && errors.passwordConfirm.message}
-        />
-      )}
-    />
-  );
-
-  const SubmitButton = (
-    <Button
-      type='submit'
-      variant='contained'
-      color='secondary'
-      className={classes.submitButton}
-    >
-      Sign Up
-    </Button>
-  );
+  function onSubmit(e: FormEvent) {
+    e.preventDefault();
+    let hasErrors = checkForErrors();
+    setShowErrors(!showErrors);
+    if (hasErrors) return;
+    let email = fieldData.email.state[0];
+    let password = fieldData.password.state[0];
+    registerNewUser(email, password);
+  }
 
   return (
     <Container>
-      <Head />
+      <Typography component='h1' variant='h5'>
+        I don't have an account
+      </Typography>
+      <Typography>Sign up with an email and password</Typography>
+
       <form onSubmit={onSubmit}>
-        {EmailField}
-        {PasswordField}
-        {PasswordConfirmField}
-        {SubmitButton}
+        {Fields}
+
+        <Button
+          type='submit'
+          variant='contained'
+          color='secondary'
+          className={classes.submitButton}
+        >
+          Sign Up
+        </Button>
       </form>
     </Container>
   );

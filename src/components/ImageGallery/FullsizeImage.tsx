@@ -37,6 +37,7 @@ const FullsizeImage = (props: {
         className={classes.fullSizeImage}
         src={image}
         onClick={() => onClick()}
+        alt={'full size'}
       />
     </Backdrop>
   );

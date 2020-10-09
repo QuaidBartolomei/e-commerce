@@ -42,7 +42,7 @@ const ItemDetails = () => {
 
   React.useEffect(() => {
     getShopItemById(id).then(setItem);
-  }, []);
+  }, [id, setItem]);
 
   if (!item) {
     history.push(Routes.Homepage);

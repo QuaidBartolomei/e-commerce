@@ -1,17 +1,15 @@
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import ItemThumbnail from 'components/ItemThumbnail';
 import CartItemData from 'interfaces/ShopItemData.interface';
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Routes } from 'Router';
-import { useUserDispatch } from 'UserContext';
-import TextField from '@material-ui/core/TextField';
 import { maxMin } from 'utils/number.utils';
 
 const useStyles = makeStyles((theme) =>

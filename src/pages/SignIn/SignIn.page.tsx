@@ -27,7 +27,7 @@ const SignInPage = () => {
   React.useEffect(() => {
     if (!state._id) return;
     history.push(Routes.Homepage);
-  }, [state._id]);
+  }, [state._id, history]);
 
   return (
     <Grid container spacing={4} className={classes.grid}>

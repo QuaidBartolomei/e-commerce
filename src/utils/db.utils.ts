@@ -48,18 +48,11 @@ export async function addImageToStorage(file: File): Promise<string> {
   return url;
 }
 
-async function addUserToDB(userId: string) {
-  return await firestore.collection(Collections.Users).add({
-    _id: userId,
-    cart: [],
-  } as UserData);
-}
-
 export async function getUserData(userId: string): Promise<UserData> {
   let ref = firestore.collection(Collections.Users).doc(userId);
   let doc = await ref.get();
   if (!doc.exists) {
-    ref.set({
+    await ref.set({
       _id: userId,
       cart: [],
     });

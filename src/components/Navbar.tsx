@@ -1,16 +1,15 @@
-import Button from '@material-ui/core/Button/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Typography from '@material-ui/core/Typography';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Routes } from 'Router';
-import { useUserDispatch, useUserState } from 'UserContext';
+import { useUserState } from 'UserContext';
 import ShoppingCartIcon from './ShoppingCartIcon';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SignOutButton from './SignOutButton';
 
 export const navbarHeight = 96;
@@ -79,13 +78,14 @@ const Navbar = () => {
     </Link>
   );
 
-  const UserButton = user._id !== '' ? (
-    <SignOutButton />
-  ) : (
-    <Link to={Routes.SignIn} style={{ height: 24 }}>
-      <AccountCircleIcon />
-    </Link>
-  );
+  const UserButton =
+    user._id !== '' ? (
+      <SignOutButton />
+    ) : (
+      <Link to={Routes.SignIn} style={{ height: 24 }}>
+        <AccountCircleIcon />
+      </Link>
+    );
 
   const ShoppingCartLink = (
     <Link to={Routes.ShoppingCart}>
@@ -112,4 +112,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
