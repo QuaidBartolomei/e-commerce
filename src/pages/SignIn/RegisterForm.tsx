@@ -26,6 +26,8 @@ const RegisterForm = () => {
   const classes = useStyles();
   const [showErrors, setShowErrors] = useState(false);
 
+  // Data //
+
   const fieldData: {
     email: FieldData;
     password: FieldData;
@@ -57,6 +59,28 @@ const RegisterForm = () => {
     fieldData.passwordConfirm,
   ];
 
+  // Functions //
+
+  function validateConfirmPassword() {
+    return fieldData.password.state[0] === fieldData.passwordConfirm.state[0]
+      ? ''
+      : 'Passwords do not match';
+  }
+
+  function checkForErrors(): boolean {
+    return fields.find((x) => x.errorMessage(x.state[0]) !== '') !== undefined;
+  }
+
+  function onSubmit(e: FormEvent) {
+    e.preventDefault();
+    return (
+      checkForErrors() ||
+      registerNewUser(fieldData.email.state[0], fieldData.password.state[0])
+    );
+  }
+
+  // Components //
+
   const Fields = fields.map(
     ({ name, errorMessage, password, state: [value, setValue] }, key) => (
       <TextField
@@ -78,26 +102,6 @@ const RegisterForm = () => {
       />
     )
   );
-
-  function validateConfirmPassword() {
-    return fieldData.password.state[0] === fieldData.passwordConfirm.state[0]
-      ? ''
-      : 'Passwords do not match';
-  }
-
-  function checkForErrors(): boolean {
-    return fields.find((x) => x.errorMessage(x.state[0]) !== '') !== undefined;
-  }
-
-  function onSubmit(e: FormEvent) {
-    e.preventDefault();
-    let hasErrors = checkForErrors();
-    setShowErrors(!showErrors);
-    if (hasErrors) return;
-    let email = fieldData.email.state[0];
-    let password = fieldData.password.state[0];
-    registerNewUser(email, password);
-  }
 
   return (
     <Container>
