@@ -1,19 +1,35 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
+☐ add list to user drawer
+
+☐ make mobile navbar more icon focused
+
+☐ add navigation drawer
+
+☐ improve shopping cart mobile appearance
+
+☐ disable proceed to checkout on empty cart
+
+☐ fix category pages
+
+☐ add search functionality
+  search page
+  search bar
+
+☐ Hide empty categories
+
 ☐ gray out cart items with quantity == 0
 
 ☐ add more shop item categories
-  ☐ pants
-    ☐ get pictures
 
-https://material-ui.com/components/buttons/#complex-buttons
 ☐ make category link icons look nicer 
+  https://material-ui.com/components/buttons/#complex-buttons
 
-https://stripe.com/docs/checkout/integration-builder
 ☐ add stripe payments support 
+  https://stripe.com/docs/checkout/integration-builder
 
-https://material-ui.com/components/progress/
 ☐ animate add to cart button 
+  https://material-ui.com/components/progress/
 
 https://e-commerce-indol.vercel.app
 
