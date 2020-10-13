@@ -2,18 +2,15 @@ import IconButton from '@material-ui/core/IconButton';
 import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchIcon from '@material-ui/icons/Search';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Routes } from 'Router';
-import { useUserState } from 'UserContext';
 import ShoppingCartIcon from '../ShoppingCartIcon';
-import SignOutButton from '../SignOutButton';
-import UserButton from '../UserButton';
 import NavbarTitle from './NavbarTitle';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import UserDrawer from 'components/Navbar/UserDrawer';
 
 export const navbarHeight = 96;
 
@@ -44,6 +41,7 @@ const useStyles = makeStyles((theme) =>
 
 const Navbar = () => {
   const classes = useStyles();
+  const [showDrawer, setShowDrawer] = React.useState(false);
 
   const LogoLink = (
     <Link to={Routes.Homepage} className={classes.toolbarLink}>
@@ -59,12 +57,15 @@ const Navbar = () => {
 
   return (
     <Toolbar className={classes.toolbar}>
+      <UserDrawer isOpen={showDrawer} onClose={() => setShowDrawer(false)} />
       {LogoLink}
       <NavbarTitle title={title} />
       <IconButton>
         <SearchIcon />
       </IconButton>
-      <UserButton />
+      <IconButton onClick={() => setShowDrawer(true)}>
+        <AccountCircleIcon />
+      </IconButton>
       {ShoppingCartLink}
     </Toolbar>
   );
