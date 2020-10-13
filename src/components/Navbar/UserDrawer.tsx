@@ -1,14 +1,16 @@
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ListItemLink from 'components/ListItemLink';
 import React from 'react';
 import { Routes } from 'Router';
 import { useUserState } from 'UserContext';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { signout } from 'utils/user.utils';
+
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -25,10 +27,6 @@ const UserDrawer = (props: { isOpen: boolean; onClose: () => void }) => {
   const userState = useUserState();
 
   let isAuth = userState._id !== '';
-
-  function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
-    return <ListItem button component='a' {...props} />;
-  }
 
   return (
     <Drawer anchor='right' open={isOpen} onClose={onClose}>

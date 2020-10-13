@@ -12,6 +12,8 @@ import NavbarTitle from './NavbarTitle';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import UserDrawer from 'components/Navbar/UserDrawer';
 
+import MenuIcon from '@material-ui/icons/Menu';
+import NavigationDrawer from './NavigationDrawer';
 export const navbarHeight = 96;
 
 const title = 'CAB Clothing';
@@ -41,12 +43,24 @@ const useStyles = makeStyles((theme) =>
 
 const Navbar = () => {
   const classes = useStyles();
-  const [showDrawer, setShowDrawer] = React.useState(false);
+  const [showUserDrawer, setShowUserDrawer] = React.useState(false);
+  const [showNavDrawer, setShowNavDrawer] = React.useState(false);
 
   const LogoLink = (
     <Link to={Routes.Homepage} className={classes.toolbarLink}>
       <Logo className={classes.logo} stroke='black' strokeWidth={2} />
     </Link>
+  );
+
+  const NavMenuButton = (
+    <IconButton
+      edge='start'
+      color='inherit'
+      aria-label='menu'
+      onClick={() => setShowNavDrawer(true)}
+    >
+      <MenuIcon />
+    </IconButton>
   );
 
   const ShoppingCartLink = (
@@ -57,13 +71,20 @@ const Navbar = () => {
 
   return (
     <Toolbar className={classes.toolbar}>
-      <UserDrawer isOpen={showDrawer} onClose={() => setShowDrawer(false)} />
-      {LogoLink}
+      <UserDrawer
+        isOpen={showUserDrawer}
+        onClose={() => setShowUserDrawer(false)}
+      />
+      <NavigationDrawer
+        isOpen={showNavDrawer}
+        onClose={() => setShowNavDrawer(false)}
+      />
+      {NavMenuButton}
       <NavbarTitle title={title} />
       <IconButton>
         <SearchIcon />
       </IconButton>
-      <IconButton onClick={() => setShowDrawer(true)}>
+      <IconButton onClick={() => setShowUserDrawer(true)}>
         <AccountCircleIcon />
       </IconButton>
       {ShoppingCartLink}
