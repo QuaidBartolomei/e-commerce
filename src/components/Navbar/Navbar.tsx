@@ -10,10 +10,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Routes } from 'Router';
 import { useUserState } from 'UserContext';
-import ShoppingCartIcon from './ShoppingCartIcon';
-import SignOutButton from './SignOutButton';
-import UserButton from './UserButton';
-
+import ShoppingCartIcon from '../ShoppingCartIcon';
+import SignOutButton from '../SignOutButton';
+import UserButton from '../UserButton';
+import NavbarTitle from './NavbarTitle';
 
 export const navbarHeight = 96;
 
@@ -21,9 +21,6 @@ const title = 'CAB Clothing';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    logoContainer: {
-      height: '100%',
-    },
     logo: {
       height: 32,
       [theme.breakpoints.up('md')]: {
@@ -31,12 +28,8 @@ const useStyles = makeStyles((theme) =>
       },
       margin: theme.spacing(1, 0),
     },
-
     toolbar: {
       borderBottom: `1px solid ${theme.palette.divider}`,
-    },
-    toolbarTitle: {
-      flex: 1,
     },
     toolbarSecondary: {
       justifyContent: 'space-between',
@@ -51,28 +44,12 @@ const useStyles = makeStyles((theme) =>
 
 const Navbar = () => {
   const classes = useStyles();
-  const user = useUserState();
 
   const LogoLink = (
     <Link to={Routes.Homepage} className={classes.toolbarLink}>
       <Logo className={classes.logo} stroke='black' strokeWidth={2} />
     </Link>
   );
-
-  const Title = (
-    <Typography
-      component='h1'
-      variant='h5'
-      color='inherit'
-      align='center'
-      noWrap
-      className={classes.toolbarTitle}
-    >
-      <Link to={Routes.Homepage}>{title}</Link>
-    </Typography>
-  );
-
-
 
   const ShoppingCartLink = (
     <Link to={Routes.ShoppingCart}>
@@ -83,7 +60,7 @@ const Navbar = () => {
   return (
     <Toolbar className={classes.toolbar}>
       {LogoLink}
-      {Title}
+      <NavbarTitle title={title} />
       <IconButton>
         <SearchIcon />
       </IconButton>

@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 import { createMuiTheme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Footer from 'components/Footer';
-import Navbar from 'components/Navbar';
+import Navbar from 'components/Navbar/Navbar';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Router from 'Router';
