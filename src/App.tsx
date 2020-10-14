@@ -48,7 +48,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
           <Box className={classes.page}>
             <Navbar />
-            <Container className={classes.mainContent}>
+            <Container disableGutters maxWidth='lg' className={classes.mainContent}>
               <Router />
             </Container>
             <Footer />

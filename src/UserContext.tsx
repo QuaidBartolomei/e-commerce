@@ -7,7 +7,8 @@ let defaultCart: CartItemData[] = [
   {
     name: 'Dumb item',
     id: '1',
-    imageUrl: '',
+    imageUrl:
+      'https://firebasestorage.googleapis.com/v0/b/e-commerce-a8505.appspot.com/o/black-shirt.jpg?alt=media&token=c3f58f4b-df5d-491c-944c-c8c2238397df',
     price: 99,
     quantity: 1,
     category: 'Hat',

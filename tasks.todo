@@ -1,12 +1,23 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-☐ update cart on signout
+☐ improve shapping cart item card
+  ☐ change quantity to selecter input
+  ☐ make remove more button/link appearing
 
-☐ improve shopping cart mobile appearance
+☐ implement searching
+
+☐ fix items being added to cart incorrectly
+
+☐ update cart on signout
 
 ☐ disable proceed to checkout on empty cart
 
 ☐ fix category pages
+
+☐ iomprove item card
+  ☐ container: no gutters, max width = sm
+  ☐ remove button in bottom right
+
 
 ☐ add search functionality
   search page
