@@ -8,7 +8,7 @@ import Navbar from 'components/Navbar/Navbar';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Router from 'Router';
-import { UserProvider } from 'UserContext';
+import { UserProvider } from 'user/UserContext';
 
 const theme = createMuiTheme({
   palette: {

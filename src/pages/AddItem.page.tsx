@@ -17,6 +17,7 @@ import {
   ShopItemData,
 } from 'interfaces/ShopItemData.interface';
 import React from 'react';
+import shortid from 'shortid';
 import { addImageToStorage, addShopItem } from 'utils/db.utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -61,7 +62,7 @@ export default function AddItem() {
       name,
       size,
       imageUrl,
-      id: '1',
+      id: shortid.generate(),
     };
     addShopItem(itemData);
   }

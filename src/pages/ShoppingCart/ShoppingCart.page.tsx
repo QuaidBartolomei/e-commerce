@@ -5,7 +5,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CartItemData from 'interfaces/ShopItemData.interface';
 import React from 'react';
-import { useUserDispatch, useUserState } from 'UserContext';
+import { useUserDispatch, useUserState } from 'user/UserContext';
 import CheckoutButton from './CheckoutButton';
 import ItemCard from './ItemCard';
 import UpdateCartButton from './UpdateCartButton';
@@ -60,7 +60,7 @@ export default function ShoppingCart() {
   }
 
   return (
-    <Container disableGutters className={classes.container}>
+    <Container className={classes.container}>
       <Grid container spacing={2} className={classes.grid}>
         {cart.map((item: CartItemData, key) => (
           <Grid item key={key} xs={12}>

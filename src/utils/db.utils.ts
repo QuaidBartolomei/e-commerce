@@ -2,10 +2,12 @@ import CartItemData, {
   ClothingSize,
   ShopItemCategory,
   ShopItemData,
-  UserData,
 } from 'interfaces/ShopItemData.interface';
 import shortid from 'shortid';
+import { UserState } from 'user/user.interface';
 import { auth, Collections, firestore, storage } from 'utils/firebase.utils';
+
+// Generic, replaceable database functions that interface with the db framework (Firebase) 
 
 type ItemData = {
   imageUrl: string;
@@ -48,7 +50,7 @@ export async function addImageToStorage(file: File): Promise<string> {
   return url;
 }
 
-export async function getUserData(userId: string): Promise<UserData> {
+export async function getUserData(userId: string): Promise<UserState> {
   let ref = firestore.collection(Collections.Users).doc(userId);
   let doc = await ref.get();
   if (!doc.exists) {
@@ -58,7 +60,7 @@ export async function getUserData(userId: string): Promise<UserData> {
     });
     doc = await ref.get();
   }
-  return doc.data() as UserData;
+  return doc.data() as UserState;
 }
 
 export async function updateCart(cart: CartItemData[]) {

@@ -3,31 +3,27 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
 ☐ improve shapping cart item card
   ☐ change quantity to selecter input
   ☐ make remove more button/link appearing
-
-☐ implement searching
-
-☐ fix items being added to cart incorrectly
-
+  ☐ change image margins
+  ☐ link to item page
+  ☐ fix remove from cart button
+  
 ☐ update cart on signout
 
 ☐ disable proceed to checkout on empty cart
 
 ☐ fix category pages
 
-☐ iomprove item card
-  ☐ container: no gutters, max width = sm
-  ☐ remove button in bottom right
-
-
 ☐ add search functionality
   search page
   search bar
 
-☐ Hide empty categories
+☐ Homepage
+  ☐ Hide empty categories
 
-☐ gray out cart items with quantity == 0
-
-☐ add more shop item categories
+☐ add ad/specials/sale banner
+  ☐ get placeholder image
+  ☐ create component
+  ☐ add component to relevant pages
 
 ☐ make category link icons look nicer 
   https://material-ui.com/components/buttons/#complex-buttons
@@ -39,6 +35,5 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
   https://material-ui.com/components/progress/
 
 https://e-commerce-indol.vercel.app
-
 
 

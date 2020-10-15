@@ -8,7 +8,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListItemLink from 'components/ListItemLink';
 import React from 'react';
 import { Routes } from 'Router';
-import { useUserState } from 'UserContext';
+import { useUserState } from 'user/UserContext';
 import { signout } from 'utils/user.utils';
 
 

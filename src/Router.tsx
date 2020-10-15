@@ -1,6 +1,7 @@
 import AddItem from 'pages/AddItem.page';
 import Checkout from 'pages/Checkout/Checkout.page';
 import ItemDetails from 'pages/ItemDetails/ItemDetails.page';
+import SearchPage from 'pages/Search.page';
 import Shop from 'pages/Shop/Shop';
 import ShoppingCart from 'pages/ShoppingCart/ShoppingCart.page';
 import SignInPage from 'pages/SignIn/SignIn.page';
@@ -15,7 +16,8 @@ export enum Routes {
   Product = '/products',
   Category = '/category',
   Checkout = '/checkout',
-  AddItem = '/add-item'
+  AddItem = '/add-item',
+  Search = '/search'
 }
 
 const Router = () => {
@@ -28,6 +30,7 @@ const Router = () => {
       <Route path={Routes.Checkout} component={Checkout} />
       <Route path={Routes.AddItem} component={AddItem} />
       <Route path={`${Routes.Product}/:id`} component={ItemDetails} />
+      <Route path={`${Routes.Search}/:query`} component={SearchPage} />
     </Switch>
   );
 };

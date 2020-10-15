@@ -2,7 +2,7 @@ import Badge from '@material-ui/core/Badge/Badge';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import React, { useMemo } from 'react';
-import { useUserState } from 'UserContext';
+import { useUserState } from 'user/UserContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

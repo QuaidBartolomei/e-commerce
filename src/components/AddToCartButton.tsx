@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import CartItemData from 'interfaces/ShopItemData.interface';
+import CartItemData, { ShopItemData } from 'interfaces/ShopItemData.interface';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import { useUserDispatch } from 'UserContext';
+import { useUserDispatch } from 'user/UserContext';
 import { Routes } from 'Router';
 import { useHistory } from 'react-router-dom';
 
@@ -16,11 +16,12 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const AddToCartButton = (item: CartItemData) => {
+const AddToCartButton = ({ item }: { item: CartItemData }) => {
   const classes = useStyles();
   const userDispatch = useUserDispatch();
   const history = useHistory();
   const addItemToCart = () => {
+    console.log('adding item: ', item);
     userDispatch({
       type: 'add_item',
       payload: { ...item, quantity: 1 },

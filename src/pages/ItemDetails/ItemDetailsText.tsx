@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-
 const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
   const [size, setSize] = React.useState<ClothingSize>('S');
   const classes = useStyles();
@@ -56,7 +55,7 @@ const ItemDetailsText = ({ item }: { item: ShopItemData }) => {
       <Typography>${item.price}</Typography>
       <Divider />
       <SizeSelect />
-      <AddToCartButton {...{ ...item, quantity: 1, size }} />
+      <AddToCartButton item={{ ...item, quantity: 1 }} />
       <Typography>{loremIpsum({ count: 3, units: 'sentence' })}</Typography>
     </Container>
   );
