@@ -34,6 +34,9 @@ export default function ShoppingCart() {
   const user = useUserState();
   const userDispatch = useUserDispatch();
   const [cart, setCart] = React.useState(user.cart);
+  React.useEffect(() => {
+    setCart(user.cart);
+  }, [user.cart]);
   const cartTotal = React.useMemo(() => {
     return cart.reduce((total, x) => total + x.price * x.quantity, 0);
   }, [cart]);
@@ -60,7 +63,7 @@ export default function ShoppingCart() {
   }
 
   return (
-    <Container className={classes.container}>
+    <Container className={classes.container} maxWidth='md'>
       <Grid container spacing={2} className={classes.grid}>
         {cart.map((item: CartItemData, key) => (
           <Grid item key={key} xs={12}>
@@ -78,7 +81,7 @@ export default function ShoppingCart() {
         <Box className={classes.buttonContainer}>
           <UpdateCartButton cart={cart} /> {Subtotal}
         </Box>
-        <CheckoutButton />
+        <CheckoutButton disabled={cart.length === 0} />
       </Container>
     </Container>
   );

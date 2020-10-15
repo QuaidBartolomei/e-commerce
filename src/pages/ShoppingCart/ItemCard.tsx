@@ -5,6 +5,14 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import CartItemData from 'interfaces/ShopItemData.interface';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+import { Container } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import { Routes } from 'Router';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -21,6 +29,10 @@ const useStyles = makeStyles((theme) =>
       maxWidth: '100%',
       maxHeight: '100%',
     },
+    formControl: {
+      width: 'fit-content',
+      minWidth: 120,
+    },
   })
 );
 
@@ -29,41 +41,65 @@ const ItemCard = (props: {
   onRemove: () => void;
   onChangeQuantity: (quantity: number) => void;
 }) => {
-  const { item } = props;
-  const { name, imageUrl } = item;
   const classes = useStyles();
+  const { item, onRemove } = props;
+  const { name, imageUrl } = item;
+  const [quantity, setQuantity] = React.useState(item.quantity);
+
+  const history = useHistory();
+
+  const QuantitySelect = (
+    <FormControl className={classes.formControl}>
+      <InputLabel id='size_label'>Quantity</InputLabel>
+      <Select
+        labelId='size_label'
+        id='size'
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
+          <MenuItem value={n} key={n}>
+            {n}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
+
+  function goToItemPage() {
+    history.push(Routes.Product + '/' + item.id);
+  }
+
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Grid container spacing={2}>
-          <Grid item>
-            <ButtonBase className={classes.image}>
-              <img className={classes.img} alt={name} src={imageUrl} />
-            </ButtonBase>
-          </Grid>
-          <Grid item xs>
-            <Typography gutterBottom variant='subtitle1'>
-              {name}
-            </Typography>
-            <Typography variant='body2' gutterBottom>
-              Size: {item.size}
-            </Typography>
-            <Typography variant='body2' color='textSecondary'>
-              Quantity: {item.quantity}
-            </Typography>
-            <Typography variant='subtitle1'>
-              ${item.price.toFixed(2)}
-            </Typography>
-            <Typography
-              variant='body2'
-              style={{ cursor: 'pointer', textAlign: 'right' }}
-            >
-              Remove
-            </Typography>
-          </Grid>
+    <Paper className={classes.paper}>
+      <Grid container spacing={2}>
+        <Grid item>
+          <ButtonBase className={classes.image} onClick={goToItemPage}>
+            <img className={classes.img} alt={name} src={imageUrl} />
+          </ButtonBase>
         </Grid>
-      </Paper>
-    </div>
+        <Grid item xs>
+          <Typography gutterBottom variant='subtitle1'>
+            {name}
+          </Typography>
+          <Typography variant='body2' gutterBottom>
+            Size: {item.size}
+          </Typography>
+          {QuantitySelect}
+          <Typography variant='subtitle1'>${item.price.toFixed(2)}</Typography>
+          <Button
+            style={{
+              cursor: 'pointer',
+              textAlign: 'right',
+              float: 'right',
+            }}
+            onClick={onRemove}
+          >
+            Remove
+          </Button>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 };
 

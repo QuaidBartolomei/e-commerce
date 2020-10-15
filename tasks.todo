@@ -1,8 +1,8 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
 ☐ improve shapping cart item card
-  ☐ change quantity to selecter input
-  ☐ make remove more button/link appearing
+  ✔ change quantity to selecter input @done (10/14/2020, 8:38:02 PM)
+  ✔ make remove more button/link appearing @done (10/14/2020, 8:38:03 PM)
   ☐ change image margins
   ☐ link to item page
   ☐ fix remove from cart button

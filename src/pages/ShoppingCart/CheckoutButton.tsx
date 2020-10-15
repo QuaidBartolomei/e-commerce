@@ -12,14 +12,16 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const CheckoutButton = () => {
+const CheckoutButton = (props: { disabled?: boolean }) => {
   const classes = useStyles();
+  const disabled = props.disabled || false;
   return (
     <Button
       href={Routes.Checkout}
       className={classes.checkoutButton}
       variant='contained'
       color='primary'
+      disabled={disabled}
     >
       {'Proceed to Checkout'}
     </Button>
