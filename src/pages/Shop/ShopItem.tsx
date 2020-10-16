@@ -8,13 +8,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Routes } from 'Router';
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       padding: theme.spacing(1),
       margin: theme.spacing(1),
-      width: '240px'
+      width: '240px',
     },
     imageContainer: {
       width: '100%',
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ShopItem = (item: ShopItemData) => {
+const ShopItem = ({ item }: { item: ShopItemData }) => {
   const classes = useStyles();
   const [isHover, setIsHover] = useState(false);
   return (

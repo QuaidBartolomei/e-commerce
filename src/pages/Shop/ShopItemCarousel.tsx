@@ -39,6 +39,7 @@ const ShopItemCarousel = (props: {
 }) => {
   const classes = useStyles();
   const { title, items, category } = props;
+  if (items.length === 0) return <div></div>;
   return (
     <Box className={classes.container}>
       <Box className={classes.header}>
@@ -56,7 +57,7 @@ const ShopItemCarousel = (props: {
       </Box>
       <Carousel>
         {items.map((item, key) => (
-          <ShopItem key={key} {...item} />
+          <ShopItem key={key} {...{ item }} />
         ))}
       </Carousel>
     </Box>

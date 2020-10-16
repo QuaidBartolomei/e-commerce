@@ -54,7 +54,7 @@ export function userReducer(state: UserState, action: Action): UserState {
       };
     }
     case 'logout': {
-      return { ...state, _id: '' };
+      return { ...state, _id: '', cart: [] };
     }
     default: {
       throw new Error(`Unhandled action type`);

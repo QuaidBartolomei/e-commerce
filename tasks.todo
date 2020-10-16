@@ -1,29 +1,21 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-☐ improve shapping cart item card
-  ✔ change quantity to selecter input @done (10/14/2020, 8:38:02 PM)
-  ✔ make remove more button/link appearing @done (10/14/2020, 8:38:03 PM)
-  ☐ change image margins
-  ☐ link to item page
-  ☐ fix remove from cart button
-  
-☐ update cart on signout
 
-☐ disable proceed to checkout on empty cart
-
-☐ fix category pages
-
-☐ add search functionality
-  search page
-  search bar
-
-☐ Homepage
-  ☐ Hide empty categories
-
-☐ add ad/specials/sale banner
+☐ create ad/specials/sale banner
   ☐ get placeholder image
   ☐ create component
   ☐ add component to relevant pages
+
+
+  
+☐ add response feedback when user adds item to cart
+☐ improve empty cart page
+☐ change user drawer menu to drop down menu 
+☐ make navbar sticky
+☐ add search functionality
+☐ map out shopping cart state life cycle
+
+
 
 ☐ make category link icons look nicer 
   https://material-ui.com/components/buttons/#complex-buttons

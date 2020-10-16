@@ -33,6 +33,11 @@ const useStyles = makeStyles((theme) =>
       width: 'fit-content',
       minWidth: 120,
     },
+    removeButton: {
+      cursor: 'pointer',
+      textAlign: 'right',
+      float: 'right',
+    },
   })
 );
 
@@ -66,40 +71,41 @@ const ItemCard = (props: {
     </FormControl>
   );
 
+  const RemoveButton = (
+    <Button className={classes.removeButton} color='secondary' onClick={onRemove}>
+      Remove
+    </Button>
+  );
+
   function goToItemPage() {
     history.push(Routes.Product + '/' + item.id);
   }
 
   return (
-    <Paper className={classes.paper}>
-      <Grid container spacing={2}>
-        <Grid item>
-          <ButtonBase className={classes.image} onClick={goToItemPage}>
-            <img className={classes.img} alt={name} src={imageUrl} />
-          </ButtonBase>
+    <div>
+      <Paper className={classes.paper}>
+        <Grid container spacing={2}>
+          <Grid item>
+            <ButtonBase className={classes.image} onClick={goToItemPage}>
+              <img className={classes.img} alt={name} src={imageUrl} />
+            </ButtonBase>
+          </Grid>
+          <Grid item xs>
+            <Typography gutterBottom variant='subtitle1'>
+              {name}
+            </Typography>
+            <Typography variant='body2' gutterBottom>
+              Size: {item.size}
+            </Typography>
+            {QuantitySelect}
+            <Typography variant='subtitle1'>
+              ${item.price.toFixed(2)}
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item xs>
-          <Typography gutterBottom variant='subtitle1'>
-            {name}
-          </Typography>
-          <Typography variant='body2' gutterBottom>
-            Size: {item.size}
-          </Typography>
-          {QuantitySelect}
-          <Typography variant='subtitle1'>${item.price.toFixed(2)}</Typography>
-          <Button
-            style={{
-              cursor: 'pointer',
-              textAlign: 'right',
-              float: 'right',
-            }}
-            onClick={onRemove}
-          >
-            Remove
-          </Button>
-        </Grid>
-      </Grid>
-    </Paper>
+      </Paper>
+      {RemoveButton}
+    </div>
   );
 };
 

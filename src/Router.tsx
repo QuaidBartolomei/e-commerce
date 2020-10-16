@@ -2,6 +2,7 @@ import AddItem from 'pages/AddItem.page';
 import Checkout from 'pages/Checkout/Checkout.page';
 import ItemDetails from 'pages/ItemDetails/ItemDetails.page';
 import SearchPage from 'pages/Search.page';
+import ItemListPage from 'pages/Shop/ItemListPage';
 import Shop from 'pages/Shop/Shop';
 import ShoppingCart from 'pages/ShoppingCart/ShoppingCart.page';
 import SignInPage from 'pages/SignIn/SignIn.page';
@@ -31,6 +32,7 @@ const Router = () => {
       <Route path={Routes.AddItem} component={AddItem} />
       <Route path={`${Routes.Product}/:id`} component={ItemDetails} />
       <Route path={`${Routes.Search}/:query`} component={SearchPage} />
+      <Route path={`${Routes.Category}/:category`} component={ItemListPage} />
     </Switch>
   );
 };

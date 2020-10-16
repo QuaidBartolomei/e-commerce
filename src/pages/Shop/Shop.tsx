@@ -1,6 +1,6 @@
 import Container from '@material-ui/core/Container/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ShopItemData } from 'interfaces/ShopItemData.interface';
+import { ShopItemCategory, ShopItemData } from 'interfaces/ShopItemData.interface';
 import React, { useEffect, useState } from 'react';
 import { getShopItems } from 'utils/db.utils';
 import ShopItemCarousel from './ShopItemCarousel';
@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) =>
     carousel: {},
   })
 );
+
+const categories: ShopItemCategory[] = ['Hat', 'Shirt'];
 
 const Shop = () => {
   const classes = useStyles();

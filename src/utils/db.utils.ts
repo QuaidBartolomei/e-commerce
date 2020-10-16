@@ -7,7 +7,7 @@ import shortid from 'shortid';
 import { UserState } from 'user/user.interface';
 import { auth, Collections, firestore, storage } from 'utils/firebase.utils';
 
-// Generic, replaceable database functions that interface with the db framework (Firebase) 
+// Generic, replaceable database functions that interface with the db framework (Firebase)
 
 type ItemData = {
   imageUrl: string;
@@ -29,7 +29,34 @@ export async function getShopItems(): Promise<ShopItemData[]> {
 
 export async function getShopItemById(id: string): Promise<ShopItemData> {
   let item = await firestore.collection(Collections.Items).doc(id).get();
-  return item.data() as ShopItemData;
+  return { ...item.data(), id } as ShopItemData;
+}
+
+export async function getShopItemsByCategory(
+  category: ShopItemCategory
+): Promise<ShopItemData[]> {
+  let itemsCollection = await firestore
+    .collection(Collections.Items)
+    .where('category', '==', category.toString())
+    .get();
+  let items = itemsCollection.docs.map((doc) => {
+    let data = doc.data() as ItemData;
+    return { ...data, id: doc.id };
+  });
+  console.log('items', items);
+  return items;
+}
+
+export async function searchForItems(
+  query: string
+): Promise<ShopItemData[]> {
+  let itemsCollection = await firestore.collection(Collections.Items).get();
+  let items = itemsCollection.docs.map((doc) => {
+    let data = doc.data() as ItemData;
+    return { ...data, id: doc.id };
+  });
+  console.log('items', items);
+  return items;
 }
 
 export async function getUrlFromStorage(id: string): Promise<string> {

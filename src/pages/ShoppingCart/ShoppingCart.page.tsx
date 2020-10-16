@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import AlertDialog from 'components/AlertDialog';
 import CartItemData from 'interfaces/ShopItemData.interface';
 import React from 'react';
 import { useUserDispatch, useUserState } from 'user/UserContext';
@@ -14,17 +15,20 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
       minHeight: '100%',
+      margin: theme.spacing(2, 0),
     },
     grid: {
       padding: theme.spacing(2, 0),
     },
     buttonContainer: {
-      margin: theme.spacing(3, 0),
       width: '100%',
       display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'flex-start',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
+    },
+    subtotal: {
+      marginBottom: theme.spacing(2),
+      float: 'right',
     },
   })
 );
@@ -34,6 +38,8 @@ export default function ShoppingCart() {
   const user = useUserState();
   const userDispatch = useUserDispatch();
   const [cart, setCart] = React.useState(user.cart);
+  const [itemToRemove, setItemToRemove] = React.useState('');
+
   React.useEffect(() => {
     setCart(user.cart);
   }, [user.cart]);
@@ -42,13 +48,16 @@ export default function ShoppingCart() {
   }, [cart]);
 
   const Subtotal = (
-    <Typography variant='h6'>{`Subtotal: $${cartTotal.toFixed(2)}`}</Typography>
+    <Typography
+      variant='h6'
+      className={classes.subtotal}
+    >{`Subtotal: $${cartTotal.toFixed(2)}`}</Typography>
   );
 
-  function removeItemFromCart(item: CartItemData) {
+  function removeItemFromCart(id: string) {
     userDispatch({
       type: 'remove_item',
-      payload: item.id,
+      payload: id,
     });
   }
 
@@ -69,7 +78,7 @@ export default function ShoppingCart() {
           <Grid item key={key} xs={12}>
             <ItemCard
               {...{ item }}
-              onRemove={() => removeItemFromCart(item)}
+              onRemove={() => setItemToRemove(item.id)}
               onChangeQuantity={(quantity) =>
                 changeItemQuantity(item, quantity)
               }
@@ -77,12 +86,16 @@ export default function ShoppingCart() {
           </Grid>
         ))}
       </Grid>
-      <Container>
-        <Box className={classes.buttonContainer}>
-          <UpdateCartButton cart={cart} /> {Subtotal}
-        </Box>
-        <CheckoutButton disabled={cart.length === 0} />
-      </Container>
+      {Subtotal}
+      <CheckoutButton disabled={cart.length === 0} />
+      <AlertDialog
+        onCancel={() => setItemToRemove('')}
+        open={Boolean(itemToRemove)}
+        onConfirm={() => {
+          removeItemFromCart(itemToRemove);
+          setItemToRemove('');
+        }}
+      />
     </Container>
   );
 }

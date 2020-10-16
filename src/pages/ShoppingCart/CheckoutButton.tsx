@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     container: {},
     checkoutButton: {
-      margin: theme.spacing(2, 0, 4),
+      float: 'right',
     },
   })
 );
