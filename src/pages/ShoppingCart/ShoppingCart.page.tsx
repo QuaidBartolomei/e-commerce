@@ -8,6 +8,7 @@ import CartItemData from 'interfaces/ShopItemData.interface';
 import React from 'react';
 import { useUserDispatch, useUserState } from 'user/UserContext';
 import CheckoutButton from './CheckoutButton';
+import EmptyCart from './EmptyCart.page';
 import ItemCard from './ItemCard';
 import UpdateCartButton from './UpdateCartButton';
 
@@ -28,7 +29,11 @@ const useStyles = makeStyles((theme) =>
     },
     subtotal: {
       marginBottom: theme.spacing(2),
-      float: 'right',
+    },
+    alignRight: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
     },
   })
 );
@@ -71,6 +76,8 @@ export default function ShoppingCart() {
     ]);
   }
 
+  if (cart.length === 0) return <EmptyCart />;
+
   return (
     <Container className={classes.container} maxWidth='md'>
       <Grid container spacing={2} className={classes.grid}>
@@ -86,8 +93,10 @@ export default function ShoppingCart() {
           </Grid>
         ))}
       </Grid>
-      {Subtotal}
-      <CheckoutButton disabled={cart.length === 0} />
+      <div className={classes.alignRight}>
+        {Subtotal}
+        <CheckoutButton disabled={cart.length === 0} />
+      </div>
       <AlertDialog
         onCancel={() => setItemToRemove('')}
         open={Boolean(itemToRemove)}

@@ -6,7 +6,7 @@ import { UserDispatch, userReducer } from 'user/user.reducer';
 import { getUserData, updateCart } from 'utils/db.utils';
 import { auth } from 'utils/firebase.utils';
 
-let defaultCart: CartItemData[] = [
+export const defaultCart: CartItemData[] = [
   {
     name: 'Dumb item',
     id: shortid.generate(),

@@ -5,9 +5,7 @@ import { Routes } from 'Router';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    container: {},
     checkoutButton: {
-      float: 'right',
     },
   })
 );

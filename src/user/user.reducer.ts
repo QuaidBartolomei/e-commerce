@@ -1,5 +1,6 @@
 import CartItemData from 'interfaces/ShopItemData.interface';
 import { UserState } from 'user/user.interface';
+import { defaultCart } from './UserContext';
 
 type Action =
   | { type: 'add_item'; payload: CartItemData }
@@ -54,7 +55,7 @@ export function userReducer(state: UserState, action: Action): UserState {
       };
     }
     case 'logout': {
-      return { ...state, _id: '', cart: [] };
+      return { ...state, _id: '', cart: defaultCart };
     }
     default: {
       throw new Error(`Unhandled action type`);
