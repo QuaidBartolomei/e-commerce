@@ -1,7 +1,11 @@
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container/Container';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
-import { createMuiTheme, createStyles, makeStyles } from '@material-ui/core/styles';
+import {
+  createMuiTheme,
+  createStyles,
+  makeStyles,
+} from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Footer from 'components/Footer';
 import Navbar from 'components/Navbar/Navbar';
@@ -47,8 +51,8 @@ const App = () => {
       <UserProvider>
         <ThemeProvider theme={theme}>
           <Box className={classes.page}>
-            <Navbar />
-            <Container disableGutters maxWidth='lg' className={classes.mainContent}>
+            <Container disableGutters className={classes.mainContent}>
+              <Navbar />
               <Router />
             </Container>
             <Footer />

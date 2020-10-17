@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box/Box';
 import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper/Paper';
+import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { ShopItemData } from 'interfaces/ShopItemData.interface';
 import React, { useState } from 'react';
@@ -10,7 +10,7 @@ import { Routes } from 'Router';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
+    paper: {
       padding: theme.spacing(1),
       margin: theme.spacing(1),
       width: '240px',
@@ -36,17 +36,17 @@ const ShopItem = ({ item }: { item: ShopItemData }) => {
   return (
     <Link to={`${Routes.Product}/${item.id}`}>
       <Paper
-        className={classes.container}
+        className={classes.paper}
         elevation={isHover ? 5 : 1}
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
-        <Box
+        <div
           className={classes.imageContainer}
           style={{
             backgroundImage: `url(${item.imageUrl})`,
           }}
-        ></Box>
+        />
         <Container className={classes.label}>
           <Typography>{item.name}</Typography>
           <Typography>{`$${item.price}`}</Typography>
