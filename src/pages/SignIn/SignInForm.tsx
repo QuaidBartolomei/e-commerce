@@ -1,4 +1,5 @@
 import Button from '@material-ui/core/Button/Button';
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField/TextField';
@@ -25,7 +26,7 @@ const SignInForm = () => {
   const classes = useStyles();
 
   return (
-    <div>
+    <Container maxWidth='xs'>
       <Typography component='h1' variant='h5'>
         I already have an account
       </Typography>
@@ -78,7 +79,7 @@ const SignInForm = () => {
           </Grid>
         </Grid>
       </form>
-    </div>
+    </Container>
   );
 };
 

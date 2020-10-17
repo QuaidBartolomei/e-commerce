@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import React from 'react';
+import { Routes } from 'Router';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -31,7 +32,7 @@ function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' >
       {'Copyright © '}
-      <Link color='inherit' href='https://material-ui.com/'>
+      <Link color='inherit' href={Routes.Homepage}>
         CAB Clothing
       </Link>{' '}
       {new Date().getFullYear()}

@@ -1,12 +1,9 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-☐ map out shopping cart state life cycle
-
-☐ fix signin page appearance
-☐ fix appbar content alignment
+☐ improve cart item card appearance - use horizontal space on larger screens
 ☐ add categories to navigation drawer
-☐ add logo to website title in navbar
-☐ align navbar title to left
+
+☐ make cart item name text into link
 
 ☐ add search functionality
 ☐ create ad/specials/sale banner

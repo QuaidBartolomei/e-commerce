@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) =>
       },
     },
   })
-);
+); 
 
 const ItemThumbnail = ({
   image,

@@ -1,4 +1,3 @@
-import Grid from '@material-ui/core/Grid/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -10,7 +9,14 @@ import SignInForm from './SignInForm';
 const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
-      padding: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: theme.spacing(2, 0),
+      '&>*': {
+        margin: theme.spacing(4,0),
+      },
     },
     grid: {
       padding: theme.spacing(4, 1),
@@ -30,14 +36,10 @@ const SignInPage = () => {
   }, [state._id, history]);
 
   return (
-    <Grid container spacing={4} className={classes.grid}>
-      <Grid item xs={12} md={6}>
-        <SignInForm />
-      </Grid>
-      <Grid item xs={12} md={6}>
-        <RegisterForm />
-      </Grid>
-    </Grid>
+    <div className={classes.container}>
+      <SignInForm />
+      <RegisterForm />
+    </div>
   );
 };
 

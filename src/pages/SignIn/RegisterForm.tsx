@@ -104,7 +104,7 @@ const RegisterForm = () => {
   );
 
   return (
-    <Container>
+    <Container maxWidth='xs'>
       <Typography component='h1' variant='h5'>
         I don't have an account
       </Typography>
@@ -116,7 +116,7 @@ const RegisterForm = () => {
         <Button
           type='submit'
           variant='contained'
-          color='secondary'
+          color='primary'
           className={classes.submitButton}
         >
           Sign Up
