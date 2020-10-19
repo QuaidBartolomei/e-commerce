@@ -9,7 +9,7 @@ import ListItemLink from 'components/ListItemLink';
 import React from 'react';
 import { Routes } from 'Router';
 import { useUserState } from 'user/UserContext';
-import { signout } from 'utils/user.utils';
+import { signout } from 'utils/auth.utils';
 
 
 const useStyles = makeStyles((theme) =>

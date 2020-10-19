@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { signout } from 'utils/user.utils';
+import { signout } from 'utils/auth.utils';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

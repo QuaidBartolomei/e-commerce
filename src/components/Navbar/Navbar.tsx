@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Routes } from 'Router';
-import ShoppingCartIcon from '../ShoppingCartIcon';
+import ShoppingCartIconButton from '../ShoppingCartIcon';
 import NavbarTitle from './NavbarTitle';
 import NavigationMenu from './NavigationMenu';
 import UserMenu from './UserMenu';
@@ -20,18 +20,12 @@ const useStyles = makeStyles((theme) =>
 const Navbar = () => {
   const classes = useStyles();
 
-  const ShoppingCartLink = () => (
-    <Link to={Routes.ShoppingCart}>
-      <ShoppingCartIcon />
-    </Link>
-  );
-
   const NavbarContent = () => (
     <Toolbar className={classes.toolbar}>
       <NavigationMenu />
       <NavbarTitle />
       <UserMenu />
-      <ShoppingCartLink />
+      <ShoppingCartIconButton />
     </Toolbar>
   );
 

@@ -1,8 +1,7 @@
-import { Typography } from '@material-ui/core';
+import { Link, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Routes } from 'Router';
 
 const useStyles = makeStyles((theme) =>
@@ -32,17 +31,17 @@ const NavbarTitle = ({ title }: { title?: string }) => {
   );
 
   return (
-    <Typography
-      component='h1'
-      variant='h5'
+    <Link
+      href={Routes.Homepage}
       color='inherit'
-      align='center'
-      noWrap
       className={classes.toolbarTitle}
+      underline='none'
     >
       <CompanyLogo />
-      <Link to={Routes.Homepage}>{title}</Link>
-    </Typography>
+      <Typography component='h1' variant='h5' align='center' noWrap>
+        {title}
+      </Typography>
+    </Link>
   );
 };
 

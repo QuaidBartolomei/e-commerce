@@ -1,7 +1,9 @@
 import Badge from '@material-ui/core/Badge/Badge';
+import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import React, { useMemo } from 'react';
+import { Routes } from 'Router';
 import { useUserState } from 'user/UserContext';
 
 const useStyles = makeStyles((theme) =>
@@ -15,20 +17,21 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ShoppingCartIcon = () => {
+const ShoppingCartIconButton = () => {
   const classes = useStyles();
   const user = useUserState();
   const cartSize = useMemo(
     () => user.cart.reduce((total, x) => total + x.quantity, 0),
     [user.cart]
   );
+
   return (
-    <div className={classes.container}>
+    <Link href={Routes.ShoppingCart} className={classes.container} color='inherit'>
       <Badge badgeContent={cartSize} color='error'>
         <ShoppingCart />
       </Badge>
-    </div>
+    </Link>
   );
 };
 
-export default ShoppingCartIcon;
+export default ShoppingCartIconButton;
