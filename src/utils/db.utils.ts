@@ -94,8 +94,9 @@ export async function updateCart(cart: CartItemData[]) {
   let user = auth.currentUser;
   if (!user) return;
   let id = user.uid;
-  firestore.collection(Collections.Users).doc(id).set({
+  await firestore.collection(Collections.Users).doc(id).set({
     _id: id,
     cart,
   });
+  console.log('cart successfully updated')
 }

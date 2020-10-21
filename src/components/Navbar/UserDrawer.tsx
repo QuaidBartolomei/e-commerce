@@ -26,8 +26,8 @@ const UserDrawer = (props: { isOpen: boolean; onClose: () => void }) => {
   const { isOpen, onClose } = props;
   const userState = useUserState();
 
-  let isAuth = userState._id !== '';
-
+  const {isAuth} = userState;
+ 
   return (
     <Drawer anchor='right' open={isOpen} onClose={onClose}>
       <List

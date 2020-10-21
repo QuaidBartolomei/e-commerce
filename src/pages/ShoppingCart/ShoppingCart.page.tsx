@@ -40,19 +40,15 @@ const useStyles = makeStyles((theme) =>
 
 export default function ShoppingCart() {
   const classes = useStyles();
-  const user = useUserState();
-  const userDispatch = useUserDispatch();
-  const [cart, setCart] = React.useState(user.cart);
   const [itemToRemove, setItemToRemove] = React.useState('');
-
-  React.useEffect(() => {
-    setCart(user.cart);
-  }, [user.cart]);
+  const userDispatch = useUserDispatch();
+  const user = useUserState();
+  const { cart } = user;
   const cartTotal = React.useMemo(() => {
     return cart.reduce((total, x) => total + x.price * x.quantity, 0);
   }, [cart]);
 
-  const Subtotal = (
+  const Subtotal = () => (
     <Typography
       variant='h6'
       className={classes.subtotal}
@@ -66,14 +62,8 @@ export default function ShoppingCart() {
     });
   }
 
-  function changeItemQuantity(item: CartItemData, quantity: number) {
-    setCart([
-      ...cart.filter((x) => x.id !== item.id),
-      {
-        ...item,
-        quantity,
-      },
-    ]);
+  function changeItemQuantity(id: string, quantity: number) {
+    userDispatch({ type: 'change_item_quantity', payload: { id, quantity } });
   }
 
   if (cart.length === 0) return <EmptyCart />;
@@ -87,14 +77,14 @@ export default function ShoppingCart() {
               {...{ item }}
               onRemove={() => setItemToRemove(item.id)}
               onChangeQuantity={(quantity) =>
-                changeItemQuantity(item, quantity)
+                changeItemQuantity(item.id, quantity)
               }
             />
           </Grid>
         ))}
       </Grid>
       <div className={classes.alignRight}>
-        {Subtotal}
+        <Subtotal />
         <CheckoutButton disabled={cart.length === 0} />
       </div>
       <AlertDialog
@@ -104,6 +94,7 @@ export default function ShoppingCart() {
           removeItemFromCart(itemToRemove);
           setItemToRemove('');
         }}
+        title='Remove item from cart?'
       />
     </Container>
   );

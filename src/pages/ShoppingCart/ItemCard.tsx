@@ -10,7 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-import { Container } from '@material-ui/core';
+import { Container, Link } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { Routes } from 'Router';
 
@@ -71,7 +71,7 @@ const ItemCard = (props: {
     </FormControl>
   );
 
-  const RemoveButton = (
+  const RemoveButton = ()=> (
     <Button className={classes.removeButton} color='secondary' onClick={onRemove}>
       Remove
     </Button>
@@ -91,9 +91,11 @@ const ItemCard = (props: {
             </ButtonBase>
           </Grid>
           <Grid item xs>
-            <Typography gutterBottom variant='subtitle1'>
-              {name}
-            </Typography>
+            <Link href={Routes.Product + '/' + item.id}>
+              <Typography gutterBottom variant='subtitle1'>
+                {name}
+              </Typography>
+            </Link>
             <Typography variant='body2' gutterBottom>
               Size: {item.size}
             </Typography>
@@ -104,7 +106,7 @@ const ItemCard = (props: {
           </Grid>
         </Grid>
       </Paper>
-      {RemoveButton}
+      <RemoveButton />
     </div>
   );
 };

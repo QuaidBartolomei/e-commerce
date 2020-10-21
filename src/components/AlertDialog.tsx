@@ -13,23 +13,23 @@ const useStyles = makeStyles((theme) =>
 
 export default function AlertDialog(props: {
   open?: boolean;
-  dialog?: string;
-  confirmText?: string;
+  title?: string;
+  text?: string;
   onCancel: () => void;
   onConfirm: () => void;
 }) {
   const open = props.open || false;
-  const { dialog, onCancel, onConfirm, confirmText } = props;
+  const { title, onCancel, onConfirm, text } = props;
   return (
     <Dialog open={open} onClose={onCancel} aria-labelledby='alert-dialog-title'>
-      <DialogTitle id='alert-dialog-title'>{dialog || 'Alert'}</DialogTitle>
+      <DialogTitle id='alert-dialog-title'>{title || 'Alert'}</DialogTitle>
 
       <DialogActions>
         <Button onClick={onCancel} color='primary'>
           Cancel
         </Button>
         <Button onClick={onConfirm} color='primary' autoFocus>
-          {confirmText || 'Confirm'}
+          {text || 'Confirm'}
         </Button>
       </DialogActions>
     </Dialog>

@@ -12,7 +12,6 @@ import Navbar from 'components/Navbar/Navbar';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Router from 'Router';
-import { UserProvider } from 'user/UserContext';
 
 const theme = createMuiTheme({
   palette: {
@@ -48,7 +47,6 @@ const App = () => {
   return (
     <BrowserRouter>
       <CssBaseline />
-      <UserProvider>
         <ThemeProvider theme={theme}>
           <Box className={classes.page}>
             <Container disableGutters className={classes.mainContent}>
@@ -58,7 +56,6 @@ const App = () => {
             <Footer />
           </Box>
         </ThemeProvider>
-      </UserProvider>
     </BrowserRouter>
   );
 };

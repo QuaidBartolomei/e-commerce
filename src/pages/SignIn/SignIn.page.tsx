@@ -27,13 +27,14 @@ const useStyles = makeStyles((theme) =>
 );
 const SignInPage = () => {
   const classes = useStyles();
-  let state = useUserState();
+  let userState = useUserState();
   let history = useHistory();
+  const { isAuth } = userState;
 
   React.useEffect(() => {
-    if (!state._id) return;
+    if (!isAuth) return;
     history.push(Routes.Homepage);
-  }, [state._id, history]);
+  }, [isAuth, history]);
 
   return (
     <div className={classes.container}>

@@ -33,7 +33,7 @@ const ItemListPage = () => {
       console.log('received items: ', items);
       setItems(items);
     });
-  }, []);
+  }, [category]);
 
   return (
     <Container>

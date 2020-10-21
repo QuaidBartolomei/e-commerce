@@ -1,8 +1,6 @@
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import createStyles from '@material-ui/core/styles/createStyles';
-import makeStyles from '@material-ui/core/styles/makeStyles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React from 'react';
@@ -10,16 +8,10 @@ import { Routes } from 'Router';
 import { useUserState } from 'user/UserContext';
 import { signout } from 'utils/auth.utils';
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    container: {},
-  })
-);
 
 const UserMenu = () => {
-  const classes = useStyles();
   const userState = useUserState();
-  const isAuth = userState._id !== '';
+  const { isAuth } = userState;
 
   const [
     userMenuAnchor,

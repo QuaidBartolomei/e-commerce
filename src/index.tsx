@@ -3,8 +3,14 @@ import ReactDOM from 'react-dom';
 import 'fontsource-roboto';
 import * as serviceWorker from './serviceWorker';
 import App from 'App';
+import { UserProvider } from 'user/UserContext';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <UserProvider>
+    <App />
+  </UserProvider>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

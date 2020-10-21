@@ -3,8 +3,6 @@ import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Toolbar from '@material-ui/core/Toolbar';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Routes } from 'Router';
 import ShoppingCartIconButton from '../ShoppingCartIcon';
 import NavbarTitle from './NavbarTitle';
 import NavigationMenu from './NavigationMenu';

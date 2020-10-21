@@ -5,6 +5,9 @@ import { UserState } from 'user/user.interface';
 import { UserDispatch, userReducer } from 'user/user.reducer';
 import { getUserData, updateCart } from 'utils/db.utils';
 import { auth } from 'utils/firebase.utils';
+import { getIntialState, persistState } from 'utils/localStorage.utils';
+
+const STORAGE_KEY = 'authState';
 
 export const defaultCart: CartItemData[] = [
   {
@@ -30,25 +33,26 @@ export const defaultCart: CartItemData[] = [
 ];
 
 const defaultState: UserState = {
-  _id: '',
-  cart: defaultCart,
+  isAuth: false,
+  cart: [],
 };
+const initialState: UserState = getIntialState(STORAGE_KEY) ?? defaultState;
 
 const UserStateContext = createContext<UserState | undefined>(undefined);
 const UserDispatchContext = createContext<UserDispatch | undefined>(undefined);
 
-
 export const UserProvider: React.FC = (props) => {
-  const [state, dispatch] = useReducer(userReducer, defaultState);
+  const [state, dispatch] = useReducer(userReducer, initialState);
 
   useEffect(() => {
     let unsub = auth.onAuthStateChanged(async (user) => {
       if (user) {
+        if (state.isAuth ) return; 
         let data = await getUserData(user.uid);
         dispatch({ type: 'login', payload: data });
       } else {
         // User is signed out.
-        dispatch({ type: 'logout' });
+        if (state.isAuth) dispatch({ type: 'logout' });
       }
     });
     return () => {
@@ -59,6 +63,8 @@ export const UserProvider: React.FC = (props) => {
   useEffect(() => {
     updateCart(state.cart);
   }, [state.cart]);
+  
+  useEffect(() => persistState(STORAGE_KEY, state), [state]);
 
   return (
     <UserStateContext.Provider value={state}>

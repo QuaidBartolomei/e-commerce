@@ -1,13 +1,11 @@
-import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import CartItemData, { ShopItemData } from 'interfaces/ShopItemData.interface';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import { useUserDispatch } from 'user/UserContext';
-import { Routes } from 'Router';
-import { useHistory } from 'react-router-dom';
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import CartItemData from 'interfaces/ShopItemData.interface';
+import React from 'react';
+import { useUserDispatch } from 'user/UserContext';
+import Alert from 'components/Alert';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -18,14 +16,9 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-function Alert(props: AlertProps) {
-  return <MuiAlert elevation={6} variant='filled' {...props} />;
-}
-
 const AddToCartButton = ({ item }: { item: CartItemData }) => {
   const classes = useStyles();
   const userDispatch = useUserDispatch();
-  const history = useHistory();
   const [showAlert, setShowAlert] = React.useState(false);
   const addItemToCart = () => {
     console.log('adding item: ', item);
@@ -55,7 +48,7 @@ const AddToCartButton = ({ item }: { item: CartItemData }) => {
       </Button>
       <Snackbar open={showAlert} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity='success'>
-          This is a success message!
+          Item added to cart!
         </Alert>
       </Snackbar>
     </React.Fragment>

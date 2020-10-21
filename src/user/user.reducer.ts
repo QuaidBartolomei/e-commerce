@@ -50,12 +50,14 @@ export function userReducer(state: UserState, action: Action): UserState {
       return { ...state };
     }
     case 'login': {
+      console.log('logging in', action.payload);
       return {
         ...action.payload,
       };
     }
     case 'logout': {
-      return { ...state, _id: '', cart: defaultCart };
+      console.log('logging out');
+      return { ...state, isAuth: false, cart: defaultCart };
     }
     default: {
       throw new Error(`Unhandled action type`);

@@ -1,6 +1,6 @@
 import CartItemData from "interfaces/ShopItemData.interface";
 
 export interface UserState {
-  _id: string;
+  isAuth: boolean;
   cart: CartItemData[];
 }
