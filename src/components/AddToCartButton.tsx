@@ -2,7 +2,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import CartItemData from 'interfaces/ShopItemData.interface';
+import {CartItemData} from 'interfaces/ShopItemData.interface';
 import React from 'react';
 import { useUserDispatch } from 'user/UserContext';
 import Alert from 'components/Alert';

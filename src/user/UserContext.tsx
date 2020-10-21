@@ -1,4 +1,4 @@
-import CartItemData from 'interfaces/ShopItemData.interface';
+import { CartItemData } from 'interfaces/ShopItemData.interface';
 import React, { createContext, useEffect, useReducer } from 'react';
 import shortid from 'shortid';
 import { UserState } from 'user/user.interface';
@@ -10,26 +10,7 @@ import { getIntialState, persistState } from 'utils/localStorage.utils';
 const STORAGE_KEY = 'authState';
 
 export const defaultCart: CartItemData[] = [
-  {
-    name: 'Dumb item',
-    id: shortid.generate(),
-    imageUrl:
-      'https://firebasestorage.googleapis.com/v0/b/e-commerce-a8505.appspot.com/o/black-shirt.jpg?alt=media&token=c3f58f4b-df5d-491c-944c-c8c2238397df',
-    price: 99,
-    quantity: 1,
-    category: 'Hat',
-    size: 'S',
-  },
-  {
-    name: 'Dumb item',
-    id: shortid.generate(),
-    imageUrl:
-      'https://firebasestorage.googleapis.com/v0/b/e-commerce-a8505.appspot.com/o/black-shirt.jpg?alt=media&token=c3f58f4b-df5d-491c-944c-c8c2238397df',
-    price: 99,
-    quantity: 1,
-    category: 'Hat',
-    size: 'S',
-  },
+
 ];
 
 const defaultState: UserState = {

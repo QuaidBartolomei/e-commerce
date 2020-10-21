@@ -1,18 +1,19 @@
-import React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { Link } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import CartItemData from 'interfaces/ShopItemData.interface';
 import FormControl from '@material-ui/core/FormControl';
+import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
 import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
-import { Container, Link } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import { CartItemData, ShopItemData } from 'interfaces/ShopItemData.interface';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Routes } from 'Router';
+import { getItemData } from 'utils/db.utils';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -42,16 +43,23 @@ const useStyles = makeStyles((theme) =>
 );
 
 const ItemCard = (props: {
-  item: CartItemData;
+  id: string;
+  quantity: number;
   onRemove: () => void;
   onChangeQuantity: (quantity: number) => void;
 }) => {
   const classes = useStyles();
-  const { item, onRemove } = props;
-  const { name, imageUrl } = item;
-  const [quantity, setQuantity] = React.useState(item.quantity);
+  const { id, onRemove } = props;
+  const [itemData, setItemData] = React.useState<ShopItemData | undefined>(
+    undefined
+  );
+  const [quantity, setQuantity] = React.useState(props.quantity);
 
   const history = useHistory();
+
+  React.useEffect(() => {
+    getItemData(id).then(setItemData);
+  }, [id]);
 
   const QuantitySelect = (
     <FormControl className={classes.formControl}>
@@ -71,17 +79,28 @@ const ItemCard = (props: {
     </FormControl>
   );
 
-  const RemoveButton = ()=> (
-    <Button className={classes.removeButton} color='secondary' onClick={onRemove}>
+  const RemoveButton = () => (
+    <Button
+      className={classes.removeButton}
+      color='secondary'
+      onClick={onRemove}
+    >
       Remove
     </Button>
   );
 
   function goToItemPage() {
-    history.push(Routes.Product + '/' + item.id);
+    history.push(Routes.Product + '/' + id);
   }
 
-  return (
+  const ItemCard = ({
+    name,
+    id,
+    imageUrl,
+    size,
+    price,
+    quantity,
+  }: ShopItemData & { quantity: number }) => (
     <div>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
@@ -91,24 +110,25 @@ const ItemCard = (props: {
             </ButtonBase>
           </Grid>
           <Grid item xs>
-            <Link href={Routes.Product + '/' + item.id}>
+            <Link href={Routes.Product + '/' + id}>
               <Typography gutterBottom variant='subtitle1'>
                 {name}
               </Typography>
             </Link>
             <Typography variant='body2' gutterBottom>
-              Size: {item.size}
+              Size: {size}
             </Typography>
             {QuantitySelect}
-            <Typography variant='subtitle1'>
-              ${item.price.toFixed(2)}
-            </Typography>
+            <Typography variant='subtitle1'>${price.toFixed(2)}</Typography>
           </Grid>
         </Grid>
       </Paper>
       <RemoveButton />
     </div>
   );
+
+  if (!itemData) return <div></div>;
+  return <ItemCard {...itemData} quantity={quantity} />;
 };
 
 export default ItemCard;

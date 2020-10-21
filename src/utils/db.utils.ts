@@ -1,4 +1,5 @@
-import CartItemData, {
+import {
+  CartItemData,
   ClothingSize,
   ShopItemCategory,
   ShopItemData,
@@ -47,9 +48,7 @@ export async function getShopItemsByCategory(
   return items;
 }
 
-export async function searchForItems(
-  query: string
-): Promise<ShopItemData[]> {
+export async function searchForItems(query: string): Promise<ShopItemData[]> {
   let itemsCollection = await firestore.collection(Collections.Items).get();
   let items = itemsCollection.docs.map((doc) => {
     let data = doc.data() as ItemData;
@@ -98,5 +97,33 @@ export async function updateCart(cart: CartItemData[]) {
     _id: id,
     cart,
   });
-  console.log('cart successfully updated')
+  console.log('cart successfully updated');
+}
+
+async function getDocData<T>(
+  collection: string,
+  id: string
+): Promise<undefined | T> {
+  let ref = firestore.collection(collection).doc(id);
+  let doc = await ref.get();
+  if (!doc.exists) {
+    return undefined;
+  }
+  return doc.data() as T;
+}
+
+export async function getItemData(
+  id: string
+): Promise<ShopItemData | undefined> {
+  return await getDocData<ShopItemData>(Collections.Items, id);
+}
+
+export async function getCartTotal(cart: CartItemData[]): Promise<number> {
+  let total = 0;
+  for (const { id, quantity } of cart) {
+    let data = await getItemData(id);
+    if (!data) continue;
+    total += data.price * quantity;
+  }
+  return total;
 }

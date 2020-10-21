@@ -1,4 +1,4 @@
-import CartItemData from "interfaces/ShopItemData.interface";
+import { CartItemData } from 'interfaces/ShopItemData.interface';
 
 export interface UserState {
   isAuth: boolean;

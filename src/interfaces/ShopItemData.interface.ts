@@ -1,11 +1,6 @@
-export default interface CartItemData {
-  imageUrl: string;
-  name: string;
-  quantity: number;
-  price: number;
+export interface CartItemData {
   id: string;
-  category: ShopItemCategory;
-  size: ClothingSize;
+  quantity: number;
 }
 
 export interface ShopItemData {

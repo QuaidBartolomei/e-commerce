@@ -1,16 +1,15 @@
-import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AlertDialog from 'components/AlertDialog';
-import CartItemData from 'interfaces/ShopItemData.interface';
-import React from 'react';
+import { CartItemData } from 'interfaces/ShopItemData.interface';
+import React, { useState } from 'react';
 import { useUserDispatch, useUserState } from 'user/UserContext';
+import { getCartTotal } from 'utils/db.utils';
 import CheckoutButton from './CheckoutButton';
 import EmptyCart from './EmptyCart.page';
 import ItemCard from './ItemCard';
-import UpdateCartButton from './UpdateCartButton';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -44,8 +43,10 @@ export default function ShoppingCart() {
   const userDispatch = useUserDispatch();
   const user = useUserState();
   const { cart } = user;
-  const cartTotal = React.useMemo(() => {
-    return cart.reduce((total, x) => total + x.price * x.quantity, 0);
+  const [cartTotal, setCartTotal] = useState(0);
+
+  React.useEffect(() => {
+    getCartTotal(cart).then(setCartTotal);
   }, [cart]);
 
   const Subtotal = () => (
@@ -68,34 +69,42 @@ export default function ShoppingCart() {
 
   if (cart.length === 0) return <EmptyCart />;
 
+  const RemoveItemWarning = () => (
+    <AlertDialog
+      onCancel={() => setItemToRemove('')}
+      open={Boolean(itemToRemove)}
+      onConfirm={() => {
+        removeItemFromCart(itemToRemove);
+        setItemToRemove('');
+      }}
+      title='Remove item from cart?'
+    />
+  );
+
+  const ItemCards = () => (
+    <Grid container spacing={2} className={classes.grid}>
+      {cart.map((item: CartItemData, key) => (
+        <Grid item key={key} xs={12}>
+          <ItemCard
+            {...item}
+            onRemove={() => setItemToRemove(item.id)}
+            onChangeQuantity={(quantity) =>
+              changeItemQuantity(item.id, quantity)
+            }
+          />
+        </Grid>
+      ))}
+    </Grid>
+  );
+
   return (
     <Container className={classes.container} maxWidth='md'>
-      <Grid container spacing={2} className={classes.grid}>
-        {cart.map((item: CartItemData, key) => (
-          <Grid item key={key} xs={12}>
-            <ItemCard
-              {...{ item }}
-              onRemove={() => setItemToRemove(item.id)}
-              onChangeQuantity={(quantity) =>
-                changeItemQuantity(item.id, quantity)
-              }
-            />
-          </Grid>
-        ))}
-      </Grid>
+      <ItemCards />
       <div className={classes.alignRight}>
         <Subtotal />
         <CheckoutButton disabled={cart.length === 0} />
       </div>
-      <AlertDialog
-        onCancel={() => setItemToRemove('')}
-        open={Boolean(itemToRemove)}
-        onConfirm={() => {
-          removeItemFromCart(itemToRemove);
-          setItemToRemove('');
-        }}
-        title='Remove item from cart?'
-      />
+      <RemoveItemWarning />
     </Container>
   );
 }
