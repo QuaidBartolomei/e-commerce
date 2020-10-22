@@ -1,17 +1,9 @@
-import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import React from 'react';
 import NavigationDrawer from './NavigationDrawer';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    container: {},
-  })
-);
-
-const NavigationMenu = () => {
-  const classes = useStyles();
+const NavigationDrawerMenu = () => {
   const [showNavDrawer, setShowNavDrawer] = React.useState(false);
 
   return (
@@ -33,4 +25,4 @@ const NavigationMenu = () => {
   );
 };
 
-export default NavigationMenu;
+export default NavigationDrawerMenu;

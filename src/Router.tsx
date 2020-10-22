@@ -37,4 +37,8 @@ const Router = () => {
   );
 };
 
+export function routeToItemPage(id: string): string {
+ return Routes.Product + '/' + id;
+}
+
 export default Router;

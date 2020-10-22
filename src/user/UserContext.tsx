@@ -1,6 +1,5 @@
 import { CartItemData } from 'interfaces/ShopItemData.interface';
 import React, { createContext, useEffect, useReducer } from 'react';
-import shortid from 'shortid';
 import { UserState } from 'user/user.interface';
 import { UserDispatch, userReducer } from 'user/user.reducer';
 import { getUserData, updateCart } from 'utils/db.utils';

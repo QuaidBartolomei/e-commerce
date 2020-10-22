@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import React from 'react';
 import ShoppingCartIconButton from './ShoppingCartIcon';
 import NavbarTitle from './NavbarTitle';
-import NavigationMenu from './NavigationMenu';
+import NavigationDrawerMenu from './NavigationMenu';
 import UserMenu from './UserMenu';
 
 const useStyles = makeStyles((theme) =>
@@ -20,7 +20,7 @@ const Navbar = () => {
 
   const NavbarContent = () => (
     <Toolbar className={classes.toolbar}>
-      <NavigationMenu />
+      <NavigationDrawerMenu />
       <NavbarTitle />
       <UserMenu />
       <ShoppingCartIconButton />

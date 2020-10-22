@@ -3,12 +3,13 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
 ☐ fix registration form submission
 ☐ fix sign in with email submission
 
+☐ fix navbar auth button menu anchor position
+
 ☐ improve item list page
 
 ☐ make cart total calculation more efficient - store full cart data in shopping cart page
 ☐ improve cart item card appearance - use horizontal space on larger screens
 ☐ add categories to navigation drawer
-☐ add search functionality
 ☐ create ad/specials/sale banner
   ☐ get placeholder image
   ☐ create component
