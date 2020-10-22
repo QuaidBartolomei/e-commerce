@@ -1,19 +1,16 @@
 import Button from '@material-ui/core/Button/Button';
 import Container from '@material-ui/core/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
 import * as EmailValidator from 'email-validator';
 import React, { FormEvent, useState } from 'react';
-import { registerNewUser } from 'utils/firebase.utils';
+import { registerNewUser } from 'utils/auth.utils';
 import { passwordValidator } from 'utils/password.utils';
+import EmailField from './EmailField';
+import PasswordField from './PasswordField';
 
-interface FieldData {
-  state: [string, React.Dispatch<React.SetStateAction<string>>];
-  name: string;
-  errorMessage: (value: string) => string;
-  password?: boolean;
-}
+const EMAIL_ERROR_MESSAGE = 'Invalid email';
+const CONFIRM_PASSWORD_ERROR_MESSAGE = 'Passwords do not match';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -24,84 +21,41 @@ const useStyles = makeStyles((theme) =>
 );
 const RegisterForm = () => {
   const classes = useStyles();
-  const [showErrors, setShowErrors] = useState(false);
-
-  // Data //
-
-  const fieldData: {
-    email: FieldData;
-    password: FieldData;
-    passwordConfirm: FieldData;
-  } = {
-    email: {
-      name: 'Email',
-      errorMessage: (value: string) =>
-        EmailValidator.validate(value) ? '' : 'Enter a valid Email',
-      state: useState(''),
-    },
-    password: {
-      name: 'Password',
-      errorMessage: passwordValidator,
-      password: true,
-      state: useState(''),
-    },
-    passwordConfirm: {
-      name: 'Confirm Password',
-      errorMessage: validateConfirmPassword,
-      password: true,
-      state: useState(''),
-    },
-  };
-
-  const fields: FieldData[] = [
-    fieldData.email,
-    fieldData.password,
-    fieldData.passwordConfirm,
-  ];
-
-  // Functions //
-
-  function validateConfirmPassword() {
-    return fieldData.password.state[0] === fieldData.passwordConfirm.state[0]
-      ? ''
-      : 'Passwords do not match';
-  }
-
-  function checkForErrors(): boolean {
-    return fields.find((x) => x.errorMessage(x.state[0]) !== '') !== undefined;
-  }
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    return (
-      checkForErrors() ||
-      registerNewUser(fieldData.email.state[0], fieldData.password.state[0])
-    );
+    let formIsValid =
+      emailIsValid() && passwordIsValid() && confirmPasswordIsValid();
+    if (!formIsValid) return;
+    registerNewUser(email, password);
   }
 
-  // Components //
+  function emailIsValid(): boolean {
+    let result = EmailValidator.validate(email);
+    if (!result) {
+      setEmailError(EMAIL_ERROR_MESSAGE);
+      return false;
+    }
+    setEmailError('');
+    return true;
+  }
 
-  const Fields = fields.map(
-    ({ name, errorMessage, password, state: [value, setValue] }, key) => (
-      <TextField
-        margin='normal'
-        required
-        fullWidth
-        type={(password && 'password') || 'text'}
-        label={name}
-        {...{ name, value, key }}
-        error={showErrors && errorMessage(value) !== ''}
-        helperText={
-          showErrors && (
-            <span style={{ whiteSpace: 'pre-wrap' }}>
-              {errorMessage(value)}
-            </span>
-          )
-        }
-        onChange={(e) => setValue(e.currentTarget.value)}
-      />
-    )
-  );
+  function passwordIsValid(): boolean {
+    let result = passwordValidator(password);
+    setPasswordError(result);
+    return result === '';
+  }
+  function confirmPasswordIsValid(): boolean {
+    let result = password === confirmPassword;
+    setConfirmPasswordError(result ? '' : CONFIRM_PASSWORD_ERROR_MESSAGE);
+    return result;
+  }
 
   return (
     <Container maxWidth='xs'>
@@ -111,8 +65,21 @@ const RegisterForm = () => {
       <Typography>Sign up with an email and password</Typography>
 
       <form onSubmit={onSubmit}>
-        {Fields}
-
+        <EmailField
+          value={email}
+          onChange={(e) => setEmail(e.currentTarget.value)}
+          error={emailError}
+        />
+        <PasswordField
+          value={password}
+          onChange={(e) => setPassword(e.currentTarget.value)}
+          error={passwordError}
+        />
+        <PasswordField
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.currentTarget.value)}
+          error={confirmPasswordError}
+        />
         <Button
           type='submit'
           variant='contained'

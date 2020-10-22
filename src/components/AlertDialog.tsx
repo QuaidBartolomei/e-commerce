@@ -2,14 +2,7 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    container: {},
-  })
-);
 
 export default function AlertDialog(props: {
   open?: boolean;
