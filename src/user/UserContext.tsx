@@ -24,6 +24,8 @@ const UserDispatchContext = createContext<UserDispatch | undefined>(undefined);
 export const UserProvider: React.FC = (props) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
 
+  useEffect(() => persistState(STORAGE_KEY, state), [state]);
+  
   useEffect(() => {
     let unsub = auth.onAuthStateChanged(async (user) => {
       if (user) {
@@ -45,7 +47,6 @@ export const UserProvider: React.FC = (props) => {
     updateCart(state.cart);
   }, [state.cart]);
   
-  useEffect(() => persistState(STORAGE_KEY, state), [state]);
 
   return (
     <UserStateContext.Provider value={state}>
