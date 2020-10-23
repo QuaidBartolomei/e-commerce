@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AlertDialog from 'components/AlertDialog';
-import { CartItemData } from 'interfaces/ShopItemData.interface';
+import { CartItemData } from 'interfaces/shop-item.interface';
 import React, { useState } from 'react';
 import { useUserDispatch, useUserState } from 'user/UserContext';
 import { getCartTotal } from 'utils/db.utils';

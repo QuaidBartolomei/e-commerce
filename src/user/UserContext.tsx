@@ -1,4 +1,4 @@
-import { CartItemData } from 'interfaces/ShopItemData.interface';
+import { CartItemData } from 'interfaces/shop-item.interface';
 import React, { createContext, useEffect, useReducer } from 'react';
 import { UserState } from 'user/user.interface';
 import { UserDispatch, userReducer } from 'user/user.reducer';

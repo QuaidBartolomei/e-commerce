@@ -14,3 +14,17 @@ export interface ShopItemData {
 
 export type ClothingSize = 'S' | 'M' | 'L';
 export type ShopItemCategory = 'Hat' | 'Shirt';
+
+export const Categories: {
+  category: ShopItemCategory;
+  name: string;
+}[] = [
+  {
+    category: 'Hat',
+    name: 'Hats',
+  },
+  {
+    category: 'Shirt',
+    name: 'Shirts',
+  },
+];

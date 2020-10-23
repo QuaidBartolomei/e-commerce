@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { ShopItemData } from 'interfaces/ShopItemData.interface';
+import { ShopItemData } from 'interfaces/shop-item.interface';
 import React from 'react';
 import { routeToItemPage } from 'Router';
 import { getItemData } from 'utils/db.utils';

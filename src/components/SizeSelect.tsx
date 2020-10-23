@@ -3,7 +3,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ClothingSize } from 'interfaces/ShopItemData.interface';
+import { ClothingSize } from 'interfaces/shop-item.interface';
 import React from 'react';
 
 const useStyles = makeStyles((theme) =>

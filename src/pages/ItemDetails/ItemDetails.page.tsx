@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
-import { ShopItemData } from 'interfaces/ShopItemData.interface';
+import { ShopItemData } from 'interfaces/shop-item.interface';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Routes } from 'Router';

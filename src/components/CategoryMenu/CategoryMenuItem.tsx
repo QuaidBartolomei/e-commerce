@@ -1,6 +1,6 @@
 import { Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { ShopItemCategory } from 'interfaces/ShopItemData.interface';
+import { ShopItemCategory } from 'interfaces/shop-item.interface';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Routes } from 'Router';

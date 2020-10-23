@@ -3,7 +3,7 @@ import {
   ClothingSize,
   ShopItemCategory,
   ShopItemData,
-} from 'interfaces/ShopItemData.interface';
+} from 'interfaces/shop-item.interface';
 import shortid from 'shortid';
 import { UserState } from 'user/user.interface';
 import { auth, Collections, firestore, storage } from 'utils/firebase.utils';

@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { useUserDispatch } from 'user/UserContext';
-import { CartItemData } from 'interfaces/ShopItemData.interface';
+import { CartItemData } from 'interfaces/shop-item.interface';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

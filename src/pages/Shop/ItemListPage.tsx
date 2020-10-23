@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import {
   ShopItemCategory,
   ShopItemData,
-} from 'interfaces/ShopItemData.interface';
+} from 'interfaces/shop-item.interface';
 import Container from '@material-ui/core/Container';
 import ShopItem from './ShopItem';
 import { getShopItemsByCategory } from 'utils/db.utils';

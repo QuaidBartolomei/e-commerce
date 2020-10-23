@@ -1,7 +1,7 @@
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import hats_img from 'assets/categories/hats.jpg';
 import shirts_img from 'assets/shirts/black-shirt.jpg';
-import { ShopItemCategory } from 'interfaces/ShopItemData.interface';
+import { ShopItemCategory } from 'interfaces/shop-item.interface';
 import React from 'react';
 import CategoryMenuItem from './CategoryMenuItem';
 

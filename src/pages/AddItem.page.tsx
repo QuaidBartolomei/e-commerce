@@ -15,7 +15,7 @@ import {
   ClothingSize,
   ShopItemCategory,
   ShopItemData,
-} from 'interfaces/ShopItemData.interface';
+} from 'interfaces/shop-item.interface';
 import React from 'react';
 import shortid from 'shortid';
 import { addImageToStorage, addShopItem } from 'utils/db.utils';

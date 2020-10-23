@@ -2,7 +2,6 @@ https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%
 
 ☐ make cart total calculation more efficient - store full cart data in shopping cart page
 ☐ improve cart item card appearance - use horizontal space on larger screens
-☐ add categories to navigation drawer
 ☐ create ad/specials/sale banner
   ☐ get placeholder image
   ☐ create component

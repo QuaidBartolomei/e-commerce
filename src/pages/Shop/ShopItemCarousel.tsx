@@ -6,7 +6,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import {
   ShopItemCategory,
   ShopItemData
-} from 'interfaces/ShopItemData.interface';
+} from 'interfaces/shop-item.interface';
 import React from 'react';
 import { Routes } from 'Router';
 import ShopItem from './ShopItem';

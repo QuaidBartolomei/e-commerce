@@ -1,4 +1,4 @@
-import { CartItemData } from 'interfaces/ShopItemData.interface';
+import { CartItemData } from 'interfaces/shop-item.interface';
 import { UserState } from 'user/user.interface';
 import { defaultCart } from './UserContext';
 

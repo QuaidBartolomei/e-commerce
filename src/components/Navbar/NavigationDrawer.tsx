@@ -7,6 +7,7 @@ import React from 'react';
 import { Routes } from 'Router';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import { Categories } from 'interfaces/shop-item.interface';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) =>
       backgroundColor: 'white',
     },
   })
-); 
+);
 
 const NavigationDrawer = (props: { isOpen: boolean; onClose: () => void }) => {
   const classes = useStyles();
@@ -34,6 +35,15 @@ const NavigationDrawer = (props: { isOpen: boolean; onClose: () => void }) => {
           </ListItemIcon>
           <ListItemText primary='Cart / Checkout' />
         </ListItemLink>
+        {
+          Categories.map(({category, name}) => {
+            return (
+              <ListItemLink href={Routes.Category + '/' + category} key={name}>
+                <ListItemText primary={name} />
+              </ListItemLink>
+            );
+          })
+        }
       </List>
     </Drawer>
   );

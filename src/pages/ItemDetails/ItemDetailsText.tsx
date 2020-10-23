@@ -7,7 +7,7 @@ import Select from '@material-ui/core/Select';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AddToCartButton from 'components/AddToCartButton';
-import { ClothingSize, ShopItemData } from 'interfaces/ShopItemData.interface';
+import { ClothingSize, ShopItemData } from 'interfaces/shop-item.interface';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
 
