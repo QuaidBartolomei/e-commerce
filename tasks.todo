@@ -1,9 +1,5 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-☐ fix navbar auth button menu anchor position
-
-☐ improve item list page
-
 ☐ make cart total calculation more efficient - store full cart data in shopping cart page
 ☐ improve cart item card appearance - use horizontal space on larger screens
 ☐ add categories to navigation drawer

@@ -42,6 +42,9 @@ const UserMenu = () => {
         keepMounted
         open={Boolean(userMenuAnchor)}
         onClose={handleClose}
+        getContentAnchorEl={null}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         {isAuth ? (
           <MenuItem button onClick={signout}>

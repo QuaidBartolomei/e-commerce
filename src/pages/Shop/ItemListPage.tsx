@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) =>
       justifyContent: 'center',
       alignItems: 'center',
     },
+    grid: {
+      padding: theme.spacing(GRID_SPACING),
+    },
   })
 );
 
@@ -37,7 +40,7 @@ const ItemListPage = () => {
 
   return (
     <Container>
-      <Grid container spacing={GRID_SPACING}>
+      <Grid container spacing={GRID_SPACING} className={classes.grid}>
         {items.map((item) => (
           <Grid
             item
