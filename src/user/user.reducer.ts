@@ -52,7 +52,9 @@ export function userReducer(state: UserState, action: Action): UserState {
     case 'login': {
       console.log('logging in', action.payload);
       return {
-        ...action.payload,
+        ...state,
+        isAuth: true,
+        cart: action.payload.cart
       };
     }
     case 'logout': {

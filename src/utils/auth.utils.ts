@@ -7,3 +7,7 @@ export async function signout() {
 export async function registerNewUser(email: string, password: string) {
   auth.createUserWithEmailAndPassword(email, password);
 }
+
+export async function signInWithEmail(email: string, password:string) {
+ return auth.signInWithEmailAndPassword(email, password);
+} 

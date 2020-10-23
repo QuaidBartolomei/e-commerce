@@ -32,6 +32,7 @@ export const UserProvider: React.FC = (props) => {
         dispatch({ type: 'login', payload: data });
       } else {
         // User is signed out.
+        console.log('user signed out');
         if (state.isAuth) dispatch({ type: 'logout' });
       }
     });

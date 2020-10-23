@@ -67,8 +67,8 @@ const RegisterForm = () => {
       <form onSubmit={onSubmit}>
         <EmailField
           value={email}
-          onChange={(e) => setEmail(e.currentTarget.value)}
-          error={emailError}
+          onChangeValue={setEmail}
+          errorMessage={emailError}
         />
         <PasswordField
           value={password}

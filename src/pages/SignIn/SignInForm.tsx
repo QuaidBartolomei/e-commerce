@@ -4,26 +4,52 @@ import Grid from '@material-ui/core/Grid/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
+import { signInWithEmail } from 'utils/auth.utils';
 import { signInWithGoogle } from 'utils/firebase.utils';
+import EmailField from './EmailField';
 
-type FormFields = {
-  email: string;
-  password: string;
-};
-
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     submit: {},
+    buttonGrid: {
+      marginTop: theme.spacing(1),
+    },
   })
 );
 const SignInForm = () => {
-  const { register, handleSubmit } = useForm<FormFields>();
-  const onSubmit = (data: FormFields) => {
-    console.log('data', data);
-  };
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const SignInButton = () => (
+    <Button
+      fullWidth
+      type='submit'
+      variant='contained'
+      color='primary'
+      className={classes.submit}
+    >
+      Sign In
+    </Button>
+  );
+  const SignInWithGoogleButton = () => (
+    <Button
+      fullWidth
+      variant='contained'
+      color='secondary'
+      className={classes.submit}
+      onClick={signInWithGoogle}
+    >
+      Sign In With Google
+    </Button>
+  );
+
+  function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    console.log('on submit');
+    signInWithEmail(email, password);
+  }
 
   return (
     <Container maxWidth='xs'>
@@ -32,18 +58,8 @@ const SignInForm = () => {
       </Typography>
       <Typography>Sign in with your email and password</Typography>
 
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          margin='normal'
-          required
-          fullWidth
-          label='Email'
-          name='email'
-          type='email'
-          autoComplete='email'
-          inputRef={register}
-          autoFocus
-        />
+      <form noValidate onSubmit={onSubmit}>
+        <EmailField value={email} onChangeValue={setEmail} autoFocus />
         <TextField
           margin='normal'
           required
@@ -51,31 +67,16 @@ const SignInForm = () => {
           name='password'
           label='Password'
           type='password'
-          inputRef={register}
           autoComplete='current-password'
+          onChange={(e) => setPassword(e.currentTarget.value)}
+          value={password}
         />
-        <Grid container spacing={2} style={{ marginTop: '8px' }}>
+        <Grid container spacing={2} className={classes.buttonGrid}>
           <Grid item xs={12} sm={6}>
-            <Button
-              fullWidth
-              type='submit'
-              variant='contained'
-              color='primary'
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
+            <SignInButton />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Button
-              fullWidth
-              variant='contained'
-              color='secondary'
-              className={classes.submit}
-              onClick={signInWithGoogle}
-            >
-              Sign In With Google
-            </Button>
+            <SignInWithGoogleButton />
           </Grid>
         </Grid>
       </form>
