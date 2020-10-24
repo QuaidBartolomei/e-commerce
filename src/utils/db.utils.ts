@@ -1,6 +1,5 @@
 import {
   CartItemData,
-  ClothingSize,
   ShopItemCategory,
   ShopItemData,
 } from 'interfaces/shop-item.interface';
@@ -10,19 +9,11 @@ import { auth, Collections, firestore, storage } from 'utils/firebase.utils';
 
 // Generic, replaceable database functions that interface with the db framework (Firebase)
 
-type ItemData = {
-  imageUrl: string;
-  name: string;
-  price: number;
-  category: ShopItemCategory;
-  size: ClothingSize;
-};
-
 export async function getShopItems(): Promise<ShopItemData[]> {
   let itemsCollection = await firestore.collection(Collections.Items).get();
   let items = itemsCollection.docs.map((doc) => {
-    let data = doc.data() as ItemData;
-    return { ...data, id: doc.id };
+    let data = doc.data() as ShopItemData;
+    return { ...data };
   });
   console.log('items', items);
   return items;
@@ -41,7 +32,7 @@ export async function getShopItemsByCategory(
     .where('category', '==', category.toString())
     .get();
   let items = itemsCollection.docs.map((doc) => {
-    let data = doc.data() as ItemData;
+    let data = doc.data() as ShopItemData;
     return { ...data, id: doc.id };
   });
   console.log('items', items);
@@ -51,7 +42,7 @@ export async function getShopItemsByCategory(
 export async function searchForItems(query: string): Promise<ShopItemData[]> {
   let itemsCollection = await firestore.collection(Collections.Items).get();
   let items = itemsCollection.docs.map((doc) => {
-    let data = doc.data() as ItemData;
+    let data = doc.data() as ShopItemData;
     return { ...data, id: doc.id };
   });
   console.log('items', items);
@@ -64,8 +55,12 @@ export async function getUrlFromStorage(id: string): Promise<string> {
   return url;
 }
 
-export function addShopItem(itemData: ItemData) {
-  firestore.collection(Collections.Items).doc(shortid.generate()).set(itemData);
+export async function addShopItem(itemData: ShopItemData) {
+  let id = shortid.generate();
+  await firestore
+    .collection(Collections.Items)
+    .doc(id)
+    .set({ ...itemData, id });
 }
 
 export async function addImageToStorage(file: File): Promise<string> {

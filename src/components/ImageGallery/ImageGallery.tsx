@@ -7,12 +7,6 @@ import React, { useState } from 'react';
 import FullsizeImage from './FullsizeImage';
 import ThumbnailGrid from './ThumbnailGrid';
 
-import black_shirt from 'assets/shirts/black-shirt.jpg';
-import blue_shirt from 'assets/shirts/blue-shirt.jpg';
-import pink_shirt from 'assets/shirts/pink-shirt.jpg';
-import plaid_shirt from 'assets/shirts/plaid-shirt.jpg';
-import yellow_shirt from 'assets/shirts/yellow-shirt.jpg';
-
 const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
@@ -42,23 +36,13 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const images: string[] = [
-  black_shirt,
-  blue_shirt,
-  pink_shirt,
-  plaid_shirt,
-  yellow_shirt,
-];
-
-const ImageGallery = ({ mainImage }: { mainImage: string }) => {
-  console.log('main image:', mainImage);
+const ImageGallery = ({ imageUrls }: { imageUrls: string[] }) => {
   const classes = useStyles();
   const [selectedImage, setSelectedImage] = useState('');
   const [showFullsizeImage, setShowFullsizeImage] = useState(false);
-  const thumbnailImages = [mainImage, ...images];
   React.useEffect(() => {
-    setSelectedImage(mainImage);
-  }, [mainImage]);
+    setSelectedImage(imageUrls[0]);
+  }, [imageUrls[0]]);
   return (
     <React.Fragment>
       <FullsizeImage
@@ -77,9 +61,9 @@ const ImageGallery = ({ mainImage }: { mainImage: string }) => {
         </Link>
         <Divider />
         <ThumbnailGrid
-          imageUrls={thumbnailImages}
+          imageUrls={imageUrls}
           onSelectImage={setSelectedImage}
-          defaultSelected={mainImage}
+          defaultSelected={imageUrls[0]}
         />
       </Container>
     </React.Fragment>

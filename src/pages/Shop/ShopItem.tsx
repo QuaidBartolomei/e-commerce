@@ -42,7 +42,7 @@ const ShopItem = ({ item }: { item: ShopItemData }) => {
         <div
           className={classes.imageContainer}
           style={{
-            backgroundImage: `url(${item.imageUrl})`,
+            backgroundImage: `url(${item.imageUrls[0]})`,
           }}
         />
         <Container className={classes.label}>

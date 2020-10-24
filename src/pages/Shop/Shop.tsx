@@ -1,6 +1,10 @@
 import Container from '@material-ui/core/Container/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ShopItemData } from 'interfaces/shop-item.interface';
+import {
+  Categories,
+  ShopItemCategory,
+  ShopItemData,
+} from 'interfaces/shop-item.interface';
 import React, { useEffect, useState } from 'react';
 import { getShopItems } from 'utils/db.utils';
 import ShopItemCarousel from './ShopItemCarousel';
@@ -8,10 +12,11 @@ import ShopItemCarousel from './ShopItemCarousel';
 const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
-      padding: theme.spacing(1),
+      padding: theme.spacing(0,2),
+      '&>*': {
+        margin: theme.spacing(6, 0),
+      },
     },
-    content: {},
-    carousel: {},
   })
 );
 
@@ -21,16 +26,24 @@ const Shop = () => {
   useEffect(() => {
     getShopItems().then(setShopItems);
   }, []);
-  let hatData = React.useMemo(() => {
-    return shopItems.filter((x) => x.category === 'Hat');
-  }, [shopItems]);
-  let shirtData = React.useMemo(() => {
-    return shopItems.filter((x) => x.category === 'Shirt');
-  }, [shopItems]);
+  let shopItemsSorted: {
+    category: ShopItemCategory;
+    items: ShopItemData[];
+  }[] = Categories.map((category) => ({
+    category,
+    items: shopItems.filter((x) => x.category === category),
+  }));
+
   return (
-    <Container maxWidth='lg' className={classes.container} disableGutters>
-      <ShopItemCarousel title='Hats' items={hatData} category={'Hat'} />
-      <ShopItemCarousel title='Shirts' items={shirtData} category={'Shirt'} />
+    <Container className={classes.container}>
+      {shopItemsSorted.map(({ category, items }) => (
+        <ShopItemCarousel
+          title={category}
+          key={category}
+          items={items}
+          category={category}
+        />
+      ))}
     </Container>
   );
 };

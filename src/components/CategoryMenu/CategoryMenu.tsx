@@ -31,27 +31,27 @@ const data: { name: string; image: string; category: ShopItemCategory }[] = [
   {
     name: 'Hats',
     image: hats_img,
-    category: 'Hat',
+    category: 'Hats',
   },
   {
     name: 'Hats',
     image: hats_img,
-    category: 'Hat',
+    category: 'Hats',
   },
   {
     name: 'Hats',
     image: hats_img,
-    category: 'Hat',
+    category: 'Hats',
   },
   {
     name: 'Hats',
     image: hats_img,
-    category: 'Hat',
+    category: 'Hats',
   },
   {
     name: 'Shirts',
     image: shirts_img,
-    category: 'Shirt',
+    category: 'Shirts',
   },
 ];
 

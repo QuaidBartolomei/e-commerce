@@ -66,7 +66,7 @@ const ItemCard = (props: {
 
 
   if (!itemData) return <div></div>;
-  const { imageUrl, size, price, name } = itemData;
+  const { imageUrls, sizes, price, name } = itemData;
   return (
     <div>
       <Paper className={classes.paper}>
@@ -76,7 +76,7 @@ const ItemCard = (props: {
               className={classes.image}
               href={routeToItemPage(id)}
             >
-              <img className={classes.img} alt={name} src={imageUrl} />
+              <img className={classes.img} alt={name} src={imageUrls[0]} />
             </ButtonBase>
           </Grid>
           <Grid item xs>
@@ -86,7 +86,7 @@ const ItemCard = (props: {
               </Typography>
             </Link>
             <Typography variant='body2' gutterBottom>
-              Size: {size}
+              Size: {sizes[0]}
             </Typography>
             <QuantitySelect quantity={quantity} onChange={setQuantity} />
             <Typography variant='subtitle1'>${price.toFixed(2)}</Typography>

@@ -44,9 +44,7 @@ const ItemListPage = () => {
         {items.map((item) => (
           <Grid
             item
-            xs={12}
-            sm={6}
-            md={3}
+
             key={item.id}
             className={classes.gridItem}
           >

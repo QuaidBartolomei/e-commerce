@@ -1,13 +1,13 @@
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import ListItemLink from 'components/ListItemLink';
-import React from 'react';
-import { Routes } from 'Router';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemLink from 'components/ListItemLink';
 import { Categories } from 'interfaces/shop-item.interface';
+import React from 'react';
+import { Routes, routeToCategoryPage } from 'Router';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -35,15 +35,11 @@ const NavigationDrawer = (props: { isOpen: boolean; onClose: () => void }) => {
           </ListItemIcon>
           <ListItemText primary='Cart / Checkout' />
         </ListItemLink>
-        {
-          Categories.map(({category, name}) => {
-            return (
-              <ListItemLink href={Routes.Category + '/' + category} key={name}>
-                <ListItemText primary={name} />
-              </ListItemLink>
-            );
-          })
-        }
+        {Categories.map((category) => (
+          <ListItemLink href={routeToCategoryPage(category)} key={category}>
+            <ListItemText primary={category} />
+          </ListItemLink>
+        ))}
       </List>
     </Drawer>
   );

@@ -47,7 +47,7 @@ export default function AddItem() {
   const classes = useStyles();
   const [name, setName] = React.useState('');
   const [price, setPrice] = React.useState('');
-  const [category, setCategory] = React.useState<ShopItemCategory>('Shirt');
+  const [category, setCategory] = React.useState<ShopItemCategory>('Shirts');
   const [size, setSize] = React.useState<ClothingSize>('S');
   const [selectedImage, setSelectedImage] = React.useState('');
   const [imageFiles, setImageFiles] = React.useState<ImageFile[]>([]);
@@ -60,9 +60,9 @@ export default function AddItem() {
       category,
       price: Number(price),
       name,
-      size,
-      imageUrl,
-      id: shortid.generate(),
+      sizes: [size],
+      imageUrls: [imageUrl],
+            id: shortid.generate(),
     };
     addShopItem(itemData);
   }

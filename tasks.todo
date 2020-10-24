@@ -1,5 +1,12 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
+☐ add more categories
+
+☐ group and distinguish shop items by size - ShopItemBase = ShopItemData without size
+
+☐ add more shop items
+  ☐ add images and generate shop items
+  
 ☐ make cart total calculation more efficient - store full cart data in shopping cart page
 ☐ improve cart item card appearance - use horizontal space on larger screens
 ☐ create ad/specials/sale banner

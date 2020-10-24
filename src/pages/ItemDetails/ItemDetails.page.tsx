@@ -34,15 +34,17 @@ const ItemDetails = () => {
   let [item, setItem] = React.useState<ShopItemData>({
     name: 'Dumb item',
     id: '1',
-    imageUrl: '',
+    imageUrls: [''],
     price: 99,
-    category: 'Hat',
-    size: 'S',
+    category: 'Hats',
+    sizes: ['S'],
   });
 
   React.useEffect(() => {
     getShopItemById(id).then(setItem);
   }, [id, setItem]);
+
+  React.useEffect(() => console.log('item changed: ', item), [item]);
 
   if (!item) {
     history.push(Routes.Homepage);
@@ -52,7 +54,7 @@ const ItemDetails = () => {
   return (
     <Grid container item spacing={1} className={classes.container}>
       <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
-        <ImageGallery mainImage={item.imageUrl} />
+        <ImageGallery imageUrls={item.imageUrls} />
       </Grid>
       <Grid item sm={7} xs={12} className={classes.detailsContainer}>
         <ItemDetailsText item={item} />

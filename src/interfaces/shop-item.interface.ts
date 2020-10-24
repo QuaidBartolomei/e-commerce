@@ -5,26 +5,18 @@ export interface CartItemData {
 
 export interface ShopItemData {
   id: string;
-  imageUrl: string;
+  imageUrls: string[];
   name: string;
   price: number;
   category: ShopItemCategory;
-  size: ClothingSize;
+  sizes: ClothingSize[];
 }
 
 export type ClothingSize = 'S' | 'M' | 'L';
-export type ShopItemCategory = 'Hat' | 'Shirt';
+export type ShopItemCategory = 'Hats' | 'Shirts' | 'Hoodies';
 
-export const Categories: {
-  category: ShopItemCategory;
-  name: string;
-}[] = [
-  {
-    category: 'Hat',
-    name: 'Hats',
-  },
-  {
-    category: 'Shirt',
-    name: 'Shirts',
-  },
-];
+export const Categories: ShopItemCategory[] = [
+  'Hats',
+  'Shirts',
+  'Hoodies'
+]

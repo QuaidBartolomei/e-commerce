@@ -7,6 +7,7 @@ import ShoppingCartIconButton from './ShoppingCartIcon';
 import NavbarTitle from './NavbarTitle';
 import NavigationDrawerMenu from './NavigationMenu';
 import UserMenu from './UserMenu';
+import AddRandomItemButton from 'components/AddRandomItemButton';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

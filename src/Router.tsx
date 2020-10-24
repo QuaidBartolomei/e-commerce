@@ -40,5 +40,8 @@ const Router = () => {
 export function routeToItemPage(id: string): string {
  return Routes.Product + '/' + id;
 }
+export function routeToCategoryPage(id: string): string {
+  return Routes.Category + '/' + id;
+}
 
 export default Router;
