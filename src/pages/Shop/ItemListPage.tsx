@@ -14,14 +14,15 @@ const GRID_SPACING = 2;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    container: {},
+    container: {
+      padding: theme.spacing(GRID_SPACING),
+    },
     gridItem: {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
     },
     grid: {
-      padding: theme.spacing(GRID_SPACING),
     },
   })
 );
@@ -39,15 +40,15 @@ const ItemListPage = () => {
   }, [category]);
 
   return (
-    <Container>
-      <Grid container spacing={GRID_SPACING} className={classes.grid}>
+    <Container className={classes.container}>
+      <Grid
+        container
+        spacing={GRID_SPACING}
+        className={classes.grid}
+        justify='center'
+      >
         {items.map((item) => (
-          <Grid
-            item
-
-            key={item.id}
-            className={classes.gridItem}
-          >
+          <Grid item key={item.id} className={classes.gridItem}>
             <ShopItem item={item} />
           </Grid>
         ))}
