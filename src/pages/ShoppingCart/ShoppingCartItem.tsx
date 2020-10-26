@@ -44,8 +44,8 @@ const ShoppingCartItem = (props: {
 }) => {
   const classes = useStyles();
   const { onRemove } = props;
-  const [quantity, setQuantity] = React.useState(props.quantity);
   const { id, imageUrls, sizes, price, name } = props.itemData;
+  const { quantity, onChangeQuantity } = props;
 
   const RemoveButton = () => (
     <Button
@@ -75,7 +75,7 @@ const ShoppingCartItem = (props: {
             <Typography variant='body2' gutterBottom>
               Size: {sizes[0]}
             </Typography>
-            <QuantitySelect quantity={quantity} onChange={setQuantity} />
+            <QuantitySelect quantity={quantity} onChange={onChangeQuantity} />
             <Typography variant='subtitle1'>${price.toFixed(2)}</Typography>
           </Grid>
         </Grid>

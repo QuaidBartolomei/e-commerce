@@ -38,23 +38,29 @@ export function userReducer(state: UserState, action: Action): UserState {
     }
     case 'change_item_quantity': {
       let { quantity, id } = action.payload;
-
-      let index = state.cart.findIndex((x) => x.id === action.payload.id);
-      if (index < 0) return { ...state };
-      if (quantity === 0)
-        return {
-          ...state,
-          cart: state.cart.filter((x) => x.id !== id),
-        };
-      else state.cart[index].quantity = quantity;
-      return { ...state };
+      console.log('changing item quantity');
+      console.log('id: ', id);
+      console.log('quantity: ', quantity);
+      return {
+        ...state,
+        cart: state.cart
+          .map((x) => {
+            if (x.id === id)
+              return {
+                ...x,
+                quantity,
+              };
+            return x;
+          })
+          .filter((x) => x.quantity ),
+      };
     }
     case 'login': {
       console.log('logging in', action.payload);
       return {
         ...state,
         isAuth: true,
-        cart: action.payload.cart
+        cart: action.payload.cart,
       };
     }
     case 'logout': {

@@ -48,21 +48,22 @@ export default function ShoppingCart() {
   const { cart } = user;
   const [shoppingCart, setShoppingCart] = useState<Cart>([]);
 
-  React.useEffect(() => {
-    cart.forEach((item) => {
-      getItemData(item.id).then((data) =>
-        data
-          ? setShoppingCart([
-              ...shoppingCart,
-              {
-                data,
-                quantity: item.quantity,
-              },
-            ])
-          : null
-      );
+  async function getCartData() {
+    let shoppingCart: Cart = [];
+    cart.forEach(async (item) => {
+      let data = await getItemData(item.id);
+      if (data)
+        shoppingCart.push({
+          data,
+          quantity: item.quantity,
+        });
     });
-  }, []);
+    return shoppingCart;
+  }
+
+  React.useEffect(() => {
+    getCartData().then(setShoppingCart);
+  }, [cart]);
 
   React.useEffect(() => {
     getCartTotal(cart).then(setCartTotal);
