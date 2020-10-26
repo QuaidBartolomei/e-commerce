@@ -3,13 +3,13 @@ import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AlertDialog from 'components/AlertDialog';
-import { CartItemData } from 'interfaces/shop-item.interface';
+import { ShopItemData } from 'interfaces/shop-item.interface';
 import React, { useState } from 'react';
 import { useUserDispatch, useUserState } from 'user/UserContext';
-import { getCartTotal } from 'utils/db.utils';
+import { getCartTotal, getItemData } from 'utils/db.utils';
 import CheckoutButton from './CheckoutButton';
 import EmptyCart from './EmptyCart.page';
-import ItemCard from './ItemCard';
+import ShoppingCartItem from './ShoppingCartItem';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -37,13 +37,32 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
+type Cart = { data: ShopItemData; quantity: number }[];
+
 export default function ShoppingCart() {
   const classes = useStyles();
-  const [itemToRemove, setItemToRemove] = React.useState('');
+  const [itemToRemove, setItemToRemove] = useState('');
+  const [cartTotal, setCartTotal] = useState(0);
   const userDispatch = useUserDispatch();
   const user = useUserState();
   const { cart } = user;
-  const [cartTotal, setCartTotal] = useState(0);
+  const [shoppingCart, setShoppingCart] = useState<Cart>([]);
+
+  React.useEffect(() => {
+    cart.forEach((item) => {
+      getItemData(item.id).then((data) =>
+        data
+          ? setShoppingCart([
+              ...shoppingCart,
+              {
+                data,
+                quantity: item.quantity,
+              },
+            ])
+          : null
+      );
+    });
+  }, []);
 
   React.useEffect(() => {
     getCartTotal(cart).then(setCartTotal);
@@ -83,17 +102,20 @@ export default function ShoppingCart() {
 
   const ItemCards = () => (
     <Grid container spacing={2} className={classes.grid}>
-      {cart.map((item: CartItemData, key) => (
-        <Grid item key={key} xs={12}>
-          <ItemCard
-            {...item}
-            onRemove={() => setItemToRemove(item.id)}
-            onChangeQuantity={(quantity) =>
-              changeItemQuantity(item.id, quantity)
-            }
-          />
-        </Grid>
-      ))}
+      {shoppingCart.map((item, key) => {
+        return (
+          <Grid item key={key} xs={12}>
+            <ShoppingCartItem
+              itemData={item.data}
+              quantity={item.quantity}
+              onRemove={() => setItemToRemove(item.data.id)}
+              onChangeQuantity={(quantity) =>
+                changeItemQuantity(item.data.id, quantity)
+              }
+            />
+          </Grid>
+        );
+      })}
     </Grid>
   );
 

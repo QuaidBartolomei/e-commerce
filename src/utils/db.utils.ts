@@ -112,7 +112,6 @@ export async function getItemData(
 ): Promise<ShopItemData | undefined> {
   return await getDocData<ShopItemData>(Collections.Items, id);
 }
-
 export async function getCartTotal(cart: CartItemData[]): Promise<number> {
   let total = 0;
   for (const { id, quantity } of cart) {

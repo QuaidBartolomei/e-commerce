@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import { ShopItemData } from 'interfaces/shop-item.interface';
 import React from 'react';
 import { routeToItemPage } from 'Router';
-import { getItemData } from 'utils/db.utils';
 import QuantitySelect from './QuantitySelect';
 
 const useStyles = makeStyles((theme) =>
@@ -37,22 +36,16 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ItemCard = (props: {
-  id: string;
+const ShoppingCartItem = (props: {
+  itemData: ShopItemData;
   quantity: number;
   onRemove: () => void;
   onChangeQuantity: (quantity: number) => void;
 }) => {
   const classes = useStyles();
-  const { id, onRemove } = props;
-  const [itemData, setItemData] = React.useState<ShopItemData | undefined>(
-    undefined
-  );
+  const { onRemove } = props;
   const [quantity, setQuantity] = React.useState(props.quantity);
-
-  React.useEffect(() => {
-    getItemData(id).then(setItemData);
-  }, [id]);
+  const { id, imageUrls, sizes, price, name } = props.itemData;
 
   const RemoveButton = () => (
     <Button
@@ -64,18 +57,12 @@ const ItemCard = (props: {
     </Button>
   );
 
-
-  if (!itemData) return <div></div>;
-  const { imageUrls, sizes, price, name } = itemData;
   return (
     <div>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
-            <ButtonBase
-              className={classes.image}
-              href={routeToItemPage(id)}
-            >
+            <ButtonBase className={classes.image} href={routeToItemPage(id)}>
               <img className={classes.img} alt={name} src={imageUrls[0]} />
             </ButtonBase>
           </Grid>
@@ -98,4 +85,4 @@ const ItemCard = (props: {
   );
 };
 
-export default ItemCard;
+export default ShoppingCartItem;
