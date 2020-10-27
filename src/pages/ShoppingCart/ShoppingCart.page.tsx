@@ -6,7 +6,7 @@ import AlertDialog from 'components/AlertDialog';
 import { ShopItemData } from 'interfaces/shop-item.interface';
 import React, { useState } from 'react';
 import { useUserDispatch, useUserState } from 'user/UserContext';
-import { getCartTotal, getItemData } from 'utils/db.utils';
+import { getCartData, getCartTotal } from 'utils/db.utils';
 import CheckoutButton from './CheckoutButton';
 import EmptyCart from './EmptyCart.page';
 import ShoppingCartItem from './ShoppingCartItem';
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-type Cart = { data: ShopItemData; quantity: number }[];
+export type Cart = { data: ShopItemData; quantity: number }[];
 
 export default function ShoppingCart() {
   const classes = useStyles();
@@ -45,29 +45,19 @@ export default function ShoppingCart() {
   const [cartTotal, setCartTotal] = useState(0);
   const userDispatch = useUserDispatch();
   const user = useUserState();
-  const { cart } = user;
   const [shoppingCart, setShoppingCart] = useState<Cart>([]);
-
-  async function getCartData() {
-    let shoppingCart: Cart = [];
-    cart.forEach(async (item) => {
-      let data = await getItemData(item.id);
-      if (data)
-        shoppingCart.push({
-          data,
-          quantity: item.quantity,
-        });
-    });
-    return shoppingCart;
-  }
-
+  
+  
+  const { cart } = user;
   React.useEffect(() => {
-    getCartData().then(setShoppingCart);
+    getCartData(cart).then(setShoppingCart);
   }, [cart]);
 
   React.useEffect(() => {
     getCartTotal(cart).then(setCartTotal);
   }, [cart]);
+
+console.log('shoppingCart', shoppingCart)
 
   const Subtotal = () => (
     <Typography

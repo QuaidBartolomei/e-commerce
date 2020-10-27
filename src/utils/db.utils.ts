@@ -3,6 +3,7 @@ import {
   ShopItemCategory,
   ShopItemData,
 } from 'interfaces/shop-item.interface';
+import { Cart } from 'pages/ShoppingCart/ShoppingCart.page';
 import shortid from 'shortid';
 import { UserState } from 'user/user.interface';
 import { auth, Collections, firestore, storage } from 'utils/firebase.utils';
@@ -112,6 +113,19 @@ export async function getItemData(
 ): Promise<ShopItemData | undefined> {
   return await getDocData<ShopItemData>(Collections.Items, id);
 }
+ export  async function getCartData(cart: CartItemData[]): Promise<Cart> {
+    let shoppingCart: Cart = [];
+    cart.forEach(async (item) => {
+      let data = await getItemData(item.id);
+      if (data)
+        shoppingCart.push({
+          data,
+          quantity: item.quantity,
+        });
+    });
+    return shoppingCart;
+  }
+
 export async function getCartTotal(cart: CartItemData[]): Promise<number> {
   let total = 0;
   for (const { id, quantity } of cart) {

@@ -1,14 +1,14 @@
-import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { useParams } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   ShopItemCategory,
-  ShopItemData,
+  ShopItemData
 } from 'interfaces/shop-item.interface';
-import Container from '@material-ui/core/Container';
-import ShopItem from './ShopItem';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import { getShopItemsByCategory } from 'utils/db.utils';
+import ShopItem from './ShopItem';
 
 const GRID_SPACING = 2;
 

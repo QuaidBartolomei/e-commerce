@@ -1,4 +1,3 @@
-import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Step from '@material-ui/core/Step';
@@ -8,7 +7,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AddressForm from 'pages/Checkout/AddressForm';
 import React from 'react';
+import { useUserState } from 'user/UserContext';
+import { getCartData } from 'utils/db.utils';
+import { Cart } from 'pages/ShoppingCart/ShoppingCart.page';
 import PaymentForm from './PaymentForm';
+import Review from './Review';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -49,26 +52,17 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-const Review = () => {
-  return <Box></Box>;
-};
 
-function getStepContent(step: number) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
 
 export default function Checkout() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(2);
+  const user = useUserState();
+  const [shoppingCart, setShoppingCart] = React.useState<Cart>([]);
+  const { cart } = user;
+  React.useEffect(() => {
+    getCartData(cart).then(setShoppingCart);
+  }, [cart]);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -78,6 +72,19 @@ export default function Checkout() {
     setActiveStep(activeStep - 1);
   };
  
+  console.log('shoppingCart', shoppingCart);
+const Content =  () => {
+  switch (activeStep) {
+    case 0:
+      return <AddressForm />;
+    case 1:
+      return <PaymentForm />;
+    case 2:
+      return <Review shoppingCart={shoppingCart} />;
+    default:
+      throw new Error('Unknown step');
+  }
+}
   return (
     <React.Fragment>
       <main className={classes.layout}>
@@ -106,7 +113,7 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
+                <Content />
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
