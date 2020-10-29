@@ -56,8 +56,8 @@ const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
 export default function Checkout() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(2);
   const user = useUserState();
+  const [activeStep, setActiveStep] = React.useState(0);
   const [shoppingCart, setShoppingCart] = React.useState<Cart>([]);
   const { cart } = user;
   React.useEffect(() => {

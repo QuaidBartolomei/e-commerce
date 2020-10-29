@@ -12,6 +12,7 @@ import Navbar from 'components/Navbar/Navbar';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Router from 'Router';
+import types from '@material-ui/lab/themeAugmentation';
 
 const theme = createMuiTheme({
   palette: {
@@ -20,6 +21,13 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#212121',
+    },
+  },
+  overrides: {
+    MuiAlert: {
+      filledSuccess: {
+        backgroundColor: '#607d8b',
+      },
     },
   },
 });
@@ -47,15 +55,15 @@ const App = () => {
   return (
     <BrowserRouter>
       <CssBaseline />
-        <ThemeProvider theme={theme}>
-          <Box className={classes.page}>
-            <Container disableGutters className={classes.mainContent}>
-              <Navbar />
-              <Router />
-            </Container>
-            <Footer />
-          </Box>
-        </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <Box className={classes.page}>
+          <Container disableGutters className={classes.mainContent}>
+            <Navbar />
+            <Router />
+          </Container>
+          <Footer />
+        </Box>
+      </ThemeProvider>
     </BrowserRouter>
   );
 };

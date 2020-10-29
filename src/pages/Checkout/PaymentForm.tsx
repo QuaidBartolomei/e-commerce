@@ -5,6 +5,13 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
+export type PaymentInfo = {
+  type: string;
+  holder: string;
+  number: string;
+  expiration: string;
+};
+
 export default function PaymentForm() {
   return (
     <React.Fragment>
