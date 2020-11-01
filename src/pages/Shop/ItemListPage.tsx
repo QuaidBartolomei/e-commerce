@@ -1,13 +1,9 @@
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import {
-  ShopItemCategory,
-  ShopItemData
-} from 'interfaces/shop-item.interface';
+import { ShopItemModel, getShopItemsByCategory, ShopItemCategory } from 'models/shop-item/shop-item.db';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { getShopItemsByCategory } from 'utils/db.utils';
 import ShopItem from './ShopItem';
 
 const GRID_SPACING = 2;
@@ -30,7 +26,7 @@ const useStyles = makeStyles((theme) =>
 const ItemListPage = () => {
   const classes = useStyles();
   let { category } = useParams<{ category: string }>();
-  const [items, setItems] = React.useState<ShopItemData[]>([]);
+  const [items, setItems] = React.useState<ShopItemModel[]>([]);
 
   React.useEffect(() => {
     getShopItemsByCategory(category as ShopItemCategory).then((items) => {

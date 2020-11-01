@@ -2,9 +2,8 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import {CartItemData} from 'interfaces/shop-item.interface';
 import React from 'react';
-import { useUserDispatch } from 'user/UserContext';
+import { CartItem, useUserDispatch } from 'UserContext';
 import Alert from 'components/Alert';
 
 const useStyles = makeStyles((theme) =>
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const AddToCartButton = ({ item }: { item: CartItemData }) => {
+const AddToCartButton = ({ item }: { item: CartItem }) => {
   const classes = useStyles();
   const userDispatch = useUserDispatch();
   const [showAlert, setShowAlert] = React.useState(false);

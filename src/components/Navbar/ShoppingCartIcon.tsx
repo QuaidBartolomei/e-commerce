@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import React, { useMemo } from 'react';
 import { Routes } from 'Router';
-import { useUserState } from 'user/UserContext';
+import { useUserState } from 'UserContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

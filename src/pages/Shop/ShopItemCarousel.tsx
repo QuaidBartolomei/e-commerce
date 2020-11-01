@@ -3,10 +3,7 @@ import Link from '@material-ui/core/Link/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import {
-  ShopItemCategory,
-  ShopItemData
-} from 'interfaces/shop-item.interface';
+import { ShopItemModel, ShopItemCategory } from 'models/shop-item/shop-item.db';
 import React from 'react';
 import { Routes } from 'Router';
 import ShopItem from './ShopItem';
@@ -44,7 +41,7 @@ const useStyles = makeStyles((theme) =>
 
 const ShopItemCarousel = (props: {
   title: string;
-  items: ShopItemData[];
+  items: ShopItemModel[];
   category: ShopItemCategory;
 }) => {
   const classes = useStyles();

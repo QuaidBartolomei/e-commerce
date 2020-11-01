@@ -1,17 +1,11 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-☐ decide on names for db model interfaces for shop items
-
-☐ retrieve cart from db in user context - store full item data in user context and id only in db
 ☐ add cart total to user context as memoized value
 ☐ display full quantity price in shopping cart items
 ☐ fix cart total in checkout
 
 ☐ create checkout context for sharing form inputs
 ☐ fix checkout page not initially updating child components
-
-
-
 
 
 ☐ add more categories

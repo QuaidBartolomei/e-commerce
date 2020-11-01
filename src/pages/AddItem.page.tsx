@@ -11,14 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import ThumbnailGrid from 'components/ImageGallery/ThumbnailGrid';
 import SizeSelect from 'components/SizeSelect';
 import UploadImageButton from 'components/UploadImageButton';
-import {
-  ClothingSize,
-  ShopItemCategory,
-  ShopItemData,
-} from 'interfaces/shop-item.interface';
+import { ShopItemCategory, ClothingSize, addImageToStorage, ShopItemModel, addShopItem } from 'models/shop-item/shop-item.db';
 import React from 'react';
 import shortid from 'shortid';
-import { addImageToStorage, addShopItem } from 'utils/db.utils';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -56,7 +51,7 @@ export default function AddItem() {
     e.preventDefault();
     e.stopPropagation();
     let imageUrl = await addImageToStorage(imageFiles[0].file);
-    let itemData: ShopItemData = {
+    let itemData: ShopItemModel = {
       category,
       price: Number(price),
       name,

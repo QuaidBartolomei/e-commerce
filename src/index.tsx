@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'fontsource-roboto';
 import * as serviceWorker from './serviceWorker';
 import App from 'App';
-import { UserProvider } from 'user/UserContext';
+import { UserProvider } from 'UserContext';
 
 ReactDOM.render(
   <UserProvider>

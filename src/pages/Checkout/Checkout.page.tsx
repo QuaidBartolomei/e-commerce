@@ -7,9 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AddressForm from 'pages/Checkout/AddressForm';
 import React from 'react';
-import { useUserState } from 'user/UserContext';
-import { getCartData } from 'utils/db.utils';
-import { Cart } from 'pages/ShoppingCart/ShoppingCart.page';
+import { useUserState } from 'UserContext';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 
@@ -58,12 +56,7 @@ export default function Checkout() {
   const classes = useStyles();
   const user = useUserState();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [shoppingCart, setShoppingCart] = React.useState<Cart>([]);
-  const { cart } = user;
-  React.useEffect(() => {
-    getCartData(cart).then(setShoppingCart);
-  }, [cart]);
-
+  const { cart: shoppingCart } = user;
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };

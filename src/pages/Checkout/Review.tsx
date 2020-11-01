@@ -4,8 +4,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { ShopItemData } from 'interfaces/shop-item.interface';
 import React from 'react';
+import { CartItem } from 'UserContext';
 
 const addresses = [
   '1 Material-UI Drive',
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Review({
   shoppingCart,
 }: {
-  shoppingCart: { data: ShopItemData; quantity: number }[];
+  shoppingCart: CartItem[];
 }) {
   const classes = useStyles();
 
@@ -89,11 +89,11 @@ export default function Review({
     <React.Fragment>
       {shoppingCart.map((item, key) => {
         console.log('data', item);
-        let { data } = item;
+        let { name, price } = item;
         return (
           <ListItem className={classes.listItem} key={key}>
-            <ListItemText primary={data.name} secondary={data.name} />
-            <Typography variant='body2'>{data.price}</Typography>
+            <ListItemText primary={name} secondary={name} />
+            <Typography variant='body2'>{price}</Typography>
           </ListItem>
         );
       })}

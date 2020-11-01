@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { useUserDispatch } from 'user/UserContext';
-import { CartItemData } from 'interfaces/shop-item.interface';
+import { CartItem, useUserDispatch } from 'UserContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -10,7 +9,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const UpdateCartButton = ({ cart }: { cart: CartItemData[] }) => {
+const UpdateCartButton = ({ cart }: { cart: CartItem[] }) => {
   const classes = useStyles();
   const userDispatch = useUserDispatch();
   return (

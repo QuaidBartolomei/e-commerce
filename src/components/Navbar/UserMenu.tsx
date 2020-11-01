@@ -5,7 +5,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React from 'react';
 import { Routes } from 'Router';
-import { useUserState } from 'user/UserContext';
+import { useUserState } from 'UserContext';
 import { signout } from 'utils/auth.utils';
 
 

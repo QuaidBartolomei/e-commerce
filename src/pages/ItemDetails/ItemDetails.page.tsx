@@ -1,11 +1,10 @@
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
-import { ShopItemData } from 'interfaces/shop-item.interface';
+import { getShopItemById, ShopItemModel } from 'models/shop-item/shop-item.db';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Routes } from 'Router';
-import { getShopItemById } from 'utils/db.utils';
 import ItemDetailsText from './ItemDetailsText';
 
 const useStyles = makeStyles((theme) =>
@@ -31,7 +30,7 @@ const ItemDetails = () => {
   const classes = useStyles();
   let { id } = useParams<{ id: string }>();
   let history = useHistory();
-  let [item, setItem] = React.useState<ShopItemData>({
+  let [item, setItem] = React.useState<ShopItemModel>({
     name: 'Dumb item',
     id: '1',
     imageUrls: [''],

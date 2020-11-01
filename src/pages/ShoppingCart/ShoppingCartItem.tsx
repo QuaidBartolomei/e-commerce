@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { ShopItemData } from 'interfaces/shop-item.interface';
+import { ShopItemModel } from 'models/shop-item/shop-item.db';
 import React from 'react';
 import { routeToItemPage } from 'Router';
 import QuantitySelect from './QuantitySelect';
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 const ShoppingCartItem = (props: {
-  itemData: ShopItemData;
+  itemData: ShopItemModel;
   quantity: number;
   onRemove: () => void;
   onChangeQuantity: (quantity: number) => void;

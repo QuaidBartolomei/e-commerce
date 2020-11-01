@@ -1,13 +1,8 @@
-import {
-  Categories,
-  ClothingSize,
-  ShopItemCategory,
-  ShopItemData,
-} from 'interfaces/shop-item.interface';
+
 import shortid from 'shortid';
 import { randomValue } from './list.utils';
 import { randomNumber } from './number.utils';
-import * as db from 'utils/db.utils';
+import { ShopItemModel, Categories, ClothingSize, addShopItem } from 'models/shop-item/shop-item.db';
 
 let images: {
   Hats: string[];
@@ -40,7 +35,7 @@ let images: {
 function randomPrice() {
   return randomNumber(10000) / 100;
 }
-export function generateShopItem(): ShopItemData {
+export function generateShopItem(): ShopItemModel {
   let category = randomValue(Categories);
   let sizes: ClothingSize[] = ['S', 'M', 'L'];
   let imageUrls = [
@@ -50,7 +45,7 @@ export function generateShopItem(): ShopItemData {
   let price = randomPrice();
   let baseItemId = shortid.generate();
   let name = 'Dumb ' + category.substr(0, category.length - 1);
-  let baseItem: ShopItemData = {
+  let baseItem: ShopItemModel = {
     category,
     id: baseItemId,
     imageUrls,
@@ -63,6 +58,6 @@ export function generateShopItem(): ShopItemData {
 
 export async function generateItemAndAddToDb() {
   let item = generateShopItem();
-  await db.addShopItem(item);
+  await addShopItem(item);
   return console.log(item);
 }

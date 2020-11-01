@@ -5,7 +5,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ListItemLink from 'components/ListItemLink';
-import { Categories } from 'interfaces/shop-item.interface';
+import { Categories } from 'models/shop-item/shop-item.db';
 import React from 'react';
 import { Routes, routeToCategoryPage } from 'Router';
 

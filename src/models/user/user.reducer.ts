@@ -1,27 +1,25 @@
-import { CartItemData } from 'interfaces/shop-item.interface';
-import { UserState } from 'user/user.interface';
-import { defaultCart } from './UserContext';
+import { CartItem, UserState } from "UserContext";
 
 type Action =
-  | { type: 'add_item'; payload: CartItemData }
-  | { type: 'login'; payload: UserState }
+  | { type: 'add_item'; payload: CartItem }
+  | { type: 'login'; payload: CartItem[] }
   | { type: 'logout' }
   | { type: 'remove_item'; payload: string }
-  | { type: 'update_cart'; payload: CartItemData[] }
+  | { type: 'update_cart'; payload: CartItem[] }
   | { type: 'change_item_quantity'; payload: { id: string; quantity: number } };
 
 export function userReducer(state: UserState, action: Action): UserState {
   switch (action.type) {
     case 'add_item': {
-      let item = action.payload;
-      let existingItem = state.cart.find((x) => x.id === item.id);
+      let {id} = action.payload;
+      let existingItem = state.cart.find((x) => x.id === id);
       if (existingItem) {
         existingItem.quantity++;
         return { ...state, cart: [...state.cart] };
       }
       return {
         ...state,
-        cart: [...state.cart, { ...item, quantity: 1 }],
+        cart: [...state.cart, action.payload],
       };
     }
     case 'remove_item': {
@@ -60,12 +58,12 @@ export function userReducer(state: UserState, action: Action): UserState {
       return {
         ...state,
         isAuth: true,
-        cart: action.payload.cart,
+        cart: action.payload,
       };
     }
     case 'logout': {
       console.log('logging out');
-      return { ...state, isAuth: false, cart: defaultCart };
+      return { ...state, isAuth: false, cart: [] };
     }
     default: {
       throw new Error(`Unhandled action type`);

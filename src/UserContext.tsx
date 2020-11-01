@@ -1,16 +1,17 @@
-import { CartItemData } from 'interfaces/shop-item.interface';
 import React, { createContext, useEffect, useReducer } from 'react';
-import { UserState } from 'user/user.interface';
-import { UserDispatch, userReducer } from 'user/user.reducer';
-import { getUserData, updateCart } from 'utils/db.utils';
+import { UserDispatch, userReducer } from 'models/user/user.reducer';
 import { auth } from 'utils/firebase.utils';
 import { getIntialState, persistState } from 'utils/localStorage.utils';
+import { CartItemModel, getUserCart, updateCart } from './models/user/user.db';
+import { ShopItemModel } from 'models/shop-item/shop-item.db';
 
 const STORAGE_KEY = 'authState';
 
-export const defaultCart: CartItemData[] = [
-
-];
+export type CartItem = CartItemModel & ShopItemModel;
+export interface UserState {
+  isAuth: boolean;
+  cart: CartItem[];
+}
 
 const defaultState: UserState = {
   isAuth: false,
@@ -30,8 +31,8 @@ export const UserProvider: React.FC = (props) => {
     let unsub = auth.onAuthStateChanged(async (user) => {
       if (user) {
         if (state.isAuth ) return; 
-        let data = await getUserData(user.uid);
-        dispatch({ type: 'login', payload: data });
+        let cart = await getUserCart(user.uid);
+        dispatch({ type: 'login', payload: cart });
       } else {
         // User is signed out.
         if (state.isAuth) dispatch({ type: 'logout' });
