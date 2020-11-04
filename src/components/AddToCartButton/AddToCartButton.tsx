@@ -15,25 +15,28 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const AddToCartButton = ({ item }: { item: CartItem }) => {
+interface Props {
+  item: CartItem;
+}
+
+const AddToCartButton = ({ item }: Props) => {
   const classes = useStyles();
   const userDispatch = useUserDispatch();
   const [showAlert, setShowAlert] = React.useState(false);
-  const addItemToCart = () => {
+
+  function handleClose(event?: React.SyntheticEvent, reason?: string) {
+    if (reason === 'clickaway') return;
+    setShowAlert(false);
+  }
+
+  function addItemToCart() {
     console.log('adding item: ', item);
     userDispatch({
       type: 'add_item',
       payload: { ...item, quantity: 1 },
     });
     setShowAlert(true);
-  };
-
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setShowAlert(false);
-  };
+  }
 
   return (
     <React.Fragment>
