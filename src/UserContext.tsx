@@ -26,11 +26,11 @@ export const UserProvider: React.FC = (props) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
 
   useEffect(() => persistState(STORAGE_KEY, state), [state]);
-  
+
   useEffect(() => {
     let unsub = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        if (state.isAuth ) return; 
+        if (state.isAuth) return;
         let cart = await getUserCart(user.uid);
         dispatch({ type: 'login', payload: cart });
       } else {
@@ -46,7 +46,6 @@ export const UserProvider: React.FC = (props) => {
   useEffect(() => {
     updateCart(state.cart);
   }, [state.cart]);
-  
 
   return (
     <UserStateContext.Provider value={state}>

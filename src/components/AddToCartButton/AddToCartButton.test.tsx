@@ -16,5 +16,4 @@ test('renders App component', () => {
     </UserProvider>
   );
 
-  screen.debug();
 });

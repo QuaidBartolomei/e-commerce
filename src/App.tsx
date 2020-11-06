@@ -10,9 +10,10 @@ import { ThemeProvider } from '@material-ui/styles';
 import Footer from 'components/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Router from 'Router';
 import types from '@material-ui/lab/themeAugmentation';
+import { UserProvider } from 'UserContext';
 
 const theme = createMuiTheme({
   palette: {
@@ -50,21 +51,28 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
+export const LocationDisplay = () => {
+  const location = useLocation();
+
+  return <div data-testid='location-display'>{location.pathname}</div>;
+};
+
 const App = () => {
   const classes = useStyles();
   return (
-    <BrowserRouter>
-      <CssBaseline />
-      <ThemeProvider theme={theme}>
-        <Box className={classes.page}>
-          <Container disableGutters className={classes.mainContent}>
-            <Navbar />
-            <Router />
-          </Container>
-          <Footer />
-        </Box>
-      </ThemeProvider>
-    </BrowserRouter>
+    <UserProvider>
+        <CssBaseline />
+        <ThemeProvider theme={theme}>
+          <Box className={classes.page}>
+            <Container disableGutters className={classes.mainContent}>
+              <Navbar />
+              <Router />
+            </Container>
+            <Footer />
+          </Box>
+        </ThemeProvider>
+        <LocationDisplay />
+    </UserProvider>
   );
 };
 

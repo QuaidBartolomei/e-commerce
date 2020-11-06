@@ -1,5 +1,24 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
+☐ create tests
+  ☐ login / logout
+  ☐ add to cart
+    ☐ alert shows after clicking
+  ☐ navbar
+    ☐ cart icon
+      ☐ change on add/remove/empty
+      ☐ links to cart
+    ☐ user icon
+      ☐ opens menu
+    ☐ user menu
+      ☐ menu changes with auth state
+    ☐ nav drawer
+      ☐ opens with menu button
+  ☐ shopping cart actions
+    ☐ remove item
+    ☐ change quantity
+    ☐ price changes
+
 ☐ add cart total to user context as memoized value
 ☐ display full quantity price in shopping cart items
 ☐ fix cart total in checkout

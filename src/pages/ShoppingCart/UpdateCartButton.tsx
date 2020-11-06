@@ -1,16 +1,8 @@
-import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import React from 'react';
 import { CartItem, useUserDispatch } from 'UserContext';
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    container: {},
-  })
-);
-
 const UpdateCartButton = ({ cart }: { cart: CartItem[] }) => {
-  const classes = useStyles();
   const userDispatch = useUserDispatch();
   return (
     <Button

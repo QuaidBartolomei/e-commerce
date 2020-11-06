@@ -1,14 +1,14 @@
+import App from 'App';
+import 'fontsource-roboto';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'fontsource-roboto';
+import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
-import App from 'App';
-import { UserProvider } from 'UserContext';
 
 ReactDOM.render(
-  <UserProvider>
+  <BrowserRouter>
     <App />
-  </UserProvider>,
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

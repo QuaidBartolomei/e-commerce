@@ -42,7 +42,7 @@ const ImageGallery = ({ imageUrls }: { imageUrls: string[] }) => {
   const [showFullsizeImage, setShowFullsizeImage] = useState(false);
   React.useEffect(() => {
     setSelectedImage(imageUrls[0]);
-  }, [imageUrls[0]]);
+  }, [imageUrls]);
   return (
     <React.Fragment>
       <FullsizeImage

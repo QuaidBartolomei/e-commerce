@@ -1,7 +1,7 @@
 import { CartItemModel } from 'models/user/user.db';
 import shortid from 'shortid';
 import { getDocData } from 'utils/db.utils';
-import { auth, Collections, firestore, storage } from 'utils/firebase.utils';
+import { Collections, firestore, storage } from 'utils/firebase.utils';
 
 
 export type ClothingSize = 'S' | 'M' | 'L';
@@ -29,7 +29,6 @@ export async function getShopItems(): Promise<ShopItemModel[]> {
     let data = doc.data() as ShopItemModel;
     return { ...data };
   });
-  console.log('items', items);
   return items;
 }
 
@@ -44,7 +43,6 @@ export async function getShopItemsByCategory(
     let data = doc.data() as ShopItemModel;
     return { ...data, id: doc.id };
   });
-  console.log('items', items);
   return items;
 }
 
@@ -64,7 +62,6 @@ export async function addShopItem(itemData: ShopItemModel) {
 
 export async function addImageToStorage(file: File): Promise<string> {
   let ref = storage.ref('images').child(shortid.generate());
-  console.log(ref);
   let snapshot = await ref.put(file);
   let url = snapshot.ref.getDownloadURL();
   return url;
