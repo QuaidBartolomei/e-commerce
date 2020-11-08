@@ -6,6 +6,7 @@ import ItemListPage from 'pages/Shop/ItemListPage';
 import Shop from 'pages/Shop/Shop';
 import ShoppingCart from 'pages/ShoppingCart/ShoppingCart.page';
 import SignInPage from 'pages/SignIn/SignIn.page';
+import UserRegistrationPage from 'pages/UserRegistration.page';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
@@ -13,6 +14,7 @@ export enum Routes {
   Homepage = '/',
   Shop = '/hats',
   SignIn = '/signin',
+  Register = '/register',
   ShoppingCart = '/cart',
   Product = '/products',
   Category = '/category',
@@ -27,7 +29,8 @@ const Router = () => {
       <Route exact path={Routes.Homepage} component={Shop} />
       <Route path={Routes.Shop} component={Shop} />
       <Route path={Routes.SignIn} component={SignInPage} />
-      <Route path={Routes.ShoppingCart} component={ShoppingCart}  />
+      <Route path={Routes.Register} component={UserRegistrationPage} />
+      <Route path={Routes.ShoppingCart} component={ShoppingCart} />
       <Route path={Routes.Checkout} component={Checkout} />
       <Route path={Routes.AddItem} component={AddItem} />
       <Route path={`${Routes.Product}/:id`} component={ItemDetails} />

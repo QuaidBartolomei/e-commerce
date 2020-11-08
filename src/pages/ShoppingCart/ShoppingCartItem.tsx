@@ -5,9 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { ShopItemModel } from 'models/shop-item/shop-item.db';
 import React from 'react';
 import { routeToItemPage } from 'Router';
+import { CartItem } from 'UserContext';
 import QuantitySelect from './QuantitySelect';
 
 const useStyles = makeStyles((theme) =>
@@ -36,16 +36,16 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ShoppingCartItem = (props: {
-  itemData: ShopItemModel;
-  quantity: number;
+type Props = {
+  itemData: CartItem;
   onRemove: () => void;
   onChangeQuantity: (quantity: number) => void;
-}) => {
+};
+
+const ShoppingCartItem = (props: Props) => {
   const classes = useStyles();
-  const { onRemove } = props;
-  const { id, imageUrls, sizes, price, name } = props.itemData;
-  const { quantity, onChangeQuantity } = props;
+  const { itemData, onChangeQuantity, onRemove } = props;
+  const { id, imageUrls, sizes, price, name, quantity } = itemData;
 
   const RemoveButton = () => (
     <Button

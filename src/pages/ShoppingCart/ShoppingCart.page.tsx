@@ -91,7 +91,6 @@ console.log('shoppingCart', cart);
           <Grid item key={key} xs={12}>
             <ShoppingCartItem
               itemData={item}
-              quantity={item.quantity}
               onRemove={() => setItemToRemove(item.id)}
               onChangeQuantity={(quantity) =>
                 changeItemQuantity(item.id, quantity)

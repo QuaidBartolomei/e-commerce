@@ -5,6 +5,8 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Routes } from 'Router';
 import { signInWithEmail } from 'utils/auth.utils';
 import { signInWithGoogle } from 'utils/firebase.utils';
 import EmailField from './EmailField';
@@ -21,6 +23,14 @@ const SignInForm = () => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    console.log('on submit');
+    let auth = await signInWithEmail(email, password);
+    history.push(Routes.Homepage);
+  }
 
   const SignInButton = () => (
     <Button
@@ -45,12 +55,6 @@ const SignInForm = () => {
     </Button>
   );
 
-  function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    console.log('on submit');
-    signInWithEmail(email, password);
-  }
-
   return (
     <Container maxWidth='xs'>
       <Typography component='h1' variant='h5'>
@@ -61,6 +65,7 @@ const SignInForm = () => {
       <form noValidate onSubmit={onSubmit}>
         <EmailField value={email} onChangeValue={setEmail} autoFocus />
         <TextField
+          data-testid='passwordInput'
           margin='normal'
           required
           fullWidth

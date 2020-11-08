@@ -1,3 +1,4 @@
+import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -15,14 +16,9 @@ const useStyles = makeStyles((theme) =>
       justifyContent: 'center',
       margin: theme.spacing(2, 0),
       '&>*': {
-        margin: theme.spacing(4,0),
+        margin: theme.spacing(4, 0),
       },
     },
-    grid: {
-      padding: theme.spacing(4, 1),
-      width: '100%',
-    },
-    gridItem: {},
   })
 );
 const SignInPage = () => {
@@ -39,7 +35,7 @@ const SignInPage = () => {
   return (
     <div className={classes.container}>
       <SignInForm />
-      <RegisterForm />
+      <Link href={Routes.Register}>New user? Register Here</Link>
     </div>
   );
 };

@@ -30,6 +30,7 @@
     "@types/react-test-renderer": "^16.9.3",
     "@types/shortid": "^0.0.29",
     "firebase": "^8.0.0",
+    "jest-environment-jsdom": "25",
     "react-test-renderer": "^17.0.1"
   },
   "scripts": {
@@ -50,5 +51,7 @@
     "development": [
       "defaults"
     ]
+  },
+  "jest": {
   }
 }
