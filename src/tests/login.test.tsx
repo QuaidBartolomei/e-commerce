@@ -1,17 +1,13 @@
 import '@testing-library/jest-dom';
-import { findByText, render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from 'App';
 import { createMemoryHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { Routes } from 'Router';
-import firebase, { init } from 'utils/firebase.utils';
 import * as auth from 'utils/auth.utils';
-
-function printPage() {
-  screen.debug(undefined, 20000);
-}
+import { init } from 'utils/firebase.utils';
 
 function testTextInput(testId: string, testValue = '') {
   const inputElement = screen.getByTestId(testId).querySelector('input');

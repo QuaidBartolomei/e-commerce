@@ -1,10 +1,5 @@
 import '@testing-library/jest-dom';
-import { screen } from '@testing-library/react';
 import firebase, { init } from 'utils/firebase.utils';
-
-function printPage() {
-  screen.debug(undefined, 20000);
-}
 
 describe('User can login with email and password', () => {
   beforeAll(async () => {
