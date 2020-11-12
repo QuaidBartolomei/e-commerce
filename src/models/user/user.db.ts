@@ -1,6 +1,10 @@
 import { getItemData } from 'models/shop-item/shop-item.db';
 import { CartItem } from 'UserContext';
-import { auth, Collections, firestore } from 'utils/firebase.utils';
+import { DbCollections } from 'utils/db.utils';
+import firebase from 'utils/firebase.utils';
+
+const firestore = () => firebase.firestore();
+const auth = () => firebase.auth();
 
 export interface CartItemModel {
   id: string;
@@ -11,7 +15,7 @@ interface UserModel {
 }
 
 export async function getUserCart(userId: string): Promise<CartItem[]> {
-  let ref = firestore.collection(Collections.Users).doc(userId);
+  let ref = firebase.firestore().collection(DbCollections.Users).doc(userId);
   let doc = await ref.get();
   if (!doc.exists) {
     return [];
@@ -34,10 +38,10 @@ async function getCartData(cart: CartItemModel[]): Promise<CartItem[]> {
   return shoppingCart;
 }
 export async function updateCart(cart: CartItemModel[]) {
-  let user = auth.currentUser;
+  let user = auth().currentUser;
   if (!user) return;
   let id = user.uid;
-  await firestore.collection(Collections.Users).doc(id).set({
+  await firestore().collection(DbCollections.Users).doc(id).set({
     _id: id,
     cart,
   });

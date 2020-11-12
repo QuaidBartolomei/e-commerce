@@ -3,12 +3,9 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 
-export enum Collections {
-  Users = 'users',
-  Items = 'items',
-}
+const provider = new firebase.auth.GoogleAuthProvider();
 
-const config = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyAzr57JspGRdqqpOTsBSxPHYZVraSGzrvA',
   authDomain: 'e-commerce-a8505.firebaseapp.com',
   databaseURL: 'https://e-commerce-a8505.firebaseio.com',
@@ -18,29 +15,25 @@ const config = {
   appId: '1:444897950136:web:a8d4ac57e3c0c7dfbdb74d',
 };
 
-firebase.initializeApp(config);
-firebase
-  .auth()
-  .setPersistence(
-    process.env.NODE_ENV === 'test'
-      ? firebase.auth.Auth.Persistence.NONE
-      : firebase.auth.Auth.Persistence.LOCAL
-  );
-
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-export const storage = firebase.storage();
-
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
-
+export async function init() {
+  console.log('initializing firebase app');
+  firebase.initializeApp(firebaseConfig);
+  await firebase
+    .auth()
+    .setPersistence(
+      process.env.NODE_ENV === 'test'
+        ? firebase.auth.Auth.Persistence.NONE
+        : firebase.auth.Auth.Persistence.LOCAL
+    );
+  provider.setCustomParameters({ prompt: 'select_account' });
+}
 
 export async function signInWithGoogle() {
-  auth.signInWithPopup(provider);
+  firebase.auth().signInWithPopup(provider);
 }
 
 export function signOut() {
-  auth.signOut();
+  firebase.auth().signOut();
 }
 
 export default firebase;

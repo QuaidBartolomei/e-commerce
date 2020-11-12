@@ -1,29 +1,27 @@
 https://github.com/sandy081/vscode-todotasks/blob/master/samples/How%20to%20use%20To%20Do%20Tasks.todo
 
-☐ create tests
-☐ login / logout
-  ✔ navigate to sign in page @done (11/7/2020, 2:33:44 PM)
-  ✔ use email field @done (11/7/2020, 2:33:45 PM)
-  ✔ use password field @done (11/7/2020, 2:33:46 PM)
-  ☐ submit button works
-    ☐ decide on success indication - search for logout link on homepage
-  ☐ seperate tests
-☐ add to cart
-  ☐ alert shows after clicking
-☐ navbar
-  ☐ cart icon
-    ☐ change on add/remove/empty
-    ☐ links to cart
-  ☐ user icon
-    ☐ opens menu
-  ☐ user menu
-    ☐ menu changes with auth state
-  ☐ nav drawer
-    ☐ opens with menu button
-☐ shopping cart actions
-  ☐ remove item
-  ☐ change quantity
-  ☐ price changes
+
+
+☐ clean up login test
+      
+  ☐ add to cart
+    ☐ alert shows after clicking
+  ☐ navbar
+    ☐ cart icon
+      ☐ change on add/remove/empty
+      ☐ links to cart
+    ☐ user icon
+      ☐ opens menu
+    ☐ user menu
+      ☐ menu changes with auth state
+    ☐ nav drawer
+      ☐ opens with menu button
+  ☐ shopping cart actions
+    ☐ remove item
+    ☐ change quantity
+    ☐ price changes
+
+☐ move firebase api keys to env file
 
 ☐ add cart total to user context as memoized value
 ☐ display full quantity price in shopping cart items

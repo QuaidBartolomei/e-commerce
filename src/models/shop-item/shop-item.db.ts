@@ -1,8 +1,11 @@
 import { CartItemModel } from 'models/user/user.db';
 import shortid from 'shortid';
 import { getDocData } from 'utils/db.utils';
-import { Collections, firestore, storage } from 'utils/firebase.utils';
+import { DbCollections } from 'utils/db.utils';
+import firebase from 'utils/firebase.utils';
 
+const firestore = () => firebase.firestore();
+const storage = () => firebase.storage();
 
 export type ClothingSize = 'S' | 'M' | 'L';
 export type ShopItemCategory = 'Hats' | 'Shirts' | 'Hoodies';
@@ -19,12 +22,12 @@ export interface ShopItemModel {
 export const Categories: ShopItemCategory[] = ['Hats', 'Shirts', 'Hoodies'];
 
 export async function getShopItemById(id: string): Promise<ShopItemModel> {
-  let item = await firestore.collection(Collections.Items).doc(id).get();
+  let item = await firestore().collection(DbCollections.Items).doc(id).get();
   return { ...item.data(), id } as ShopItemModel;
 }
 
 export async function getShopItems(): Promise<ShopItemModel[]> {
-  let itemsCollection = await firestore.collection(Collections.Items).get();
+  let itemsCollection = await firestore().collection(DbCollections.Items).get();
   let items = itemsCollection.docs.map((doc) => {
     let data = doc.data() as ShopItemModel;
     return { ...data };
@@ -35,8 +38,8 @@ export async function getShopItems(): Promise<ShopItemModel[]> {
 export async function getShopItemsByCategory(
   category: ShopItemCategory
 ): Promise<ShopItemModel[]> {
-  let itemsCollection = await firestore
-    .collection(Collections.Items)
+  let itemsCollection = await firestore()
+    .collection(DbCollections.Items)
     .where('category', '==', category.toString())
     .get();
   let items = itemsCollection.docs.map((doc) => {
@@ -47,21 +50,21 @@ export async function getShopItemsByCategory(
 }
 
 export async function getUrlFromStorage(id: string): Promise<string> {
-  let ref = storage.refFromURL(id);
+  let ref = storage().refFromURL(id);
   let url = await ref.getDownloadURL();
   return url;
 }
 
 export async function addShopItem(itemData: ShopItemModel) {
   let id = shortid.generate();
-  await firestore
-    .collection(Collections.Items)
+  await firestore()
+    .collection(DbCollections.Items)
     .doc(id)
     .set({ ...itemData, id });
 }
 
 export async function addImageToStorage(file: File): Promise<string> {
-  let ref = storage.ref('images').child(shortid.generate());
+  let ref = storage().ref('images').child(shortid.generate());
   let snapshot = await ref.put(file);
   let url = snapshot.ref.getDownloadURL();
   return url;
@@ -70,9 +73,8 @@ export async function addImageToStorage(file: File): Promise<string> {
 export async function getItemData(
   id: string
 ): Promise<ShopItemModel | undefined> {
-  return await getDocData<ShopItemModel>(Collections.Items, id);
+  return await getDocData<ShopItemModel>(DbCollections.Items, id);
 }
-
 
 export async function getCartTotal(cart: CartItemModel[]): Promise<number> {
   let total = 0;

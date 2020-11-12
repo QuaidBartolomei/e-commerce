@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) =>
 export const LocationDisplay = () => {
   const location = useLocation();
 
-  return <div data-testid='location-display'>{location.pathname}</div>;
+  return <div data-testid='location-display'>{'Path: ' + location.pathname}</div>;
 };
 
 const App = () => {

@@ -1,12 +1,13 @@
-import React from 'react';
-import { render, waitFor, screen } from '@testing-library/react';
-import App from 'App';
-import { Routes } from 'Router';
-import userEvent from '@testing-library/user-event';
-
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import '@testing-library/jest-dom';
+import { findByText, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import App from 'App';
+import { createMemoryHistory } from 'history';
+import React from 'react';
+import { Router } from 'react-router-dom';
+import { Routes } from 'Router';
+import firebase, { init } from 'utils/firebase.utils';
+import * as auth from 'utils/auth.utils';
 
 function printPage() {
   screen.debug(undefined, 20000);
@@ -22,22 +23,33 @@ function testTextInput(testId: string, testValue = '') {
 
 describe('User can login with email and password', () => {
   const history = createMemoryHistory();
-  render(
-    <Router history={history}>
-      <App />
-    </Router>
-  );
+  
+  beforeAll(async () => {
+    jest.setTimeout(10000);
+    await init();
+    render(
+      <Router history={history}>
+        <App />
+      </Router>
+    );
+  });
 
   test('User can navigate to signin page', async () => {
+    const spy = jest.spyOn(auth, 'signInWithEmail');
+
+    expect(screen.getByText('Path: /')).toBeInTheDocument();
     const signInLink = screen.getByText(/Sign in/).closest('a');
     expect(signInLink).toBeInTheDocument();
     expect(signInLink).toHaveAttribute('href', Routes.SignIn);
-    history.push(Routes.SignIn);
 
-    let testValue = 'admin@test.com';
+    history.push(Routes.SignIn);
+    expect(screen.getByText('Path: /signin')).toBeInTheDocument();
+
     const inputElement = (
       await screen.findByTestId('emailInput')
     ).querySelector('input');
+    expect(inputElement).toBeInTheDocument();
+    let testValue = 'admin@test.com';
     inputElement && userEvent.type(inputElement, testValue);
     inputElement && expect(inputElement.value).toBe(testValue);
     testTextInput('passwordInput', 'password');
@@ -48,9 +60,7 @@ describe('User can login with email and password', () => {
     console.log('sign in button: ', signInButton.outerHTML);
 
     userEvent.click(signInButton);
+
+    expect(spy).toHaveBeenCalled();
   });
-
-  test('User can input email', () => {});
-
-  //screen.debug();
 });

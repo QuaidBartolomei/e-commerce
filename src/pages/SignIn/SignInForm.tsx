@@ -10,6 +10,7 @@ import { Routes } from 'Router';
 import { signInWithEmail } from 'utils/auth.utils';
 import { signInWithGoogle } from 'utils/firebase.utils';
 import EmailField from './EmailField';
+import firebase from 'utils/firebase.utils';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -23,12 +24,14 @@ const SignInForm = () => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     console.log('on submit');
-    let auth = await signInWithEmail(email, password);
+    await signInWithEmail(email, password);
+    setLoggedIn(Boolean(firebase.auth().currentUser));
     history.push(Routes.Homepage);
   }
 
@@ -57,6 +60,7 @@ const SignInForm = () => {
 
   return (
     <Container maxWidth='xs'>
+      {loggedIn && <div>SUCCESS</div>}
       <Typography component='h1' variant='h5'>
         I already have an account
       </Typography>
