@@ -1,9 +1,9 @@
 import AddItem from 'pages/AddItem.page';
 import Checkout from 'pages/Checkout/Checkout.page';
-import ItemDetails from 'pages/ItemDetails/ItemDetails.page';
+import ItemDetailsPage from 'pages/ItemDetails/ItemDetails.page';
 import SearchPage from 'pages/Search.page';
 import ItemListPage from 'pages/Shop/ItemListPage';
-import Shop from 'pages/Shop/Shop';
+import Homepage from 'pages/Shop/Homepage';
 import ShoppingCart from 'pages/ShoppingCart/ShoppingCart.page';
 import SignInPage from 'pages/SignIn/SignIn.page';
 import UserRegistrationPage from 'pages/UserRegistration.page';
@@ -16,24 +16,25 @@ export enum Routes {
   SignIn = '/signin',
   Register = '/register',
   ShoppingCart = '/cart',
-  Product = '/products',
+  ItemDetails = '/products',
   Category = '/category',
   Checkout = '/checkout',
   AddItem = '/add-item',
   Search = '/search'
 }
 
-const Router = () => {
+const AppRouter = () => {
   return (
     <Switch>
-      <Route exact path={Routes.Homepage} component={Shop} />
-      <Route path={Routes.Shop} component={Shop} />
+      <Route exact path={Routes.Homepage} component={Homepage} />
+      <Route path={Routes.Shop} component={Homepage} />
       <Route path={Routes.SignIn} component={SignInPage} />
       <Route path={Routes.Register} component={UserRegistrationPage} />
       <Route path={Routes.ShoppingCart} component={ShoppingCart} />
       <Route path={Routes.Checkout} component={Checkout} />
       <Route path={Routes.AddItem} component={AddItem} />
-      <Route path={`${Routes.Product}/:id`} component={ItemDetails} />
+      <Route path={`${Routes.ItemDetails}/:id`} component={ItemDetailsPage} />
+      <Route path={`${Routes.ItemDetails}`} component={ItemDetailsPage} />
       <Route path={`${Routes.Search}/:query`} component={SearchPage} />
       <Route path={`${Routes.Category}/:category`} component={ItemListPage} />
     </Switch>
@@ -41,10 +42,10 @@ const Router = () => {
 };
 
 export function routeToItemPage(id: string): string {
- return Routes.Product + '/' + id;
+ return Routes.ItemDetails + '/' + id;
 }
 export function routeToCategoryPage(id: string): string {
   return Routes.Category + '/' + id;
 }
 
-export default Router;
+export default AppRouter;

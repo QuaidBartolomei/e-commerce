@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const Shop = () => {
+const Homepage = () => {
   const classes = useStyles();
   const [shopItems, setShopItems] = useState<ShopItemModel[]>([]);
   useEffect(() => {
@@ -43,4 +43,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Homepage;

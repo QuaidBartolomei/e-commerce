@@ -11,7 +11,7 @@ import Footer from 'components/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Router from 'Router';
+import AppRouter from 'Router';
 import types from '@material-ui/lab/themeAugmentation';
 import { UserProvider } from 'UserContext';
 
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) =>
 export const LocationDisplay = () => {
   const location = useLocation();
 
-  return <div data-testid='location-display'>{'Path: ' + location.pathname}</div>;
+  return <div data-testid='location-display'>{location.pathname}</div>;
 };
 
 const App = () => {
@@ -66,7 +66,7 @@ const App = () => {
           <Box className={classes.page}>
             <Container disableGutters className={classes.mainContent}>
               <Navbar />
-              <Router />
+              <AppRouter />
             </Container>
             <Footer />
           </Box>

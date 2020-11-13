@@ -3,9 +3,11 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from 'App';
 import { createMemoryHistory } from 'history';
+import SignInPage from 'pages/SignIn/SignIn.page';
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { Routes } from 'Router';
+import { UserProvider } from 'UserContext';
 import * as auth from 'utils/auth.utils';
 import { init } from 'utils/firebase.utils';
 
@@ -17,46 +19,44 @@ function testTextInput(testId: string, testValue = '') {
   expect(inputElement.value).toBe(testValue);
 }
 
-describe('User can login with email and password', () => {
-  const history = createMemoryHistory();
-  
-  beforeAll(async () => {
-    jest.setTimeout(10000);
-    await init();
-    render(
-      <Router history={history}>
-        <App />
-      </Router>
-    );
-  });
+const history = createMemoryHistory();
 
-  test('User can navigate to signin page', async () => {
-    const spy = jest.spyOn(auth, 'signInWithEmail');
+beforeAll(async () => {
+  jest.setTimeout(10000);
+  await init();
+});
 
-    expect(screen.getByText('Path: /')).toBeInTheDocument();
-    const signInLink = screen.getByText(/Sign in/).closest('a');
-    expect(signInLink).toBeInTheDocument();
-    expect(signInLink).toHaveAttribute('href', Routes.SignIn);
+test('User can navigate to signin page', async () => {
+  render(
+    <Router history={history}>
+      <App />
+    </Router>
+  );
+  expect(screen.getByText(Routes.Homepage)).toBeInTheDocument();
+  const signInLink = screen.getByText(/Sign in/).closest('a');
+  expect(signInLink).toBeInTheDocument();
+  expect(signInLink).toHaveAttribute('href', Routes.SignIn);
+  history.push(Routes.SignIn);
+  expect(screen.getByText(Routes.SignIn)).toBeInTheDocument();
+});
 
-    history.push(Routes.SignIn);
-    expect(screen.getByText('Path: /signin')).toBeInTheDocument();
+test('User can use sign in page', async () => {
+  render(
+    <UserProvider>
+      <SignInPage />
+    </UserProvider>
+  );
+  const spy = jest.spyOn(auth, 'signInWithEmail');
 
-    const inputElement = (
-      await screen.findByTestId('emailInput')
-    ).querySelector('input');
-    expect(inputElement).toBeInTheDocument();
-    let testValue = 'admin@test.com';
-    inputElement && userEvent.type(inputElement, testValue);
-    inputElement && expect(inputElement.value).toBe(testValue);
-    testTextInput('passwordInput', 'password');
+  testTextInput('emailInput', 'admin@test.com');
+  testTextInput('passwordInput', 'password');
 
-    const signInButton = screen.getByText('Sign In').closest('button');
-    expect(signInButton).toBeInTheDocument();
-    if (!signInButton) return;
-    console.log('sign in button: ', signInButton.outerHTML);
+  const signInButton = screen.getByText('Sign In').closest('button');
+  expect(signInButton).toBeInTheDocument();
+  if (!signInButton) return;
+  console.log('sign in button: ', signInButton.outerHTML);
 
-    userEvent.click(signInButton);
+  userEvent.click(signInButton);
 
-    expect(spy).toHaveBeenCalled();
-  });
+  expect(spy).toHaveBeenCalled();
 });

@@ -21,7 +21,7 @@ export interface ShopItemModel {
 
 export const Categories: ShopItemCategory[] = ['Hats', 'Shirts', 'Hoodies'];
 
-export async function getShopItemById(id: string): Promise<ShopItemModel> {
+export async function getShopItemById(id: string): Promise<ShopItemModel | undefined> {
   let item = await firestore().collection(DbCollections.Items).doc(id).get();
   return { ...item.data(), id } as ShopItemModel;
 }

@@ -35,6 +35,7 @@ let images: {
 function randomPrice() {
   return randomNumber(10000) / 100;
 }
+
 export function generateShopItem(): ShopItemModel {
   let category = randomValue(Categories);
   let sizes: ClothingSize[] = ['S', 'M', 'L'];

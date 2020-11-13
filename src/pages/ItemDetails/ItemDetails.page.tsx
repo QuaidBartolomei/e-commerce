@@ -26,27 +26,35 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ItemDetails = () => {
+interface Props {
+  item?: ShopItemModel;
+}
+
+const ItemDetailsPage = (props: Props) => {
   const classes = useStyles();
   let { id } = useParams<{ id: string }>();
+  id = id || '';
   let history = useHistory();
-  let [item, setItem] = React.useState<ShopItemModel>({
-    name: 'Dumb item',
-    id: '1',
-    imageUrls: [''],
-    price: 99,
-    category: 'Hats',
-    sizes: ['S'],
-  });
+  let [item, setItem] = React.useState<ShopItemModel | undefined>(undefined);
 
+  function goHome() {
+    console.log('Going Home');
+    history.push(Routes.Homepage);
+  }
+  
+  console.log('id', id);
+  
   React.useEffect(() => {
-    getShopItemById(id).then(setItem);
-  }, [id, setItem]);
-
-  React.useEffect(() => console.log('item changed: ', item), [item]);
+    if (props.item) setItem(props.item);
+    else if (id !== '')
+      getShopItemById(id).then((itemDoc) => {
+        if (itemDoc) setItem(itemDoc);
+        else goHome();
+      });
+    else goHome();
+  }, [id, setItem, props, history]);
 
   if (!item) {
-    history.push(Routes.Homepage);
     return <div></div>;
   }
 
@@ -62,4 +70,4 @@ const ItemDetails = () => {
   );
 };
 
-export default ItemDetails;
+export default ItemDetailsPage;
