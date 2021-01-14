@@ -1,16 +1,12 @@
+import { TextFieldProps } from '@material-ui/core';
 import Button from '@material-ui/core/Button/Button';
 import Container from '@material-ui/core/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography/Typography';
-import * as EmailValidator from 'email-validator';
-import React, { FormEvent, useState } from 'react';
-import { registerNewUser } from 'utils/auth.utils';
-import { passwordValidator } from 'utils/password.utils';
-import EmailField from './EmailField';
-import PasswordField from './PasswordField';
-
-const EMAIL_ERROR_MESSAGE = 'Invalid email';
-const CONFIRM_PASSWORD_ERROR_MESSAGE = 'Passwords do not match';
+import useConfirmPasswordField from 'components/form-inputs/useConfirmPasswordField';
+import useEmailField from 'components/form-inputs/useEmailField';
+import usePasswordField from 'components/form-inputs/usePasswordField';
+import React from 'react';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -19,42 +15,32 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
-const RegisterForm = () => {
+export default function RegisterForm() {
   const classes = useStyles();
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [confirmPasswordError, setConfirmPasswordError] = useState('');
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
 
-  function onSubmit(e: FormEvent) {
+  const textFieldOptions: TextFieldProps = {
+    margin: 'normal',
+    fullWidth: true,
+  };
+
+  const email = useEmailField(textFieldOptions);
+  const password = usePasswordField(textFieldOptions);
+  const confirmPassword = useConfirmPasswordField(textFieldOptions);
+
+  function validateForm() {
+    return [
+      email.validate(),
+      password.validate(),
+      confirmPassword.validate(password.value),
+    ].every(Boolean);
+  }
+
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    let formIsValid =
-      emailIsValid() && passwordIsValid() && confirmPasswordIsValid();
-    if (!formIsValid) return;
-    registerNewUser(email, password);
-  }
-
-  function emailIsValid(): boolean {
-    let result = EmailValidator.validate(email);
-    if (!result) {
-      setEmailError(EMAIL_ERROR_MESSAGE);
-      return false;
-    }
-    setEmailError('');
-    return true;
-  }
-
-  function passwordIsValid(): boolean {
-    let result = passwordValidator(password);
-    setPasswordError(result);
-    return result === '';
-  }
-  function confirmPasswordIsValid(): boolean {
-    let result = password === confirmPassword;
-    setConfirmPasswordError(result ? '' : CONFIRM_PASSWORD_ERROR_MESSAGE);
-    return result;
+    const isValid = validateForm();
+    const data = { email: email.value, password: password.value };
+    console.log('form is valid: ', isValid);
+    console.log('data', data);
   }
 
   return (
@@ -65,21 +51,9 @@ const RegisterForm = () => {
       <Typography>Sign up with an email and password</Typography>
 
       <form onSubmit={onSubmit}>
-        <EmailField
-          value={email}
-          onChangeValue={setEmail}
-          errorMessage={emailError}
-        />
-        <PasswordField
-          value={password}
-          onChange={(e) => setPassword(e.currentTarget.value)}
-          error={passwordError}
-        />
-        <PasswordField
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.currentTarget.value)}
-          error={confirmPasswordError}
-        />
+        {email.element}
+        {password.element}
+        {confirmPassword.element}
         <Button
           type='submit'
           variant='contained'
@@ -91,6 +65,4 @@ const RegisterForm = () => {
       </form>
     </Container>
   );
-};
-
-export default RegisterForm;
+}

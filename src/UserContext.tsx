@@ -6,13 +6,12 @@ import { ShopItemModel } from 'models/shop-item/shop-item.db';
 import firebase from 'utils/firebase.utils';
 
 const STORAGE_KEY = 'authState';
-
 export type CartItem = CartItemModel & ShopItemModel;
+
 export interface UserState {
   isAuth: boolean;
   cart: CartItem[];
 }
-
 const defaultState: UserState = {
   isAuth: false,
   cart: [],

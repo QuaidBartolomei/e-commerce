@@ -2,15 +2,17 @@ import Button from '@material-ui/core/Button/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField/TextField';
+import {
+  TextFieldProps
+} from '@material-ui/core/TextField/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
+import useEmailField from 'components/form-inputs/useEmailField';
+import usePasswordField from 'components/form-inputs/usePasswordField';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Routes } from 'Router';
 import { signInWithEmail } from 'utils/auth.utils';
-import { signInWithGoogle } from 'utils/firebase.utils';
-import EmailField from './EmailField';
-import firebase from 'utils/firebase.utils';
+import firebase, { signInWithGoogle } from 'utils/firebase.utils';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -22,15 +24,21 @@ const useStyles = makeStyles((theme) =>
 );
 const SignInForm = () => {
   const classes = useStyles();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
+
+  const textFieldOptions: TextFieldProps = {
+    margin: 'normal',
+    fullWidth: true,
+  };
+
+  const email = useEmailField(textFieldOptions);
+  const password = usePasswordField(textFieldOptions);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     console.log('on submit');
-    await signInWithEmail(email, password);
+    await signInWithEmail(email.value, password.value);
     setLoggedIn(Boolean(firebase.auth().currentUser));
     history.push(Routes.Homepage);
   }
@@ -66,20 +74,10 @@ const SignInForm = () => {
       </Typography>
       <Typography>Sign in with your email and password</Typography>
 
-      <form noValidate onSubmit={onSubmit}>
-        <EmailField value={email} onChangeValue={setEmail} autoFocus />
-        <TextField
-          data-testid='passwordInput'
-          margin='normal'
-          required
-          fullWidth
-          name='password'
-          label='Password'
-          type='password'
-          autoComplete='current-password'
-          onChange={(e) => setPassword(e.currentTarget.value)}
-          value={password}
-        />
+      <form onSubmit={onSubmit}>
+        {email.element}
+        {password.element}
+
         <Grid container spacing={2} className={classes.buttonGrid}>
           <Grid item xs={12} sm={6}>
             <SignInButton />

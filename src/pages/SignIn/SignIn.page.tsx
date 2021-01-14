@@ -4,7 +4,6 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Routes } from 'Router';
 import { useUserState } from 'UserContext';
-import RegisterForm from './RegisterForm';
 import SignInForm from './SignInForm';
 
 const useStyles = makeStyles((theme) =>
