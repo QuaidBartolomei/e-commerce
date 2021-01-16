@@ -2,11 +2,11 @@ import React, { createContext, useEffect, useReducer } from 'react';
 import { UserDispatch, userReducer } from 'models/user/user.reducer';
 import { getIntialState, persistState } from 'utils/localStorage.utils';
 import { CartItemModel, getUserCart, updateCart } from './models/user/user.db';
-import { ShopItemModel } from 'models/shop-item/shop-item.db';
+import { ItemData } from 'models/shop-item/shop-item.db';
 import firebase from 'utils/firebase.utils';
 
 const STORAGE_KEY = 'authState';
-export type CartItem = CartItemModel & ShopItemModel;
+export type CartItem = CartItemModel & ItemData;
 
 export interface UserState {
   isAuth: boolean;

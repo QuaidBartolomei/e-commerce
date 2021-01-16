@@ -3,10 +3,10 @@ import Link from '@material-ui/core/Link/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { ShopItemModel, ShopItemCategory } from 'models/shop-item/shop-item.db';
+import { ItemData, ShopItemCategory } from 'models/shop-item/shop-item.db';
 import React from 'react';
 import { Routes } from 'Router';
-import ShopItem from './ShopItem';
+import ShopItemCard from './ShopItemCard';
 
 // Horizontal scrolling list of shop items
 
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) =>
 
 const ShopItemCarousel = (props: {
   title: string;
-  items: ShopItemModel[];
+  items: ItemData[];
   category: ShopItemCategory;
 }) => {
   const classes = useStyles();
@@ -64,7 +64,7 @@ const ShopItemCarousel = (props: {
       </Box>
       <Box className={classes.carousel}>
         {items.map((item, key) => (
-          <ShopItem key={key} {...{ item }} />
+          <ShopItemCard key={key} {...{ item }} />
         ))}
       </Box>
     </Box>

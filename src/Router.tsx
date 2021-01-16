@@ -1,4 +1,4 @@
-import AddItem from 'pages/AddItem.page';
+
 import Checkout from 'pages/Checkout/Checkout.page';
 import ItemDetailsPage from 'pages/ItemDetails/ItemDetails.page';
 import SearchPage from 'pages/Search.page';
@@ -19,7 +19,6 @@ export enum Routes {
   ItemDetails = '/products',
   Category = '/category',
   Checkout = '/checkout',
-  AddItem = '/add-item',
   Search = '/search'
 }
 
@@ -32,7 +31,6 @@ const AppRouter = () => {
       <Route path={Routes.Register} component={UserRegistrationPage} />
       <Route path={Routes.ShoppingCart} component={ShoppingCart} />
       <Route path={Routes.Checkout} component={Checkout} />
-      <Route path={Routes.AddItem} component={AddItem} />
       <Route path={`${Routes.ItemDetails}/:id`} component={ItemDetailsPage} />
       <Route path={`${Routes.ItemDetails}`} component={ItemDetailsPage} />
       <Route path={`${Routes.Search}/:query`} component={SearchPage} />

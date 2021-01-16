@@ -8,7 +8,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AddToCartButton from 'components/AddToCartButton';
 import { loremIpsum } from 'lorem-ipsum';
-import { ShopItemModel, ClothingSize } from 'models/shop-item/shop-item.db';
+import { ItemData, ClothingSize } from 'models/shop-item/shop-item.db';
 import React from 'react';
 
 const useStyles = makeStyles((theme) =>
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ItemDetailsText = ({ item }: { item: ShopItemModel }) => {
+const ItemDetailsText = ({ item }: { item: ItemData }) => {
   const [size, setSize] = React.useState<ClothingSize>('S');
   const classes = useStyles();
 

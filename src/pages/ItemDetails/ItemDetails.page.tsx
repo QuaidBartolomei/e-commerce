@@ -1,11 +1,12 @@
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import ImageGallery from 'components/ImageGallery/ImageGallery';
-import { getShopItemById, ShopItemModel } from 'models/shop-item/shop-item.db';
-import React from 'react';
+import ItemImagesSection from 'components/ImageGallery/ImageGallery';
+import { getShopItemById, ItemData } from 'models/shop-item/shop-item.db';
+import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Routes } from 'Router';
 import ItemDetailsText from './ItemDetailsText';
+import { ItemDetailsProvider } from './useItemDetails';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -26,47 +27,36 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-interface Props {
-  item?: ShopItemModel;
-}
+interface Props {}
 
 const ItemDetailsPage = (props: Props) => {
   const classes = useStyles();
-  let { id } = useParams<{ id: string }>();
-  id = id || '';
-  let history = useHistory();
-  let [item, setItem] = React.useState<ShopItemModel | undefined>(undefined);
+  const { id = '' } = useParams<{ id: string }>();
+  const history = useHistory();
+  const [item, setItem] = useState<ItemData | undefined>(undefined);
 
-  function goHome() {
-    console.log('Going Home');
-    history.push(Routes.Homepage);
-  }
-  
-  console.log('id', id);
-  
   React.useEffect(() => {
-    if (props.item) setItem(props.item);
-    else if (id !== '')
-      getShopItemById(id).then((itemDoc) => {
-        if (itemDoc) setItem(itemDoc);
-        else goHome();
-      });
-    else goHome();
-  }, [id, setItem, props, history]);
+    if (id === '') return history.push(Routes.Homepage);
+    getShopItemById(id).then((itemData) => {
+      if (itemData) setItem(itemData);
+    });
+  }, [id, setItem, history]);
 
   if (!item) {
     return <div></div>;
   }
 
   return (
-    <Grid container item spacing={1} className={classes.container}>
-      <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
-        <ImageGallery imageUrls={item.imageUrls} />
+    <ItemDetailsProvider item={item}>
+      <Grid container item spacing={1} className={classes.container}>
+        <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
+          <ItemImagesSection />
+        </Grid>
+        <Grid item sm={7} xs={12} className={classes.detailsContainer}>
+          <ItemDetailsText item={item} />
+        </Grid>
       </Grid>
-      <Grid item sm={7} xs={12} className={classes.detailsContainer}>
-        <ItemDetailsText item={item} />
-      </Grid>
-    </Grid>
+    </ItemDetailsProvider>
   );
 };
 

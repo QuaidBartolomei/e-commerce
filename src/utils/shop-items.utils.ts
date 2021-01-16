@@ -2,7 +2,7 @@
 import shortid from 'shortid';
 import { randomValue } from './list.utils';
 import { randomNumber } from './number.utils';
-import { ShopItemModel, Categories, ClothingSize, addShopItem } from 'models/shop-item/shop-item.db';
+import { ItemData, Categories, ClothingSize, addShopItem } from 'models/shop-item/shop-item.db';
 
 let images: {
   Hats: string[];
@@ -36,7 +36,7 @@ function randomPrice() {
   return randomNumber(10000) / 100;
 }
 
-export function generateShopItem(): ShopItemModel {
+export function generateShopItem(): ItemData {
   let category = randomValue(Categories);
   let sizes: ClothingSize[] = ['S', 'M', 'L'];
   let imageUrls = [
@@ -46,7 +46,7 @@ export function generateShopItem(): ShopItemModel {
   let price = randomPrice();
   let baseItemId = shortid.generate();
   let name = 'Dumb ' + category.substr(0, category.length - 1);
-  let baseItem: ShopItemModel = {
+  let baseItem: ItemData = {
     category,
     id: baseItemId,
     imageUrls,

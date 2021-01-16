@@ -8,10 +8,10 @@ import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import ThumbnailGrid from 'components/ImageGallery/ThumbnailGrid';
-import SizeSelect from 'components/SizeSelect';
+import ItemThumbnailGrid from 'components/ThumbnailGrid';
+import SizeSelect from 'pages/ItemDetails/SizeSelect';
 import UploadImageButton from 'components/UploadImageButton';
-import { ShopItemCategory, ClothingSize, addImageToStorage, ShopItemModel, addShopItem } from 'models/shop-item/shop-item.db';
+import { ShopItemCategory, ClothingSize, addImageToStorage, ItemData, addShopItem } from 'models/shop-item/shop-item.db';
 import React from 'react';
 import shortid from 'shortid';
 
@@ -51,7 +51,7 @@ export default function AddItem() {
     e.preventDefault();
     e.stopPropagation();
     let imageUrl = await addImageToStorage(imageFiles[0].file);
-    let itemData: ShopItemModel = {
+    let itemData: ItemData = {
       category,
       price: Number(price),
       name,
@@ -163,7 +163,7 @@ export default function AddItem() {
               <DeleteImageButton />
             </Grid>
             <Grid item xs={12}>
-              <ThumbnailGrid
+              <ItemThumbnailGrid
                 imageUrls={imageFiles.map((file) => file.url)}
                 onSelectImage={setSelectedImage}
               />

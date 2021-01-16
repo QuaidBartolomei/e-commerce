@@ -28,11 +28,13 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ThumbnailGrid = (props: {
+interface Props {
   imageUrls: string[];
   onSelectImage: (image: string) => void;
   defaultSelected?: string;
-}) => {
+}
+
+const ThumbnailGrid = (props: Props) => {
   const { imageUrls, onSelectImage, defaultSelected } = props;
   const [selectedImage, setSelectedImage] = React.useState(
     defaultSelected || ''

@@ -3,9 +3,13 @@ import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import React, { useState } from 'react';
+import {
+  useItemDetailsDispatch,
+  useItemDetailsState,
+} from 'pages/ItemDetails/useItemDetails';
+import React from 'react';
 import FullsizeImage from './FullsizeImage';
-import ThumbnailGrid from './ThumbnailGrid';
+import ItemThumbnailGrid from '../ThumbnailGrid';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -36,22 +40,16 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ImageGallery = ({ imageUrls }: { imageUrls: string[] }) => {
+const ItemImagesSection = () => {
   const classes = useStyles();
-  const [selectedImage, setSelectedImage] = useState('');
-  const [showFullsizeImage, setShowFullsizeImage] = useState(false);
-  React.useEffect(() => {
-    setSelectedImage(imageUrls[0]);
-  }, [imageUrls]);
+  const { selectedImage, item } = useItemDetailsState();
+  const dispatch = useItemDetailsDispatch();
+
   return (
     <React.Fragment>
-      <FullsizeImage
-        open={showFullsizeImage}
-        onClick={() => setShowFullsizeImage(false)}
-        image={selectedImage}
-      />
+      <FullsizeImage />
       <Container className={classes.container}>
-        <Link onClick={() => setShowFullsizeImage(true)}>
+        <Link onClick={() => dispatch({ type: 'toggle_show_fullsize_image' })}>
           <Box
             className={classes.mainImageContainer}
             style={{
@@ -60,14 +58,15 @@ const ImageGallery = ({ imageUrls }: { imageUrls: string[] }) => {
           />
         </Link>
         <Divider />
-        <ThumbnailGrid
-          imageUrls={imageUrls}
-          onSelectImage={setSelectedImage}
-          defaultSelected={imageUrls[0]}
+        <ItemThumbnailGrid
+          imageUrls={item.imageUrls}
+          onSelectImage={(image) =>
+            dispatch({ type: 'set_selected_image', payload: image })
+          }
         />
       </Container>
     </React.Fragment>
   );
 };
 
-export default ImageGallery;
+export default ItemImagesSection;
