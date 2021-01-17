@@ -4,25 +4,31 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import React from 'react';
 
-export default function AlertDialog(props: {
+interface Props {
   open?: boolean;
   title?: string;
   text?: string;
   onCancel: () => void;
   onConfirm: () => void;
-}) {
-  const open = props.open || false;
-  const { title, onCancel, onConfirm, text } = props;
+}
+
+export default function AlertDialog(props: Props) {
+  const {
+    open = false,
+    title = 'Alert',
+    text = 'Confirm',
+    onCancel,
+    onConfirm,
+  } = props;
   return (
     <Dialog open={open} onClose={onCancel} aria-labelledby='alert-dialog-title'>
-      <DialogTitle id='alert-dialog-title'>{title || 'Alert'}</DialogTitle>
-
+      <DialogTitle id='alert-dialog-title'>{title}</DialogTitle>
       <DialogActions>
         <Button onClick={onCancel} color='primary'>
           Cancel
         </Button>
         <Button onClick={onConfirm} color='primary' autoFocus>
-          {text || 'Confirm'}
+          {text}
         </Button>
       </DialogActions>
     </Dialog>

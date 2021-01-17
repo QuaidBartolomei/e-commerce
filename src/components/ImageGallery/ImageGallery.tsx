@@ -9,7 +9,7 @@ import {
 } from 'pages/ItemDetails/useItemDetails';
 import React from 'react';
 import FullsizeImage from './FullsizeImage';
-import ItemThumbnailGrid from '../ThumbnailGrid';
+import ItemThumbnailGrid from '../ThumbnailGrid/ThumbnailGrid';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

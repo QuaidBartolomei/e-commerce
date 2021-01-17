@@ -19,7 +19,6 @@ export enum Routes {
   ItemDetails = '/products',
   Category = '/category',
   Checkout = '/checkout',
-  Search = '/search'
 }
 
 const AppRouter = () => {
@@ -33,7 +32,6 @@ const AppRouter = () => {
       <Route path={Routes.Checkout} component={Checkout} />
       <Route path={`${Routes.ItemDetails}/:id`} component={ItemDetailsPage} />
       <Route path={`${Routes.ItemDetails}`} component={ItemDetailsPage} />
-      <Route path={`${Routes.Search}/:query`} component={SearchPage} />
       <Route path={`${Routes.Category}/:category`} component={ItemListPage} />
     </Switch>
   );
