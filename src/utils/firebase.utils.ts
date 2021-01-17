@@ -5,7 +5,7 @@ import 'firebase/storage';
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: 'AIzaSyAzr57JspGRdqqpOTsBSxPHYZVraSGzrvA',
   authDomain: 'e-commerce-a8505.firebaseapp.com',
   databaseURL: 'https://e-commerce-a8505.firebaseio.com',
@@ -15,17 +15,15 @@ export const firebaseConfig = {
   appId: '1:444897950136:web:a8d4ac57e3c0c7dfbdb74d',
 };
 
-export async function init() {
+export function init() {
   console.log('initializing firebase app');
   firebase.initializeApp(firebaseConfig);
-  await firebase
-    .auth()
-    .setPersistence(
-      process.env.NODE_ENV === 'test'
-        ? firebase.auth.Auth.Persistence.NONE
-        : firebase.auth.Auth.Persistence.LOCAL
-    );
   provider.setCustomParameters({ prompt: 'select_account' });
+}
+
+export async function initTest() {
+  init();
+  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 }
 
 export async function signInWithGoogle() {

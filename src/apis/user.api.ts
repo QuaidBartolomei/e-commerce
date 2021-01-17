@@ -1,4 +1,5 @@
-import { getItemData } from 'models/shop-item/shop-item.db';
+import { CartItemData } from 'interfaces/shopItem.interface';
+import { getItemData } from 'apis/shopItem.api';
 import { CartItem } from 'UserContext';
 import { DbCollections } from 'utils/db.utils';
 import firebase from 'utils/firebase.utils';
@@ -6,12 +7,8 @@ import firebase from 'utils/firebase.utils';
 const firestore = () => firebase.firestore();
 const auth = () => firebase.auth();
 
-export interface CartItemModel {
-  id: string;
-  quantity: number;
-}
 interface UserModel {
-  cart: CartItemModel[];
+  cart: CartItemData[];
 }
 
 export async function getUserCart(userId: string): Promise<CartItem[]> {
@@ -25,7 +22,7 @@ export async function getUserCart(userId: string): Promise<CartItem[]> {
   return cart;
 }
 
-async function getCartData(cart: CartItemModel[]): Promise<CartItem[]> {
+async function getCartData(cart: CartItemData[]): Promise<CartItem[]> {
   let shoppingCart: CartItem[] = [];
   cart.forEach(async (item) => {
     let data = await getItemData(item.id);
@@ -37,7 +34,7 @@ async function getCartData(cart: CartItemModel[]): Promise<CartItem[]> {
   });
   return shoppingCart;
 }
-export async function updateCart(cart: CartItemModel[]) {
+export async function updateCart(cart: CartItemData[]) {
   let user = auth().currentUser;
   if (!user) return;
   let id = user.uid;

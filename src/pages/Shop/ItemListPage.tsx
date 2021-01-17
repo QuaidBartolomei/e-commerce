@@ -1,7 +1,8 @@
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ItemData, getShopItemsByCategory, ShopItemCategory } from 'models/shop-item/shop-item.db';
+import { getShopItemsByCategory } from 'apis/shopItem.api';
+import { ItemData, ShopItemCategory } from 'interfaces/shopItem.interface';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import ShopItemCard from './ShopItemCard';

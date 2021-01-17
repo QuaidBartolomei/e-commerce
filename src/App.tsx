@@ -4,15 +4,15 @@ import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 import {
   createMuiTheme,
   createStyles,
-  makeStyles,
+  makeStyles
 } from '@material-ui/core/styles';
+import types from '@material-ui/lab/themeAugmentation';
 import { ThemeProvider } from '@material-ui/styles';
 import Footer from 'components/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import AppRouter from 'Router';
-import types from '@material-ui/lab/themeAugmentation';
 import { UserProvider } from 'UserContext';
 
 const theme = createMuiTheme({

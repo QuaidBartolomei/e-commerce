@@ -14,14 +14,12 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
-
-const QuantitySelect = ({
-  quantity,
-  onChange,
-}: {
+interface Props {
   quantity: number;
   onChange: (quantity: number) => void;
-}) => {
+}
+const QuantitySelect = (props: Props) => {
+  const { quantity, onChange } = props;
   const classes = useStyles();
   return (
     <FormControl className={classes.formControl}>

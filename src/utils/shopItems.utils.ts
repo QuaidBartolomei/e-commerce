@@ -1,8 +1,9 @@
 
+import { ItemData, Categories, ClothingSize } from 'interfaces/shopItem.interface';
+import { addShopItem } from 'apis/shopItem.api';
 import shortid from 'shortid';
 import { randomValue } from './list.utils';
 import { randomNumber } from './number.utils';
-import { ItemData, Categories, ClothingSize, addShopItem } from 'models/shop-item/shop-item.db';
 
 let images: {
   Hats: string[];

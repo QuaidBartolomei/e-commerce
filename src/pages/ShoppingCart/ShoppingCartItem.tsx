@@ -7,7 +7,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { routeToItemPage } from 'Router';
-import { CartItem } from 'UserContext';
+import { CartItem, useUserDispatch } from 'UserContext';
 import QuantitySelect from './QuantitySelect';
 
 const useStyles = makeStyles((theme) =>
@@ -38,14 +38,23 @@ const useStyles = makeStyles((theme) =>
 
 type Props = {
   itemData: CartItem;
-  onRemove: () => void;
-  onChangeQuantity: (quantity: number) => void;
 };
 
 const ShoppingCartItem = (props: Props) => {
   const classes = useStyles();
-  const { itemData, onChangeQuantity, onRemove } = props;
+  const { itemData } = props;
   const { id, imageUrls, sizes, price, name, quantity } = itemData;
+  const userDispatch = useUserDispatch();
+
+  function onChangeQuantity() {
+    userDispatch({ type: 'change_item_quantity', payload: { id, quantity } });
+  }
+  function onRemove() {
+    userDispatch({
+      type: 'remove_item',
+      payload: id,
+    });
+  }
 
   const RemoveButton = () => (
     <Button
@@ -57,21 +66,28 @@ const ShoppingCartItem = (props: Props) => {
     </Button>
   );
 
+  const ThumbnailImage = () => (
+    <ButtonBase className={classes.image} href={routeToItemPage(id)}>
+      <img className={classes.img} alt={name} src={imageUrls[0]} />
+    </ButtonBase>
+  );
+  const TitleLink = () => (
+    <Link href={routeToItemPage(id)}>
+      <Typography gutterBottom variant='subtitle1'>
+        {name}
+      </Typography>
+    </Link>
+  );
+
   return (
     <div>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
-            <ButtonBase className={classes.image} href={routeToItemPage(id)}>
-              <img className={classes.img} alt={name} src={imageUrls[0]} />
-            </ButtonBase>
+            <ThumbnailImage />
           </Grid>
           <Grid item xs>
-            <Link href={routeToItemPage(id)}>
-              <Typography gutterBottom variant='subtitle1'>
-                {name}
-              </Typography>
-            </Link>
+            <TitleLink />
             <Typography variant='body2' gutterBottom>
               Size: {sizes[0]}
             </Typography>

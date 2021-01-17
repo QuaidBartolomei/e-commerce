@@ -1,7 +1,6 @@
 
 import Checkout from 'pages/Checkout/Checkout.page';
 import ItemDetailsPage from 'pages/ItemDetails/ItemDetails.page';
-import SearchPage from 'pages/Search.page';
 import ItemListPage from 'pages/Shop/ItemListPage';
 import Homepage from 'pages/Shop/Homepage';
 import ShoppingCart from 'pages/ShoppingCart/ShoppingCart.page';

@@ -2,7 +2,7 @@ import { Link, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { ItemData } from 'models/shop-item/shop-item.db';
+import { ItemData } from 'interfaces/shopItem.interface';
 import React, { useState } from 'react';
 import { Routes } from 'Router';
 

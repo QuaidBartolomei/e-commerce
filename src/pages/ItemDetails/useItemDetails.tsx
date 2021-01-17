@@ -1,4 +1,4 @@
-import { ItemData } from 'models/shop-item/shop-item.db';
+import { ItemData } from 'interfaces/shopItem.interface';
 import React, { createContext, useContext, useReducer } from 'react';
 
 type State = {

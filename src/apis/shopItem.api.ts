@@ -1,4 +1,4 @@
-import { CartItemModel } from 'models/user/user.db';
+import { CartItemData, ItemData, ShopItemCategory } from 'interfaces/shopItem.interface';
 import shortid from 'shortid';
 import { getDocData } from 'utils/db.utils';
 import { DbCollections } from 'utils/db.utils';
@@ -7,19 +7,6 @@ import firebase from 'utils/firebase.utils';
 const firestore = () => firebase.firestore();
 const storage = () => firebase.storage();
 
-export type ClothingSize = 'S' | 'M' | 'L';
-export type ShopItemCategory = 'Hats' | 'Shirts' | 'Hoodies';
-
-export interface ItemData {
-  id: string;
-  imageUrls: string[];
-  name: string;
-  price: number;
-  category: ShopItemCategory;
-  sizes: ClothingSize[];
-}
-
-export const Categories: ShopItemCategory[] = ['Hats', 'Shirts', 'Hoodies'];
 
 export async function getShopItemById(id: string): Promise<ItemData | undefined> {
   let item = await firestore().collection(DbCollections.Items).doc(id).get();
@@ -76,7 +63,7 @@ export async function getItemData(
   return await getDocData<ItemData>(DbCollections.Items, id);
 }
 
-export async function getCartTotal(cart: CartItemModel[]): Promise<number> {
+export async function getCartTotal(cart: CartItemData[]): Promise<number> {
   let total = 0;
   for (const { id, quantity } of cart) {
     let data = await getItemData(id);

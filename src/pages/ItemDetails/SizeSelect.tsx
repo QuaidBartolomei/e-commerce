@@ -4,7 +4,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { ClothingSize } from 'models/shop-item/shop-item.db';
+import { ClothingSize } from 'interfaces/shopItem.interface';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

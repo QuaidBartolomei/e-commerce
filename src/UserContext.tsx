@@ -1,22 +1,21 @@
+import { getUserCart, updateCart } from 'apis/user.api';
+import { CartItemData, ItemData } from 'interfaces/shopItem.interface';
 import React, { createContext, useEffect, useReducer } from 'react';
-import { UserDispatch, userReducer } from 'models/user/user.reducer';
-import { getIntialState, persistState } from 'utils/localStorage.utils';
-import { CartItemModel, getUserCart, updateCart } from './models/user/user.db';
-import { ItemData } from 'models/shop-item/shop-item.db';
+import { UserDispatch, userReducer } from 'user.reducer';
 import firebase from 'utils/firebase.utils';
+import { getIntialState, persistState } from 'utils/localStorage.utils';
 
 const STORAGE_KEY = 'authState';
-export type CartItem = CartItemModel & ItemData;
 
+export type CartItem = CartItemData & ItemData;
 export interface UserState {
   isAuth: boolean;
   cart: CartItem[];
 }
-const defaultState: UserState = {
+const initialState: UserState = getIntialState(STORAGE_KEY) ?? {
   isAuth: false,
   cart: [],
 };
-const initialState: UserState = getIntialState(STORAGE_KEY) ?? defaultState;
 
 const UserStateContext = createContext<UserState | undefined>(undefined);
 const UserDispatchContext = createContext<UserDispatch | undefined>(undefined);
@@ -27,15 +26,14 @@ export const UserProvider: React.FC = (props) => {
   useEffect(() => persistState(STORAGE_KEY, state), [state]);
 
   useEffect(() => {
-    let unsub = firebase.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        if (state.isAuth) return;
-        let cart = await getUserCart(user.uid);
-        dispatch({ type: 'login', payload: cart });
-      } else {
-        // User is signed out.
+    const unsub = firebase.auth().onAuthStateChanged(async (user) => {
+      if (!user) {
         if (state.isAuth) dispatch({ type: 'logout' });
+        return;
       }
+      if (state.isAuth) return;
+      const cart = await getUserCart(user.uid);
+      dispatch({ type: 'login', payload: cart });
     });
     return () => {
       unsub();

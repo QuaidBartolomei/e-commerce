@@ -6,13 +6,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { init } from 'utils/firebase.utils';
 import * as serviceWorker from './serviceWorker';
 
-init().then(() =>
-  ReactDOM.render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>,
-    document.getElementById('root')
-  )
+init();
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

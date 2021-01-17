@@ -11,9 +11,10 @@ import Typography from '@material-ui/core/Typography';
 import ItemThumbnailGrid from 'components/ThumbnailGrid/ThumbnailGrid';
 import SizeSelect from 'pages/ItemDetails/SizeSelect';
 import UploadImageButton from 'pages/AddItem/UploadImageButton';
-import { ShopItemCategory, ClothingSize, addImageToStorage, ItemData, addShopItem } from 'models/shop-item/shop-item.db';
 import React from 'react';
 import shortid from 'shortid';
+import { ShopItemCategory, ClothingSize, ItemData } from 'interfaces/shopItem.interface';
+import { addImageToStorage, addShopItem } from 'apis/shopItem.api';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

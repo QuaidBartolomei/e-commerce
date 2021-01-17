@@ -8,8 +8,8 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AddToCartButton from 'pages/ItemDetails/AddToCartButton';
 import { loremIpsum } from 'lorem-ipsum';
-import { ItemData, ClothingSize } from 'models/shop-item/shop-item.db';
 import React from 'react';
+import { ItemData, ClothingSize } from 'interfaces/shopItem.interface';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

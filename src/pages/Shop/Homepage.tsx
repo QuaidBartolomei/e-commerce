@@ -1,6 +1,7 @@
 import Container from '@material-ui/core/Container/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Categories, getShopItems, ShopItemCategory, ItemData } from 'models/shop-item/shop-item.db';
+import { getShopItems } from 'apis/shopItem.api';
+import { ItemData, ShopItemCategory, Categories } from 'interfaces/shopItem.interface';
 import React, { useEffect, useState } from 'react';
 import ShopItemCarousel from './ShopItemCarousel';
 

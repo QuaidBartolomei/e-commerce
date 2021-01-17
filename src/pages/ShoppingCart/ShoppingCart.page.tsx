@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AlertDialog from 'components/AlertDialog';
-import { getCartTotal } from 'models/shop-item/shop-item.db';
+import { getCartTotal } from 'apis/shopItem.api';
 import React, { useState } from 'react';
 import { useUserDispatch, useUserState } from 'UserContext';
 import CheckoutButton from './CheckoutButton';
@@ -42,15 +42,14 @@ export default function ShoppingCart() {
   const [cartTotal, setCartTotal] = useState(0);
   const userDispatch = useUserDispatch();
   const user = useUserState();
-  
+
   const { cart } = user;
-  
 
   React.useEffect(() => {
     getCartTotal(cart).then(setCartTotal);
   }, [cart]);
 
-console.log('shoppingCart', cart);
+  console.log('shoppingCart', cart);
 
   const Subtotal = () => (
     <Typography
@@ -59,17 +58,6 @@ console.log('shoppingCart', cart);
     >{`Subtotal: $${cartTotal.toFixed(2)}`}</Typography>
   );
 
-  function removeItemFromCart(id: string) {
-    userDispatch({
-      type: 'remove_item',
-      payload: id,
-    });
-  }
-
-  function changeItemQuantity(id: string, quantity: number) {
-    userDispatch({ type: 'change_item_quantity', payload: { id, quantity } });
-  }
-
   if (cart.length === 0) return <EmptyCart />;
 
   const RemoveItemWarning = () => (
@@ -77,7 +65,10 @@ console.log('shoppingCart', cart);
       onCancel={() => setItemToRemove('')}
       open={Boolean(itemToRemove)}
       onConfirm={() => {
-        removeItemFromCart(itemToRemove);
+        userDispatch({
+          type: 'remove_item',
+          payload: itemToRemove,
+        });
         setItemToRemove('');
       }}
       title='Remove item from cart?'
@@ -89,13 +80,7 @@ console.log('shoppingCart', cart);
       {cart.map((item, key) => {
         return (
           <Grid item key={key} xs={12}>
-            <ShoppingCartItem
-              itemData={item}
-              onRemove={() => setItemToRemove(item.id)}
-              onChangeQuantity={(quantity) =>
-                changeItemQuantity(item.id, quantity)
-              }
-            />
+            <ShoppingCartItem itemData={item} />
           </Grid>
         );
       })}
