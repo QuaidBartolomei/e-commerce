@@ -5,7 +5,7 @@ import ItemListPage from 'pages/Shop/ItemListPage';
 import Homepage from 'pages/Shop/Homepage';
 import ShoppingCart from 'pages/ShoppingCart/ShoppingCart.page';
 import SignInPage from 'pages/SignIn/SignIn.page';
-import UserRegistrationPage from 'pages/UserRegistration.page';
+import Registration from 'pages/Registration/Registration.page';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ const AppRouter = () => {
       <Route exact path={Routes.Homepage} component={Homepage} />
       <Route path={Routes.Shop} component={Homepage} />
       <Route path={Routes.SignIn} component={SignInPage} />
-      <Route path={Routes.Register} component={UserRegistrationPage} />
+      <Route path={Routes.Register} component={Registration} />
       <Route path={Routes.ShoppingCart} component={ShoppingCart} />
       <Route path={Routes.Checkout} component={Checkout} />
       <Route path={`${Routes.ItemDetails}/:id`} component={ItemDetailsPage} />

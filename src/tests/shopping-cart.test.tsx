@@ -5,7 +5,7 @@ import { createMemoryHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { Routes } from 'Router';
-import { init } from 'utils/firebase.utils';
+import { initTest } from 'utils/firebase.utils';
 
 // testing item details page
 // clicking thumbnails changes main image
@@ -18,7 +18,7 @@ const history = createMemoryHistory();
 
 beforeAll(async () => {
   jest.setTimeout(10000);
-  await init();
+  await initTest();
 });
 
 test('Item details page redirects to Homepage if no prop or param', async () => {

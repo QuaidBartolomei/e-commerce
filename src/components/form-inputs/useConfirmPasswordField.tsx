@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const ERROR_MESSAGE = 'Passwords do not match';
 const name = 'Confirm Password';
 
-export default function useConfirmPasswordField(props: TextFieldProps = {}) {
+export default function useConfirmPasswordField() {
   const [error, setError] = useState(false);
   const [value, setValue] = useState('');
 
@@ -14,7 +14,7 @@ export default function useConfirmPasswordField(props: TextFieldProps = {}) {
     return isValid;
   }
 
-  const element = (
+  const Element = (props: TextFieldProps) => (
     <TextField
       type='password'
       label={name}
@@ -27,7 +27,7 @@ export default function useConfirmPasswordField(props: TextFieldProps = {}) {
   );
 
   return {
-    element,
+    Element,
     value,
     validate,
   };

@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom';
-import firebase, { init } from 'utils/firebase.utils';
+import firebase, { initTest } from 'utils/firebase.utils';
 
 describe('User can login with email and password', () => {
   beforeAll(async () => {
     jest.setTimeout(10000);
-    await init();
+    await initTest();
   });
  
   beforeEach(async () => await firebase.auth().signOut());
@@ -31,5 +31,6 @@ describe('User can login with email and password', () => {
     expect(user).toBeTruthy();
   });
 
+  
   
 });

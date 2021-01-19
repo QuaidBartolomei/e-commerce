@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import RegisterForm from './SignIn/RegisterForm';
+import RegisterForm from './RegisterForm';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const UserRegistrationPage = () => {
+const Registration = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
@@ -30,4 +30,4 @@ const UserRegistrationPage = () => {
   );
 };
 
-export default UserRegistrationPage;
+export default Registration;

@@ -4,7 +4,7 @@ import { passwordValidator } from 'utils/password.utils';
 
 const NAME = 'Password';
 
-export default function usePasswordField(props: TextFieldProps = {}) {
+export default function usePasswordField( ) {
   const [errorMessage, setErrorMessage] = useState('');
   const [value, setValue] = useState('');
 
@@ -18,7 +18,7 @@ export default function usePasswordField(props: TextFieldProps = {}) {
     <span style={{ whiteSpace: 'pre-wrap' }}>{errorMessage}</span>
   );
 
-  const element = (
+  const Element = (props: TextFieldProps) => (
     <TextField
       type='password'
       label={NAME}
@@ -31,7 +31,7 @@ export default function usePasswordField(props: TextFieldProps = {}) {
   );
 
   return {
-    element,
+    Element,
     value,
     validate,
   };

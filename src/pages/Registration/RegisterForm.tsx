@@ -23,9 +23,9 @@ export default function RegisterForm() {
     fullWidth: true,
   };
 
-  const email = useEmailField(textFieldOptions);
-  const password = usePasswordField(textFieldOptions);
-  const confirmPassword = useConfirmPasswordField(textFieldOptions);
+  const email = useEmailField();
+  const password = usePasswordField();
+  const confirmPassword = useConfirmPasswordField();
 
   function validateForm() {
     return [
@@ -51,9 +51,9 @@ export default function RegisterForm() {
       <Typography>Sign up with an email and password</Typography>
 
       <form onSubmit={onSubmit}>
-        {email.element}
-        {password.element}
-        {confirmPassword.element}
+        <email.Element {...textFieldOptions} />
+        <password.Element {...textFieldOptions} />
+        <confirmPassword.Element {...textFieldOptions} />
         <Button
           type='submit'
           variant='contained'

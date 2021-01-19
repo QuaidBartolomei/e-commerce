@@ -36,11 +36,6 @@ export async function getShopItemsByCategory(
   return items;
 }
 
-export async function getUrlFromStorage(id: string): Promise<string> {
-  let ref = storage().refFromURL(id);
-  let url = await ref.getDownloadURL();
-  return url;
-}
 
 export async function addShopItem(itemData: ItemData) {
   let id = shortid.generate();

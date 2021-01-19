@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 const ERROR_MESSAGE = 'Invalid email';
 const NAME = 'Email';
 
-export default function useEmailField(props: TextFieldProps = {}) {
+export default function useEmailField() {
   const [error, setError] = useState(false);
   const [value, setValue] = useState('');
 
@@ -15,7 +15,7 @@ export default function useEmailField(props: TextFieldProps = {}) {
     return isValid;
   }
 
-  const element = (
+  const Element = (props: TextFieldProps) => (
     <TextField
       type='text'
       label={NAME}
@@ -28,7 +28,7 @@ export default function useEmailField(props: TextFieldProps = {}) {
   );
 
   return {
-    element,
+    Element,
     value,
     validate,
   };

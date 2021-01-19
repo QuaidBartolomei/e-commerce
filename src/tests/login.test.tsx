@@ -9,7 +9,7 @@ import { Router } from 'react-router-dom';
 import { Routes } from 'Router';
 import { UserProvider } from 'UserContext';
 import * as auth from 'utils/auth.utils';
-import { init } from 'utils/firebase.utils';
+import { initTest } from 'utils/firebase.utils';
 
 function testTextInput(testId: string, testValue = '') {
   const inputElement = screen.getByTestId(testId).querySelector('input');
@@ -23,7 +23,7 @@ const history = createMemoryHistory();
 
 beforeAll(async () => {
   jest.setTimeout(10000);
-  await init();
+  await initTest();
 });
 
 test('User can navigate to signin page', async () => {
