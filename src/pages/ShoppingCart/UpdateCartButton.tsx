@@ -1,8 +1,9 @@
 import Button from '@material-ui/core/Button';
 import React from 'react';
-import { CartItem, useUserDispatch } from 'UserContext';
+import { useUserDispatch, useUserState } from 'UserContext';
 
-const UpdateCartButton = ({ cart }: { cart: CartItem[] }) => {
+const UpdateCartButton = () => {
+  const { cart } = useUserState();
   const userDispatch = useUserDispatch();
   return (
     <Button

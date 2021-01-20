@@ -1,7 +1,7 @@
 import Container from '@material-ui/core/Container/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { getShopItems } from 'apis/shopItem.api';
-import { ItemData, ShopItemCategory, Categories } from 'interfaces/shopItem.interface';
+import { Product, ShopItemCategory, Categories } from 'interfaces/shopItem.interface';
 import React, { useEffect, useState } from 'react';
 import ShopItemCarousel from './ShopItemCarousel';
 
@@ -18,13 +18,13 @@ const useStyles = makeStyles((theme) =>
 
 const Homepage = () => {
   const classes = useStyles();
-  const [shopItems, setShopItems] = useState<ItemData[]>([]);
+  const [shopItems, setShopItems] = useState<Product[]>([]);
   useEffect(() => {
     getShopItems().then(setShopItems);
   }, []);
   let shopItemsSorted: {
     category: ShopItemCategory;
-    items: ItemData[];
+    items: Product[];
   }[] = Categories.map((category) => ({
     category,
     items: shopItems.filter((x) => x.category === category),

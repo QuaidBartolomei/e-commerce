@@ -80,7 +80,7 @@ export default function ShoppingCart() {
       {cart.map((item, key) => {
         return (
           <Grid item key={key} xs={12}>
-            <ShoppingCartItem itemData={item} />
+            <ShoppingCartItem {...item} />
           </Grid>
         );
       })}

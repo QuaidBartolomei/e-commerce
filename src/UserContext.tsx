@@ -1,5 +1,5 @@
 import { getUserCart, updateCart } from 'apis/user.api';
-import { CartItemData, ItemData } from 'interfaces/shopItem.interface';
+import { CartItemData } from 'interfaces/shopItem.interface';
 import React, { createContext, useEffect, useReducer } from 'react';
 import { UserDispatch, userReducer } from 'user.reducer';
 import firebase from 'utils/firebase.utils';
@@ -7,10 +7,9 @@ import { getIntialState, persistState } from 'utils/localStorage.utils';
 
 const STORAGE_KEY = 'authState';
 
-export type CartItem = CartItemData & ItemData;
 export interface UserState {
   isAuth: boolean;
-  cart: CartItem[];
+  cart: CartItemData[];
 }
 const initialState: UserState = getIntialState(STORAGE_KEY) ?? {
   isAuth: false,

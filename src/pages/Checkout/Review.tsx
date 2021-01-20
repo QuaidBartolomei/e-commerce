@@ -4,8 +4,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import React from 'react';
-import { CartItem } from 'UserContext';
+import { getItemData } from 'apis/shopItem.api';
+import React, { useEffect, useState } from 'react';
+import { useUserState } from 'UserContext';
 
 const addresses = [
   '1 Material-UI Drive',
@@ -48,12 +49,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review({
-  shoppingCart,
-}: {
-  shoppingCart: CartItem[];
-}) {
+export default function Review() {
   const classes = useStyles();
+  const { cart } = useUserState();
 
   const Shipping = () => (
     <Grid item xs={12} sm={6}>
@@ -87,18 +85,38 @@ export default function Review({
 
   const CartItems = () => (
     <React.Fragment>
-      {shoppingCart.map((item, key) => {
-        console.log('data', item);
-        let { name, price } = item;
-        return (
-          <ListItem className={classes.listItem} key={key}>
-            <ListItemText primary={name} secondary={name} />
-            <Typography variant='body2'>{price}</Typography>
-          </ListItem>
-        );
+      {cart.map((item, key) => {
+        let { id } = item;
+        return <CartItem itemId={id} key={key} />;
       })}
     </React.Fragment>
   );
+  const CartItem = ({ itemId }: { itemId: string }) => {
+    const [itemDetails, setItemDetails] = useState<{
+      name: string;
+      price: number;
+    }>();
+
+    useEffect(() => {
+      getItemData(itemId).then((data) => {
+        if (!data) return;
+        const { name, price } = data;
+        setItemDetails({
+          name,
+          price,
+        });
+      });
+    }, [itemId]);
+
+    if (!itemDetails) return null;
+    const { name, price } = itemDetails;
+    return (
+      <ListItem className={classes.listItem}>
+        <ListItemText primary={name} secondary={name} />
+        <Typography variant='body2'>{price}</Typography>
+      </ListItem>
+    );
+  };
 
   const OrderSummary = () => (
     <React.Fragment>

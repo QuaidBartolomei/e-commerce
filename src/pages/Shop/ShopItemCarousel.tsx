@@ -3,7 +3,7 @@ import Link from '@material-ui/core/Link/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { ItemData, ShopItemCategory } from 'interfaces/shopItem.interface';
+import { Product, ShopItemCategory } from 'interfaces/shopItem.interface';
 import React from 'react';
 import { Routes } from 'Router';
 import ShopItemCard from './ShopItemCard';
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) =>
 
 interface Props {
   title: string;
-  items: ItemData[];
+  items: Product[];
   category: ShopItemCategory;
 }
 

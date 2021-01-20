@@ -2,9 +2,7 @@ import Button from '@material-ui/core/Button/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import {
-  TextFieldProps
-} from '@material-ui/core/TextField/TextField';
+import { TextFieldProps } from '@material-ui/core/TextField/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
 import useEmailField from 'components/form-inputs/useEmailField';
 import usePasswordField from 'components/form-inputs/usePasswordField';
@@ -32,8 +30,8 @@ const SignInForm = () => {
     fullWidth: true,
   };
 
-  const email = useEmailField(textFieldOptions);
-  const password = usePasswordField(textFieldOptions);
+  const email = useEmailField();
+  const password = usePasswordField();
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -75,8 +73,8 @@ const SignInForm = () => {
       <Typography>Sign in with your email and password</Typography>
 
       <form onSubmit={onSubmit}>
-        {email.element}
-        {password.element}
+        <email.Element {...textFieldOptions} />
+        <password.Element {...textFieldOptions} />
 
         <Grid container spacing={2} className={classes.buttonGrid}>
           <Grid item xs={12} sm={6}>

@@ -1,15 +1,12 @@
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import AddToCartButton from 'pages/ItemDetails/AddToCartButton';
 import { loremIpsum } from 'lorem-ipsum';
+import AddToCartButton from 'pages/ItemDetails/AddToCartButton';
 import React from 'react';
-import { ItemData, ClothingSize } from 'interfaces/shopItem.interface';
+import SizeSelect from './SizeSelect';
+import { useItemDetailsState } from './useItemDetails';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -27,25 +24,13 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ItemDetailsText = ({ item }: { item: ItemData }) => {
-  const [size, setSize] = React.useState<ClothingSize>('S');
+const ItemDetailsText = () => {
   const classes = useStyles();
-
-  const SizeSelect = () => (
-    <FormControl className={classes.formControl}>
-      <InputLabel id='size_label'>Size</InputLabel>
-      <Select
-        labelId='size_label'
-        id='size'
-        value={size}
-        onChange={(e) => setSize(e.target.value as ClothingSize)}
-      >
-        <MenuItem value={'S'}>S</MenuItem>
-        <MenuItem value={'M'}>M</MenuItem>
-        <MenuItem value={'L'}>L</MenuItem>
-      </Select>
-    </FormControl>
-  );
+  const {
+    item,
+    selectedSize: size,
+    selectedColor: color,
+  } = useItemDetailsState();
 
   return (
     <Container className={classes.container}>
@@ -55,7 +40,7 @@ const ItemDetailsText = ({ item }: { item: ItemData }) => {
       <Typography>${item.price}</Typography>
       <Divider />
       <SizeSelect />
-      <AddToCartButton item={{ ...item, quantity: 1 }} />
+      <AddToCartButton item={{ id: item.id, size, color, quantity: 1 }} />
       <Typography>{loremIpsum({ count: 3, units: 'sentence' })}</Typography>
     </Container>
   );

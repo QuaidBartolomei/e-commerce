@@ -1,8 +1,8 @@
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { getShopItemById } from 'apis/shopItem.api';
+import { getProductById } from 'apis/shopItem.api';
 import ItemImagesSection from 'components/ImageGallery/ImageGallery';
-import { ItemData } from 'interfaces/shopItem.interface';
+import { Product } from 'interfaces/shopItem.interface';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Routes } from 'Router';
@@ -28,17 +28,15 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-interface Props {}
-
-const ItemDetailsPage = (props: Props) => {
+const ItemDetailsPage = () => {
   const classes = useStyles();
   const { id = '' } = useParams<{ id: string }>();
   const history = useHistory();
-  const [item, setItem] = useState<ItemData | undefined>(undefined);
+  const [item, setItem] = useState<Product | undefined>(undefined);
 
   React.useEffect(() => {
     if (id === '') return history.push(Routes.Homepage);
-    getShopItemById(id).then((itemData) => {
+    getProductById(id).then((itemData) => {
       if (itemData) setItem(itemData);
     });
   }, [id, setItem, history]);
@@ -54,7 +52,7 @@ const ItemDetailsPage = (props: Props) => {
           <ItemImagesSection />
         </Grid>
         <Grid item sm={7} xs={12} className={classes.detailsContainer}>
-          <ItemDetailsText item={item} />
+          <ItemDetailsText />
         </Grid>
       </Grid>
     </ItemDetailsProvider>

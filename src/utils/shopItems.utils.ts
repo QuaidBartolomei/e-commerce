@@ -1,5 +1,9 @@
-
-import { ItemData, Categories, ClothingSize } from 'interfaces/shopItem.interface';
+import {
+  Product,
+  Categories,
+  ClothingSize,
+  ProductInventory,
+} from 'interfaces/shopItem.interface';
 import { addShopItem } from 'apis/shopItem.api';
 import shortid from 'shortid';
 import { randomValue } from './list.utils';
@@ -37,23 +41,35 @@ function randomPrice() {
   return randomNumber(10000) / 100;
 }
 
-export function generateShopItem(): ItemData {
-  let category = randomValue(Categories);
-  let sizes: ClothingSize[] = ['S', 'M', 'L'];
-  let imageUrls = [
+export function generateShopItem(): Product {
+  const category = randomValue(Categories);
+  const sizes: ClothingSize[] = ['S', 'M', 'L'];
+  const colors = ['blue', 'black', 'white'];
+  const imageUrls = [
     images[category][randomNumber(images[category].length)],
     ...images[category],
   ];
-  let price = randomPrice();
-  let baseItemId = shortid.generate();
-  let name = 'Dumb ' + category.substr(0, category.length - 1);
-  let baseItem: ItemData = {
+  const price = randomPrice();
+  const id = shortid.generate();
+  const name = 'Dumb ' + category.substr(0, category.length - 1);
+
+  const inventory: ProductInventory[] = sizes
+    .map((size) => {
+      return colors.map((color) => ({
+        color,
+        size,
+        stock: randomNumber(4),
+      }));
+    })
+    .flat();
+
+  let baseItem: Product = {
     category,
-    id: baseItemId,
+    id,
     imageUrls,
     name,
     price,
-    sizes,
+    inventory,
   };
   return baseItem;
 }

@@ -1,18 +1,19 @@
-import { CartItem, UserState } from "UserContext";
+import { CartItemData } from 'interfaces/shopItem.interface';
+import {UserState } from 'UserContext';
 
 type Action =
-  | { type: 'add_item'; payload: CartItem }
-  | { type: 'login'; payload: CartItem[] }
+  | { type: 'add_item'; payload: CartItemData }
+  | { type: 'login'; payload: CartItemData[] }
   | { type: 'logout' }
   | { type: 'remove_item'; payload: string }
-  | { type: 'update_cart'; payload: CartItem[] }
+  | { type: 'update_cart'; payload: CartItemData[] }
   | { type: 'change_item_quantity'; payload: { id: string; quantity: number } };
 
 export function userReducer(state: UserState, action: Action): UserState {
   switch (action.type) {
     case 'add_item': {
-      let {id} = action.payload;
-      let existingItem = state.cart.find((x) => x.id === id);
+      const { id } = action.payload;
+      const existingItem = state.cart.find((x) => x.id === id);
       if (existingItem) {
         existingItem.quantity++;
         return { ...state, cart: [...state.cart] };
@@ -36,9 +37,6 @@ export function userReducer(state: UserState, action: Action): UserState {
     }
     case 'change_item_quantity': {
       let { quantity, id } = action.payload;
-      console.log('changing item quantity');
-      console.log('id: ', id);
-      console.log('quantity: ', quantity);
       return {
         ...state,
         cart: state.cart
@@ -50,11 +48,10 @@ export function userReducer(state: UserState, action: Action): UserState {
               };
             return x;
           })
-          .filter((x) => x.quantity ),
+          .filter((x) => x.quantity),
       };
     }
     case 'login': {
-      console.log('logging in', action.payload);
       return {
         ...state,
         isAuth: true,
@@ -62,7 +59,6 @@ export function userReducer(state: UserState, action: Action): UserState {
       };
     }
     case 'logout': {
-      console.log('logging out');
       return { ...state, isAuth: false, cart: [] };
     }
     default: {

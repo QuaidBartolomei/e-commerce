@@ -1,4 +1,4 @@
-import { CartItemData, ItemData, ShopItemCategory } from 'interfaces/shopItem.interface';
+import { CartItemData, Product, ShopItemCategory } from 'interfaces/shopItem.interface';
 import shortid from 'shortid';
 import { getDocData } from 'utils/db.utils';
 import { DbCollections } from 'utils/db.utils';
@@ -8,15 +8,15 @@ const firestore = () => firebase.firestore();
 const storage = () => firebase.storage();
 
 
-export async function getShopItemById(id: string): Promise<ItemData | undefined> {
+export async function getProductById(id: string): Promise<Product | undefined> {
   let item = await firestore().collection(DbCollections.Items).doc(id).get();
-  return { ...item.data(), id } as ItemData;
+  return { ...item.data(), id } as Product;
 }
 
-export async function getShopItems(): Promise<ItemData[]> {
+export async function getShopItems(): Promise<Product[]> {
   let itemsCollection = await firestore().collection(DbCollections.Items).get();
   let items = itemsCollection.docs.map((doc) => {
-    let data = doc.data() as ItemData;
+    let data = doc.data() as Product;
     return { ...data };
   });
   return items;
@@ -24,20 +24,20 @@ export async function getShopItems(): Promise<ItemData[]> {
 
 export async function getShopItemsByCategory(
   category: ShopItemCategory
-): Promise<ItemData[]> {
+): Promise<Product[]> {
   let itemsCollection = await firestore()
     .collection(DbCollections.Items)
     .where('category', '==', category.toString())
     .get();
   let items = itemsCollection.docs.map((doc) => {
-    let data = doc.data() as ItemData;
+    let data = doc.data() as Product;
     return { ...data, id: doc.id };
   });
   return items;
 }
 
 
-export async function addShopItem(itemData: ItemData) {
+export async function addShopItem(itemData: Product) {
   let id = shortid.generate();
   await firestore()
     .collection(DbCollections.Items)
@@ -54,8 +54,8 @@ export async function addImageToStorage(file: File): Promise<string> {
 
 export async function getItemData(
   id: string
-): Promise<ItemData | undefined> {
-  return await getDocData<ItemData>(DbCollections.Items, id);
+): Promise<Product | undefined> {
+  return await getDocData<Product>(DbCollections.Items, id);
 }
 
 export async function getCartTotal(cart: CartItemData[]): Promise<number> {

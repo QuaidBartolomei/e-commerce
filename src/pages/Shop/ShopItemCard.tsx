@@ -2,7 +2,7 @@ import { Link, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { ItemData } from 'interfaces/shopItem.interface';
+import { Product } from 'interfaces/shopItem.interface';
 import React, { useState } from 'react';
 import { Routes } from 'Router';
 
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ShopItemCard = ({ item }: { item: ItemData }) => {
+const ShopItemCard = ({ item }: { item: Product }) => {
   const classes = useStyles();
   const [isHover, setIsHover] = useState(false);
   return (

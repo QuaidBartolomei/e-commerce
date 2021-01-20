@@ -2,7 +2,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { getShopItemsByCategory } from 'apis/shopItem.api';
-import { ItemData, ShopItemCategory } from 'interfaces/shopItem.interface';
+import { Product, ShopItemCategory } from 'interfaces/shopItem.interface';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import ShopItemCard from './ShopItemCard';
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) =>
 const ItemListPage = () => {
   const classes = useStyles();
   let { category } = useParams<{ category: string }>();
-  const [items, setItems] = React.useState<ItemData[]>([]);
+  const [items, setItems] = React.useState<Product[]>([]);
 
   React.useEffect(() => {
     getShopItemsByCategory(category as ShopItemCategory).then((items) => {

@@ -73,7 +73,7 @@ const Content =  () => {
     case 1:
       return <PaymentForm />;
     case 2:
-      return <Review shoppingCart={shoppingCart} />;
+      return <Review />;
     default:
       throw new Error('Unknown step');
   }

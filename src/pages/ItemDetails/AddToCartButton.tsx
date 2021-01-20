@@ -2,9 +2,10 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import React from 'react';
-import { CartItem, useUserDispatch } from 'UserContext';
 import Alert from 'components/Alert';
+import { CartItemData } from 'interfaces/shopItem.interface';
+import React from 'react';
+import { useUserDispatch } from 'UserContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -16,10 +17,11 @@ const useStyles = makeStyles((theme) =>
 );
 
 interface Props {
-  item: CartItem;
+  item: CartItemData;
 }
 
 const AddToCartButton = ({ item }: Props) => {
+  const { id, color, size, quantity } = item;
   const classes = useStyles();
   const userDispatch = useUserDispatch();
   const [showAlert, setShowAlert] = React.useState(false);
@@ -33,7 +35,7 @@ const AddToCartButton = ({ item }: Props) => {
     console.log('adding item: ', item);
     userDispatch({
       type: 'add_item',
-      payload: { ...item, quantity: 1 },
+      payload: { id, color, size, quantity },
     });
     setShowAlert(true);
   }

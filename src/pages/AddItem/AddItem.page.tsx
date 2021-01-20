@@ -8,13 +8,12 @@ import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { addImageToStorage, addShopItem } from 'apis/shopItem.api';
 import ItemThumbnailGrid from 'components/ThumbnailGrid/ThumbnailGrid';
-import SizeSelect from 'pages/ItemDetails/SizeSelect';
+import { ClothingSize, Product, ShopItemCategory } from 'interfaces/shopItem.interface';
 import UploadImageButton from 'pages/AddItem/UploadImageButton';
 import React from 'react';
 import shortid from 'shortid';
-import { ShopItemCategory, ClothingSize, ItemData } from 'interfaces/shopItem.interface';
-import { addImageToStorage, addShopItem } from 'apis/shopItem.api';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -52,11 +51,11 @@ export default function AddItem() {
     e.preventDefault();
     e.stopPropagation();
     let imageUrl = await addImageToStorage(imageFiles[0].file);
-    let itemData: ItemData = {
+    let itemData: Product = {
       category,
       price: Number(price),
       name,
-      sizes: [size],
+      inventory: [],
       imageUrls: [imageUrl],
             id: shortid.generate(),
     };
@@ -153,9 +152,6 @@ export default function AddItem() {
                   <MenuItem value={'Shirt'}>Shirt</MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <SizeSelect onChange={setSize} />
             </Grid>
             <Grid item xs={3}>
               <UploadImageButton onFileUpload={onFilesSelected} />

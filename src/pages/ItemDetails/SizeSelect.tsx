@@ -1,25 +1,29 @@
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { ClothingSize } from 'interfaces/shopItem.interface';
+import { useItemDetailsDispatch, useItemDetailsState } from './useItemDetails';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     formControl: {
       width: 'fit-content',
       minWidth: 120,
-      paddingLeft:theme.spacing(1)
+      paddingLeft: theme.spacing(1),
     },
   })
 );
 
-const SizeSelect = (props: { onChange: (size: ClothingSize) => void }) => {
-  const { onChange } = props;
+const SizeSelect = () => {
   const classes = useStyles();
-  const [size, setSize] = React.useState<ClothingSize>('S');
+
+  const { item, selectedSize } = useItemDetailsState();
+  const dispatch = useItemDetailsDispatch();
+
+  const sizes = item.inventory.map((i) => i.size);
+
   return (
     <FormControl className={classes.formControl}>
       <InputLabel id='size_label'>Size</InputLabel>
@@ -27,16 +31,15 @@ const SizeSelect = (props: { onChange: (size: ClothingSize) => void }) => {
         required
         labelId='size_label'
         id='size'
-        value={size}
+        value={selectedSize}
         onChange={(e) => {
-          let newSize = e.target.value as ClothingSize;
-          setSize(newSize);
-          onChange(newSize);
+          const newSize = e.target.value as string;
+          dispatch({ type: 'set_selected_size', payload: newSize });
         }}
       >
-        <MenuItem value={'S'}>S</MenuItem>
-        <MenuItem value={'M'}>M</MenuItem>
-        <MenuItem value={'L'}>L</MenuItem>
+        {sizes.map((size) => (
+          <MenuItem value={size}>{size}</MenuItem>
+        ))}
       </Select>
     </FormControl>
   );

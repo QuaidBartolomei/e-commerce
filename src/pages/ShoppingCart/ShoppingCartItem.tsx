@@ -5,9 +5,11 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import React from 'react';
+import { getItemData } from 'apis/shopItem.api';
+import { CartItemData, Product } from 'interfaces/shopItem.interface';
+import React, { useEffect, useState } from 'react';
 import { routeToItemPage } from 'Router';
-import { CartItem, useUserDispatch } from 'UserContext';
+import { useUserDispatch } from 'UserContext';
 import QuantitySelect from './QuantitySelect';
 
 const useStyles = makeStyles((theme) =>
@@ -36,15 +38,34 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-type Props = {
-  itemData: CartItem;
-};
-
-const ShoppingCartItem = (props: Props) => {
+const ShoppingCartItem = (props: CartItemData) => {
   const classes = useStyles();
-  const { itemData } = props;
-  const { id, imageUrls, sizes, price, name, quantity } = itemData;
   const userDispatch = useUserDispatch();
+
+  const { id } = props;
+
+  const [itemDetails, setItemDetails] = useState<{
+    name: string;
+    price: number;
+    imageUrls: string[];
+    size: string;
+    color: string;
+    quantity: number;
+  }>();
+
+  useEffect(() => {
+    getItemData(id).then((data) => {
+      if (!data) return;
+      setItemDetails({
+        ...data,
+        ...props,
+      });
+    });
+  }, [props, id]);
+
+  if (!itemDetails) return <div>Loading...</div>;
+
+  const { imageUrls, size, price, name, quantity } = itemDetails;
 
   function onChangeQuantity() {
     userDispatch({ type: 'change_item_quantity', payload: { id, quantity } });
@@ -89,7 +110,7 @@ const ShoppingCartItem = (props: Props) => {
           <Grid item xs>
             <TitleLink />
             <Typography variant='body2' gutterBottom>
-              Size: {sizes[0]}
+              Size: {size}
             </Typography>
             <QuantitySelect quantity={quantity} onChange={onChangeQuantity} />
             <Typography variant='subtitle1'>${price.toFixed(2)}</Typography>
