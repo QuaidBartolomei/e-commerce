@@ -65,7 +65,7 @@ const ShoppingCartItem = (props: CartItemData) => {
 
   if (!itemDetails) return <div>Loading...</div>;
 
-  const { imageUrls, size, price, name, quantity } = itemDetails;
+  const { imageUrls, size, price, name, quantity ,color} = itemDetails;
 
   function onChangeQuantity() {
     userDispatch({ type: 'change_item_quantity', payload: { id, quantity } });
@@ -95,7 +95,7 @@ const ShoppingCartItem = (props: CartItemData) => {
   const TitleLink = () => (
     <Link href={routeToItemPage(id)}>
       <Typography gutterBottom variant='subtitle1'>
-        {name}
+        {name} ({size}, {color})
       </Typography>
     </Link>
   );
@@ -109,11 +109,8 @@ const ShoppingCartItem = (props: CartItemData) => {
           </Grid>
           <Grid item xs>
             <TitleLink />
-            <Typography variant='body2' gutterBottom>
-              Size: {size}
-            </Typography>
-            <QuantitySelect quantity={quantity} onChange={onChangeQuantity} />
             <Typography variant='subtitle1'>${price.toFixed(2)}</Typography>
+            <QuantitySelect quantity={quantity} onChange={onChangeQuantity} />
           </Grid>
         </Grid>
       </Paper>

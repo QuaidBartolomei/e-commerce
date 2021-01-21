@@ -1,5 +1,5 @@
 import { CartItemData } from 'interfaces/shopItem.interface';
-import {UserState } from 'UserContext';
+import { UserState } from 'UserContext';
 
 type Action =
   | { type: 'add_item'; payload: CartItemData }
@@ -12,8 +12,10 @@ type Action =
 export function userReducer(state: UserState, action: Action): UserState {
   switch (action.type) {
     case 'add_item': {
-      const { id } = action.payload;
-      const existingItem = state.cart.find((x) => x.id === id);
+      const { id, color, size } = action.payload;
+      const existingItem = state.cart.find(
+        (x) => x.id === id && x.color === color && x.size === size
+      );
       if (existingItem) {
         existingItem.quantity++;
         return { ...state, cart: [...state.cart] };

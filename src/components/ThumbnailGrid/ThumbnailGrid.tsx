@@ -9,6 +9,8 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       flexDirection: 'row',
       width: '100%',
+      padding: 8,
+      margin: 0,
     },
   })
 );
@@ -20,7 +22,7 @@ interface Props {
 }
 
 const ThumbnailGrid = (props: Props) => {
-  const { imageUrls, onSelectImage, defaultSelected = '' } = props;
+  const { imageUrls, onSelectImage } = props;
   const [selectedImage, setSelectedImage] = React.useState(imageUrls[0]);
   const classes = useStyles();
 

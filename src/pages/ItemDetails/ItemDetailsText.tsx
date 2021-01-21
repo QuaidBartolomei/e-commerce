@@ -5,8 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import { loremIpsum } from 'lorem-ipsum';
 import AddToCartButton from 'pages/ItemDetails/AddToCartButton';
 import React from 'react';
-import useSizeSelect from './SizeSelect';
-import useColorSelect from './useColorSelect';
+import { getColors, getSizes } from 'utils/shopItems.utils';
+import useSelectInput from '../../components/form-inputs/useSelectInput';
 import { useItemDetailsState } from './useItemDetails';
 
 const useStyles = makeStyles((theme) =>
@@ -27,14 +27,16 @@ const useStyles = makeStyles((theme) =>
 
 const ItemDetailsText = () => {
   const classes = useStyles();
-  const {
-    item,
-    selectedSize: size,
-    selectedColor: color,
-  } = useItemDetailsState();
+  const { item } = useItemDetailsState();
 
-  const { ColorSelect } = useColorSelect();
-  const { SizeSelect } = useSizeSelect();
+  const { SelectInput: ColorSelect, value: color } = useSelectInput(
+    'Color',
+    getColors(item)
+  );
+  const { SelectInput: SizeSelect, value: size } = useSelectInput(
+    'Size',
+    getSizes(item)
+  );
 
   return (
     <Container className={classes.container}>

@@ -16,8 +16,7 @@ const useStyles = makeStyles((theme) =>
       backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
       backgroundImage: `url(${props.image})`,
-      border: props.selected ? 'black 1px solid' : 'none',
-      margin: 1,
+      border: props.selected ? 'black 1px solid' : 'white 1px solid',
       '&:hover': {
         cursor: 'pointer',
         border: 'black 1px solid',

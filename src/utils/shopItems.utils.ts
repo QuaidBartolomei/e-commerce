@@ -79,3 +79,15 @@ export async function generateItemAndAddToDb() {
   await addShopItem(item);
   return console.log(item);
 }
+
+export function getColors(item: Product): string[] {
+  return item.inventory
+    .map((i) => i.color)
+    .filter((v, i, a) => a.indexOf(v) === i);
+}
+
+export function getSizes(item: Product): string[] {
+  return item.inventory
+    .map((i) => i.size)
+    .filter((v, i, a) => a.indexOf(v) === i);
+}
