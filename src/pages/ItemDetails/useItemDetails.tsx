@@ -52,7 +52,7 @@ const itemDetailsReducer = (state: State, action: Action): State => {
 export const ItemDetailsProvider: React.FC<{ item: Product }> = (props) => {
   const [state, dispatch] = useReducer(itemDetailsReducer, {
     item: props.item,
-    selectedImage: '',
+    selectedImage: props.item.imageUrls[0],
     showFullSizeImage: false,
     selectedSize: '',
     selectedColor: '',

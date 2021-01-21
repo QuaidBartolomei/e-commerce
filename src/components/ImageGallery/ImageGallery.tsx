@@ -3,13 +3,13 @@ import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import ThumbnailGrid from 'components/ThumbnailGrid/ThumbnailGrid';
 import {
   useItemDetailsDispatch,
   useItemDetailsState,
 } from 'pages/ItemDetails/useItemDetails';
 import React from 'react';
 import FullsizeImage from './FullsizeImage';
-import ItemThumbnailGrid from '../ThumbnailGrid/ThumbnailGrid';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -58,8 +58,8 @@ const ItemImagesSection = () => {
           />
         </Link>
         <Divider />
-        <ItemThumbnailGrid
-          imageUrls={item.imageUrls}
+        <ThumbnailGrid
+          imageUrls={item.imageUrls.filter((v, i, a) => a.indexOf(v) === i)}
           onSelectImage={(image) =>
             dispatch({ type: 'set_selected_image', payload: image })
           }

@@ -15,22 +15,22 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export default function useSizeSelect() {
+export default function useColorSelect() {
   const classes = useStyles();
   const { item } = useItemDetailsState();
   const values = item.inventory
-    .map((i) => i.size)
+    .map((i) => i.color)
     .filter((v, i, a) => a.indexOf(v) === i);
 
   const [value, setValue] = useState(values[0]);
 
-  const SizeSelect = () => (
+  const ColorSelect = () => (
     <FormControl className={classes.formControl}>
-      <InputLabel id='size_label'>size</InputLabel>
+      <InputLabel id='color_label'>Color</InputLabel>
       <Select
         required
-        labelId='size_label'
-        id='size'
+        labelId='color_label'
+        id='color'
         onChange={(e) => {
           setValue(e.target.value as string);
         }}
@@ -45,7 +45,7 @@ export default function useSizeSelect() {
   );
 
   return {
-    SizeSelect,
+    ColorSelect,
     value,
   };
 }

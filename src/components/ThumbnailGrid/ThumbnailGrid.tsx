@@ -21,7 +21,7 @@ interface Props {
 
 const ThumbnailGrid = (props: Props) => {
   const { imageUrls, onSelectImage, defaultSelected = '' } = props;
-  const [selectedImage, setSelectedImage] = React.useState(defaultSelected);
+  const [selectedImage, setSelectedImage] = React.useState(imageUrls[0]);
   const classes = useStyles();
 
   return (

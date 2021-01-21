@@ -43,7 +43,7 @@ function randomPrice() {
 
 export function generateShopItem(): Product {
   const category = randomValue(Categories);
-  const sizes: ClothingSize[] = ['S', 'M', 'L'];
+  const sizes = ['S', 'M', 'L'];
   const colors = ['blue', 'black', 'white'];
   const imageUrls = [
     images[category][randomNumber(images[category].length)],
