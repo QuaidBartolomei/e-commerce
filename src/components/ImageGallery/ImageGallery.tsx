@@ -1,15 +1,11 @@
-import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import ThumbnailGrid from 'components/ThumbnailGrid/ThumbnailGrid';
-import {
-  useItemDetailsDispatch,
-  useItemDetailsState,
-} from 'pages/ItemDetails/useItemDetails';
+import ThumbnailGrid from 'components/ImageGallery/components/ThumbnailGrid';
+import { ImageGalleryProvider } from 'components/ImageGallery/useImageGallery';
 import React from 'react';
-import FullsizeImage from './FullsizeImage';
+import FullsizeImage from './components/FullsizeImage';
+import SelectedImage from './components/SelectedImage';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -20,53 +16,28 @@ const useStyles = makeStyles((theme) =>
         margin: theme.spacing(1),
       },
     },
-    mainImage: {
-      maxWidth: '100%',
-      maxHeight: '50vh',
-    },
-    mainImageContainer: {
-      border: 'black 2px solid',
-      display: 'flex',
-      justifyContent: 'center',
-      width: '100%',
-      height: 480,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      '&:hover': {
-        cursor: 'pointer',
-      },
-    },
   })
 );
 
-const ItemImagesSection = () => {
+interface Props {
+  imageUrls: string[];
+}
+const ImageGallery = (props: Props) => {
+  const { imageUrls } = props;
   const classes = useStyles();
-  const { selectedImage, item } = useItemDetailsState();
-  const dispatch = useItemDetailsDispatch();
 
   return (
-    <React.Fragment>
+    <ImageGalleryProvider
+      imageUrls={imageUrls.filter((v, i, a) => a.indexOf(v) === i)}
+    >
       <FullsizeImage />
       <Container className={classes.container}>
-        <Link onClick={() => dispatch({ type: 'toggle_show_fullsize_image' })}>
-          <Box
-            className={classes.mainImageContainer}
-            style={{
-              backgroundImage: `url(${selectedImage})`,
-            }}
-          />
-        </Link>
+        <SelectedImage />
         <Divider />
-        <ThumbnailGrid
-          imageUrls={item.imageUrls.filter((v, i, a) => a.indexOf(v) === i)}
-          onSelectImage={(image) =>
-            dispatch({ type: 'set_selected_image', payload: image })
-          }
-        />
+        <ThumbnailGrid />
       </Container>
-    </React.Fragment>
+    </ImageGalleryProvider>
   );
 };
 
-export default ItemImagesSection;
+export default ImageGallery;

@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { addImageToStorage, addShopItem } from 'apis/shopItem.api';
-import ItemThumbnailGrid from 'components/ThumbnailGrid/ThumbnailGrid';
+import ItemThumbnailGrid from 'components/ImageGallery/components/ThumbnailGrid';
 import { ClothingSize, Product, ShopItemCategory } from 'interfaces/shopItem.interface';
 import UploadImageButton from 'pages/AddItem/UploadImageButton';
 import React from 'react';

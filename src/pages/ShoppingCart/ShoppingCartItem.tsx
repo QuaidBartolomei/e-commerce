@@ -1,4 +1,4 @@
-import { Link } from '@material-ui/core';
+import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Grid from '@material-ui/core/Grid';
@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { getItemData } from 'apis/shopItem.api';
-import { CartItemData, Product } from 'interfaces/shopItem.interface';
+import { CartItemData } from 'interfaces/shopItem.interface';
 import React, { useEffect, useState } from 'react';
 import { routeToItemPage } from 'Router';
 import { useUserDispatch } from 'UserContext';
@@ -65,27 +65,29 @@ const ShoppingCartItem = (props: CartItemData) => {
 
   if (!itemDetails) return <div>Loading...</div>;
 
-  const { imageUrls, size, price, name, quantity ,color} = itemDetails;
+  const { imageUrls, size, price, name, quantity, color } = itemDetails;
 
   function onChangeQuantity() {
     userDispatch({ type: 'change_item_quantity', payload: { id, quantity } });
   }
-  function onRemove() {
-    userDispatch({
-      type: 'remove_item',
-      payload: id,
-    });
-  }
 
-  const RemoveButton = () => (
-    <Button
-      className={classes.removeButton}
-      color='secondary'
-      onClick={onRemove}
-    >
-      Remove
-    </Button>
-  );
+  const RemoveButton = () => {
+    function onRemove() {
+      userDispatch({
+        type: 'remove_item',
+        payload: id,
+      });
+    }
+    return (
+      <Button
+        className={classes.removeButton}
+        color='secondary'
+        onClick={onRemove}
+      >
+        Remove
+      </Button>
+    );
+  };
 
   const ThumbnailImage = () => (
     <ButtonBase className={classes.image} href={routeToItemPage(id)}>

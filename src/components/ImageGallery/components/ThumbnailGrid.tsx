@@ -1,5 +1,9 @@
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import {
+  useImageGalleryDispatch,
+  useImageGalleryState,
+} from 'components/ImageGallery/useImageGallery';
 import React from 'react';
 import ThumbnailImage from './ThumbnailImage';
 
@@ -16,15 +20,15 @@ const useStyles = makeStyles((theme) =>
 );
 
 interface Props {
-  imageUrls: string[];
-  onSelectImage: (image: string) => void;
+  imageUrls?: string[];
+  onSelectImage?: (image: string) => void;
   defaultSelected?: string;
 }
 
 const ThumbnailGrid = (props: Props) => {
-  const { imageUrls, onSelectImage } = props;
-  const [selectedImage, setSelectedImage] = React.useState(imageUrls[0]);
   const classes = useStyles();
+  const dispatch = useImageGalleryDispatch();
+  const { selectedImage, imageUrls } = useImageGalleryState();
 
   return (
     <Grid className={classes.thumbnailsContainer} container spacing={1}>
@@ -34,8 +38,7 @@ const ThumbnailGrid = (props: Props) => {
           image={image}
           selected={image === selectedImage}
           onClick={() => {
-            setSelectedImage(image);
-            onSelectImage(image);
+            dispatch({ type: 'set_selected_image', payload: image });
           }}
         />
       ))}

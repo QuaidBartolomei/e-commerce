@@ -1,13 +1,13 @@
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { getProductById } from 'apis/shopItem.api';
-import ItemImagesSection from 'components/ImageGallery/ImageGallery';
+import ImageGallery from 'components/ImageGallery/ImageGallery';
 import { Product } from 'interfaces/shopItem.interface';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Routes } from 'Router';
-import ItemDetailsText from './ItemDetailsText';
-import { ItemDetailsProvider } from './useItemDetails';
+import ItemDetailsText from './components/ItemDetailsText';
+import { ImageGalleryProvider } from '../../components/ImageGallery/useImageGallery';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -46,16 +46,16 @@ const ItemDetailsPage = () => {
   }
 
   return (
-    <ItemDetailsProvider item={item}>
+    <ImageGalleryProvider item={item}>
       <Grid container item spacing={1} className={classes.container}>
         <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
-          <ItemImagesSection />
+          <ImageGallery />
         </Grid>
         <Grid item sm={7} xs={12} className={classes.detailsContainer}>
           <ItemDetailsText />
         </Grid>
       </Grid>
-    </ItemDetailsProvider>
+    </ImageGalleryProvider>
   );
 };
 

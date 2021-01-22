@@ -15,6 +15,11 @@ const firebaseConfig = {
   appId: '1:444897950136:web:a8d4ac57e3c0c7dfbdb74d',
 };
 
+export enum DbCollections {
+  Users = 'users',
+  Items = 'items',
+}
+
 export function init() {
   console.log('initializing firebase app');
   firebase.initializeApp(firebaseConfig);
@@ -32,6 +37,18 @@ export async function signInWithGoogle() {
 
 export function signOut() {
   firebase.auth().signOut();
+}
+
+export async function getDocData<T>(
+  collection: string,
+  id: string
+): Promise<undefined | T> {
+  let ref = firebase.firestore().collection(collection).doc(id);
+  let doc = await ref.get();
+  if (!doc.exists) {
+    return undefined;
+  }
+  return doc.data() as T;
 }
 
 export default firebase;

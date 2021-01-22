@@ -5,11 +5,11 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import AddressForm from 'pages/Checkout/AddressForm';
+import AddressForm from 'pages/Checkout/components/AddressForm';
 import React from 'react';
 import { useUserState } from 'UserContext';
-import PaymentForm from './PaymentForm';
-import Review from './Review';
+import PaymentForm from './components/PaymentForm';
+import Review from './components/Review';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {

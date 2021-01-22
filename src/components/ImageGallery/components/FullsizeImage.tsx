@@ -1,9 +1,9 @@
 import Backdrop from '@material-ui/core/Backdrop';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import {
-  useItemDetailsState,
-  useItemDetailsDispatch,
-} from 'pages/ItemDetails/useItemDetails';
+  useImageGalleryState,
+  useImageGalleryDispatch,
+} from 'components/ImageGallery/useImageGallery';
 import React from 'react';
 
 const useStyles = makeStyles((theme) =>
@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const FullsizeImage = () => {
+export default function FullsizeImage () {
   const classes = useStyles();
-  const { selectedImage, showFullSizeImage } = useItemDetailsState();
-  const dispatch = useItemDetailsDispatch();
+  const { selectedImage, showFullSizeImage } = useImageGalleryState();
+  const dispatch = useImageGalleryDispatch();
 
   const onClick = () => dispatch({ type: 'toggle_show_fullsize_image' });
 
@@ -50,5 +50,3 @@ const FullsizeImage = () => {
     </Backdrop>
   );
 };
-
-export default FullsizeImage;
