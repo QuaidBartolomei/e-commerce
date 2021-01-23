@@ -3,10 +3,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { signout } from 'apis/user.api';
 import React from 'react';
 import { Routes } from 'Router';
 import { useUserState } from 'UserContext';
-import { signout } from 'utils/auth.utils';
 
 
 const UserMenu = () => {

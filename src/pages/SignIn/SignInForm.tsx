@@ -4,12 +4,12 @@ import Grid from '@material-ui/core/Grid/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { TextFieldProps } from '@material-ui/core/TextField/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
+import { signInWithEmail } from 'apis/user.api';
 import useEmailField from 'components/form-inputs/useEmailField';
 import usePasswordField from 'components/form-inputs/usePasswordField';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Routes } from 'Router';
-import { signInWithEmail } from 'utils/auth.utils';
 import firebase, { signInWithGoogle } from 'utils/firebase.utils';
 
 const useStyles = makeStyles((theme) =>

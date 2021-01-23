@@ -1,10 +1,7 @@
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import {
-  useImageGalleryDispatch,
-  useImageGalleryState
-} from 'components/ImageGallery/useImageGallery';
+import { useImageGalleryState, useImageGalleryDispatch } from '../ImageGallery';
 import React from 'react';
 
 const useStyles = makeStyles((theme) =>

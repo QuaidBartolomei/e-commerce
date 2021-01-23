@@ -1,8 +1,6 @@
 import { CartItemData, Product, ShopItemCategory } from 'interfaces/shopItem.interface';
 import shortid from 'shortid';
-import { getDocData } from 'utils/db.utils';
-import { DbCollections } from 'utils/db.utils';
-import firebase from 'utils/firebase.utils';
+import firebase, { DbCollections, getDocData } from 'utils/firebase.utils';
 
 const firestore = () => firebase.firestore();
 const storage = () => firebase.storage();

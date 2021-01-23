@@ -35,10 +35,6 @@ export async function signInWithGoogle() {
   firebase.auth().signInWithPopup(provider);
 }
 
-export function signOut() {
-  firebase.auth().signOut();
-}
-
 export async function getDocData<T>(
   collection: string,
   id: string

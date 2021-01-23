@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Routes } from 'Router';
 import ItemDetailsText from './components/ItemDetailsText';
-import { ImageGalleryProvider } from '../../components/ImageGallery/useImageGallery';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -46,16 +45,14 @@ const ItemDetailsPage = () => {
   }
 
   return (
-    <ImageGalleryProvider item={item}>
-      <Grid container item spacing={1} className={classes.container}>
-        <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
-          <ImageGallery />
-        </Grid>
-        <Grid item sm={7} xs={12} className={classes.detailsContainer}>
-          <ItemDetailsText />
-        </Grid>
+    <Grid container item spacing={1} className={classes.container}>
+      <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
+        <ImageGallery imageUrls={item.imageUrls} />
       </Grid>
-    </ImageGalleryProvider>
+      <Grid item sm={7} xs={12} className={classes.detailsContainer}>
+        <ItemDetailsText item={item} />
+      </Grid>
+    </Grid>
   );
 };
 

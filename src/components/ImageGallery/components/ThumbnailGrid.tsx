@@ -1,9 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import {
-  useImageGalleryDispatch,
-  useImageGalleryState,
-} from 'components/ImageGallery/useImageGallery';
+import { useImageGalleryState, useImageGalleryDispatch } from '../ImageGallery';
 import React from 'react';
 import ThumbnailImage from './ThumbnailImage';
 

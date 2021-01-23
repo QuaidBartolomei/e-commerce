@@ -1,5 +1,4 @@
-import { DbCollections } from 'utils/db.utils';
-import firebase from 'utils/firebase.utils';
+import firebase, { DbCollections } from 'utils/firebase.utils';
 import { generateItemAndAddToDb } from 'utils/shopItems.utils';
 
 // get number of docs
