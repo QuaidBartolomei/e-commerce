@@ -1,17 +1,16 @@
 import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container/Container';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 import {
   createMuiTheme,
   createStyles,
   makeStyles
 } from '@material-ui/core/styles';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import types from '@material-ui/lab/themeAugmentation';
 import { ThemeProvider } from '@material-ui/styles';
 import Footer from 'components/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import AppRouter from 'Router';
 import { UserProvider } from 'UserContext';
 
@@ -51,12 +50,6 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export const LocationDisplay = () => {
-  const location = useLocation();
-
-  return <div data-testid='location-display'>{location.pathname}</div>;
-};
-
 const App = () => {
   const classes = useStyles();
   return (
@@ -64,14 +57,13 @@ const App = () => {
         <CssBaseline />
         <ThemeProvider theme={theme}>
           <Box className={classes.page}>
-            <Container disableGutters className={classes.mainContent}>
+            <Box className={classes.mainContent}>
               <Navbar />
               <AppRouter />
-            </Container>
+            </Box>
             <Footer />
           </Box>
         </ThemeProvider>
-        <LocationDisplay />
     </UserProvider>
   );
 };

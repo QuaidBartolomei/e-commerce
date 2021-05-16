@@ -3,11 +3,12 @@ import {
   Categories,
   Product,
   ProductInventory,
+  ShopItemCategory,
 } from 'interfaces/shopItem.interface';
 import shortid from 'shortid';
 import { randomNumber, randomValue } from './js.utils';
 
-let images: {
+const images: {
   Hats: string[];
   Shirts: string[];
   Hoodies: string[];
@@ -39,6 +40,48 @@ function randomPrice() {
   return randomNumber(10000) / 100;
 }
 
+export function generateShopItemCustom(options: {
+  category: ShopItemCategory;
+  image: string;
+}): Product {
+  const { category, image } = options;
+  const sizes = ['S', 'M', 'L'];
+  const colors = ['blue', 'black', 'white'];
+  const imageUrls = [image, ...images[category]];
+  const price = randomPrice();
+  const id = shortid.generate();
+  const name = category.substr(0, category.length - 1);
+  const inventory: ProductInventory[] = sizes
+    .map(size => {
+      return colors.map(color => ({
+        color,
+        size,
+        stock: randomNumber(4),
+      }));
+    })
+    .flat();
+
+  let baseItem: Product = {
+    category,
+    id,
+    imageUrls,
+    name,
+    price,
+    inventory,
+  };
+  return baseItem;
+}
+
+export function generateInventory() {
+  const categories: ShopItemCategory[] = ['Hats', 'Hoodies', 'Shirts'];
+  categories.forEach(category =>
+    images[category].forEach(image => {
+      const item = generateShopItemCustom({ category, image });
+      addShopItem(item);
+    })
+  );
+}
+
 export function generateShopItem(): Product {
   const category = randomValue(Categories);
   const sizes = ['S', 'M', 'L'];
@@ -52,8 +95,8 @@ export function generateShopItem(): Product {
   const name = 'Dumb ' + category.substr(0, category.length - 1);
 
   const inventory: ProductInventory[] = sizes
-    .map((size) => {
-      return colors.map((color) => ({
+    .map(size => {
+      return colors.map(color => ({
         color,
         size,
         stock: randomNumber(4),
@@ -80,12 +123,12 @@ export async function generateItemAndAddToDb() {
 
 export function getColors(item: Product): string[] {
   return item.inventory
-    .map((i) => i.color)
+    .map(i => i.color)
     .filter((v, i, a) => a.indexOf(v) === i);
 }
 
 export function getSizes(item: Product): string[] {
   return item.inventory
-    .map((i) => i.size)
+    .map(i => i.size)
     .filter((v, i, a) => a.indexOf(v) === i);
 }

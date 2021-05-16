@@ -40,12 +40,18 @@ const ItemListPage = () => {
     <Container className={classes.container}>
       <Grid
         container
+        direction='row'
         spacing={GRID_SPACING}
         className={classes.grid}
         justify='center'
       >
-        {items.map((item) => (
-          <Grid item key={item.id} className={classes.gridItem}>
+        {items.map(item => (
+          <Grid
+            item
+            key={item.id}
+            className={classes.gridItem}
+            justify='flex-start'
+          >
             <ShopItemCard item={item} />
           </Grid>
         ))}

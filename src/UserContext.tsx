@@ -37,6 +37,7 @@ export const UserProvider: React.FC = (props) => {
     return () => {
       unsub();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

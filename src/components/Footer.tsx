@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       flexDireciton: 'row',
       alignItems: 'center',
+      justifyContent: 'center',
     },
     logo: {
       height: 64,

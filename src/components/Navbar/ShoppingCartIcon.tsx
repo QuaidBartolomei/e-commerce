@@ -6,10 +6,11 @@ import React, { useMemo } from 'react';
 import { Routes } from 'Router';
 import { useUserState } from 'UserContext';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     container: {
-      paddingRight: '4px',
+      paddingRight: theme.spacing(1),
+      paddingLeft: theme.spacing(1),
     },
     countText: {
       color: 'red',
@@ -26,9 +27,13 @@ const ShoppingCartIconButton = () => {
   );
 
   return (
-    <Link href={Routes.ShoppingCart} className={classes.container} color='inherit'>
+    <Link
+      href={Routes.ShoppingCart}
+      className={classes.container}
+      color='inherit'
+    >
       <Badge badgeContent={cartSize} color='error'>
-        <ShoppingCart />
+        <ShoppingCart fontSize='large' />
       </Badge>
     </Link>
   );

@@ -1,21 +1,17 @@
 import firebase, { DbCollections } from 'utils/firebase.utils';
-import { generateItemAndAddToDb } from 'utils/shopItems.utils';
-
-// get number of docs
+import { generateInventory } from 'utils/shopItems.utils';
 
 export async function main() {
-  console.log('checking shop data');
-
-  const N = 50;
   const collection = await firebase
     .firestore()
     .collection(DbCollections.Items)
     .get();
+
   const docsN = collection.docs.length;
-  console.log('docsN', docsN);
-  if (docsN >= N) return;
+
+  if (docsN > 0) return;
+
+  console.log('No shop items found.');
   console.log('generating new docs');
-  for (let i = N - docsN; i > 0; i--) {
-    generateItemAndAddToDb();
-  }
+  generateInventory();
 }

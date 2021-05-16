@@ -2,11 +2,11 @@ import AppBar from '@material-ui/core/AppBar';
 import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Toolbar from '@material-ui/core/Toolbar';
+import SignInButton from 'components/SignInButton';
 import React from 'react';
 import NavbarTitle from './NavbarTitle';
 import NavigationDrawerMenu from './NavigationMenu';
 import ShoppingCartIconButton from './ShoppingCartIcon';
-import UserMenu from './UserMenu';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -22,7 +22,7 @@ const Navbar = () => {
     <Toolbar className={classes.toolbar}>
       <NavigationDrawerMenu />
       <NavbarTitle />
-      <UserMenu />
+      <SignInButton />
       <ShoppingCartIconButton />
     </Toolbar>
   );

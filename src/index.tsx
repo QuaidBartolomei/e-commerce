@@ -1,5 +1,5 @@
+import '@fontsource/roboto';
 import App from 'App';
-import 'fontsource-roboto';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
