@@ -2,24 +2,21 @@ import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import ItemDetailsText from 'components/ItemDetailsText';
-import { Categories, Product } from 'interfaces/shopItem.interface';
+import { Product } from 'interfaces/shopItem.interface';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
-import { getShopItemById, getShopItems } from 'utils/shopItem.util';
 import firebase, { DbCollections, initFirebase } from 'utils/firebase.utils';
 
 initFirebase();
 const firestore = firebase.firestore();
+
 const useStyles = makeStyles(theme =>
   createStyles({
     container: {
       width: '100%',
       padding: theme.spacing(4, 0),
-      '&>*': {},
     },
-    imageGalleryContainer: {},
-    formItem: {},
     detailsContainer: {
       display: 'flex',
       flexDirection: 'column',
@@ -36,10 +33,9 @@ interface Props {
 
 export default function ItemPage({ item }: Props) {
   const classes = useStyles();
-
   return (
     <Grid container item spacing={1} className={classes.container}>
-      <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
+      <Grid item sm={5} xs={12} >
         <ImageGallery imageUrls={item.imageUrls} />
       </Grid>
       <Grid item sm={7} xs={12} className={classes.detailsContainer}>

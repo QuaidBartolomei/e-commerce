@@ -1,25 +1,20 @@
-import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { useImageGalleryDispatch } from '../ImageGallery';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
-    thumbnail: {
-      display: 'flex',
-      justifyContent: 'center',
-    },
     thumbnailImage: (props: { image: string; selected: boolean }) => ({
-      width: '100%',
-      height: '64px',
+      width: '20%',
+      height: 64,
       backgroundPosition: 'center',
-      backgroundSize: 'contain',
+      backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundImage: `url(${props.image})`,
-      border: props.selected ? 'black 1px solid' : 'white 1px solid',
+      border: 'black 1px solid',
       '&:hover': {
         cursor: 'pointer',
-        border: 'black 1px solid',
       },
     }),
   })
@@ -27,16 +22,16 @@ const useStyles = makeStyles((theme) =>
 
 interface Props {
   image: string;
-  selected?: boolean;
-  onClick: () => void;
+  selected: boolean;
 }
 
-export default function ThumbnailImage(props: Props) {
-  const { image, selected = false, onClick } = props;
+export default function ThumbnailImage({ image, selected }: Props) {
+  const dispatch = useImageGalleryDispatch();
   const classes = useStyles({ image, selected });
   return (
-    <Grid item className={classes.thumbnail} onClick={() => onClick()} xs={3}>
-      <Box className={classes.thumbnailImage} />
-    </Grid>
+    <Box
+      className={classes.thumbnailImage}
+      onClick={() => dispatch({ type: 'set_selected_image', payload: image })}
+    />
   );
 }

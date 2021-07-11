@@ -1,19 +1,15 @@
 import Container from '@material-ui/core/Container';
-import Divider from '@material-ui/core/Divider';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import ThumbnailGrid from './components/ThumbnailGrid';
 import React, { createContext, useContext, useReducer } from 'react';
 import FullsizeImage from './components/FullsizeImage';
 import SelectedImage from './components/SelectedImage';
+import ThumbnailGrid from './components/ThumbnailGrid';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
       display: 'flex',
       flexDirection: 'column',
-      '&>*': {
-        margin: theme.spacing(1),
-      },
     },
   })
 );
@@ -47,7 +43,7 @@ interface Props {
 }
 export default function ImageGallery(props: Props) {
   const classes = useStyles();
-  const imageUrls = props.imageUrls.filter((v, i, a) => a.indexOf(v) === i);
+  const imageUrls = props.imageUrls.filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
   const [state, dispatch] = useReducer(itemDetailsReducer, {
     imageUrls,
     selectedImage: imageUrls[0],
@@ -59,7 +55,6 @@ export default function ImageGallery(props: Props) {
         <FullsizeImage />
         <Container className={classes.container}>
           <SelectedImage />
-          <Divider />
           <ThumbnailGrid />
         </Container>
       </DispatchContext.Provider>

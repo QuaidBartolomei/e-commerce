@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import bannerImage from './banner.jpg';
 import { Paper } from '@material-ui/core';
 
+const bannerImage = 'assets/banner.jpg';
 const gradientColors: string[] = ['#7cbbe691', '#000000bf'];
 
 const useStyles = makeStyles(theme =>

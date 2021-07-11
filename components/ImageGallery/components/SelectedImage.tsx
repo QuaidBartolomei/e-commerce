@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       justifyContent: 'center',
       width: '100%',
-      height: 480,
+      height: 320,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
