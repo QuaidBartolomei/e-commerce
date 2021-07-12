@@ -5,22 +5,18 @@ import { Paper } from '@material-ui/core';
 const bannerImage = 'assets/banner.jpg';
 const gradientColors: string[] = ['#7cbbe691', '#000000bf'];
 
+const backgroundGradient = `linear-gradient(to top,
+  ${gradientColors.join(',')}),
+  url("${bannerImage}")`;
+
 const useStyles = makeStyles(theme =>
   createStyles({
-    image: {
-      width: '100%',
-      maxHeight: 300,
-      objectFit: 'cover',
-      objectPosition: 'center',
-    },
     header: {
-      height: 300,
+      height: 200,
       width: '100%',
-      overflow: 'hidden',
-      background: ` linear-gradient(to top, ${gradientColors.join(
-        ','
-      )}), url("${bannerImage}")`,
+      background: backgroundGradient,
       backgroundPosition: 'center',
+      backgroundSize:'cover'
     },
   })
 );

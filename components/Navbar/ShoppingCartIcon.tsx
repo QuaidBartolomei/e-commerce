@@ -2,9 +2,9 @@ import Badge from '@material-ui/core/Badge/Badge';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import { useUserState } from 'components/User/user.context';
 import React, { useMemo } from 'react';
-import { Routes } from 'Router';
-import { useUserState } from 'UserContext';
+import routes from 'utils/routes';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -28,7 +28,7 @@ const ShoppingCartIconButton = () => {
 
   return (
     <Link
-      href={Routes.ShoppingCart}
+      href={routes.cart}
       className={classes.container}
       color='inherit'
     >

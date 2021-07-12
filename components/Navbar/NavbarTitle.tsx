@@ -1,10 +1,10 @@
 import { Link, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ReactComponent as Logo } from 'assets/logo.svg';
+import Logo from './Logo';
 import React from 'react';
-import { Routes } from 'Router';
+import routes from 'utils/routes';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     toolbarTitle: {
       flex: 1,
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) =>
     },
     logo: {
       height: 32,
+      width: 32,
     },
   })
 );
@@ -32,7 +33,7 @@ const NavbarTitle = ({ title }: { title?: string }) => {
 
   return (
     <Link
-      href={Routes.Homepage}
+      href={routes.index}
       color='inherit'
       className={classes.toolbarTitle}
       underline='none'

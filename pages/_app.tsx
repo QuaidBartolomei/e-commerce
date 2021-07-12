@@ -1,6 +1,7 @@
 import '@fontsource/roboto';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
+import Navbar from 'components/Navbar/Navbar';
 import { UserProvider } from 'components/User/user.context';
 import type { AppProps } from 'next/app';
 import MyThemeProvider from 'pages/_theme';
@@ -15,6 +16,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <MyThemeProvider>
       <CssBaseline />
       <UserProvider>
+        <Navbar />
         <Component {...pageProps} />
       </UserProvider>
     </MyThemeProvider>
