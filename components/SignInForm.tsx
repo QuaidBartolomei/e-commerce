@@ -4,13 +4,13 @@ import Grid from '@material-ui/core/Grid/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { TextFieldProps } from '@material-ui/core/TextField/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
-import { signInWithEmail } from 'apis/user.api';
 import useEmailField from 'components/form-inputs/useEmailField';
 import usePasswordField from 'components/form-inputs/usePasswordField';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Routes } from 'Router';
 import firebase, { signInWithGoogle } from 'utils/firebase.utils';
+import routes from 'utils/routes';
+import { signInWithEmail } from 'utils/user.util';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -38,7 +38,7 @@ const SignInForm = () => {
     console.log('on submit');
     await signInWithEmail(email.value, password.value);
     setLoggedIn(Boolean(firebase.auth().currentUser));
-    history.push(Routes.Homepage);
+    history.push(routes.index);
   }
 
   const SignInButton = () => (

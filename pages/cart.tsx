@@ -2,17 +2,14 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import AlertDialog from 'components/AlertDialog';
+import ShoppingCartItem from 'components/Cart/CartItem/ShoppingCartItem';
 import CheckoutButton from 'components/Cart/CheckoutButton';
 import EmptyCart from 'components/Cart/EmptyCart';
-import ShoppingCartItem from 'components/Cart/CartItem/ShoppingCartItem';
-import { useUserDispatch, useUserState } from 'components/User/user.context';
+import RemoveItemWarning from 'components/Cart/RemoveItemWarning';
+import { CartProvider } from 'components/Cart/useCart';
+import { useUserState } from 'components/User/user.context';
 import React, { useState } from 'react';
 import { getCartTotal } from 'utils/shopItem.util';
-import { CartProvider } from 'components/Cart/useCart';
-import RemoveItemWarning from 'components/Cart/RemoveItemWarning';
-import { useQuery } from 'react-query';
-import axios from 'axios';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -42,12 +39,8 @@ const useStyles = makeStyles(theme =>
 
 export default function ShoppingCart() {
   const classes = useStyles();
-  const [itemToRemove, setItemToRemove] = useState('');
   const [cartTotal, setCartTotal] = useState(0);
-  const userDispatch = useUserDispatch();
   const user = useUserState();
-
-  const result = useQuery('cart',)
 
   const { cart } = user;
 

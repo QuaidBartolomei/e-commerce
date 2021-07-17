@@ -5,7 +5,11 @@ import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { useUserDispatch } from 'components/User/user.context';
+import { CartItemData } from 'interfaces/shopItem.interface';
 import React from 'react';
+import { useQuery } from 'react-query';
+import routes from 'utils/routes';
+import { getShopItemById } from 'utils/shopItem.util';
 import QuantitySelect from '../QuantitySelect';
 import { CartItem } from './CartItem.interface';
 import RemoveButton from './RemoveButton';
@@ -32,20 +36,28 @@ const useStyles = makeStyles(theme =>
 );
 
 interface Props {
-  item: CartItem;
+  item: CartItemData;
 }
 
 export default function ShoppingCartItem({ item }: Props) {
   const classes = useStyles();
   const userDispatch = useUserDispatch();
 
-  const { name, price, imageUrls, size, color, quantity, id } = item;
+  const { size, color, quantity, id } = item;
+  const { isLoading, isError, data } = useQuery('cartItemData', () =>
+    getShopItemById(id)
+  );
 
   function onChangeQuantity() {
     userDispatch({ type: 'change_item_quantity', payload: { id, quantity } });
   }
 
-  const itemLink = `items/${id}`;
+  const itemLink = routes.item(id);
+
+  if (isLoading || !data) return <div>'Loading...'</div>;
+  if (isError) return <div>'An error has occurred: '</div>;
+
+  const { name, imageUrls, price } = data;
 
   const ThumbnailImage = () => (
     <ButtonBase className={classes.image} href={itemLink}>
@@ -78,4 +90,3 @@ export default function ShoppingCartItem({ item }: Props) {
     </>
   );
 }
-

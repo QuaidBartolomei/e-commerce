@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Button, Typography, Container } from '@material-ui/core';
-import { Routes } from 'Router';
+import routes from 'utils/routes';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     container: {
       height: '100%',
@@ -22,7 +22,7 @@ const EmptyCart = () => {
   return (
     <Container className={classes.container}>
       <Typography variant='h5'>Cart is empty</Typography>
-      <Button color='primary' variant='contained' href={Routes.Shop}>
+      <Button color='primary' variant='contained' href={routes.index}>
         Go to Shop
       </Button>
     </Container>

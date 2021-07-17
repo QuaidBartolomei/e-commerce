@@ -23,6 +23,7 @@
     "eslint": "^7.26.0",
     "firebase": "^8.6.8",
     "firebase-admin": "^9.9.0",
+    "formik": "^2.2.9",
     "framer-motion": "^4.1.16",
     "lorem-ipsum": "^2.0.3",
     "next": "^11.0.0",
@@ -32,7 +33,8 @@
     "react-query": "^3.17.3",
     "react-use-scroll-direction": "^0.1.0",
     "shortid": "^2.2.15",
-    "typescript": "~4.3.4"
+    "typescript": "~4.3.4",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@testing-library/dom": "^7.31.0",

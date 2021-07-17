@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import routes from 'utils/routes';
+import LinkButton from 'components/LinkButton';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -11,11 +12,11 @@ const useStyles = makeStyles(theme =>
 export default function SignInButton() {
   const classes = useStyles();
 
-  function signIn() {}
-
   return (
-    <Button variant='contained' className={classes.container} onClick={signIn}>
-      Sign In
-    </Button>
+    <div>
+      <LinkButton href={routes.login}>Sign In</LinkButton>
+      or
+      <LinkButton href={routes.register}>Register</LinkButton>
+    </div>
   );
 }

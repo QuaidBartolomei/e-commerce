@@ -1,10 +1,11 @@
+import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import SignInForm from 'components/SignInForm';
+import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import { useUserState } from 'components/User/user.context';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import routes from 'utils/routes';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -20,24 +21,21 @@ const useStyles = makeStyles(theme =>
     },
   })
 );
-const SignInPage = () => {
+
+export default function LoginPage() {
   const classes = useStyles();
   let userState = useUserState();
-  let history = useHistory();
   const { isAuth } = userState;
   const router = useRouter();
 
   React.useEffect(() => {
     if (!isAuth) return;
     router.push('/');
-  }, [isAuth, history]);
+  }, [isAuth]);
 
   return (
-    <div className={classes.container}>
-      <SignInForm />
-      <Link href='/register'>New user? Register Here</Link>
-    </div>
+    <Container className={classes.container}>
+      <LoginForm />
+    </Container>
   );
-};
-
-export default SignInPage;
+}

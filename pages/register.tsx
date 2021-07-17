@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import RegisterForm from 'components/RegisterForm';
+import RegisterForm from 'components/Forms/RegisterForm/RegisterForm';
 
 const useStyles = makeStyles(theme =>
   createStyles({
