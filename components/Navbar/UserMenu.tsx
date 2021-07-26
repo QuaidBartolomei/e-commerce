@@ -1,64 +1,51 @@
+import Container from '@material-ui/core/Container';
+import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { signout } from 'apis/user.api';
+import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import React from 'react';
-import { Routes } from 'Router';
-import { useUserState } from 'UserContext';
 
+const useStyles = makeStyles(theme =>
+  createStyles({
+    UserDrawerContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: theme.spacing(2),
+    },
+    title: {},
+  })
+);
 
-const UserMenu = () => {
-  const userState = useUserState();
-  const { isAuth } = userState;
-
-  const [
-    userMenuAnchor,
-    setUserMenuAnchor,
-  ] = React.useState<null | HTMLElement>(null);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setUserMenuAnchor(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setUserMenuAnchor(null);
-  };
-
+export default function UserMenu() {
+  const classes = useStyles();
+  const [showNavDrawer, setShowNavDrawer] = React.useState(true);
 
   return (
     <React.Fragment>
       <IconButton
-        aria-controls='simple-menu'
-        aria-haspopup='true'
-        onClick={handleClick}
+        edge='start'
+        color='inherit'
+        aria-label='user-menu'
+        onClick={() => setShowNavDrawer(true)}
       >
         <AccountCircleIcon />
       </IconButton>
-      <Menu
-        id='simple-menu'
-        anchorEl={userMenuAnchor}
-        keepMounted
-        open={Boolean(userMenuAnchor)}
-        onClose={handleClose}
-        getContentAnchorEl={null}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+      <Drawer
+        anchor='right'
+        open={showNavDrawer}
+        onClose={() => setShowNavDrawer(false)}
       >
-        {isAuth ? (
-          <MenuItem button onClick={signout}>
-            <ExitToAppIcon />
-            Logout
-          </MenuItem>
-        ) : (
-          <MenuItem component='a' href={Routes.SignIn}>
-            Sign in / Register
-          </MenuItem>
-        )}
-      </Menu>
+        <Container
+        
+        className={classes.UserDrawerContainer}
+        >
+          <LoginForm />
+        </Container>
+      </Drawer>
     </React.Fragment>
   );
-};
-
-export default UserMenu;
+}

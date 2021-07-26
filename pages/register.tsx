@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import RegisterForm from 'components/Forms/RegisterForm/RegisterForm';
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -24,9 +25,9 @@ const useStyles = makeStyles(theme =>
 const Registration = () => {
   const classes = useStyles();
   return (
-    <div className={classes.container}>
+    <Container className={classes.container}>
       <RegisterForm />
-    </div>
+    </Container>
   );
 };
 

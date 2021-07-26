@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import LinkButton from 'components/LinkButton';
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 interface FormData {
   email: string;
@@ -44,6 +45,16 @@ const useStyles = makeStyles(theme =>
         marginBottom: theme.spacing(1),
       },
     },
+    registerButton: {
+      width: '100%',
+      '&>*': {
+        width: '100%',
+      },
+    },
+    forgotPasswordLink: {
+      width: '100%',
+      textAlign: 'center',
+    },
   })
 );
 
@@ -57,6 +68,16 @@ export default function LoginForm() {
     if (res.status === 200) setSubmitState('done');
   };
 
+ const GoogleLoginButton = ()=>(
+<Button
+onClick={()=>{
+  firebase
+}}
+>
+Google Sign In
+</Button>
+ ) 
+
   return (
     <Formik
       initialValues={initialValues}
@@ -64,14 +85,20 @@ export default function LoginForm() {
       onSubmit={onSubmit}
     >
       <Form className={classes.form}>
+        <Typography variant='h5' className={classes.forgotPasswordLink}>
+          Sign In
+        </Typography>
+        <GoogleLoginButton />
         <EmailField />
         <PasswordField />
         <SubmitButton status={submitState} />
-        <LinkButton>Forgot Password</LinkButton>
-        <Link href={routes.register}>
-          <Button variant='contained'
-          color='secondary'
-          >Register</Button>
+        <Link href={routes.register} className={classes.forgotPasswordLink}>
+          Forgot Password
+        </Link>
+        <Link href={routes.register} className={classes.registerButton}>
+          <Button variant='contained' color='secondary'>
+            Create New Account
+          </Button>
         </Link>
       </Form>
     </Formik>

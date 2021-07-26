@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useFormikContext } from 'formik';
 import TextField from '@material-ui/core/TextField';
-import { LoginFormData } from './login.form';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -14,7 +13,7 @@ const useStyles = makeStyles(theme =>
 
 export default function EmailField() {
   const { values, handleChange, touched, errors } =
-    useFormikContext<LoginFormData>();
+    useFormikContext<{ email: string }>();
   return (
     <TextField
       id='email'

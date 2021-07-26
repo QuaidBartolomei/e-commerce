@@ -1,9 +1,9 @@
-import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import Button, { ButtonProps } from '@material-ui/core/Button';
-import SendIcon from '@material-ui/icons/Send';
+import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import DoneIcon from '@material-ui/icons/Done';
+import SendIcon from '@material-ui/icons/Send';
+import React from 'react';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -18,40 +18,65 @@ const useStyles = makeStyles(theme =>
 
 export type SubmitStatus = 'ready' | 'submitting' | 'done';
 
-interface Props {
-  status?: SubmitStatus;
+type StateOptions = {
+  text: string;
+  icon: JSX.Element;
+};
+
+interface SubmitButtonOptions {
+  ready: StateOptions;
+  submitting: StateOptions;
+  done: StateOptions;
 }
 
-export default function SubmitButton({ status = 'ready' }: Props) {
+const defaultOptions: SubmitButtonOptions = {
+  ready: {
+    text: 'Submit',
+    icon: <SendIcon />,
+  },
+  submitting: {
+    text: 'Submitting...',
+    icon: <CircularProgress />,
+  },
+  done: {
+    text: 'Done',
+    icon: <DoneIcon />,
+  },
+};
+
+interface Props {
+  status?: SubmitStatus;
+  options?: Partial<SubmitButtonOptions>;
+}
+
+export default function SubmitButton({ status = 'ready', options }: Props) {
   const classes = useStyles();
 
-  const props = (status: SubmitStatus): ButtonProps => {
-    switch (status) {
-      case 'ready':
-        return {
-          endIcon: <SendIcon />,
-          disabled: false,
-          children: 'Send',
-        };
-      case 'submitting':
-        return {
-          endIcon: <CircularProgress />,
-          disabled: true,
-          children: 'Sending...',
-        };
-      case 'done':
-        return {
-          endIcon: <DoneIcon />,
-          disabled: false,
-          children: 'Email Sent',
-          className: classes.doneButton,
-        };
-    }
+  const newOptions = { ...defaultOptions, ...options };
+
+  const states = {
+    ready: {
+      endIcon: newOptions.ready.icon,
+      children: newOptions.ready.text,
+      disabled: false,
+    },
+    submitting: {
+      endIcon: newOptions.submitting.icon,
+      children: newOptions.submitting.text,
+      disabled: true,
+    },
+    done: {
+      endIcon: newOptions.done.icon,
+      children: newOptions.done.text,
+      disabled: false,
+      className: classes.doneButton,
+    },
   };
+  const { children, ...props } = states[status];
 
   return (
-    <Button variant='contained' {...props(status)}>
-      Email Sent
+    <Button variant='contained' {...props}>
+      {children}
     </Button>
   );
 }
