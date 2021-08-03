@@ -2,7 +2,6 @@ import Container from '@material-ui/core/Container';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import React from 'react';
@@ -39,10 +38,7 @@ export default function UserMenu() {
         open={showNavDrawer}
         onClose={() => setShowNavDrawer(false)}
       >
-        <Container
-        
-        className={classes.UserDrawerContainer}
-        >
+        <Container className={classes.UserDrawerContainer}>
           <LoginForm />
         </Container>
       </Drawer>

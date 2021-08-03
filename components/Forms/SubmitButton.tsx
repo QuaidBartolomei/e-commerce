@@ -1,4 +1,5 @@
 import Button from '@material-ui/core/Button';
+import { ButtonProps } from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import DoneIcon from '@material-ui/icons/Done';
@@ -44,12 +45,16 @@ const defaultOptions: SubmitButtonOptions = {
   },
 };
 
-interface Props {
+export type SubmitButtonProps = ButtonProps & {
   status?: SubmitStatus;
   options?: Partial<SubmitButtonOptions>;
-}
+};
 
-export default function SubmitButton({ status = 'ready', options }: Props) {
+export default function SubmitButton({
+  status = 'ready',
+  options,
+  ...buttonProps
+}: SubmitButtonProps) {
   const classes = useStyles();
 
   const newOptions = { ...defaultOptions, ...options };
@@ -75,7 +80,7 @@ export default function SubmitButton({ status = 'ready', options }: Props) {
   const { children, ...props } = states[status];
 
   return (
-    <Button variant='contained' {...props}>
+    <Button variant='contained' {...buttonProps} {...props}>
       {children}
     </Button>
   );

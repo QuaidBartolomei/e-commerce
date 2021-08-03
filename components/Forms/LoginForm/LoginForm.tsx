@@ -68,15 +68,11 @@ export default function LoginForm() {
     if (res.status === 200) setSubmitState('done');
   };
 
- const GoogleLoginButton = ()=>(
-<Button
-onClick={()=>{
-  firebase
-}}
->
-Google Sign In
-</Button>
- ) 
+  const GoogleLoginButton = () => (
+    <Button
+    variant='contained'
+    onClick={() => {}}>Sign In With Google</Button>
+  );
 
   return (
     <Formik
@@ -88,10 +84,12 @@ Google Sign In
         <Typography variant='h5' className={classes.forgotPasswordLink}>
           Sign In
         </Typography>
-        <GoogleLoginButton />
         <EmailField />
         <PasswordField />
-        <SubmitButton status={submitState} />
+        <SubmitButton status={submitState}
+        color='primary'
+        />
+        <GoogleLoginButton />
         <Link href={routes.register} className={classes.forgotPasswordLink}>
           Forgot Password
         </Link>

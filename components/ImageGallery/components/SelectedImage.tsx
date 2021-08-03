@@ -1,39 +1,35 @@
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { useImageGalleryState, useImageGalleryDispatch } from '../ImageGallery';
 import React from 'react';
+import { useImageGalleryDispatch, useImageGalleryState } from '../ImageGallery';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
-    mainImageContainer: {
+    mainImageContainer: ({ imageUrl }: { imageUrl: string }) => ({
       border: 'black 2px solid',
       display: 'flex',
       justifyContent: 'center',
       width: '100%',
       height: 320,
+      backgroundImage: `url(${imageUrl})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       '&:hover': {
         cursor: 'pointer',
       },
-    },
+    }),
   })
 );
 
 export default function SelectedImage() {
-  const classes = useStyles();
-  const dispatch = useImageGalleryDispatch();
   const { selectedImage } = useImageGalleryState();
+  const classes = useStyles({ imageUrl: selectedImage });
+  const dispatch = useImageGalleryDispatch();
   return (
     <Link onClick={() => dispatch({ type: 'toggle_show_fullsize_image' })}>
-      <Box
-        className={classes.mainImageContainer}
-        style={{
-          backgroundImage: `url(${selectedImage})`,
-        }}
-      />
+      <Box className={classes.mainImageContainer} />
     </Link>
   );
 }
