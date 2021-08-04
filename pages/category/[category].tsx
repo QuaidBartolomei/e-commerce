@@ -22,7 +22,6 @@ const useStyles = makeStyles(theme =>
       justifyContent: 'center',
       alignItems: 'center',
     },
-    grid: {},
   })
 );
 
@@ -30,28 +29,21 @@ interface Params {
   params: { category: string };
 }
 
-interface Props {
+interface CategoryPageProps {
   items: Product[];
 }
 
-export default function CategoryPage({ items }: Props) {
+export default function CategoryPage({ items }: CategoryPageProps) {
   const classes = useStyles();
 
   return (
     <Container className={classes.container}>
-      <Grid
-        container
-        direction='row'
-        spacing={gridSpacing}
-        className={classes.grid}
-        justify='center'
-      >
+      <Grid container direction='row' spacing={gridSpacing} justify='center'>
         {items.map(item => (
           <Grid
             item
             key={item.id}
             className={classes.gridItem}
-            justify='flex-start'
           >
             <ShopItemCard item={item} />
           </Grid>
@@ -64,11 +56,8 @@ export default function CategoryPage({ items }: Props) {
 export const getStaticProps = async ({ params }: Params) => {
   const { category } = params;
   const items = await getShopItemsByCategory(category as ShopItemCategory);
-  return {
-    props: {
-      items,
-    },
-  };
+  const props = { items };
+  return { props };
 };
 
 export async function getStaticPaths() {

@@ -11,7 +11,9 @@ import routes from './routes';
 const firestore = () => firebase.firestore();
 const storage = () => firebase.storage();
 
-export async function getShopItemById(id: string): Promise<Product | undefined> {
+export async function getShopItemById(
+  id: string
+): Promise<Product | undefined> {
   const route = routes.api.items(id);
   const res = await axios.get(route);
   const { item } = res.data;
@@ -30,7 +32,7 @@ export async function getShopItemsByCategory(
 ): Promise<Product[]> {
   const route = routes.api.categories(category);
   const res = await axios.get(route);
-  const items = res.data;
+  const { items } = res.data;
   return items;
 }
 
