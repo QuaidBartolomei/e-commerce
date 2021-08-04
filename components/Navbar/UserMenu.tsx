@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme =>
 
 export default function UserMenu() {
   const classes = useStyles();
-  const [showNavDrawer, setShowNavDrawer] = React.useState(true);
+  const [showNavDrawer, setShowNavDrawer] = React.useState(false);
 
   return (
     <React.Fragment>
