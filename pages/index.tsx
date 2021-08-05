@@ -30,16 +30,6 @@ type HomepageProps = {
   sortedItems: SortedItems[];
 };
 
-export const getStaticProps = async () => {
-  const shopItems = await getShopItems();
-  const sortedItems: SortedItems[] = Categories.map(category => ({
-    category,
-    items: shopItems.filter(x => x.category === category),
-  }));
-  const props: HomepageProps = { sortedItems };
-  return { props };
-};
-
 export default function Homepage({ sortedItems }: HomepageProps) {
   const classes = useStyles();
 
@@ -59,3 +49,13 @@ export default function Homepage({ sortedItems }: HomepageProps) {
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  const shopItems = await getShopItems();
+  const sortedItems: SortedItems[] = Categories.map(category => ({
+    category,
+    items: shopItems.filter(x => x.category === category),
+  }));
+  const props: HomepageProps = { sortedItems };
+  return { props };
+};

@@ -1,12 +1,13 @@
 import { NextApiHandler } from 'next';
-import { DbCollections, firestore, initFirebase } from 'utils/firebase.utils';
+import firebase, { DbCollections, initFirebase } from 'utils/firebase.utils';
 
 initFirebase();
 
 const handler: NextApiHandler = async (req, res) => {
   try {
     const { userId } = req.query as { userId: string };
-    const userDoc = await firestore
+    const userDoc = await firebase
+      .firestore()
       .collection(DbCollections.Items)
       .doc(userId)
       .get();

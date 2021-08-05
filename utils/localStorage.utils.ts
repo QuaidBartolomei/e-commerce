@@ -9,7 +9,6 @@ export const getIntialState = <T>(storageKey: string): T | undefined => {
     }
     return JSON.parse(savedState ?? '{}') as T;
   } catch (e) {
-    console.error('Error loading state : ' + storageKey);
     return undefined;
   }
 };

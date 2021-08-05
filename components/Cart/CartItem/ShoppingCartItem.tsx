@@ -11,7 +11,6 @@ import { useQuery } from 'react-query';
 import routes from 'utils/routes';
 import { getShopItemById } from 'utils/shopItem.util';
 import QuantitySelect from '../QuantitySelect';
-import { CartItem } from './CartItem.interface';
 import RemoveButton from './RemoveButton';
 
 const useStyles = makeStyles(theme =>
@@ -40,10 +39,11 @@ interface Props {
 }
 
 export default function ShoppingCartItem({ item }: Props) {
+  const { size, color, quantity, id } = item;
+  const itemLink = routes.item(id);
   const classes = useStyles();
   const userDispatch = useUserDispatch();
 
-  const { size, color, quantity, id } = item;
   const { isLoading, isError, data } = useQuery('cartItemData', () =>
     getShopItemById(id)
   );
@@ -51,8 +51,6 @@ export default function ShoppingCartItem({ item }: Props) {
   function onChangeQuantity() {
     userDispatch({ type: 'change_item_quantity', payload: { id, quantity } });
   }
-
-  const itemLink = routes.item(id);
 
   if (isLoading || !data) return <div>'Loading...'</div>;
   if (isError) return <div>'An error has occurred: '</div>;
@@ -64,6 +62,7 @@ export default function ShoppingCartItem({ item }: Props) {
       <img className={classes.img} alt={name} src={imageUrls[0]} />
     </ButtonBase>
   );
+
   const TitleLink = () => (
     <Link href={itemLink}>
       <Typography gutterBottom variant='subtitle1'>
@@ -86,7 +85,7 @@ export default function ShoppingCartItem({ item }: Props) {
           </Grid>
         </Grid>
       </Paper>
-      <RemoveButton />
+      <RemoveButton itemId={id} />
     </>
   );
 }
