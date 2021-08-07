@@ -41,6 +41,10 @@ const ItemDetailsText = ({ item }: { item: Product }) => {
 
   const sizes = useMemo(() => getSizes(item), [item.inventory]);
   const colors = useMemo(() => getColors(item), [item.inventory]);
+  const description = loremIpsum({
+    count: 3,
+    units: 'sentence',
+  });
 
   type ProductFormData = {
     size: string;
@@ -86,7 +90,7 @@ const ItemDetailsText = ({ item }: { item: Product }) => {
           <AddToCartButton />
         </Form>
       </Formik>
-      <Typography>{loremIpsum({ count: 3, units: 'sentence' })}</Typography>
+      <Typography>{description}</Typography>
       <ItemAddedAlert show={showAlert} />
     </Container>
   );

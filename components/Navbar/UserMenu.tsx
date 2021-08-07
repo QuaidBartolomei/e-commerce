@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme =>
       justifyContent: 'center',
       paddingTop: theme.spacing(2),
     },
-    title: {},
   })
 );
 
@@ -23,8 +22,8 @@ export default function UserMenu() {
   const classes = useStyles();
   const [showNavDrawer, setShowNavDrawer] = React.useState(false);
 
-  return (
-    <React.Fragment>
+  function UserButton() {
+    return (
       <IconButton
         edge='start'
         color='inherit'
@@ -33,10 +32,17 @@ export default function UserMenu() {
       >
         <AccountCircleIcon />
       </IconButton>
+    );
+  }
+
+  return (
+    <React.Fragment>
+      <UserButton />
       <Drawer
         anchor='right'
         open={showNavDrawer}
         onClose={() => setShowNavDrawer(false)}
+        transitionDuration={{ appear: 500, enter: 500, exit: 500 }}
       >
         <Container className={classes.UserDrawerContainer}>
           <LoginForm />

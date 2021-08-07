@@ -1,8 +1,8 @@
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import React, { PropsWithChildren } from 'react';
 
 // Create a theme instance.
-export const theme = createMuiTheme({
+export const theme = createTheme({
   palette: {
     background: {},
     primary: {

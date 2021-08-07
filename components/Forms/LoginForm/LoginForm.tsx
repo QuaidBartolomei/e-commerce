@@ -1,23 +1,25 @@
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
+import { GoogleSignInButton } from 'components/GoogleSignInButton';
+import { useUserState } from 'components/User/user.context';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import EmailField from '../Fields/EmailField';
-import SubmitButton, { SubmitStatus } from '../SubmitButton';
-import axios from 'axios';
 import routes from 'utils/routes';
-import PasswordField from '../Fields/PasswordField';
+import { signout } from 'utils/user.util';
 import * as yup from 'yup';
-import LinkButton from 'components/LinkButton';
-import Link from '@material-ui/core/Link';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import EmailField from '../Fields/EmailField';
+import PasswordField from '../Fields/PasswordField';
+import SubmitButton, { SubmitStatus } from '../SubmitButton';
 
-interface FormData {
+interface LoginFormData {
   email: string;
   password: string;
 }
 
-const initialValues: FormData = {
+const initialValues: LoginFormData = {
   email: '',
   password: '',
 };
@@ -62,17 +64,15 @@ export default function LoginForm() {
   const classes = useStyles();
   const [submitState, setSubmitState] = React.useState<SubmitStatus>('ready');
 
-  const onSubmit = async (values: FormData) => {
+  const { isAuth } = useUserState();
+
+  if (isAuth) return <Button onClick={signout}>Sign Out</Button>;
+
+  const onSubmit = async (values: LoginFormData) => {
     setSubmitState('submitting');
     const res = await axios.post(routes.api.login, values);
     if (res.status === 200) setSubmitState('done');
   };
-
-  const GoogleLoginButton = () => (
-    <Button
-    variant='contained'
-    onClick={() => {}}>Sign In With Google</Button>
-  );
 
   return (
     <Formik
@@ -86,10 +86,8 @@ export default function LoginForm() {
         </Typography>
         <EmailField />
         <PasswordField />
-        <SubmitButton status={submitState}
-        color='primary'
-        />
-        <GoogleLoginButton />
+        <SubmitButton status={submitState} />
+        <GoogleSignInButton />
         <Link href={routes.register} className={classes.forgotPasswordLink}>
           Forgot Password
         </Link>

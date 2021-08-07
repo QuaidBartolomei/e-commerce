@@ -4,9 +4,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { getItemData } from 'apis/shopItem.api';
+import { useUserState } from 'components/User/user.context';
 import React, { useEffect, useState } from 'react';
-import { useUserState } from 'UserContext';
+import OrderSummary from './OrderSummary';
 
 const addresses = [
   '1 Material-UI Drive',
@@ -38,12 +38,6 @@ const payments = [
 ];
 
 const useStyles = makeStyles((theme) => ({
-  listItem: {
-    padding: theme.spacing(1, 0),
-  },
-  total: {
-    fontWeight: 700,
-  },
   title: {
     marginTop: theme.spacing(2),
   },
@@ -81,58 +75,6 @@ export default function Review() {
         ))}
       </Grid>
     </Grid>
-  );
-
-  const CartItems = () => (
-    <React.Fragment>
-      {cart.map((item, key) => {
-        let { id } = item;
-        return <CartItem itemId={id} key={key} />;
-      })}
-    </React.Fragment>
-  );
-  const CartItem = ({ itemId }: { itemId: string }) => {
-    const [itemDetails, setItemDetails] = useState<{
-      name: string;
-      price: number;
-    }>();
-
-    useEffect(() => {
-      getItemData(itemId).then((data) => {
-        if (!data) return;
-        const { name, price } = data;
-        setItemDetails({
-          name,
-          price,
-        });
-      });
-    }, [itemId]);
-
-    if (!itemDetails) return null;
-    const { name, price } = itemDetails;
-    return (
-      <ListItem className={classes.listItem}>
-        <ListItemText primary={name} secondary={name} />
-        <Typography variant='body2'>{price}</Typography>
-      </ListItem>
-    );
-  };
-
-  const OrderSummary = () => (
-    <React.Fragment>
-      <Typography variant='h6' gutterBottom>
-        Order summary
-      </Typography>
-      <List disablePadding>
-        <CartItems />
-        <ListItem className={classes.listItem}>
-          <ListItemText primary='Total' />
-          <Typography variant='subtitle1' className={classes.total}>
-            $34.06
-          </Typography>
-        </ListItem>
-      </List>
-    </React.Fragment>
   );
 
   return (

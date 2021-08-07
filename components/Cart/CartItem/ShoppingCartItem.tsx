@@ -9,7 +9,7 @@ import { CartItemData } from 'interfaces/shopItem.interface';
 import React from 'react';
 import { useQuery } from 'react-query';
 import routes from 'utils/routes';
-import { getShopItemById } from 'utils/shopItem.util';
+import { formatItemPrice, getShopItemById } from 'utils/shopItem.util';
 import QuantitySelect from '../QuantitySelect';
 import RemoveButton from './RemoveButton';
 
@@ -48,8 +48,11 @@ export default function ShoppingCartItem({ item }: Props) {
     getShopItemById(id)
   );
 
-  function onChangeQuantity() {
-    userDispatch({ type: 'change_item_quantity', payload: { id, quantity } });
+  function onChangeQuantity(newQuantity: number) {
+    userDispatch({
+      type: 'change_item_quantity',
+      payload: { id, quantity: newQuantity },
+    });
   }
 
   if (isLoading || !data) return <div>'Loading...'</div>;
@@ -80,7 +83,7 @@ export default function ShoppingCartItem({ item }: Props) {
           </Grid>
           <Grid item xs>
             <TitleLink />
-            <Typography variant='subtitle1'>${price.toFixed(2)}</Typography>
+            <Typography variant='subtitle1'>{formatItemPrice(data)}</Typography>
             <QuantitySelect quantity={quantity} onChange={onChangeQuantity} />
           </Grid>
         </Grid>

@@ -76,6 +76,7 @@ export default function Checkout() {
         throw new Error('Unknown step');
     }
   };
+
   return (
     <main className={classes.layout}>
       <Paper className={classes.paper}>

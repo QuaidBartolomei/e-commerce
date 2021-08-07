@@ -60,3 +60,7 @@ export async function getCartTotal(cart: CartItemData[]): Promise<number> {
   }
   return total;
 }
+
+export function formatItemPrice(item: Product) {
+  return `$${item.price.toFixed(2)}`;
+}

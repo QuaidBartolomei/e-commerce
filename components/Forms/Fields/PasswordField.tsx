@@ -1,6 +1,6 @@
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { useFormikContext } from 'formik';
+import TextField, { TextFieldProps } from '@material-ui/core/TextField';
+import { useField, useFormikContext } from 'formik';
 import React from 'react';
 
 const useStyles = makeStyles(theme =>
@@ -10,6 +10,21 @@ const useStyles = makeStyles(theme =>
     },
   })
 );
+
+function FormikTextField(props: TextFieldProps) {
+  const { name = 'MISSING_NAME' } = props;
+  const [field, meta, helpers] = useField(name);
+  const { touched, error } = meta;
+
+  return (
+    <TextField
+      {...props}
+      {...field}
+      error={touched && Boolean(error)}
+      helperText={touched && error}
+    />
+  );
+}
 
 export default function PasswordField() {
   const { values, handleChange, touched, errors } =

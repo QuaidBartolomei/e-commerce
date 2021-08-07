@@ -8,9 +8,6 @@ import React from 'react';
 
 const useStyles = makeStyles(theme =>
   createStyles({
-    SubmitButtonContainer: {
-      // styles here
-    },
     doneButton: {
       backgroundColor: theme.palette.success.main,
     },
@@ -80,7 +77,13 @@ export default function SubmitButton({
   const { children, ...props } = states[status];
 
   return (
-    <Button variant='contained' {...buttonProps} {...props}>
+    <Button
+      variant='contained'
+      color='primary'
+      type='submit'
+      {...buttonProps}
+      {...props}
+    >
       {children}
     </Button>
   );

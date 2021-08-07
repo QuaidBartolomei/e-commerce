@@ -32,7 +32,11 @@ export async function initTest() {
 }
 
 export async function signInWithGoogle() {
-  firebase.auth().signInWithPopup(provider);
+  return firebase.auth().signInWithPopup(provider);
+}
+
+export async function signOut() {
+  return firebase.auth().signOut()
 }
 
 export async function getDocData<T>(
