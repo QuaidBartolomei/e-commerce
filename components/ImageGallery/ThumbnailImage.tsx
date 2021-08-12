@@ -1,7 +1,7 @@
 import Box from '@material-ui/core/Box';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { useImageGalleryDispatch } from '../ImageGallery';
+import { useImageGalleryDispatch } from './ImageGallery';
 
 const useStyles = makeStyles(theme =>
   createStyles({

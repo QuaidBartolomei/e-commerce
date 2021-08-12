@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
-import ItemDetailsText from 'components/ItemDetailsText';
+import ItemDetailsText from 'components/ShopItem/ItemDetailsText';
 import { Product } from 'interfaces/shopItem.interface';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';

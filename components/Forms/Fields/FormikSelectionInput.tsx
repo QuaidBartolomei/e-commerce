@@ -5,6 +5,7 @@ import Select from '@material-ui/core/Select';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useField } from 'formik';
 import React from 'react';
+
 const useStyles = makeStyles(theme =>
   createStyles({
     selectionInput: {
@@ -19,18 +20,14 @@ export type SelectionInputProps = {
   selectionValues: string[];
 };
 
-export function SelectionInput(props: SelectionInputProps) {
+export function FormikSelectionInput(props: SelectionInputProps) {
   const classes = useStyles();
   const { name, selectionValues } = props;
-  const [field, meta, helpers] = useField(name);
+  const [field] = useField(name);
   return (
     <FormControl className={classes.selectionInput}>
       <InputLabel id={`${name}_label`}>{name}</InputLabel>
-      <Select
-        required
-        labelId={`${name}_label`}
-	{...field}
-      >
+      <Select required labelId={`${name}_label`} {...field}>
         {selectionValues.map(value => (
           <MenuItem value={value} key={value}>
             {value}

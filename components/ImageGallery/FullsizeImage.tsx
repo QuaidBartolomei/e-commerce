@@ -1,7 +1,7 @@
 import Backdrop from '@material-ui/core/Backdrop';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { useImageGalleryState, useImageGalleryDispatch } from '../ImageGallery';
+import { useImageGalleryState, useImageGalleryDispatch } from './ImageGallery';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

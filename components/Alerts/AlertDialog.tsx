@@ -3,7 +3,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import React, { useState } from 'react';
-import { useCart } from './Cart/useCart';
 
 interface Props {
   open?: boolean;
@@ -23,8 +22,6 @@ export default function AlertDialog(props: Props) {
   } = props;
 
   const [openState, setOpenState] = useState(open);
-
-  const {itemToRemove} = useCart()
 
   return (
     <Dialog

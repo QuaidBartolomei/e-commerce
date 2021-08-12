@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useUserDispatch } from 'components/User/user.context';
-import AlertDialog from 'components/AlertDialog';
-import { useCart } from './useCart';
+import { useCart } from '../Cart/useCart';
+import AlertDialog from 'components/Alerts/AlertDialog';
 
 const useStyles = makeStyles(theme =>
   createStyles({

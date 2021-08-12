@@ -10,8 +10,8 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import routes from 'utils/routes';
 import { formatItemPrice, getShopItemById } from 'utils/shopItem.util';
-import QuantitySelect from '../QuantitySelect';
-import RemoveButton from './RemoveButton';
+import QuantitySelect from '../../Forms/Fields/QuantitySelect';
+import RemoveButton from '../../Forms/Buttons/RemoveButton';
 
 const useStyles = makeStyles(theme =>
   createStyles({

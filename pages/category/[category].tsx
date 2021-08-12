@@ -1,7 +1,7 @@
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import ShopItemCard from 'components/ShopItemCard';
+import ShopItemCard from 'components/ShopItem/ShopItemCard';
 import {
   Categories,
   Product,

@@ -13,12 +13,13 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
       width: '240px',
     },
-    imageContainer: {
+    imageContainer: ({ backgroundImage }: { backgroundImage: string }) => ({
       width: '100%',
       height: '240px',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
-    },
+      backgroundImage,
+    }),
     label: {
       display: 'flex',
       flexDirection: 'column',
@@ -29,7 +30,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ShopItemCard = ({ item }: { item: Product }) => {
-  const classes = useStyles();
+  const classes = useStyles({
+    backgroundImage: `url(${item.imageUrls[0]})`,
+  });
   const [isHover, setIsHover] = useState(false);
   return (
     <Link href={routes.item(item.id)}>
@@ -39,12 +42,7 @@ const ShopItemCard = ({ item }: { item: Product }) => {
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
-        <div
-          className={classes.imageContainer}
-          style={{
-            backgroundImage: `url(${item.imageUrls[0]})`,
-          }}
-        />
+        <div className={classes.imageContainer} />
         <Container className={classes.label}>
           <Typography>{item.name}</Typography>
           <Typography>{`$${item.price}`}</Typography>

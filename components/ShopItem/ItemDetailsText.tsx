@@ -9,9 +9,9 @@ import { Product } from 'interfaces/shopItem.interface';
 import { loremIpsum } from 'lorem-ipsum';
 import React, { useMemo } from 'react';
 import { getColors, getSizes } from 'utils/shopItems.utils';
-import ItemAddedAlert from './ItemAddedAlert';
-import { SelectionInput } from './SelectionInput';
-import { useUserDispatch } from './User/user.context';
+import ItemAddedAlert from '../Alerts/ItemAddedAlert';
+import { FormikSelectionInput } from '../Forms/Fields/FormikSelectionInput';
+import { useUserDispatch } from '../User/user.context';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -85,8 +85,8 @@ const ItemDetailsText = ({ item }: { item: Product }) => {
       <Divider />
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form className={classes.form}>
-          <SelectionInput name='size' selectionValues={sizes} />
-          <SelectionInput name='color' selectionValues={colors} />
+          <FormikSelectionInput name='size' selectionValues={sizes} />
+          <FormikSelectionInput name='color' selectionValues={colors} />
           <AddToCartButton />
         </Form>
       </Formik>

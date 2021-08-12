@@ -1,11 +1,11 @@
 import Container from '@material-ui/core/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import FullsizeImage from './FullsizeImage';
+import SelectedImage from './SelectedImage';
+import ThumbnailGrid from './ThumbnailGrid';
 import React, { createContext, useContext, useReducer } from 'react';
-import FullsizeImage from './components/FullsizeImage';
-import SelectedImage from './components/SelectedImage';
-import ThumbnailGrid from './components/ThumbnailGrid';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     container: {
       display: 'flex',
@@ -60,7 +60,7 @@ export default function ImageGallery(props: Props) {
       </DispatchContext.Provider>
     </StateContext.Provider>
   );
-};
+}
 
 export function useImageGalleryState() {
   const context = useContext(StateContext);

@@ -3,7 +3,7 @@ import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
-import { GoogleSignInButton } from 'components/GoogleSignInButton';
+import { GoogleSignInButton } from 'components/Forms/Buttons/GoogleSignInButton';
 import { useUserState } from 'components/User/user.context';
 import { Form, Formik } from 'formik';
 import React from 'react';
@@ -12,7 +12,7 @@ import { signout } from 'utils/user.util';
 import * as yup from 'yup';
 import EmailField from '../Fields/EmailField';
 import PasswordField from '../Fields/PasswordField';
-import SubmitButton, { SubmitStatus } from '../SubmitButton';
+import SubmitButton, { SubmitStatus } from '../Buttons/SubmitButton';
 
 interface LoginFormData {
   email: string;

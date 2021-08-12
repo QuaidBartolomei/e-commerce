@@ -1,7 +1,7 @@
 import Container from '@material-ui/core/Container/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import BannerImage from 'components/BannerImage/BannerImage';
-import ShopItemCarousel from 'components/ShopItemCarousel';
+import BannerImage from 'components/BannerImage';
+import ShopItemCarousel from 'components/ShopItem/ShopItemCarousel';
 import {
   Categories,
   Product,

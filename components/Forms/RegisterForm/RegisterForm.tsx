@@ -2,7 +2,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import EmailField from 'components/Forms/Fields/EmailField';
-import SubmitButton, { SubmitStatus } from '../SubmitButton';
+import SubmitButton, { SubmitStatus } from '../Buttons/SubmitButton';
 import axios from 'axios';
 import routes from 'utils/routes';
 import PasswordField from '../Fields/PasswordField';

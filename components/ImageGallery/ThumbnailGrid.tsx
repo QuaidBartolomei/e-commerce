@@ -1,6 +1,6 @@
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { useImageGalleryState } from '../ImageGallery';
+import { useImageGalleryState } from './ImageGallery';
 import ThumbnailImage from './ThumbnailImage';
 
 const useStyles = makeStyles(theme =>

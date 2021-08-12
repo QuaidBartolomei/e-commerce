@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { Product, ShopItemCategory } from 'interfaces/shopItem.interface';
 import React from 'react';
-import ShopItemCard from 'components/ShopItemCard';
+import ShopItemCard from 'components/ShopItem/ShopItemCard';
 import routes from 'utils/routes';
 
 // Horizontal scrolling list of shop items

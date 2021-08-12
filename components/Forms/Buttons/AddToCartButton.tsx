@@ -1,11 +1,11 @@
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-import Alert from 'components/Alert';
+import Alert from 'components/Alerts/Alert';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { CartItemData } from 'interfaces/shopItem.interface';
 import React from 'react';
-import { useUserDispatch } from './User/user.context';
+import { useUserDispatch } from 'components/User/user.context';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

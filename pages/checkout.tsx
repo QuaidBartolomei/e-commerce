@@ -5,9 +5,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import AddressForm from 'components/Checkout/AddressForm';
+import AddressForm from 'components/Forms/AddressForm';
 import React from 'react';
-import PaymentForm from 'components/Checkout/PaymentForm';
+import PaymentForm from 'components/Forms/PaymentForm';
 import Review from 'components/Checkout/Review';
 import { useUserState } from 'components/User/user.context';
 
