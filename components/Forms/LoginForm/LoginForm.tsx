@@ -74,6 +74,20 @@ export default function LoginForm() {
     if (res.status === 200) setSubmitState('done');
   };
 
+  const ForgotPasswordLink = () => (
+    <Link href={routes.register} className={classes.forgotPasswordLink}>
+      Forgot Password
+    </Link>
+  );
+
+  const CreateNewAccountButton = () => (
+    <Link href={routes.register} className={classes.registerButton}>
+      <Button variant='contained' color='secondary'>
+        Create New Account
+      </Button>
+    </Link>
+  );
+
   return (
     <Formik
       initialValues={initialValues}
@@ -88,14 +102,8 @@ export default function LoginForm() {
         <PasswordField />
         <SubmitButton status={submitState} />
         <GoogleSignInButton />
-        <Link href={routes.register} className={classes.forgotPasswordLink}>
-          Forgot Password
-        </Link>
-        <Link href={routes.register} className={classes.registerButton}>
-          <Button variant='contained' color='secondary'>
-            Create New Account
-          </Button>
-        </Link>
+        <ForgotPasswordLink />
+        <CreateNewAccountButton />
       </Form>
     </Formik>
   );

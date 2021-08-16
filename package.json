@@ -1,5 +1,5 @@
 {
-  "name": "react-boilerplate",
+  "name": "cab-clothing",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -38,12 +38,13 @@
     "@testing-library/user-event": "^13.1.9",
     "@types/jest": "^26.0.23",
     "@types/react-test-renderer": "^17.0.1",
+    "eslint-config-next": "^11.1.0",
     "jest-environment-jsdom": "27.0.6",
     "react-test-renderer": "^17.0.2"
   },
   "peerDependencies": {},
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "next"
   },
   "browserslist": {
     "production": [

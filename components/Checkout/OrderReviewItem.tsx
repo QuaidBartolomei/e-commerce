@@ -25,8 +25,8 @@ export default function OrderReviewItem({ item }: { item: CartItemData }) {
   const { isLoading, isError, data } = useQuery('cartItemData', () =>
     getShopItemById(id)
   );
-  if (isLoading || !data) return <div>'Loading...'</div>;
-  if (isError) return <div>'An error has occurred: '</div>;
+  if (isLoading || !data) return <div>Loading...</div>;
+  if (isError) return <div>An error has occurred: </div>;
   const { name, price } = data;
   return (
     <ListItem className={classes.listItem}>

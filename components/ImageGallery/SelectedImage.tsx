@@ -2,7 +2,7 @@ import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { useImageGalleryDispatch, useImageGalleryState } from './ImageGallery';
+import { useImageGalleryDispatch, useImageGalleryState } from './ImageGalleryState';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -12,6 +12,10 @@ const useStyles = makeStyles(theme =>
       justifyContent: 'center',
       width: '100%',
       height: 320,
+      [theme.breakpoints.up('lg')]: {
+        height: 640,
+      },
+      maxHeight: '100vh',
       backgroundImage: `url(${imageUrl})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',

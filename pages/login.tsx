@@ -1,11 +1,9 @@
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import { useUserState } from 'components/User/user.context';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
-import routes from 'utils/routes';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -31,7 +29,7 @@ export default function LoginPage() {
   React.useEffect(() => {
     if (!isAuth) return;
     router.push('/');
-  }, [isAuth]);
+  }, [isAuth, router]);
 
   return (
     <Container className={classes.container}>

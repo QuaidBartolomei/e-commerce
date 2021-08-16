@@ -30,6 +30,9 @@ const useStyles = makeStyles(theme =>
         margin: theme.spacing(2),
       },
     },
+    addToCartButton: {
+      maxWidth: 320,
+    },
   })
 );
 
@@ -39,8 +42,8 @@ const ItemDetailsText = ({ item }: { item: Product }) => {
   const userDispatch = useUserDispatch();
   const [showAlert, setShowAlert] = React.useState(false);
 
-  const sizes = useMemo(() => getSizes(item), [item.inventory]);
-  const colors = useMemo(() => getColors(item), [item.inventory]);
+  const sizes = useMemo(() => getSizes(item), [item]);
+  const colors = useMemo(() => getColors(item), [item]);
   const description = loremIpsum({
     count: 3,
     units: 'sentence',
@@ -57,6 +60,7 @@ const ItemDetailsText = ({ item }: { item: Product }) => {
         variant='outlined'
         startIcon={<AddShoppingCartIcon />}
         type='submit'
+        className={classes.addToCartButton}
       >
         Add To Cart
       </Button>

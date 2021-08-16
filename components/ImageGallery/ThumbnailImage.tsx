@@ -1,13 +1,16 @@
 import Box from '@material-ui/core/Box';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { useImageGalleryDispatch } from './ImageGallery';
+import { useImageGalleryDispatch } from './ImageGalleryState';
 
 const useStyles = makeStyles(theme =>
   createStyles({
     thumbnailImage: (props: { image: string; selected: boolean }) => ({
       width: '20%',
       height: 64,
+      [theme.breakpoints.up('lg')]: {
+        height: 128,
+      },
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',

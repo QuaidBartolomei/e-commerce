@@ -1,4 +1,4 @@
-import ButtonBase from '@material-ui/core/ButtonBase';
+import ButtonBase, { ButtonBaseProps } from '@material-ui/core/ButtonBase';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
@@ -26,6 +26,15 @@ const useStyles = makeStyles(theme =>
     img: {
       maxWidth: '100%',
       maxHeight: '100%',
+    },
+    imageSrc: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center 40%',
     },
     formControl: {
       width: 'fit-content',
@@ -55,14 +64,19 @@ export default function ShoppingCartItem({ item }: Props) {
     });
   }
 
-  if (isLoading || !data) return <div>'Loading...'</div>;
-  if (isError) return <div>'An error has occurred: '</div>;
+  if (isLoading || !data) return <div>Loading...</div>;
+  if (isError) return <div>An error has occurred: </div>;
 
-  const { name, imageUrls, price } = data;
+  const { name, imageUrls } = data;
 
   const ThumbnailImage = () => (
     <ButtonBase className={classes.image} href={itemLink}>
-      <img className={classes.img} alt={name} src={imageUrls[0]} />
+      <span
+        className={classes.imageSrc}
+        style={{
+          backgroundImage: `url(${imageUrls[0]})`,
+        }}
+      />
     </ButtonBase>
   );
 

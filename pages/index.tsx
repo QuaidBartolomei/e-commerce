@@ -50,7 +50,7 @@ export default function Homepage({ sortedItems }: HomepageProps) {
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const shopItems = await getShopItems();
   const sortedItems: SortedItems[] = Categories.map(category => ({
     category,

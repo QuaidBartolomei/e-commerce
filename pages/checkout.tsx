@@ -5,33 +5,25 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import AddressForm from 'components/Forms/AddressForm';
-import React from 'react';
-import PaymentForm from 'components/Forms/PaymentForm';
 import Review from 'components/Checkout/Review';
-import { useUserState } from 'components/User/user.context';
+import { CheckoutPageStateProvider } from 'components/CheckoutPageState';
+import AddressForm from 'components/Forms/AddressForm';
+import PaymentForm from 'components/Forms/PaymentForm';
+import React from 'react';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
   },
-  layout: {
-    width: 'auto',
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-  },
   paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
+    margin: theme.spacing(3, 2),
     padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(6),
+      width: 600,
+      marginLeft: 'auto',
+      marginRight: 'auto',
       padding: theme.spacing(3),
     },
   },
@@ -52,18 +44,11 @@ const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
 export default function Checkout() {
   const classes = useStyles();
-  const user = useUserState();
   const [activeStep, setActiveStep] = React.useState(0);
-  const { cart: shoppingCart } = user;
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-  };
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-  };
+  const handleNext = () => setActiveStep(activeStep + 1);
+  const handleBack = () => setActiveStep(activeStep - 1);
 
-  console.log('shoppingCart', shoppingCart);
   const Content = () => {
     switch (activeStep) {
       case 0:
@@ -78,7 +63,7 @@ export default function Checkout() {
   };
 
   return (
-    <main className={classes.layout}>
+    <CheckoutPageStateProvider>
       <Paper className={classes.paper}>
         <Typography component='h1' variant='h4' align='center'>
           Checkout
@@ -124,6 +109,6 @@ export default function Checkout() {
           )}
         </React.Fragment>
       </Paper>
-    </main>
+    </CheckoutPageStateProvider>
   );
 }

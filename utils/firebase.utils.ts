@@ -10,25 +10,26 @@ export enum DbCollections {
   Items = 'items',
 }
 
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_authDomain,
+  databaseURL: process.env.NEXT_PUBLIC_databaseURL,
+  projectId: process.env.NEXT_PUBLIC_projectId,
+  storageBucket: process.env.NEXT_PUBLIC_storageBucket,
+  messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
+  appId: process.env.NEXT_PUBLIC_appId,
+};
+
 export function initFirebase() {
   if (firebase.apps.length > 0) return;
-  const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
-  const authDomain = process.env.NEXT_PUBLIC_authDomain;
-  const databaseURL = process.env.NEXT_PUBLIC_databaseURL;
-  const projectId = process.env.NEXT_PUBLIC_projectId;
-  const storageBucket = process.env.NEXT_PUBLIC_storageBucket;
-  const messagingSenderId = process.env.NEXT_PUBLIC_messagingSenderId;
-  const appId = process.env.NEXT_PUBLIC_appId;
-  firebase.initializeApp({
-    apiKey,
-    authDomain,
-    databaseURL,
-    projectId,
-    storageBucket,
-    messagingSenderId,
-    appId,
-  });
+
+  firebase.initializeApp(firebaseConfig);
   provider.setCustomParameters({ prompt: 'select_account' });
+}
+
+export function getFirestore() {
+  if (!firebase.firestore()) initFirebase();
+  return firebase.firestore();
 }
 
 export async function initTest() {

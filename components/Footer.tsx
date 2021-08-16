@@ -6,9 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import React from 'react';
-import { Routes } from 'Router';
+import routes from 'utils/routes';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     footer: {
       backgroundColor: theme.palette.primary.light,
@@ -31,9 +31,9 @@ const useStyles = makeStyles((theme) =>
 
 function Copyright() {
   return (
-    <Typography variant='body2' color='textSecondary' >
+    <Typography variant='body2' color='textSecondary'>
       {'Copyright © '}
-      <Link color='inherit' href={Routes.Homepage}>
+      <Link color='inherit' href={routes.index}>
         CAB Clothing
       </Link>{' '}
       {new Date().getFullYear()}

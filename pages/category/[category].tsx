@@ -40,11 +40,7 @@ export default function CategoryPage({ items }: CategoryPageProps) {
     <Container className={classes.container}>
       <Grid container direction='row' spacing={gridSpacing} justify='center'>
         {items.map(item => (
-          <Grid
-            item
-            key={item.id}
-            className={classes.gridItem}
-          >
+          <Grid item key={item.id} className={classes.gridItem}>
             <ShopItemCard item={item} />
           </Grid>
         ))}
@@ -53,17 +49,9 @@ export default function CategoryPage({ items }: CategoryPageProps) {
   );
 }
 
-export const getStaticProps = async ({ params }: Params) => {
+export const getServerSideProps = async ({ params }: Params) => {
   const { category } = params;
   const items = await getShopItemsByCategory(category as ShopItemCategory);
   const props = { items };
   return { props };
 };
-
-export async function getStaticPaths() {
-  const paths = Categories.map(category => ({
-    params: { category },
-  }));
-
-  return { paths, fallback: false };
-}
