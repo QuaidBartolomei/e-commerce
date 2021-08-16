@@ -8,21 +8,27 @@ interface UserModel {
   cart: CartItemData[];
 }
 
+export async function getUserById(id: string): Promise<UserModel | undefined> {
+  const userDoc = await firebase
+    .firestore()
+    .collection(DbCollections.Items)
+    .doc(id)
+    .get();
+  const user = userDoc.data() as UserModel;
+  return user;
+}
+
 export async function getUserCart(userId: string): Promise<CartItemData[]> {
-  const ref = firebase.firestore().collection(DbCollections.Users).doc(userId);
-  const doc = await ref.get();
-  if (!doc.exists) {
-    return [];
-  }
-  const user = doc.data() as UserModel;
+  const user = await getUserById(userId);
+  if (!user) return [];
   const { cart } = user; // await getCartData(user.cart);
   return cart;
 }
 
 export async function updateCart(cart: CartItemData[]) {
-  let user = auth().currentUser;
+  const user = auth().currentUser;
   if (!user) return;
-  let id = user.uid;
+  const id = user.uid;
   await firestore().collection(DbCollections.Users).doc(id).set({
     _id: id,
     cart,
