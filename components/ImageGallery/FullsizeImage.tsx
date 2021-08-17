@@ -1,6 +1,5 @@
 import Backdrop from '@material-ui/core/Backdrop';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import ImageButton from 'components/Forms/Buttons/ImageButton';
 import React from 'react';
 import {
   useImageGalleryDispatch,

@@ -1,27 +1,22 @@
-import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import {
   useImageGalleryDispatch,
   useImageGalleryState,
 } from './ImageGalleryState';
+import Image from 'next/image';
 
 const useStyles = makeStyles(theme =>
   createStyles({
-    selectedImage: ({ imageUrl }: { imageUrl: string }) => ({
-      border: 'black 2px solid',
+    selectedImage: () => ({
       display: 'flex',
       justifyContent: 'center',
       width: '100%',
+      position: 'relative',
       flexGrow: 1,
-      height: 400,
-      [theme.breakpoints.up('sm')]: {
-        height: 540,
-      },
-      backgroundImage: `url(${imageUrl})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
+      height: 320,
+      marginBottom: theme.spacing(1),
       '&:hover': {
         cursor: 'pointer',
       },
@@ -34,9 +29,16 @@ export default function SelectedImage() {
   const classes = useStyles({ imageUrl: selectedImage });
   const dispatch = useImageGalleryDispatch();
   return (
-    <Box
+    <Paper
       onClick={() => dispatch({ type: 'toggle_show_fullsize_image' })}
       className={classes.selectedImage}
-    />
+    >
+      <Image
+        src={selectedImage}
+        layout='fill'
+        objectFit='cover'
+        alt='product'
+      />
+    </Paper>
   );
 }

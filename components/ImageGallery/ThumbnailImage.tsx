@@ -1,21 +1,20 @@
-import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Image from 'next/image';
 import React from 'react';
 import { useImageGalleryDispatch } from './ImageGalleryState';
 
 const useStyles = makeStyles(theme =>
   createStyles({
-    thumbnailImage: (props: { image: string; selected: boolean }) => ({
+    thumbnailImage: () => ({
       width: '20%',
+      minWidth: 64,
       height: 64,
+      margin: theme.spacing(0.2),
+      position: 'relative',
       [theme.breakpoints.up('lg')]: {
-        height: 128,
+        height: 96,
       },
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      backgroundImage: `url(${props.image})`,
-      border: 'black 1px solid',
       '&:hover': {
         cursor: 'pointer',
       },
@@ -30,11 +29,18 @@ interface Props {
 
 export default function ThumbnailImage({ image, selected }: Props) {
   const dispatch = useImageGalleryDispatch();
-  const classes = useStyles({ image, selected });
+  const classes = useStyles();
+  const [isHover, setIsHover] = React.useState(false);
+  const elevated = isHover || selected;
   return (
-    <Box
+    <Paper
       className={classes.thumbnailImage}
       onClick={() => dispatch({ type: 'set_selected_image', payload: image })}
-    />
+      onMouseOver={() => setIsHover(true)}
+      onMouseOut={() => setIsHover(false)}
+      elevation={elevated ? 2 : 0}
+    >
+      <Image src={image} layout='fill' objectFit='cover' alt='product' />
+    </Paper>
   );
 }

@@ -37,10 +37,10 @@ export default function ItemPage({ item }: Props) {
   const classes = useStyles();
   return (
     <Grid container item  className={classes.itemDetailsPage}>
-      <Grid item md={5} xs={12} className={classes.imageGalleryContainer}>
+      <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
         <ImageGallery imageUrls={item.imageUrls} />
       </Grid>
-      <Grid item md={7} xs={12} className={classes.detailsContainer}>
+      <Grid item sm={7} xs={12} className={classes.detailsContainer}>
         <ItemDetailsText item={item} />
       </Grid>
     </Grid>
