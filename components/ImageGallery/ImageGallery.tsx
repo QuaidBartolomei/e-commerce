@@ -8,9 +8,7 @@ import ThumbnailGrid from './ThumbnailGrid';
 
 const useStyles = makeStyles(theme =>
   createStyles({
-    container: {
-      display: 'flex',
-      flexDirection: 'column',
+    imageGallery: {
     },
   })
 );
@@ -25,7 +23,7 @@ export default function ImageGallery(props: Props) {
   return (
     <ImageGalleryProvider imageUrls={imageUrls}>
       <FullsizeImage />
-      <Container className={classes.container}>
+      <Container className={classes.imageGallery}>
         <SelectedImage />
         <ThumbnailGrid />
       </Container>

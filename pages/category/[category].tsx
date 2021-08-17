@@ -3,9 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ShopItemCard from 'components/ShopItem/ShopItemCard';
 import {
-  Categories,
   Product,
-  ShopItemCategory,
+  ShopItemCategory
 } from 'interfaces/shopItem.interface';
 import React from 'react';
 import { getShopItemsByCategory } from 'utils/shopItem.util';
@@ -25,17 +24,12 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-interface Params {
-  params: { category: string };
-}
-
 interface CategoryPageProps {
   items: Product[];
 }
 
 export default function CategoryPage({ items }: CategoryPageProps) {
   const classes = useStyles();
-
   return (
     <Container className={classes.container}>
       <Grid container direction='row' spacing={gridSpacing} justify='center'>
@@ -49,7 +43,10 @@ export default function CategoryPage({ items }: CategoryPageProps) {
   );
 }
 
-export const getServerSideProps = async ({ params }: Params) => {
+interface Context {
+  params: { category: string };
+}
+export const getServerSideProps = async ({ params }: Context) => {
   const { category } = params;
   const items = await getShopItemsByCategory(category as ShopItemCategory);
   const props = { items };

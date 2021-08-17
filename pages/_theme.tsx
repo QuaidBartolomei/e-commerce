@@ -6,12 +6,13 @@ export const theme = createTheme({
   palette: {
     background: {},
     primary: {
-      main: '#457b9d',
+      // https://coolors.co/2a373c-607d8b-a8dadc
+      main: '#607d8b',
       light: '#a8dadc',
-      dark: '#1d3557',
+      dark: '#2A373C',
     },
     secondary: {
-      main: '#e63946',
+      main: '#212121',
     },
   },
 });

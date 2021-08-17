@@ -6,6 +6,7 @@ import {
   useImageGalleryDispatch,
   useImageGalleryState,
 } from './ImageGalleryState';
+import Image from 'next/image';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -17,6 +18,7 @@ const useStyles = makeStyles(theme =>
     backdrop: {
       zIndex: theme.zIndex.drawer + 1,
       color: '#fff',
+      overflow: 'scroll',
       '&:hover': {
         cursor: 'pointer',
       },
@@ -31,16 +33,19 @@ export default function FullsizeImage() {
 
   const onClick = () => dispatch({ type: 'toggle_show_fullsize_image' });
 
+  console.log('image: ', selectedImage);
+
   return (
     <Backdrop
       className={classes.backdrop}
       open={showFullSizeImage}
       onClick={onClick}
     >
-      <ImageButton
-        src={selectedImage}
-        onClick={onClick}
-        className={classes.fullSizeImage}
+      <Image
+        src={selectedImage || ''}
+        objectFit='contain'
+        alt='fullsize'
+        layout='fill'
       />
     </Backdrop>
   );

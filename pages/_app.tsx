@@ -8,10 +8,10 @@ import MyThemeProvider from 'pages/_theme';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { initFirebase } from 'utils/firebase.utils';
+import { Footer } from '@quaidbartolomei/material-ui.layout.footer';
 
 initFirebase();
 axios.defaults.baseURL = 'http://localhost:3000';
-
 const queryClient = new QueryClient();
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -20,8 +20,26 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <CssBaseline />
       <UserProvider>
         <QueryClientProvider client={queryClient}>
-          <Navbar />
-          <Component {...pageProps} />
+          <div
+            style={{
+              minHeight: '100vh',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <Navbar />
+            <div
+              style={{
+                flexGrow: 1,
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <Component {...pageProps} />
+            </div>
+            <Footer owner='CAB Clothing' />
+          </div>
         </QueryClientProvider>
       </UserProvider>
     </MyThemeProvider>

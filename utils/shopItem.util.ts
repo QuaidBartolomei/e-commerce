@@ -1,12 +1,10 @@
-import axios from 'axios';
 import {
   CartItemData,
   Product,
-  ShopItemCategory,
+  ShopItemCategory
 } from 'interfaces/shopItem.interface';
 import shortid from 'shortid';
-import firebase, { DbCollections, getFirestore } from 'utils/firebase.utils';
-import routes from './routes';
+import { DbCollections, getFirestore } from 'utils/firebase.utils';
 
 const firestore = getFirestore();
 

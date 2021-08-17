@@ -1,21 +1,23 @@
 import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { useImageGalleryDispatch, useImageGalleryState } from './ImageGalleryState';
+import {
+  useImageGalleryDispatch,
+  useImageGalleryState,
+} from './ImageGalleryState';
 
 const useStyles = makeStyles(theme =>
   createStyles({
-    mainImageContainer: ({ imageUrl }: { imageUrl: string }) => ({
+    selectedImage: ({ imageUrl }: { imageUrl: string }) => ({
       border: 'black 2px solid',
       display: 'flex',
       justifyContent: 'center',
       width: '100%',
-      height: 320,
-      [theme.breakpoints.up('lg')]: {
-        height: 640,
+      flexGrow: 1,
+      height: 400,
+      [theme.breakpoints.up('sm')]: {
+        height: 540,
       },
-      maxHeight: '100vh',
       backgroundImage: `url(${imageUrl})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -32,8 +34,9 @@ export default function SelectedImage() {
   const classes = useStyles({ imageUrl: selectedImage });
   const dispatch = useImageGalleryDispatch();
   return (
-    <Link onClick={() => dispatch({ type: 'toggle_show_fullsize_image' })}>
-      <Box className={classes.mainImageContainer} />
-    </Link>
+    <Box
+      onClick={() => dispatch({ type: 'toggle_show_fullsize_image' })}
+      className={classes.selectedImage}
+    />
   );
 }

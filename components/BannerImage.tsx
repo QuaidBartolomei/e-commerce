@@ -1,9 +1,13 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
+import { theme } from 'pages/_theme';
 
 const bannerImage = 'assets/banner.jpg';
-const gradientColors: string[] = ['#7cbbe691', '#000000bf'];
+const gradientColors: string[] = [
+  theme.palette.primary.main + '91',
+  theme.palette.primary.dark + 'bf',
+];
 
 const backgroundGradient = `linear-gradient(to top,
   ${gradientColors.join(',')}),
@@ -16,7 +20,7 @@ const useStyles = makeStyles(theme =>
       width: '100%',
       background: backgroundGradient,
       backgroundPosition: 'center',
-      backgroundSize:'cover'
+      backgroundSize: 'cover',
     },
   })
 );

@@ -3,19 +3,17 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import ItemDetailsText from 'components/ShopItem/ItemDetailsText';
 import { Product } from 'interfaces/shopItem.interface';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { ParsedUrlQuery } from 'querystring';
+import { GetServerSideProps } from 'next';
 import React from 'react';
-import firebase, { DbCollections, initFirebase } from 'utils/firebase.utils';
-
-initFirebase();
-const firestore = firebase.firestore();
+import { DbCollections, getFirestore } from 'utils/firebase.utils';
 
 const useStyles = makeStyles(theme =>
   createStyles({
-    container: {
+    itemDetailsPage: {
       width: '100%',
+      height: '100%',
       padding: theme.spacing(4, 0),
+      flexGrow: 1,
     },
     detailsContainer: {
       display: 'flex',
@@ -23,6 +21,10 @@ const useStyles = makeStyles(theme =>
       '&>*': {
         marginBottom: theme.spacing(1),
       },
+    },
+    imageGalleryContainer: {
+      display: 'flex',
+      flexDirection: 'column',
     },
   })
 );
@@ -34,42 +36,28 @@ interface Props {
 export default function ItemPage({ item }: Props) {
   const classes = useStyles();
   return (
-    <Grid container item spacing={1} className={classes.container}>
-      <Grid item sm={5} xs={12} >
+    <Grid container item  className={classes.itemDetailsPage}>
+      <Grid item md={5} xs={12} className={classes.imageGalleryContainer}>
         <ImageGallery imageUrls={item.imageUrls} />
       </Grid>
-      <Grid item sm={7} xs={12} className={classes.detailsContainer}>
+      <Grid item md={7} xs={12} className={classes.detailsContainer}>
         <ItemDetailsText item={item} />
       </Grid>
     </Grid>
   );
 }
 
-interface IParams extends ParsedUrlQuery {
+type Params = {
   item: string;
-}
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const itemsCollection = await firestore.collection(DbCollections.Items).get();
-  const slugs: string[] = itemsCollection.docs.map(doc => doc.id);
-  const paths = slugs.map(slug => ({
-    params: { item: slug },
-  }));
-  return { paths, fallback: false };
 };
-
-export const getStaticProps: GetStaticProps = async context => {
-  const { item: itemId } = context.params as IParams;
+export const getServerSideProps: GetServerSideProps = async context => {
+  const firestore = getFirestore();
+  const { item: itemId } = context.params as Params;
   const itemDoc = await firestore
     .collection(DbCollections.Items)
     .doc(itemId)
     .get();
   const item = itemDoc.data() as Product;
-  if (!item) {
-    return {
-      notFound: true,
-    };
-  }
-  const props: Props = { item };
-  return { props };
+  if (!item) return { notFound: true };
+  return { props: { item } };
 };
