@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme =>
     itemDetailsPage: {
       width: '100%',
       height: '100%',
+      minHeight: '100vh',
       padding: theme.spacing(4, 0),
       flexGrow: 1,
     },
@@ -36,7 +37,7 @@ interface Props {
 export default function ItemPage({ item }: Props) {
   const classes = useStyles();
   return (
-    <Grid container item  className={classes.itemDetailsPage}>
+    <Grid container item className={classes.itemDetailsPage}>
       <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
         <ImageGallery imageUrls={item.imageUrls} />
       </Grid>

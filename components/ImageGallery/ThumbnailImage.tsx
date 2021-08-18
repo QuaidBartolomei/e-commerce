@@ -7,14 +7,11 @@ import { useImageGalleryDispatch } from './ImageGalleryState';
 const useStyles = makeStyles(theme =>
   createStyles({
     thumbnailImage: () => ({
-      width: '20%',
-      minWidth: 64,
+      width: 64,
       height: 64,
       margin: theme.spacing(0.2),
       position: 'relative',
-      [theme.breakpoints.up('lg')]: {
-        height: 96,
-      },
+      [theme.breakpoints.up('lg')]: {},
       '&:hover': {
         cursor: 'pointer',
       },
@@ -22,12 +19,15 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-interface Props {
+type ThumbnailImageProps = {
   image: string;
   selected: boolean;
-}
+};
 
-export default function ThumbnailImage({ image, selected }: Props) {
+export default function ThumbnailImage({
+  image,
+  selected,
+}: ThumbnailImageProps) {
   const dispatch = useImageGalleryDispatch();
   const classes = useStyles();
   const [isHover, setIsHover] = React.useState(false);
@@ -38,7 +38,7 @@ export default function ThumbnailImage({ image, selected }: Props) {
       onClick={() => dispatch({ type: 'set_selected_image', payload: image })}
       onMouseOver={() => setIsHover(true)}
       onMouseOut={() => setIsHover(false)}
-      elevation={elevated ? 2 : 0}
+      elevation={elevated ? 3 : 0}
     >
       <Image src={image} layout='fill' objectFit='cover' alt='product' />
     </Paper>

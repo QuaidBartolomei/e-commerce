@@ -30,19 +30,16 @@ export default function FullsizeImage() {
   const { selectedImage, showFullSizeImage } = useImageGalleryState();
   const dispatch = useImageGalleryDispatch();
 
-  const onClick = () => dispatch({ type: 'toggle_show_fullsize_image' });
-
-  console.log('image: ', selectedImage);
-
   return (
     <Backdrop
       className={classes.backdrop}
       open={showFullSizeImage}
-      onClick={onClick}
+      onClick={() => dispatch({ type: 'toggle_show_fullsize_image' })}
     >
       <Image
         src={selectedImage || ''}
         objectFit='contain'
+        quality={100}
         alt='fullsize'
         layout='fill'
       />
