@@ -49,6 +49,7 @@ export default function SelectedImage() {
         layout='fill'
         objectFit='contain'
         alt='product'
+        unoptimized
       />
     </Link>
   );

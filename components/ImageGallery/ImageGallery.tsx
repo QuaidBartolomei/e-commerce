@@ -1,4 +1,3 @@
-import Container from '@material-ui/core/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { ImageGalleryProvider } from './ImageGalleryState';

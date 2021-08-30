@@ -40,7 +40,13 @@ export default function ThumbnailImage({
       onMouseOut={() => setIsHover(false)}
       elevation={elevated ? 3 : 0}
     >
-      <Image src={image} layout='fill' objectFit='cover' alt='product' />
+      <Image
+        unoptimized
+        src={image}
+        layout='fill'
+        objectFit='cover'
+        alt='product'
+      />
     </Paper>
   );
 }

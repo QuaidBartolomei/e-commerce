@@ -1,6 +1,6 @@
+import { getAuth } from 'firebase/auth';
 import { CartItemData } from 'interfaces/shopItem.interface';
 import React, { createContext, useEffect, useReducer } from 'react';
-import firebase from 'utils/firebase.utils';
 import { getIntialState, persistState } from 'utils/localStorage.utils';
 import { getUserCart, updateCart } from 'utils/user.util';
 import { UserDispatch, userReducer } from './user.reducer';
@@ -25,7 +25,7 @@ export const UserProvider: React.FC = (props) => {
   useEffect(() => persistState(STORAGE_KEY, state), [state]);
 
   useEffect(() => {
-    const unsub = firebase.auth().onAuthStateChanged(async (user) => {
+    const unsub = getAuth().onAuthStateChanged(async (user) => {
       if (!user) {
         if (state.isAuth) dispatch({ type: 'logout' });
         return;
