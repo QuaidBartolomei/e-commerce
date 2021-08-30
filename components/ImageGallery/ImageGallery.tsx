@@ -1,7 +1,6 @@
 import Container from '@material-ui/core/Container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import FullsizeImage from './FullsizeImage';
 import { ImageGalleryProvider } from './ImageGalleryState';
 import SelectedImage from './SelectedImage';
 import ThumbnailGrid from './ThumbnailGrid';
@@ -9,24 +8,30 @@ import ThumbnailGrid from './ThumbnailGrid';
 const useStyles = makeStyles(theme =>
   createStyles({
     imageGallery: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   })
 );
 
-interface Props {
+type ImageGalleryProps = {
   imageUrls: string[];
-}
+} & React.HTMLProps<HTMLDivElement>;
 
-export default function ImageGallery(props: Props) {
+export default function ImageGallery(props: ImageGalleryProps) {
   const classes = useStyles();
-  const imageUrls = props.imageUrls.filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
+  const { imageUrls, className, children, ...divProps } = props;
+  const filteredUrls = React.useMemo(() => {
+    return imageUrls.filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
+  }, [imageUrls]);
   return (
-    <ImageGalleryProvider imageUrls={imageUrls}>
-      <FullsizeImage />
-      <Container className={classes.imageGallery}>
+    <ImageGalleryProvider imageUrls={filteredUrls}>
+      <div className={`${classes.imageGallery} ${className}`} {...divProps}>
         <SelectedImage />
         <ThumbnailGrid />
-      </Container>
+      </div>
     </ImageGalleryProvider>
   );
 }

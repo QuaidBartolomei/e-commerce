@@ -1,11 +1,8 @@
 import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { useUserState } from 'components/User/user.context';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import OrderSummary from './OrderSummary';
 
 const addresses = [

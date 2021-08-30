@@ -11,6 +11,8 @@ const useStyles = makeStyles(theme =>
       flexWrap: 'wrap',
       width: '100%',
       margin: 0,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   })
 );

@@ -31,7 +31,7 @@ export default function OrderReviewItem({ item }: { item: CartItemData }) {
   return (
     <ListItem className={classes.listItem}>
       <ListItemText primary={name} secondary={name} />
-      <Typography variant='body2'>{price}</Typography>
+      <Typography variant='body2'>{price.toFixed(2)}</Typography>
     </ListItem>
   );
 }

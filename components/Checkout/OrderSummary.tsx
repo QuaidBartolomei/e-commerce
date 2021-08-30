@@ -50,7 +50,7 @@ export default function OrderSummary({}: OrderSummaryProps) {
         <ListItem className={classes.listItem}>
           <ListItemText primary='Total' />
           <Typography variant='subtitle1' className={classes.total}>
-            {data || '...'}
+            {data?.toFixed(2) || '...'}
           </Typography>
         </ListItem>
       </List>

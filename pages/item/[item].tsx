@@ -1,3 +1,4 @@
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
@@ -30,27 +31,10 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-interface Props {
-  item: Product;
-}
-
-export default function ItemPage({ item }: Props) {
-  const classes = useStyles();
-  return (
-    <Grid container item className={classes.itemDetailsPage}>
-      <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
-        <ImageGallery imageUrls={item.imageUrls} />
-      </Grid>
-      <Grid item sm={7} xs={12} className={classes.detailsContainer}>
-        <ItemDetailsText item={item} />
-      </Grid>
-    </Grid>
-  );
-}
-
 type Params = {
   item: string;
 };
+
 export const getServerSideProps: GetServerSideProps = async context => {
   const firestore = getFirestore();
   const { item: itemId } = context.params as Params;
@@ -62,3 +46,23 @@ export const getServerSideProps: GetServerSideProps = async context => {
   if (!item) return { notFound: true };
   return { props: { item } };
 };
+
+interface Props {
+  item: Product;
+}
+
+export default function ItemPage({ item }: Props) {
+  const classes = useStyles();
+  return (
+    <Container maxWidth='lg'>
+      <Grid container item className={classes.itemDetailsPage}>
+        <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
+          <ImageGallery imageUrls={item.imageUrls} />
+        </Grid>
+        <Grid item sm={7} xs={12} className={classes.detailsContainer}>
+          <ItemDetailsText item={item} />
+        </Grid>
+      </Grid>
+    </Container>
+  );
+}

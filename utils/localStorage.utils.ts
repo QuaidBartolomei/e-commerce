@@ -4,9 +4,7 @@ export const persistState = (storageKey: string, state: object): void => {
 export const getIntialState = <T>(storageKey: string): T | undefined => {
   try {
     const savedState = window.localStorage.getItem(storageKey);
-    if (!savedState) {
-      return undefined;
-    }
+    if (!savedState) return undefined;
     return JSON.parse(savedState ?? '{}') as T;
   } catch (e) {
     return undefined;
