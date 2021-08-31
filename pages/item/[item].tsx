@@ -3,10 +3,11 @@ import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import ItemDetailsText from 'components/ShopItem/ItemDetailsText';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { Product } from 'interfaces/shopItem.interface';
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import { DbCollections, getFirestore } from 'utils/firebase.utils';
+import { DbCollections, getDataById } from 'utils/firebase.utils';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -36,13 +37,8 @@ type Params = {
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const firestore = getFirestore();
   const { item: itemId } = context.params as Params;
-  const itemDoc = await firestore
-    .collection(DbCollections.Items)
-    .doc(itemId)
-    .get();
-  const item = itemDoc.data() as Product;
+  const item = await getDataById(DbCollections.Items, itemId);
   if (!item) return { notFound: true };
   return { props: { item } };
 };

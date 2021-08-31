@@ -1,9 +1,16 @@
-import firebase from 'firebase/app';
+import { getApps, initializeApp } from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/firestore';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  inMemoryPersistence,
+  signInWithPopup,
+} from 'firebase/auth';
 import 'firebase/storage';
+import 'firebase/firestore';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 
-const provider = new firebase.auth.GoogleAuthProvider();
+const provider = new GoogleAuthProvider();
 
 export enum DbCollections {
   Users = 'users',
@@ -20,29 +27,32 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_appId,
 };
 
-export function initFirebase() {
-  if (firebase.apps.length > 0) return;
-
-  firebase.initializeApp(firebaseConfig);
+if (getApps().length <= 0) {
+  initializeApp(firebaseConfig);
   provider.setCustomParameters({ prompt: 'select_account' });
 }
 
-export function getFirestore() {
-  if (!firebase.firestore()) initFirebase();
-  return firebase.firestore();
-}
+export const db = getFirestore();
 
 export async function initTest() {
-  initFirebase();
-  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+  await getAuth().setPersistence(inMemoryPersistence);
 }
 
 export async function signInWithGoogle() {
-  return firebase.auth().signInWithPopup(provider);
+  const auth = getAuth();
+  signInWithPopup(auth, provider);
 }
 
 export async function signOut() {
-  return firebase.auth().signOut();
+  return getAuth().signOut();
 }
 
-export default firebase;
+export async function getDocById(collectionName: string, id: string) {
+  const docRef = doc(db, collectionName, id);
+     return await getDoc(docRef);
+}
+
+export async function getDataById(collectionName: string, id: string) {
+  const d = await getDocById(collectionName, id);
+  return d.data();
+}

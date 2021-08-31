@@ -1,13 +1,13 @@
-import firebase, { DbCollections } from 'utils/firebase.utils';
+import { DbCollections } from 'utils/firebase.utils';
 import { generateInventory } from 'utils/shopItems.utils';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
 
 export async function main() {
-  const collection = await firebase
-    .firestore()
-    .collection(DbCollections.Items)
-    .get();
+  const db = getFirestore();
 
-  const docsN = collection.docs.length;
+  const querySnapshot = await getDocs(collection(db, DbCollections.Items));
+
+  const docsN = querySnapshot.size;
 
   if (docsN > 0) return;
 

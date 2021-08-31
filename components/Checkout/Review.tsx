@@ -1,7 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { useUserState } from 'components/User/user.context';
 import React from 'react';
 import OrderSummary from './OrderSummary';
 
@@ -42,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review() {
   const classes = useStyles();
-  const { cart } = useUserState();
 
   const Shipping = () => (
     <Grid item xs={12} sm={6}>

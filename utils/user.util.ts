@@ -1,21 +1,20 @@
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { doc, getFirestore, updateDoc } from 'firebase/firestore';
 import { CartItemData } from 'interfaces/shopItem.interface';
-import firebase, { DbCollections } from 'utils/firebase.utils';
+import { DbCollections, getDataById, getDocById } from 'utils/firebase.utils';
 
-const firestore = () => firebase.firestore();
-const auth = () => firebase.auth();
+const db = getFirestore();
 
 interface UserModel {
   cart: CartItemData[];
 }
 
 export async function getUserById(id: string): Promise<UserModel | undefined> {
-  const userDoc = await firebase
-    .firestore()
-    .collection(DbCollections.Items)
-    .doc(id)
-    .get();
-  const user = userDoc.data() as UserModel;
-  return user;
+  return (await getDataById(DbCollections.Users, id)) as UserModel;
 }
 
 export async function getUserCart(userId: string): Promise<CartItemData[]> {
@@ -26,24 +25,26 @@ export async function getUserCart(userId: string): Promise<CartItemData[]> {
 }
 
 export async function updateCart(cart: CartItemData[]) {
-  const user = auth().currentUser;
+  const user = getAuth().currentUser;
   if (!user) return;
   const id = user.uid;
-  await firestore().collection(DbCollections.Users).doc(id).set({
+  const userRef = doc(db, DbCollections.Items, id);
+  const newData = {
     _id: id,
     cart,
-  });
+  };
+  await updateDoc(userRef, newData);
   console.log('cart successfully updated');
 }
 
 export async function signout() {
-  await auth().signOut();
+  await getAuth().signOut();
 }
 
 export async function registerNewUser(email: string, password: string) {
-  auth().createUserWithEmailAndPassword(email, password);
+  createUserWithEmailAndPassword(getAuth(), email, password);
 }
 
 export async function signInWithEmail(email: string, password: string) {
-  return auth().signInWithEmailAndPassword(email, password);
+  signInWithEmailAndPassword(getAuth(), email, password);
 }

@@ -70,7 +70,7 @@ const ItemDetailsText = ({ item }: { item: Product }) => {
   const onSubmit = ({ size, color }: ProductFormData) => {
     userDispatch({
       type: 'add_item',
-      payload: { id: item.id, color, size, quantity: 1 },
+      payload: { ...item, color, size, quantity: 1 },
     });
     setShowAlert(true);
   };

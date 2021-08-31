@@ -2,10 +2,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { CartItemData } from 'interfaces/shopItem.interface';
+import { CartItemData, Product } from 'interfaces/shopItem.interface';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { getShopItemById } from 'utils/shopItem.util';
+import { DbCollections, getDataById } from 'utils/firebase.utils';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -15,23 +15,30 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-export type OrderReviewItemProps = {
-  // props
-};
+export type OrderReviewItemProps = { item: CartItemData };
 
-export default function OrderReviewItem({ item }: { item: CartItemData }) {
+export default function OrderReviewItem({ item }: OrderReviewItemProps) {
   const classes = useStyles();
-  const { id } = item;
-  const { isLoading, isError, data } = useQuery('cartItemData', () =>
-    getShopItemById(id)
+  const { id, quantity } = item;
+
+  const { isLoading, isError, data } = useQuery(
+    `cartIaatem_${id}`,
+    async () => {
+      const data = await getDataById(DbCollections.Items, id);
+      return data as Product;
+    }
   );
-  if (isLoading || !data) return <div>Loading...</div>;
+
+  console.log(data);
   if (isError) return <div>An error has occurred: </div>;
+  if (isLoading || !data) return <div>Loading...</div>;
   const { name, price } = data;
+  const fixedPrice = price.toFixed(2);
+
   return (
     <ListItem className={classes.listItem}>
       <ListItemText primary={name} secondary={name} />
-      <Typography variant='body2'>{price.toFixed(2)}</Typography>
+      <Typography variant='body2'>{`${quantity} x ${fixedPrice}`}</Typography>
     </ListItem>
   );
 }

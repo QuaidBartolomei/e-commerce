@@ -21,7 +21,8 @@ export interface ProductInventory extends ProductOptions {
 
 export const Categories: ShopItemCategory[] = ['Hats', 'Shirts', 'Hoodies'];
 
-export interface CartItemData extends ProductOptions {
-  id: string;
-  quantity: number;
-}
+export type CartItemData = ProductOptions &
+  Product & {
+    id: string;
+    quantity: number;
+  };
