@@ -5,8 +5,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { useUserState } from 'components/User/user.context';
 import React from 'react';
-import { useQuery } from 'react-query';
-import { formatItemPrice, getCartTotal } from 'utils/shopItem.util';
+import { getCartTotal } from 'utils/shopItem.util';
 import OrderReviewItem from './OrderReviewItem';
 
 const useStyles = makeStyles(theme =>
@@ -28,10 +27,6 @@ export default function OrderSummary({}: OrderSummaryProps) {
   const classes = useStyles();
   const { cart } = useUserState();
 
-  const { isLoading, isError, data } = useQuery('cartTotal', () =>
-    getCartTotal(cart)
-  );
-
   const CartItems = () => (
     <React.Fragment>
       {cart.map((item, key) => {
@@ -50,7 +45,7 @@ export default function OrderSummary({}: OrderSummaryProps) {
         <ListItem className={classes.listItem}>
           <ListItemText primary='Total' />
           <Typography variant='subtitle1' className={classes.total}>
-            {data?.toFixed(2) || '...'}
+            {getCartTotal(cart)}
           </Typography>
         </ListItem>
       </List>

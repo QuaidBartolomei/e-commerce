@@ -6,9 +6,6 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles(theme =>
   createStyles({
     removeButton: {
-      cursor: 'pointer',
-      textAlign: 'right',
-      float: 'right',
     },
   })
 );
@@ -32,6 +29,7 @@ export default function RemoveButton({ itemId }: RemoveButtonProps) {
       className={classes.removeButton}
       color='secondary'
       onClick={onRemove}
+      variant='outlined'
     >
       Remove
     </Button>

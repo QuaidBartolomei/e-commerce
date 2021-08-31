@@ -1,9 +1,7 @@
-import { firestore } from 'firebase-admin';
 import {
   collection,
   doc,
   DocumentData,
-  getDoc,
   getDocs,
   getFirestore,
   query,
@@ -17,17 +15,9 @@ import {
   ShopItemCategory,
 } from 'interfaces/shopItem.interface';
 import shortid from 'shortid';
-import { DbCollections, getDocById } from 'utils/firebase.utils';
+import { DbCollections, getDataById } from 'utils/firebase.utils';
 
 const db = getFirestore();
-
-export async function getShopItemById(
-  id: string
-): Promise<Product | undefined> {
-  const itemDoc = await getDocById(DbCollections.Items, id);
-  const item = itemDoc.data() as Product | undefined;
-  return item;
-}
 
 function snapshotToItems(
   querySnapshot: QuerySnapshot<DocumentData>
@@ -65,14 +55,8 @@ export async function addShopItem(itemData: Product) {
   await setDoc(doc(db, DbCollections.Items, id), { ...itemData, id });
 }
 
-export async function getCartTotal(cart: CartItemData[]): Promise<number> {
-  let total = 0;
-  for (const { id, quantity } of cart) {
-    let data = await getShopItemById(id);
-    if (!data) continue;
-    total += data.price * quantity;
-  }
-  return total;
+export function getCartTotal(cart: CartItemData[]) {
+  return cart.reduce((total, x) => total + x.price * x.quantity, 0).toFixed(2);
 }
 
 export function formatItemPrice(item: Product) {

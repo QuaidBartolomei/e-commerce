@@ -7,7 +7,7 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { Product } from 'interfaces/shopItem.interface';
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import { DbCollections } from 'utils/firebase.utils';
+import { DbCollections, getDataById } from 'utils/firebase.utils';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -38,18 +38,7 @@ type Params = {
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const { item: itemId } = context.params as Params;
-  const db = getFirestore();
-
-  const docRef = doc(db, DbCollections.Items, itemId);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    console.log('Document data:', docSnap.data());
-  } else {
-    // doc.data() will be undefined in this case
-    console.log('No such document!');
-  }
-
-  const item = docSnap.data() as Product;
+  const item = await getDataById(DbCollections.Items, itemId);
   if (!item) return { notFound: true };
   return { props: { item } };
 };

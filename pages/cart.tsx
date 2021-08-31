@@ -1,25 +1,23 @@
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import ShoppingCartItem from 'components/Cart/CartItem/ShoppingCartItem';
-import CheckoutButton from 'components/Forms/Buttons/CheckoutButton';
-import EmptyCart from 'components/Cart/EmptyCart';
 import RemoveItemWarning from 'components/Alerts/RemoveItemWarning';
+import ShoppingCartItem from 'components/Cart/CartItem/ShoppingCartItem';
+import EmptyCart from 'components/Cart/EmptyCart';
 import { CartProvider } from 'components/Cart/useCart';
+import CheckoutButton from 'components/Forms/Buttons/CheckoutButton';
 import { useUserState } from 'components/User/user.context';
-import React, { useState } from 'react';
+import React from 'react';
 import { getCartTotal } from 'utils/shopItem.util';
 
 const useStyles = makeStyles(theme =>
   createStyles({
     container: {
-      minHeight: '100%',
-      margin: theme.spacing(2, 0),
+      '&>*': {
+        marginTop: theme.spacing(2),
+      },
     },
-    grid: {
-      padding: theme.spacing(2, 0),
-    },
+    shopItemsContainer: {},
     subtotal: {
       marginBottom: theme.spacing(2),
     },
@@ -31,41 +29,35 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-export default function ShoppingCart() {
+export default function CartPage() {
   const classes = useStyles();
-  const [cartTotal, setCartTotal] = useState(0);
   const user = useUserState();
-
   const { cart } = user;
-
-  React.useEffect(() => {
-    getCartTotal(cart).then(setCartTotal);
-  }, [cart]);
+  const cartTotal = getCartTotal(cart);
 
   const Subtotal = () => (
     <Typography
       variant='h6'
       className={classes.subtotal}
-    >{`Subtotal: $${cartTotal.toFixed(2)}`}</Typography>
+    >{`Subtotal: $${cartTotal}`}</Typography>
   );
 
   if (cart.length === 0) return <EmptyCart />;
 
   const ItemCards = () => (
-    <Grid container spacing={2} className={classes.grid}>
-      {cart.map((item, key) => {
-        return (
-          <Grid item key={key} xs={12}>
-            <ShoppingCartItem item={item} />
-          </Grid>
-        );
-      })}
-    </Grid>
+    <div className={classes.shopItemsContainer}>
+      {cart.map((item, key) => (
+        <ShoppingCartItem item={item} key={key} />
+      ))}
+    </div>
   );
 
   return (
     <CartProvider>
       <Container className={classes.container} maxWidth='md'>
+        <Typography variant='h4' component='h1'>
+          Shopping Cart
+        </Typography>
         <ItemCards />
         <div className={classes.alignRight}>
           <Subtotal />

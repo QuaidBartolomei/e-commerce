@@ -32,6 +32,8 @@ if (getApps().length <= 0) {
   provider.setCustomParameters({ prompt: 'select_account' });
 }
 
+export const db = getFirestore();
+
 export async function initTest() {
   await getAuth().setPersistence(inMemoryPersistence);
 }
@@ -46,9 +48,8 @@ export async function signOut() {
 }
 
 export async function getDocById(collectionName: string, id: string) {
-  const db = getFirestore();
   const docRef = doc(db, collectionName, id);
-  return await getDoc(docRef);
+     return await getDoc(docRef);
 }
 
 export async function getDataById(collectionName: string, id: string) {
