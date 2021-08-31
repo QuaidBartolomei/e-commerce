@@ -1,8 +1,9 @@
-import { Link, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Logo from './Logo';
 import React from 'react';
 import routes from 'utils/routes';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme =>
   createStyles({

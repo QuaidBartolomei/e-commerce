@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Paper } from '@material-ui/core';
 import { theme } from 'pages/_theme';
+import Paper from '@material-ui/core/Paper';
 
 const bannerImage = 'assets/banner.jpg';
 const gradientColors: string[] = [
