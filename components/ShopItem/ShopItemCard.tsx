@@ -1,7 +1,8 @@
-import { Link, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import { Product } from 'interfaces/shopItem.interface';
 import React, { useState } from 'react';
 import routes from 'utils/routes';

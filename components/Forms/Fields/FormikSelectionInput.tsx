@@ -28,8 +28,8 @@ export function FormikSelectionInput(props: SelectionInputProps) {
     <FormControl className={classes.selectionInput}>
       <InputLabel id={`${name}_label`}>{name}</InputLabel>
       <Select required labelId={`${name}_label`} {...field}>
-        {selectionValues.map(value => (
-          <MenuItem value={value} key={value}>
+        {selectionValues.map((value, key) => (
+          <MenuItem value={value} key={key}>
             {value}
           </MenuItem>
         ))}

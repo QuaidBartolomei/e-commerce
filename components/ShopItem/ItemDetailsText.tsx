@@ -1,17 +1,12 @@
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import { Form, Formik } from 'formik';
 import { Product } from 'interfaces/shopItem.interface';
 import { loremIpsum } from 'lorem-ipsum';
-import React, { useMemo } from 'react';
-import { getColors, getSizes } from 'utils/shopItems.utils';
+import React from 'react';
 import ItemAddedAlert from '../Alerts/ItemAddedAlert';
-import { FormikSelectionInput } from '../Forms/Fields/FormikSelectionInput';
-import { useUserDispatch } from '../User/user.context';
+import AddItemForm from '../Forms/AddItemForm/AddItemForm';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -22,63 +17,18 @@ const useStyles = makeStyles(theme =>
         margin: theme.spacing(1),
       },
     },
-    form: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      '&>*': {
-        margin: theme.spacing(2),
-      },
-    },
-    addToCartButton: {
-      maxWidth: 320,
-    },
   })
 );
 
 const ItemDetailsText = ({ item }: { item: Product }) => {
   const classes = useStyles();
 
-  const userDispatch = useUserDispatch();
   const [showAlert, setShowAlert] = React.useState(false);
 
-  const sizes = useMemo(() => getSizes(item), [item]);
-  const colors = useMemo(() => getColors(item), [item]);
   const description = loremIpsum({
     count: 3,
     units: 'sentence',
   });
-
-  type ProductFormData = {
-    size: string;
-    color: string;
-  };
-
-  const AddToCartButton = () => {
-    return (
-      <Button
-        variant='outlined'
-        startIcon={<AddShoppingCartIcon />}
-        type='submit'
-        className={classes.addToCartButton}
-      >
-        Add To Cart
-      </Button>
-    );
-  };
-
-  const onSubmit = ({ size, color }: ProductFormData) => {
-    userDispatch({
-      type: 'add_item',
-      payload: { ...item, color, size, quantity: 1 },
-    });
-    setShowAlert(true);
-  };
-
-  const initialValues = {
-    size: sizes[0],
-    color: colors[0],
-  };
 
   return (
     <Container className={classes.container}>
@@ -87,13 +37,7 @@ const ItemDetailsText = ({ item }: { item: Product }) => {
       </Typography>
       <Typography>${item.price}</Typography>
       <Divider />
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        <Form className={classes.form}>
-          <FormikSelectionInput name='size' selectionValues={sizes} />
-          <FormikSelectionInput name='color' selectionValues={colors} />
-          <AddToCartButton />
-        </Form>
-      </Formik>
+      <AddItemForm item={item} onAddItem={() => setShowAlert(true)} />
       <Typography>{description}</Typography>
       <ItemAddedAlert show={showAlert} />
     </Container>
