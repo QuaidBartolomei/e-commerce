@@ -1,22 +1,11 @@
-import React from 'react';
-import makeStyles from '@material-ui/styles/makeStyles';
-import createStyles from '@material-ui/styles/createStyles';
-import { useUserDispatch } from 'components/User/user.context';
-import { useCart } from '../Cart/useCart';
 import AlertDialog from 'components/Alerts/AlertDialog';
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    RemoveItemWarningContainer: {
-      // styles here
-    },
-  })
-);
+import { useUserDispatch } from 'components/User/user.context';
+import React from 'react';
+import { useCart } from '../Cart/useCart';
 
 interface Props {}
 
 export default function RemoveItemWarning(props: Props) {
-  const classes = useStyles();
   const userDispatch = useUserDispatch();
   const cart = useCart();
   return (

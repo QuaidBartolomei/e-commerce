@@ -3,29 +3,17 @@ import List from '@material-ui/core/List';
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Categories } from 'interfaces/shopItem.interface';
 import React from 'react';
 import routes from 'utils/routes';
 
-import { Theme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    list: {
-      width: 250,
-      backgroundColor: 'white',
-    },
-  })
-);
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
 const NavigationDrawer = (props: Props) => {
-  const classes = useStyles();
   const { isOpen, onClose } = props;
 
   function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
@@ -36,7 +24,10 @@ const NavigationDrawer = (props: Props) => {
       <List
         component='nav'
         aria-label='main mailbox folders'
-        className={classes.list}
+        sx={{
+          width: 250,
+          backgroundColor: 'white',
+        }}
       >
         <ListItemLink href={routes.cart}>
           <ListItemIcon>

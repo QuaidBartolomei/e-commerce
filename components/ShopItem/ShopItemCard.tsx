@@ -1,52 +1,43 @@
+import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import Link from 'components/Link';
 import Paper from '@material-ui/core/Paper';
-import { Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
 import { Product } from 'interfaces/shopItem.interface';
 import React, { useState } from 'react';
 import routes from 'utils/routes';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      padding: theme.spacing(1),
-      margin: theme.spacing(1),
-      width: '240px',
-    },
-    imageContainer: ({ backgroundImage }: { backgroundImage: string }) => ({
-      width: '100%',
-      height: '240px',
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      backgroundImage,
-    }),
-    label: {
-      display: 'flex',
-      flexDirection: 'column',
-      textAlign: 'center',
-      padding: theme.spacing(1, 0),
-    },
-  })
-);
-
 const ShopItemCard = ({ item }: { item: Product }) => {
-  const classes = useStyles({
-    backgroundImage: `url(${item.imageUrls[0]})`,
-  });
   const [isHover, setIsHover] = useState(false);
   return (
     <Link href={routes.item(item.id)}>
       <Paper
-        className={classes.paper}
+        sx={{
+          p: 1,
+          m: 1,
+          width: 240,
+        }}
         elevation={isHover ? 5 : 1}
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
-        <div className={classes.imageContainer} />
-        <Container className={classes.label}>
+        <Box
+          sx={{
+            width: '100%',
+            height: '240px',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundImage: `url(${item.imageUrls[0]})`,
+          }}
+        />
+        <Container
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            textAlign: 'center',
+            p: 1,
+          }}
+        >
           <Typography>{item.name}</Typography>
           <Typography>{`$${item.price}`}</Typography>
         </Container>

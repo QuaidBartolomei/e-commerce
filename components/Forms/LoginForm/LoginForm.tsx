@@ -1,13 +1,11 @@
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import { Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
+import Link from 'components/Link';
 import axios from 'axios';
 import { GoogleSignInButton } from 'components/Forms/Buttons/GoogleSignInButton';
 import { useUserState } from 'components/User/user.context';
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 import React from 'react';
 import routes from 'utils/routes';
 import { signout } from 'utils/user.util';
@@ -37,37 +35,9 @@ const validationSchema = yup.object({
     .required('password is required'),
 });
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    form: {
-      width: '100%',
-      maxWidth: 600,
-      display: 'flex',
-      flexDirection: 'column',
-      '&>*': {
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-      },
-    },
-    registerButton: {
-      width: '100%',
-      '&>*': {
-        width: '100%',
-      },
-    },
-    forgotPasswordLink: {
-      width: '100%',
-      textAlign: 'center',
-    },
-  })
-);
-
 export default function LoginForm() {
-  const classes = useStyles();
   const [submitState, setSubmitState] = React.useState<SubmitStatus>('ready');
-
   const { isAuth } = useUserState();
-
   if (isAuth) return <Button onClick={signout}>Sign Out</Button>;
 
   const onSubmit = async (values: LoginFormData) => {
@@ -77,13 +47,25 @@ export default function LoginForm() {
   };
 
   const ForgotPasswordLink = () => (
-    <Link href={routes.register} className={classes.forgotPasswordLink}>
+    <Link
+      href={routes.register}
+      sx={{
+        width: '100%',
+        textAlign: 'center',
+      }}
+    >
       Forgot Password
     </Link>
   );
 
   const CreateNewAccountButton = () => (
-    <Link href={routes.register} className={classes.registerButton}>
+    <Link
+      href={routes.register}
+      sx={{
+        width: '100%',
+        textAlign: 'center',
+      }}
+    >
       <Button variant='contained' color='secondary'>
         Create New Account
       </Button>
@@ -96,17 +78,26 @@ export default function LoginForm() {
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      <Form className={classes.form}>
-        <Typography variant='h5' className={classes.forgotPasswordLink}>
-          Sign In
-        </Typography>
+      <Box
+        component='form'
+        sx={{
+          width: '100%',
+          maxWidth: 600,
+          display: 'flex',
+          flexDirection: 'column',
+          '>*': {
+            my: 1,
+          },
+        }}
+      >
+        <Typography variant='h5'>Sign In</Typography>
         <EmailField />
         <PasswordField />
         <SubmitButton status={submitState} />
         <GoogleSignInButton />
         <ForgotPasswordLink />
         <CreateNewAccountButton />
-      </Form>
+      </Box>
     </Formik>
   );
 }

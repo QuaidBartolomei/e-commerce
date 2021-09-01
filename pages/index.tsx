@@ -1,7 +1,4 @@
-import React from 'react';
 import Container from '@material-ui/core/Container';
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
 import BannerImage from 'components/BannerImage';
 import ShopItemCarousel from 'components/ShopItem/ShopItemCarousel';
 import {
@@ -9,19 +6,8 @@ import {
   Product,
   ShopItemCategory,
 } from 'interfaces/shopItem.interface';
+import React from 'react';
 import { getShopItems } from 'utils/shopItem.util';
-import { Theme } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    content: {
-      padding: theme.spacing(0, 2),
-      '&>*': {
-        margin: theme.spacing(6, 0),
-      },
-    },
-  })
-);
 
 type SortedItems = {
   category: ShopItemCategory;
@@ -33,12 +19,17 @@ type HomepageProps = {
 };
 
 export default function Homepage({ sortedItems }: HomepageProps) {
-  const classes = useStyles();
-
   return (
     <>
       <BannerImage />
-      <Container className={classes.content}>
+      <Container
+        sx={{
+          px: 2,
+          '> *': {
+            my: 4,
+          },
+        }}
+      >
         {sortedItems.map(({ category, items }) => (
           <ShopItemCarousel
             title={category}

@@ -1,16 +1,6 @@
-import React from 'react';
-import makeStyles from '@material-ui/styles/makeStyles';
-import createStyles from '@material-ui/styles/createStyles';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from 'components/Alerts/Alert';
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    ItemAddedAlertContainer: {
-      // styles here
-    },
-  })
-);
+import React from 'react';
 
 export type ItemAddedAlertProps = {
   show?: boolean;

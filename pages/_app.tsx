@@ -1,53 +1,44 @@
+import { CacheProvider, EmotionCache } from '@emotion/react';
 import '@fontsource/roboto';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { Footer } from 'components/Footer';
-import Navbar from 'components/Navbar/Navbar';
+import Layout from 'components/Layout';
 import { UserProvider } from 'components/User/user.context';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import createEmotionCache from 'utils/createEmotionCache';
 import 'utils/firebase.utils';
 import { theme } from '../utils/_theme';
 
 const queryClient = new QueryClient();
 
-export default function MyApp({ Component, pageProps }: AppProps) {
-  React.useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles) {
-      jssStyles.parentElement?.removeChild(jssStyles);
-    }
-  }, [Component]);
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
 
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
+export default function MyApp(props: MyAppProps) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <QueryClientProvider client={queryClient}>
-        <UserProvider>
-          <div
-            style={{
-              minHeight: '100vh',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <Navbar />
-            <div
-              style={{
-                flexGrow: 1,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
+    <CacheProvider value={emotionCache}>
+      <Head>
+        <title>CAB Clothing</title>
+        <meta name='viewport' content='initial-scale=1, width=device-width' />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <QueryClientProvider client={queryClient}>
+          <UserProvider>
+            <Layout>
               <Component {...pageProps} />
-            </div>
-            <Footer copyright='CAB Clothing' />
-          </div>
-        </UserProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+            </Layout>
+          </UserProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </CacheProvider>
   );
 }

@@ -2,19 +2,8 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
 import { useField } from 'formik';
 import React from 'react';
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    selectionInput: {
-      width: 'fit-content',
-      minWidth: 120,
-    },
-  })
-);
 
 export type SelectionInputProps = {
   name: string;
@@ -22,13 +11,18 @@ export type SelectionInputProps = {
 };
 
 export function FormikSelectionInput(props: SelectionInputProps) {
-  const classes = useStyles();
   const { name, selectionValues } = props;
   const [field] = useField(name);
   return (
-    <FormControl className={classes.selectionInput}>
+    <FormControl
+      sx={{
+        width: 'fit-content',
+        minWidth: 120,
+      }}
+      margin='normal'
+    >
       <InputLabel id={`${name}_label`}>{name}</InputLabel>
-      <Select required labelId={`${name}_label`} {...field}>
+      <Select label={name} required labelId={`${name}_label`} {...field}>
         {selectionValues.map((value, key) => (
           <MenuItem value={value} key={key}>
             {value}

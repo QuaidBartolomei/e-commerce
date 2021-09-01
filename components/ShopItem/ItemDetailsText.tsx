@@ -1,30 +1,12 @@
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
-import { Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
 import { Product } from 'interfaces/shopItem.interface';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
-import AddItemForm from '../Forms/AddItemForm/AddItemForm';
-
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      display: 'flex',
-      flexDirection: 'column',
-      '&>*': {
-        margin: theme.spacing(1),
-      },
-    },
-  })
-);
+import AddToCartForm from '../Forms/AddItemForm/AddToCartForm';
 
 const ItemDetailsText = ({ item }: { item: Product }) => {
-  const classes = useStyles();
-
   const [showAlert, setShowAlert] = React.useState(false);
 
   const description = loremIpsum({
@@ -33,13 +15,21 @@ const ItemDetailsText = ({ item }: { item: Product }) => {
   });
 
   return (
-    <Container className={classes.container}>
-      <Typography component='h1' variant='h3' style={{ margin: 0 }}>
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        '>*': {
+          mt: 3,
+        },
+      }}
+    >
+      <Typography component='h1' variant='h3' >
         {item.name}
       </Typography>
       <Typography>${item.price}</Typography>
       <Divider />
-      <AddItemForm item={item} onAddItem={() => setShowAlert(true)} />
+      <AddToCartForm item={item} onAddItem={() => setShowAlert(true)} />
       <Typography>{description}</Typography>
     </Container>
   );
