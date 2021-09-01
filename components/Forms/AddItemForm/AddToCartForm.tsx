@@ -1,30 +1,12 @@
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
+import Box from '@material-ui/core/Box';
 import { useUserDispatch } from 'components/User/user.context';
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 import { Product } from 'interfaces/shopItem.interface';
 import React from 'react';
 import { getColors, getSizes } from 'utils/shopItems.utils';
 import AddToCartButton from '../Buttons/AddToCartButton';
 import { FormikSelectionInput } from '../Fields/FormikSelectionInput';
 
-import { Theme } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    form: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      '&>*': {
-        margin: theme.spacing(2),
-      },
-    },
-    addToCartButton: {
-      maxWidth: 320,
-    },
-  })
-);
 
 export type AddItemFormProps = {
   item: Product;
@@ -36,8 +18,7 @@ type ProductFormData = {
   color: string;
 };
 
-export default function AddItemForm({ item, onAddItem }: AddItemFormProps) {
-  const classes = useStyles();
+export default function AddToCartForm({ item, onAddItem }: AddItemFormProps) {
   const userDispatch = useUserDispatch();
   const sizes = getSizes(item);
   const colors = getColors(item);
@@ -57,11 +38,18 @@ export default function AddItemForm({ item, onAddItem }: AddItemFormProps) {
 
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
-      <Form className={classes.form}>
+      <Box
+        component='form'
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
         <FormikSelectionInput name='size' selectionValues={sizes} />
         <FormikSelectionInput name='color' selectionValues={colors} />
         <AddToCartButton />
-      </Form>
+      </Box>
     </Formik>
   );
 }

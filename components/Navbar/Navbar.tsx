@@ -1,6 +1,4 @@
 import AppBar from '@material-ui/core/AppBar';
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
 import Toolbar from '@material-ui/core/Toolbar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import { useRouter } from 'next/dist/client/router';
@@ -11,19 +9,10 @@ import NavigationDrawerMenu from './NavigationMenu';
 import ShoppingCartIconButton from './ShoppingCartIcon';
 import UserMenu from './UserMenu';
 
-const useStyles = makeStyles(theme =>
-  createStyles({
-    toolbar: {
-      color: 'white',
-    },
-  })
-);
-
 const Navbar = () => {
   const scrollTrigger = useScrollTrigger({
     disableHysteresis: true,
   });
-  const classes = useStyles();
   const router = useRouter();
   const isHomepage = router.pathname == routes.index;
 
@@ -34,7 +23,11 @@ const Navbar = () => {
         elevation={isHomepage && !scrollTrigger ? 0 : 1}
         color={isHomepage && !scrollTrigger ? 'transparent' : 'primary'}
       >
-        <Toolbar className={classes.toolbar}>
+        <Toolbar
+          sx={{
+            color: 'white',
+          }}
+        >
           <NavigationDrawerMenu />
           <NavbarTitle />
           <UserMenu />

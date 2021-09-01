@@ -1,9 +1,7 @@
-import { Theme } from '@material-ui/core/styles';
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
+import Box from '@material-ui/core/Box';
 import axios from 'axios';
 import EmailField from 'components/Forms/Fields/EmailField';
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 import React from 'react';
 import routes from 'utils/routes';
 import * as yup from 'yup';
@@ -35,23 +33,7 @@ const validationSchema = yup.object({
     .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    form: {
-      width: '100%',
-      maxWidth: 600,
-      display: 'flex',
-      flexDirection: 'column',
-      '&>*': {
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-      },
-    },
-  })
-);
-
 export default function RegisterForm() {
-  const classes = useStyles();
   const [submitState, setSubmitState] = React.useState<SubmitStatus>('ready');
 
   const onSubmit = async (values: FormData) => {
@@ -66,12 +48,23 @@ export default function RegisterForm() {
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      <Form className={classes.form}>
+      <Box
+        component='form'
+        sx={{
+          width: '100%',
+          maxWidth: 600,
+          display: 'flex',
+          flexDirection: 'column',
+          '>*': {
+            my: 1,
+          },
+        }}
+      >
         <EmailField />
         <PasswordField />
         <ConfirmPasswordField />
         <SubmitButton status={submitState} />
-      </Form>
+      </Box>
     </Formik>
   );
 }

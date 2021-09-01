@@ -1,42 +1,37 @@
-import React from 'react';
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
+import Box, { BoxProps } from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-
-import { Theme } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      height: 100,
-      width: '100%',
-      backgroundColor: theme.palette.primary.dark,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: 'white',
-    },
-  })
-);
+import React from 'react';
+import { theme } from 'utils/_theme';
 
 export type FooterProps = {
   copyright?: string;
-} & React.HTMLProps<HTMLDivElement>;
+} & BoxProps
 
 export function Footer(props: FooterProps) {
   const { copyright, className = '', children, ...otherProps } = props;
-  const classes = useStyles();
   const currentYear = React.useMemo(() => new Date().getFullYear(), []);
 
   return (
-    <footer className={`${classes.container} ${className}`} {...otherProps}>
+    <Box
+      component='footer'
+      sx={{
+        height: 100,
+        width: '100%',
+        backgroundColor: theme.palette.primary.dark,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+      }}
+      {...otherProps}
+    >
       {children}
       {copyright && (
         <Typography>
           &copy; Copyright {currentYear}, {copyright}
         </Typography>
       )}
-    </footer>
+    </Box>
   );
 }

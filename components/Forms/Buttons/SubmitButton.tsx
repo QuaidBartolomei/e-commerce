@@ -1,21 +1,9 @@
-import Button from '@material-ui/core/Button';
-import { ButtonProps } from '@material-ui/core/Button';
+import Button, { ButtonProps } from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
 import DoneIcon from '@material-ui/icons/Done';
 import SendIcon from '@material-ui/icons/Send';
 import React from 'react';
 
-import { Theme } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    doneButton: {
-      backgroundColor: theme.palette.success.main,
-    },
-  })
-);
 
 export type SubmitStatus = 'ready' | 'submitting' | 'done';
 
@@ -55,8 +43,6 @@ export default function SubmitButton({
   options,
   ...buttonProps
 }: SubmitButtonProps) {
-  const classes = useStyles();
-
   const newOptions = { ...defaultOptions, ...options };
 
   const states = {
@@ -74,7 +60,9 @@ export default function SubmitButton({
       endIcon: newOptions.done.icon,
       children: newOptions.done.text,
       disabled: false,
-      className: classes.doneButton,
+      sx: {
+        backgroundColor: 'success.main',
+      },
     },
   };
   const { children, ...props } = states[status];

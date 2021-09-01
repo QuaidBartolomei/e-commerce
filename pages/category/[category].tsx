@@ -1,42 +1,39 @@
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import createStyles from '@material-ui/styles/createStyles';
-import makeStyles from '@material-ui/styles/makeStyles';
 import ShopItemCard from 'components/ShopItem/ShopItemCard';
-import {
-  Product,
-  ShopItemCategory
-} from 'interfaces/shopItem.interface';
+import { Product, ShopItemCategory } from 'interfaces/shopItem.interface';
 import React from 'react';
 import { getShopItemsByCategory } from 'utils/shopItem.util';
 
 const gridSpacing = 2;
-import { Theme } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      padding: theme.spacing(gridSpacing),
-    },
-    gridItem: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-  })
-);
 
 interface CategoryPageProps {
   items: Product[];
 }
 
 export default function CategoryPage({ items }: CategoryPageProps) {
-  const classes = useStyles();
   return (
-    <Container className={classes.container}>
-      <Grid container direction='row' spacing={gridSpacing} justifyContent='center'>
+    <Container
+      sx={{
+        p: gridSpacing,
+      }}
+    >
+      <Grid
+        container
+        direction='row'
+        spacing={gridSpacing}
+        justifyContent='center'
+      >
         {items.map(item => (
-          <Grid item key={item.id} className={classes.gridItem}>
+          <Grid
+            item
+            key={item.id}
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
             <ShopItemCard item={item} />
           </Grid>
         ))}

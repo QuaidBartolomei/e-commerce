@@ -1,20 +1,8 @@
-import React from 'react';
-import makeStyles from '@material-ui/styles/makeStyles';
-import createStyles from '@material-ui/styles/createStyles';
-import Link, { LinkProps } from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
+import Link, { LinkProps } from 'components/Link';
+import React from 'react';
 
-const useStyles = makeStyles(theme =>
-  createStyles({
-    LinkButtonContainer: {
-      // styles here
-    },
-  })
-);
-
-export default function LinkButton({ children, ...linkProps }: LinkProps) {
-  const classes = useStyles();
-
+export default function LinkButton({ children, ref, ...linkProps }: LinkProps) {
   return (
     <Link {...linkProps}>
       <Button>{children}</Button>
