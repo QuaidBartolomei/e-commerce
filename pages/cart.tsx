@@ -17,7 +17,11 @@ const useStyles = makeStyles(theme =>
         marginTop: theme.spacing(2),
       },
     },
-    shopItemsContainer: {},
+    shopItemsContainer: {
+      '&>*': {
+        marginTop: theme.spacing(2),
+      },
+    },
     subtotal: {
       marginBottom: theme.spacing(2),
     },

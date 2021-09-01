@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = {
   images: {
     domains: [
@@ -8,4 +6,5 @@ module.exports = {
       'https://firebasestorage.googleapis.com/',
     ],
   },
+  webpack5: false,
 };
