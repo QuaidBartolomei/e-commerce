@@ -1,7 +1,9 @@
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import axios from 'axios';
 import { GoogleSignInButton } from 'components/Forms/Buttons/GoogleSignInButton';
 import { useUserState } from 'components/User/user.context';
@@ -10,9 +12,9 @@ import React from 'react';
 import routes from 'utils/routes';
 import { signout } from 'utils/user.util';
 import * as yup from 'yup';
+import SubmitButton, { SubmitStatus } from '../Buttons/SubmitButton';
 import EmailField from '../Fields/EmailField';
 import PasswordField from '../Fields/PasswordField';
-import SubmitButton, { SubmitStatus } from '../Buttons/SubmitButton';
 
 interface LoginFormData {
   email: string;
@@ -35,7 +37,7 @@ const validationSchema = yup.object({
     .required('password is required'),
 });
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     form: {
       width: '100%',

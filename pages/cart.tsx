@@ -1,5 +1,6 @@
 import Container from '@material-ui/core/Container';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Typography from '@material-ui/core/Typography';
 import RemoveItemWarning from 'components/Alerts/RemoveItemWarning';
 import ShoppingCartItem from 'components/Cart/CartItem/ShoppingCartItem';
@@ -9,15 +10,20 @@ import CheckoutButton from 'components/Forms/Buttons/CheckoutButton';
 import { useUserState } from 'components/User/user.context';
 import React from 'react';
 import { getCartTotal } from 'utils/shopItem.util';
+import { Theme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       '&>*': {
         marginTop: theme.spacing(2),
       },
     },
-    shopItemsContainer: {},
+    shopItemsContainer: {
+      '&>*': {
+        margin: theme.spacing(2),
+      },
+    },
     subtotal: {
       marginBottom: theme.spacing(2),
     },

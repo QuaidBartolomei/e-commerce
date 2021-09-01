@@ -3,22 +3,23 @@ import Paper from '@material-ui/core/Paper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Typography from '@material-ui/core/Typography';
 import Review from 'components/Checkout/Review';
 import { CheckoutPageStateProvider } from 'components/CheckoutPageState';
 import AddressForm from 'components/Forms/AddressForm';
 import PaymentForm from 'components/Forms/PaymentForm';
 import React from 'react';
+import { theme } from '../utils/_theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   appBar: {
     position: 'relative',
   },
   paper: {
     margin: theme.spacing(3, 2),
     padding: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+    [theme.breakpoints.up(600 + Number(theme.spacing(3)) * 2)]: {
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(6),
       width: 600,
@@ -38,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
-}));
+});
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 

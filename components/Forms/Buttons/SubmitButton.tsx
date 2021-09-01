@@ -1,12 +1,15 @@
 import Button from '@material-ui/core/Button';
 import { ButtonProps } from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import DoneIcon from '@material-ui/icons/Done';
 import SendIcon from '@material-ui/icons/Send';
 import React from 'react';
 
-const useStyles = makeStyles(theme =>
+import { Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     doneButton: {
       backgroundColor: theme.palette.success.main,

@@ -1,14 +1,16 @@
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import ItemDetailsText from 'components/ShopItem/ItemDetailsText';
 import { Product } from 'interfaces/shopItem.interface';
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import { DbCollections, getDataById } from 'utils/firebase.utils';
+import { Theme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     itemDetailsPage: {
       width: '100%',

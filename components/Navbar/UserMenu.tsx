@@ -1,12 +1,15 @@
 import Container from '@material-ui/core/Container';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import React from 'react';
 
-const useStyles = makeStyles(theme =>
+import { Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     UserDrawerContainer: {
       display: 'flex',
@@ -29,7 +32,7 @@ export default function UserMenu() {
         color='inherit'
         aria-label='user-menu'
         onClick={() => setShowNavDrawer(true)}
-      >
+        size="large">
         <AccountCircleIcon />
       </IconButton>
     );

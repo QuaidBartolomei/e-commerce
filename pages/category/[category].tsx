@@ -1,6 +1,7 @@
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import ShopItemCard from 'components/ShopItem/ShopItemCard';
 import {
   Product,
@@ -10,8 +11,9 @@ import React from 'react';
 import { getShopItemsByCategory } from 'utils/shopItem.util';
 
 const gridSpacing = 2;
+import { Theme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       padding: theme.spacing(gridSpacing),
@@ -32,7 +34,7 @@ export default function CategoryPage({ items }: CategoryPageProps) {
   const classes = useStyles();
   return (
     <Container className={classes.container}>
-      <Grid container direction='row' spacing={gridSpacing} justify='center'>
+      <Grid container direction='row' spacing={gridSpacing} justifyContent='center'>
         {items.map(item => (
           <Grid item key={item.id} className={classes.gridItem}>
             <ShopItemCard item={item} />

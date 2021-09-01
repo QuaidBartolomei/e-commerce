@@ -1,9 +1,11 @@
 import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
+import createStyles from '@material-ui/styles/createStyles';
 import RegisterForm from 'components/Forms/RegisterForm/RegisterForm';
 import Container from '@material-ui/core/Container';
+import { Theme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       display: 'flex',

@@ -1,6 +1,7 @@
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import makeStyles from '@material-ui/styles/makeStyles';
 import React from 'react';
 import OrderSummary from './OrderSummary';
 
@@ -33,7 +34,7 @@ const payments = [
   { name: 'Expiry date', detail: expiration },
 ];
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   title: {
     marginTop: theme.spacing(2),
   },
@@ -58,7 +59,7 @@ export default function Review() {
         Payment details
       </Typography>
       <Grid container>
-        {payments.map((payment) => (
+        {payments.map(payment => (
           <React.Fragment key={payment.name}>
             <Grid item xs={6}>
               <Typography gutterBottom>{payment.name}</Typography>

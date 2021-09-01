@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
+import createStyles from '@material-ui/styles/createStyles';
 import Link, { LinkProps } from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 

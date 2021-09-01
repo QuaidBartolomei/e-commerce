@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
+import createStyles from '@material-ui/styles/createStyles';
 import { useUserDispatch } from 'components/User/user.context';
 import { useCart } from '../Cart/useCart';
 import AlertDialog from 'components/Alerts/AlertDialog';

@@ -1,11 +1,14 @@
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Image from 'next/image';
 import React from 'react';
 import { useImageGalleryState } from './ImageGalleryState';
 
-const useStyles = makeStyles(theme =>
+import { Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     selectedImage: () => ({
       display: 'flex',
@@ -17,7 +20,7 @@ const useStyles = makeStyles(theme =>
       [theme.breakpoints.up('sm')]: {
         height: 480,
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         width: '100%',
         flexGrow: 1,
       },

@@ -1,4 +1,5 @@
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import { useUserDispatch } from 'components/User/user.context';
 import { Form, Formik } from 'formik';
 import { Product } from 'interfaces/shopItem.interface';
@@ -7,7 +8,9 @@ import { getColors, getSizes } from 'utils/shopItems.utils';
 import AddToCartButton from '../Buttons/AddToCartButton';
 import { FormikSelectionInput } from '../Fields/FormikSelectionInput';
 
-const useStyles = makeStyles(theme =>
+import { Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     form: {
       display: 'flex',
