@@ -1,14 +1,15 @@
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
+import axios from 'axios';
+import EmailField from 'components/Forms/Fields/EmailField';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import EmailField from 'components/Forms/Fields/EmailField';
-import SubmitButton, { SubmitStatus } from '../Buttons/SubmitButton';
-import axios from 'axios';
 import routes from 'utils/routes';
-import PasswordField from '../Fields/PasswordField';
-
 import * as yup from 'yup';
+import SubmitButton, { SubmitStatus } from '../Buttons/SubmitButton';
 import ConfirmPasswordField from '../Fields/ConfirmPasswordField';
+import PasswordField from '../Fields/PasswordField';
 
 interface FormData {
   email: string;
@@ -31,10 +32,10 @@ const validationSchema = yup.object({
     .required('password is required'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     form: {
       width: '100%',

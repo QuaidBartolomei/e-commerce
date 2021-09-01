@@ -1,7 +1,8 @@
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Typography from '@material-ui/core/Typography';
 import { useUserDispatch } from 'components/User/user.context';
 import { CartItemData } from 'interfaces/shopItem.interface';
@@ -10,8 +11,9 @@ import routes from 'utils/routes';
 import { formatItemPrice } from 'utils/shopItem.util';
 import RemoveButton from '../../Forms/Buttons/RemoveButton';
 import QuantitySelect from '../../Forms/Fields/QuantitySelect';
+import { Theme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     cartItem: {
       padding: theme.spacing(1),

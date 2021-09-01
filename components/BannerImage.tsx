@@ -1,7 +1,9 @@
-import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { theme } from 'pages/_theme';
 import Paper from '@material-ui/core/Paper';
+import { Theme } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
+import { theme } from 'utils/_theme';
+import React from 'react';
 
 const bannerImage = 'assets/banner.jpg';
 const gradientColors: string[] = [
@@ -13,7 +15,8 @@ const backgroundGradient = `linear-gradient(to top,
   ${gradientColors.join(',')}),
   url("${bannerImage}")`;
 
-const useStyles = makeStyles(theme =>
+
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
       height: 200,

@@ -1,6 +1,7 @@
-import Box from '@material-ui/core/Box/Box';
-import Link from '@material-ui/core/Link/Link';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Link from '@material-ui/core/Link';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Typography from '@material-ui/core/Typography';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { Product, ShopItemCategory } from 'interfaces/shopItem.interface';
@@ -10,7 +11,9 @@ import routes from 'utils/routes';
 
 // Horizontal scrolling list of shop items
 
-const useStyles = makeStyles(theme =>
+import { Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       margin: theme.spacing(1, 0),

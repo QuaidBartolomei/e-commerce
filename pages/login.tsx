@@ -1,11 +1,13 @@
 import Container from '@material-ui/core/Container';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import { useUserState } from 'components/User/user.context';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       display: 'flex',

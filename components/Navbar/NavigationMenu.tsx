@@ -13,7 +13,7 @@ const NavigationDrawerMenu = () => {
         color='inherit'
         aria-label='menu'
         onClick={() => setShowNavDrawer(true)}
-      >
+        size="large">
         <MenuIcon />
       </IconButton>
 

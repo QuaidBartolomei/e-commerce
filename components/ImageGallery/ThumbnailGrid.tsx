@@ -1,4 +1,5 @@
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import React from 'react';
 import { useImageGalleryState } from './ImageGalleryState';
 import ThumbnailImage from './ThumbnailImage';

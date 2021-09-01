@@ -1,5 +1,7 @@
-import Container from '@material-ui/core/Container/Container';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import Container from '@material-ui/core/Container';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import BannerImage from 'components/BannerImage';
 import ShopItemCarousel from 'components/ShopItem/ShopItemCarousel';
 import {
@@ -7,10 +9,10 @@ import {
   Product,
   ShopItemCategory,
 } from 'interfaces/shopItem.interface';
-import React from 'react';
 import { getShopItems } from 'utils/shopItem.util';
+import { Theme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     content: {
       padding: theme.spacing(0, 2),

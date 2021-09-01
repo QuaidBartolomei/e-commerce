@@ -1,10 +1,13 @@
 import Paper from '@material-ui/core/Paper';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import createStyles from '@material-ui/styles/createStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Image from 'next/image';
 import React from 'react';
 import { useImageGalleryDispatch } from './ImageGalleryState';
 
-const useStyles = makeStyles(theme =>
+import { Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     thumbnailImage: () => ({
       width: 64,
