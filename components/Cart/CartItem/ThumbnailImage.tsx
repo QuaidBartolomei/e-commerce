@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import Box from '@material-ui/core/Box';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
@@ -14,9 +14,17 @@ export default function ThumbnailImage({
   return (
     <ButtonBase
       sx={{
-        width: 128,
-        height: 128,
+        width: {
+          xs: 64,
+          sm: 128,
+        },
+        height: {
+          xs: 64,
+          sm: 128,
+        },
         mr: 2,
+        mt: 0.5,
+        minWidth: 64,
       }}
       href={href}
     >

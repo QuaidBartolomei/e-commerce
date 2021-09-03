@@ -1,10 +1,13 @@
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
+import Divider from '@material-ui/core/Divider';
+import Stack from '@material-ui/core/Stack';
 import Typography from '@material-ui/core/Typography';
 import RemoveItemWarning from 'components/Alerts/RemoveItemWarning';
-import ShoppingCartItem from 'components/Cart/CartItem/ShoppingCartItem';
+import CartItem from 'components/Cart/CartItem/CartItem';
 import EmptyCart from 'components/Cart/EmptyCart';
 import { CartProvider } from 'components/Cart/useCart';
+import { FlexCol } from 'components/Flexbox';
 import CheckoutButton from 'components/Forms/Buttons/CheckoutButton';
 import { useUserState } from 'components/User/user.context';
 import React from 'react';
@@ -26,49 +29,44 @@ export default function CartPage() {
 
   if (cart.length === 0) return <EmptyCart />;
 
-  const ItemCards = () => (
-    <Box
-      sx={{
-        '>*': {
-          m: 2,
-        },
-      }}
-    >
+  const CartItems = () => (
+    <Stack spacing={3} divider={<Divider flexItem />}>
       {cart.map((item, key) => (
-        <ShoppingCartItem item={item} key={key} />
+        <CartItem item={item} key={key} />
       ))}
-    </Box>
+    </Stack>
   );
 
   return (
     <CartProvider>
-      <Container
-        sx={{
-          '>*': {
-           m: 1,
-          },
-          mt:2,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-        maxWidth='md'
-      >
-        <Typography variant='h4' component='h1'>
-          Shopping Cart
-        </Typography>
-        <ItemCards />
-        <Box
+      <Container maxWidth='md'>
+        <Stack
+        spacing={4}
+          direction='column'
+          alignItems='center'
+          justifyContent='center'
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-end',
+            mt: 2,
+            mb: 4,
           }}
         >
-          <Subtotal />
-          <CheckoutButton disabled={cart.length === 0} />
-        </Box>
+          <Typography
+            variant='h4'
+            component='h1'
+          >
+            Shopping Cart
+          </Typography>
+          <CartItems />
+          <FlexCol
+            sx={{
+              width: '100%',
+            }}
+            align='end'
+          >
+            <Subtotal />
+            <CheckoutButton disabled={cart.length === 0} />
+          </FlexCol>
+        </Stack>
       </Container>
       <RemoveItemWarning />
     </CartProvider>

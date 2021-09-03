@@ -16,6 +16,7 @@ const QuantitySelect = (props: Props) => {
       sx={{
         width: 'fit-content',
         minWidth: 120,
+        mr:2
       }}
       margin='normal'
     >

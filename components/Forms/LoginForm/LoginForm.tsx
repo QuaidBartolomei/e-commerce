@@ -5,7 +5,7 @@ import Link from 'components/Link';
 import axios from 'axios';
 import { GoogleSignInButton } from 'components/Forms/Buttons/GoogleSignInButton';
 import { useUserState } from 'components/User/user.context';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import React from 'react';
 import routes from 'utils/routes';
 import { signout } from 'utils/user.util';
@@ -79,7 +79,7 @@ export default function LoginForm() {
       onSubmit={onSubmit}
     >
       <Box
-        component='form'
+        component={Form}
         sx={{
           width: '100%',
           maxWidth: 600,

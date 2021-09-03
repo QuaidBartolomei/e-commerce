@@ -1,3 +1,4 @@
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import { useUserDispatch } from 'components/User/user.context';
 import React from 'react';
@@ -16,8 +17,17 @@ export default function RemoveButton({ itemId }: RemoveButtonProps) {
     });
   }
   return (
-    <Button color='secondary' onClick={onRemove} variant='outlined'>
-      Remove
-    </Button>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+      }}
+    >
+      <Button color='secondary' variant='text' onClick={onRemove}>
+        Remove
+      </Button>
+    </Box>
   );
 }
