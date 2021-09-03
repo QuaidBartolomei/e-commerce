@@ -1,8 +1,6 @@
 import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import ThumbnailImage from './ThumbnailImage';
-import Link from 'components/Link';
+import Link from '@material-ui/core/Link';
 import { useUserDispatch } from 'components/User/user.context';
 import { CartItemData } from 'interfaces/shopItem.interface';
 import React from 'react';
@@ -10,6 +8,7 @@ import routes from 'utils/routes';
 import { formatItemPrice } from 'utils/shopItem.util';
 import RemoveButton from '../../Forms/Buttons/RemoveButton';
 import QuantitySelect from '../../Forms/Fields/QuantitySelect';
+import ThumbnailImage from './ThumbnailImage';
 
 interface Props {
   item: CartItemData;
@@ -27,22 +26,32 @@ export default function ShoppingCartItem({ item }: Props) {
     });
   }
 
-  const TitleLink = () => (
+  const Name = () => (
     <Link href={itemLink}>
-      <Typography sx={{mt:1}} variant='subtitle1'>
-        {name} ({size}, {color})
+      <Typography sx={{ mt: 1 }} variant='subtitle1'>
+        {name}
       </Typography>
     </Link>
   );
 
+  const Details = () => (
+    <Typography sx={{ mt: 1 }} variant='subtitle2'>
+      Size: {size} Color: {color}
+    </Typography>
+  );
+
+  const Price = () => (
+    <Typography sx={{ mt: 1 }} variant='subtitle1'>
+      {formatItemPrice(item)}
+    </Typography>
+  );
+
   return (
-    <Paper
+    <Box
       sx={{
         p: 1,
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center',
-        flexWrap: 'wrap',
         width: 500,
       }}
     >
@@ -51,14 +60,37 @@ export default function ShoppingCartItem({ item }: Props) {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          flexGrow: 1,
         }}
       >
-        <TitleLink />
-        <Typography sx={{mt:1}} variant='subtitle1'>{formatItemPrice(item)}</Typography>
-        <QuantitySelect quantity={quantity} onChange={onChangeQuantity} />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <Name />
+            <Details />
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+            }}
+          >
+            <QuantitySelect quantity={quantity} onChange={onChangeQuantity} />
+            <Price />
+          </Box>
+        </Box>
         <RemoveButton itemId={id} />
       </Box>
-    </Paper>
+    </Box>
   );
 }

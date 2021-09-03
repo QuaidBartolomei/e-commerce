@@ -18,7 +18,6 @@ export default function AddToCartButton({}: AddToCartButtonProps) {
       }}
       startIcon={<AddShoppingCartIcon />}
       type='submit'
-      disabled={submitCount !== 0}
     >
       Add To Cart
     </Button>

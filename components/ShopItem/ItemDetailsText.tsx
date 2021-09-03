@@ -7,8 +7,6 @@ import React from 'react';
 import AddToCartForm from '../Forms/AddItemForm/AddToCartForm';
 
 const ItemDetailsText = ({ item }: { item: Product }) => {
-  const [showAlert, setShowAlert] = React.useState(false);
-
   const description = loremIpsum({
     count: 3,
     units: 'sentence',
@@ -24,12 +22,12 @@ const ItemDetailsText = ({ item }: { item: Product }) => {
         },
       }}
     >
-      <Typography component='h1' variant='h3' >
+      <Typography component='h1' variant='h3'>
         {item.name}
       </Typography>
       <Typography>${item.price}</Typography>
       <Divider />
-      <AddToCartForm item={item} onAddItem={() => setShowAlert(true)} />
+      <AddToCartForm item={item} onAddItem={() => {}} />
       <Typography>{description}</Typography>
     </Container>
   );
