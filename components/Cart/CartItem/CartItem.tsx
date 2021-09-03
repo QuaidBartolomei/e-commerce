@@ -1,6 +1,7 @@
-import Box from '@material-ui/core/Box';
+import Stack from '@material-ui/core/Stack';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+import { FlexCol, FlexRow } from 'components/Flexbox';
+import Link from 'components/Link';
 import { useUserDispatch } from 'components/User/user.context';
 import { CartItemData } from 'interfaces/shopItem.interface';
 import React from 'react';
@@ -14,7 +15,7 @@ interface Props {
   item: CartItemData;
 }
 
-export default function ShoppingCartItem({ item }: Props) {
+export default function CartItem({ item }: Props) {
   const { size, color, quantity, id, name, imageUrls } = item;
   const itemLink = routes.item(id);
   const userDispatch = useUserDispatch();
@@ -28,69 +29,50 @@ export default function ShoppingCartItem({ item }: Props) {
 
   const Name = () => (
     <Link href={itemLink}>
-      <Typography sx={{ mt: 1 }} variant='subtitle1'>
-        {name}
-      </Typography>
+      <Typography variant='h5'>{name}</Typography>
     </Link>
   );
 
   const Details = () => (
-    <Typography sx={{ mt: 1 }} variant='subtitle2'>
-      Size: {size} Color: {color}
-    </Typography>
+    <>
+      <Typography variant='subtitle2'>Size: {size}</Typography>
+      <Typography variant='subtitle2'>Color: {color}</Typography>
+    </>
   );
 
   const Price = () => (
-    <Typography sx={{ mt: 1 }} variant='subtitle1'>
+    <Typography sx={{ mt: 1, mr: 2 }} variant='subtitle1'>
       {formatItemPrice(item)}
     </Typography>
   );
 
   return (
-    <Box
+    <FlexRow
       sx={{
         p: 1,
-        display: 'flex',
-        flexDirection: 'row',
-        width: 500,
       }}
     >
       <ThumbnailImage href={itemLink} imageUrls={imageUrls} />
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          flexGrow: 1,
-        }}
-      >
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-          }}
-        >
-          <Box
+      <FlexCol grow sx={{ height: '100%', justifyContent: 'space-between' }}>
+        <FlexRow grow wrap>
+          <Stack
+            direction='column'
+            spacing={1}
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
+              mr: 2,
+              mb: 1,
             }}
           >
             <Name />
             <Details />
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-            }}
-          >
+          </Stack>
+          <FlexRow sx={{}}>
             <QuantitySelect quantity={quantity} onChange={onChangeQuantity} />
             <Price />
-          </Box>
-        </Box>
+          </FlexRow>
+        </FlexRow>
         <RemoveButton itemId={id} />
-      </Box>
-    </Box>
+      </FlexCol>
+    </FlexRow>
   );
 }

@@ -1,7 +1,7 @@
 import Box from '@material-ui/core/Box';
 import axios from 'axios';
 import EmailField from 'components/Forms/Fields/EmailField';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import React from 'react';
 import routes from 'utils/routes';
 import * as yup from 'yup';
@@ -49,7 +49,7 @@ export default function RegisterForm() {
       onSubmit={onSubmit}
     >
       <Box
-        component='form'
+        component={Form}
         sx={{
           width: '100%',
           maxWidth: 600,

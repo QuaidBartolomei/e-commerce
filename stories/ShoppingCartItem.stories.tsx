@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { CartItemData } from '../interfaces/shopItem.interface';
 import React from 'react';
-import ShoppingCartItem from '../components/Cart/CartItem/ShoppingCartItem';
+import CartItem from '../components/Cart/CartItem/CartItem';
 import Box from '@material-ui/system/Box';
 
 const sampleData: CartItemData[] = [
@@ -81,11 +81,11 @@ const sampleData: CartItemData[] = [
 
 export default {
   title: 'Example/ShoppingCartItem',
-  component: ShoppingCartItem,
-} as ComponentMeta<typeof ShoppingCartItem>;
+  component: CartItem,
+} as ComponentMeta<typeof CartItem>;
 
-const Template: ComponentStory<typeof ShoppingCartItem> = args => (
-  <ShoppingCartItem {...args} />
+const Template: ComponentStory<typeof CartItem> = args => (
+  <CartItem {...args} />
 );
 
 export const Primary = Template.bind({});
@@ -95,8 +95,8 @@ Primary.args = {
 
 export const Multiple = () => (
   <Box>
-    <ShoppingCartItem item={sampleData[0]} />
-    <ShoppingCartItem item={sampleData[1]} />
-    <ShoppingCartItem item={sampleData[2]} />
+    <CartItem item={sampleData[0]} />
+    <CartItem item={sampleData[1]} />
+    <CartItem item={sampleData[2]} />
   </Box>
 );
