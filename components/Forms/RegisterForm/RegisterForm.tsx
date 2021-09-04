@@ -1,14 +1,13 @@
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import axios from 'axios';
+import EmailField from 'components/Forms/Fields/EmailField';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import EmailField from 'components/Forms/Fields/EmailField';
-import SubmitButton, { SubmitStatus } from '../Buttons/SubmitButton';
-import axios from 'axios';
 import routes from 'utils/routes';
-import PasswordField from '../Fields/PasswordField';
-
 import * as yup from 'yup';
+import SubmitButton, { SubmitStatus } from '../Buttons/SubmitButton';
 import ConfirmPasswordField from '../Fields/ConfirmPasswordField';
+import PasswordField from '../Fields/PasswordField';
 
 interface FormData {
   email: string;
@@ -31,26 +30,10 @@ const validationSchema = yup.object({
     .required('password is required'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-const useStyles = makeStyles(theme =>
-  createStyles({
-    form: {
-      width: '100%',
-      maxWidth: 600,
-      display: 'flex',
-      flexDirection: 'column',
-      '&>*': {
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-      },
-    },
-  })
-);
-
 export default function RegisterForm() {
-  const classes = useStyles();
   const [submitState, setSubmitState] = React.useState<SubmitStatus>('ready');
 
   const onSubmit = async (values: FormData) => {
@@ -65,12 +48,23 @@ export default function RegisterForm() {
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      <Form className={classes.form}>
+      <Box
+        component={Form}
+        sx={{
+          width: '100%',
+          maxWidth: 600,
+          display: 'flex',
+          flexDirection: 'column',
+          '>*': {
+            my: 1,
+          },
+        }}
+      >
         <EmailField />
         <PasswordField />
         <ConfirmPasswordField />
         <SubmitButton status={submitState} />
-      </Form>
+      </Box>
     </Formik>
   );
 }

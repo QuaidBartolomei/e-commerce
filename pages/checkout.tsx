@@ -1,49 +1,20 @@
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Review from 'components/Checkout/Review';
 import { CheckoutPageStateProvider } from 'components/CheckoutPageState';
 import AddressForm from 'components/Forms/AddressForm';
 import PaymentForm from 'components/Forms/PaymentForm';
 import React from 'react';
-
-const useStyles = makeStyles(theme => ({
-  appBar: {
-    position: 'relative',
-  },
-  paper: {
-    margin: theme.spacing(3, 2),
-    padding: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(6),
-      width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      padding: theme.spacing(3),
-    },
-  },
-  stepper: {
-    padding: theme.spacing(3, 0, 5),
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
-  },
-}));
+import { theme } from '../utils/_theme';
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
 export default function Checkout() {
-  const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => setActiveStep(activeStep + 1);
@@ -64,11 +35,28 @@ export default function Checkout() {
 
   return (
     <CheckoutPageStateProvider>
-      <Paper className={classes.paper}>
+      <Paper
+        sx={{
+          my: 3,
+          mx: 2,
+          p: 2,
+          [theme.breakpoints.up(600 + Number(theme.spacing(3)) * 2)]: {
+            my: 6,
+            width: 600,
+            mx: 'auto',
+            p: 3,
+          },
+        }}
+      >
         <Typography component='h1' variant='h4' align='center'>
           Checkout
         </Typography>
-        <Stepper activeStep={activeStep} className={classes.stepper}>
+        <Stepper
+          activeStep={activeStep}
+          sx={{
+            padding: theme.spacing(3, 0, 5),
+          }}
+        >
           {steps.map(label => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
@@ -90,9 +78,20 @@ export default function Checkout() {
           ) : (
             <React.Fragment>
               <Content />
-              <div className={classes.buttons}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                }}
+              >
                 {activeStep !== 0 && (
-                  <Button onClick={handleBack} className={classes.button}>
+                  <Button
+                    onClick={handleBack}
+                    sx={{
+                      mt: 3,
+                      ml: 1,
+                    }}
+                  >
                     Back
                   </Button>
                 )}
@@ -100,11 +99,10 @@ export default function Checkout() {
                   variant='contained'
                   color='primary'
                   onClick={handleNext}
-                  className={classes.button}
                 >
                   {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
                 </Button>
-              </div>
+              </Box>
             </React.Fragment>
           )}
         </React.Fragment>

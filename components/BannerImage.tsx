@@ -1,7 +1,6 @@
+import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Paper } from '@material-ui/core';
-import { theme } from 'pages/_theme';
+import { theme } from 'utils/_theme';
 
 const bannerImage = 'assets/banner.jpg';
 const gradientColors: string[] = [
@@ -13,19 +12,18 @@ const backgroundGradient = `linear-gradient(to top,
   ${gradientColors.join(',')}),
   url("${bannerImage}")`;
 
-const useStyles = makeStyles(theme =>
-  createStyles({
-    header: {
-      height: 200,
-      width: '100%',
-      background: backgroundGradient,
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-    },
-  })
-);
-
 export default function BannerImage() {
-  const classes = useStyles();
-  return <Paper elevation={1} square={true} className={classes.header}></Paper>;
+  return (
+    <Paper
+      elevation={1}
+      sx={{
+        height: 200,
+        width: '100%',
+        background: backgroundGradient,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+      }}
+      square={true}
+    ></Paper>
+  );
 }

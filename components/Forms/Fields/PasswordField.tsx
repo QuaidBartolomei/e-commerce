@@ -1,30 +1,6 @@
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import TextField, { TextFieldProps } from '@material-ui/core/TextField';
-import { useField, useFormikContext } from 'formik';
+import TextField from '@material-ui/core/TextField';
+import { useFormikContext } from 'formik';
 import React from 'react';
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    EmailFieldContainer: {
-      // styles here
-    },
-  })
-);
-
-function FormikTextField(props: TextFieldProps) {
-  const { name = 'MISSING_NAME' } = props;
-  const [field, meta, helpers] = useField(name);
-  const { touched, error } = meta;
-
-  return (
-    <TextField
-      {...props}
-      {...field}
-      error={touched && Boolean(error)}
-      helperText={touched && error}
-    />
-  );
-}
 
 export default function PasswordField() {
   const { values, handleChange, touched, errors } =
@@ -32,6 +8,7 @@ export default function PasswordField() {
   return (
     <TextField
       id='password'
+      margin='normal'
       label='Password'
       variant='outlined'
       name='password'

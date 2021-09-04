@@ -1,21 +1,13 @@
-import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { useUserDispatch } from 'components/User/user.context';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    removeButton: {
-    },
-  })
-);
+import { useUserDispatch } from 'components/User/user.context';
+import React from 'react';
 
 export type RemoveButtonProps = {
   itemId: string;
 };
 
 export default function RemoveButton({ itemId }: RemoveButtonProps) {
-  const classes = useStyles();
   const userDispatch = useUserDispatch();
 
   function onRemove() {
@@ -25,13 +17,17 @@ export default function RemoveButton({ itemId }: RemoveButtonProps) {
     });
   }
   return (
-    <Button
-      className={classes.removeButton}
-      color='secondary'
-      onClick={onRemove}
-      variant='outlined'
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+      }}
     >
-      Remove
-    </Button>
+      <Button color='secondary' variant='text' onClick={onRemove}>
+        Remove
+      </Button>
+    </Box>
   );
 }

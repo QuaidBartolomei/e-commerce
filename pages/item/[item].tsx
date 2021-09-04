@@ -1,36 +1,11 @@
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import ItemDetailsText from 'components/ShopItem/ItemDetailsText';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { Product } from 'interfaces/shopItem.interface';
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import { DbCollections, getDataById } from 'utils/firebase.utils';
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    itemDetailsPage: {
-      width: '100%',
-      height: '100%',
-      minHeight: '100vh',
-      padding: theme.spacing(4, 0),
-      flexGrow: 1,
-    },
-    detailsContainer: {
-      display: 'flex',
-      flexDirection: 'column',
-      '&>*': {
-        marginBottom: theme.spacing(1),
-      },
-    },
-    imageGalleryContainer: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
-  })
-);
 
 type Params = {
   item: string;
@@ -48,14 +23,41 @@ interface Props {
 }
 
 export default function ItemPage({ item }: Props) {
-  const classes = useStyles();
   return (
     <Container maxWidth='lg'>
-      <Grid container item className={classes.itemDetailsPage}>
-        <Grid item sm={5} xs={12} className={classes.imageGalleryContainer}>
+      <Grid
+        container
+        sx={{
+          width: '100%',
+          height: '100%',
+          minHeight: '100vh',
+          py: 4,
+          flexGrow: 1,
+        }}
+      >
+        <Grid
+          item
+          sm={5}
+          xs={12}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
           <ImageGallery imageUrls={item.imageUrls} />
         </Grid>
-        <Grid item sm={7} xs={12} className={classes.detailsContainer}>
+        <Grid
+          item
+          sm={7}
+          xs={12}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            '>*': {
+              mb: 1,
+            },
+          }}
+        >
           <ItemDetailsText item={item} />
         </Grid>
       </Grid>

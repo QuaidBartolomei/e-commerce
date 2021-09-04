@@ -1,15 +1,6 @@
-import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import Alert from '@material-ui/core/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
-import Alert from 'components/Alerts/Alert';
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    ItemAddedAlertContainer: {
-      // styles here
-    },
-  })
-);
+import React from 'react';
 
 export type ItemAddedAlertProps = {
   show?: boolean;
@@ -28,8 +19,21 @@ export default function ItemAddedAlert({ show = false }: ItemAddedAlertProps) {
   }
 
   return (
-    <Snackbar open={showAlert} autoHideDuration={6000} onClose={handleClose}>
-      <Alert onClose={handleClose} severity='success'>
+    <Snackbar
+      open={showAlert}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
+      autoHideDuration={6000}
+      onClose={handleClose}
+    >
+      <Alert
+        elevation={6}
+        variant='filled'
+        onClose={handleClose}
+        severity='success'
+      >
         Item added to cart!
       </Alert>
     </Snackbar>

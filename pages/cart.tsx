@@ -1,36 +1,19 @@
+import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
+import Stack from '@material-ui/core/Stack';
 import Typography from '@material-ui/core/Typography';
 import RemoveItemWarning from 'components/Alerts/RemoveItemWarning';
-import ShoppingCartItem from 'components/Cart/CartItem/ShoppingCartItem';
+import CartItem from 'components/Cart/CartItem/CartItem';
 import EmptyCart from 'components/Cart/EmptyCart';
 import { CartProvider } from 'components/Cart/useCart';
+import { FlexCol } from 'components/Flexbox';
 import CheckoutButton from 'components/Forms/Buttons/CheckoutButton';
 import { useUserState } from 'components/User/user.context';
 import React from 'react';
 import { getCartTotal } from 'utils/shopItem.util';
 
-const useStyles = makeStyles(theme =>
-  createStyles({
-    container: {
-      '&>*': {
-        marginTop: theme.spacing(2),
-      },
-    },
-    shopItemsContainer: {},
-    subtotal: {
-      marginBottom: theme.spacing(2),
-    },
-    alignRight: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-end',
-    },
-  })
-);
-
 export default function CartPage() {
-  const classes = useStyles();
   const user = useUserState();
   const { cart } = user;
   const cartTotal = getCartTotal(cart);
@@ -38,33 +21,54 @@ export default function CartPage() {
   const Subtotal = () => (
     <Typography
       variant='h6'
-      className={classes.subtotal}
+      sx={{
+        mb: 2,
+      }}
     >{`Subtotal: $${cartTotal}`}</Typography>
   );
 
   if (cart.length === 0) return <EmptyCart />;
 
-  const ItemCards = () => (
-    <div className={classes.shopItemsContainer}>
+  const CartItems = () => (
+    <Stack spacing={3} divider={<Divider flexItem />}>
       {cart.map((item, key) => (
-        <ShoppingCartItem item={item} key={key} />
+        <CartItem item={item} key={key} />
       ))}
-    </div>
+    </Stack>
   );
 
   return (
     <CartProvider>
-      <Container className={classes.container} maxWidth='md'>
-        <Typography variant='h4' component='h1'>
-          Shopping Cart
-        </Typography>
-        <ItemCards />
-        <div className={classes.alignRight}>
-          <Subtotal />
-          <CheckoutButton disabled={cart.length === 0} />
-        </div>
-        <RemoveItemWarning />
+      <Container maxWidth='md'>
+        <Stack
+        spacing={4}
+          direction='column'
+          alignItems='center'
+          justifyContent='center'
+          sx={{
+            mt: 2,
+            mb: 4,
+          }}
+        >
+          <Typography
+            variant='h4'
+            component='h1'
+          >
+            Shopping Cart
+          </Typography>
+          <CartItems />
+          <FlexCol
+            sx={{
+              width: '100%',
+            }}
+            align='end'
+          >
+            <Subtotal />
+            <CheckoutButton disabled={cart.length === 0} />
+          </FlexCol>
+        </Stack>
       </Container>
+      <RemoveItemWarning />
     </CartProvider>
   );
 }
