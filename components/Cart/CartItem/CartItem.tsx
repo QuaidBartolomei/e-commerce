@@ -1,5 +1,5 @@
-import Stack from '@material-ui/core/Stack';
-import Typography from '@material-ui/core/Typography';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { FlexCol, FlexRow } from 'components/Flexbox';
 import Link from 'components/Link';
 import { useUserDispatch } from 'components/User/user.context';

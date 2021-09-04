@@ -1,4 +1,4 @@
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 import React from 'react';
 import { theme } from 'utils/_theme';
 

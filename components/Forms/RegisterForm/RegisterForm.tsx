@@ -1,4 +1,4 @@
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import axios from 'axios';
 import EmailField from 'components/Forms/Fields/EmailField';
 import { Form, Formik } from 'formik';

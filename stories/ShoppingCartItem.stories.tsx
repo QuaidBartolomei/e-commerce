@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { CartItemData } from '../interfaces/shopItem.interface';
 import React from 'react';
 import CartItem from '../components/Cart/CartItem/CartItem';
-import Box from '@material-ui/system/Box';
+import Box from '@mui/system/Box';
 
 const sampleData: CartItemData[] = [
   {

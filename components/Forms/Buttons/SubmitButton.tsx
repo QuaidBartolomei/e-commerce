@@ -1,7 +1,7 @@
-import Button, { ButtonProps } from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import DoneIcon from '@material-ui/icons/Done';
-import SendIcon from '@material-ui/icons/Send';
+import Button, { ButtonProps } from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import DoneIcon from '@mui/icons-material/Done';
+import SendIcon from '@mui/icons-material/Send';
 import React from 'react';
 
 

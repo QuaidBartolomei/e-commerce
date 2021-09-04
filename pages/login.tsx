@@ -1,4 +1,4 @@
-import Container from '@material-ui/core/Container';
+import Container from '@mui/material/Container';
 import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import { useUserState } from 'components/User/user.context';
 import { useRouter } from 'next/dist/client/router';

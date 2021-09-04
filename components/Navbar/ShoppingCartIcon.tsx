@@ -1,6 +1,6 @@
-import Badge from '@material-ui/core/Badge';
+import Badge from '@mui/material/Badge';
 import Link from 'components/Link';
-import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import { useUserState } from 'components/User/user.context';
 import React, { useEffect } from 'react';
 import routes from 'utils/routes';

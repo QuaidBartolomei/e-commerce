@@ -1,4 +1,4 @@
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 import Image from 'next/image';
 import React from 'react';
 import { useImageGalleryDispatch } from './ImageGalleryState';

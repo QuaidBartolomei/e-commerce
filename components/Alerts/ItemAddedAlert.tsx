@@ -1,5 +1,5 @@
-import Alert from '@material-ui/core/Alert';
-import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import React from 'react';
 
 export type ItemAddedAlertProps = {

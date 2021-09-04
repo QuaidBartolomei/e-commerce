@@ -1,6 +1,6 @@
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import Link from 'components/Link';
 import axios from 'axios';
 import { GoogleSignInButton } from 'components/Forms/Buttons/GoogleSignInButton';
