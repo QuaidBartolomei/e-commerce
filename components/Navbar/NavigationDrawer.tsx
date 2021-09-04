@@ -1,9 +1,9 @@
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem, { ListItemProps } from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Categories } from 'interfaces/shopItem.interface';
 import React from 'react';
 import routes from 'utils/routes';

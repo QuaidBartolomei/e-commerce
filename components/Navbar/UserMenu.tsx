@@ -1,7 +1,7 @@
-import Container from '@material-ui/core/Container';
-import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Container from '@mui/material/Container';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import React from 'react';
 

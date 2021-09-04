@@ -1,6 +1,6 @@
-import Container from '@material-ui/core/Container';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
 import { Product } from 'interfaces/shopItem.interface';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';

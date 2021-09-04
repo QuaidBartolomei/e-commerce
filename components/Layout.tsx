@@ -1,4 +1,4 @@
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import { Footer } from 'components/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import React from 'react';

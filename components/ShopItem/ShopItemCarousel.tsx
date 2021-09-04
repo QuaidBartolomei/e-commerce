@@ -1,7 +1,7 @@
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import Link from 'components/Link';
-import Typography from '@material-ui/core/Typography';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import Typography from '@mui/material/Typography';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import ShopItemCard from 'components/ShopItem/ShopItemCard';
 import { Product, ShopItemCategory } from 'interfaces/shopItem.interface';
 import React from 'react';

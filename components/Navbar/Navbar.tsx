@@ -1,6 +1,6 @@
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import routes from 'utils/routes';

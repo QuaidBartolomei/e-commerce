@@ -1,4 +1,4 @@
-import Container from '@material-ui/core/Container';
+import Container from '@mui/material/Container';
 import RegisterForm from 'components/Forms/RegisterForm/RegisterForm';
 import React from 'react';
 

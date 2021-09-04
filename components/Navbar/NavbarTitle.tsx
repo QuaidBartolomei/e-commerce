@@ -1,5 +1,5 @@
 import Link from 'components/Link';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 import routes from 'utils/routes';
 import Logo from './Logo';

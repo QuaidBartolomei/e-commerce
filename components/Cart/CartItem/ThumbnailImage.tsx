@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
-import Box from '@material-ui/core/Box';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import Box from '@mui/material/Box';
+import ButtonBase from '@mui/material/ButtonBase';
 
 export type ThumbnailImageProps = {
   href: string;

@@ -1,5 +1,5 @@
-import Box from '@material-ui/core/Box';
-import ButtonBase, { ButtonBaseProps } from '@material-ui/core/ButtonBase';
+import Box from '@mui/material/Box';
+import ButtonBase, { ButtonBaseProps } from '@mui/material/ButtonBase';
 import React from 'react';
 
 export type ImageButtonProps = {

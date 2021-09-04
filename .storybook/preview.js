@@ -1,8 +1,8 @@
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { theme } from 'utils/_theme';
 import { UserProvider } from 'components/User/user.context';
 import { RouterContext } from 'next/dist/shared/lib/router-context'; // next 11.2
-import CssBaseline from '@material-ui/core/CssBaseline';
+import CssBaseline from '@mui/material/CssBaseline';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },

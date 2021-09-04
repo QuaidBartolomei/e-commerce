@@ -1,5 +1,5 @@
-import Button from '@material-ui/core/Button';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import Button from '@mui/material/Button';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useFormikContext } from 'formik';
 import React from 'react';
 

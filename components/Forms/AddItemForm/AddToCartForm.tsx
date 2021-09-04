@@ -1,4 +1,4 @@
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import ItemAddedAlert from 'components/Alerts/ItemAddedAlert';
 import { useUserDispatch } from 'components/User/user.context';
 import { Form, Formik, FormikHelpers } from 'formik';
