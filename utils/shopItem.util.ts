@@ -62,3 +62,7 @@ export function getCartTotal(cart: CartItemData[]) {
 export function formatItemPrice(item: Product) {
   return `$${item.price.toFixed(2)}`;
 }
+
+export function priceToString(price: number) {
+  return `$${price.toFixed(2)}`;
+}

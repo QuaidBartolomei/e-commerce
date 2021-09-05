@@ -3,7 +3,6 @@ import Image from 'next/image';
 import React from 'react';
 import { useImageGalleryState } from './ImageGalleryState';
 
-
 export default function SelectedImage() {
   const { selectedImage } = useImageGalleryState();
   return (
@@ -32,7 +31,6 @@ export default function SelectedImage() {
         ':hover': {
           cursor: 'pointer',
         },
-        border: 'thin solid black',
       }}
     >
       <Image
