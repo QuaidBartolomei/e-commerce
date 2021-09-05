@@ -6,9 +6,11 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Link from 'components/Link';
 import { Product, ShopItemCategory } from 'interfaces/shopItem.interface';
 import Image from 'next/image';
 import React from 'react';
+import routes from 'utils/routes';
 import { getShopItemsByCategory, priceToString } from 'utils/shopItem.util';
 
 interface CategoryPageProps {
@@ -20,13 +22,22 @@ export default function CategoryPage({ items }: CategoryPageProps) {
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
+  const categoryName = items[0]?.category ?? '';
+
+  const Title = () => (
+    <Typography
+      component='h2'
+      variant='h4'
+    >
+      {categoryName}
+    </Typography>
+  );
 
   function ItemList() {
     return (
       <Container maxWidth='xl'>
         <Box
           sx={{
-            my: 4,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -42,26 +53,28 @@ export default function CategoryPage({ items }: CategoryPageProps) {
           >
             {items.map(({ imageUrls, name, id, price }) => (
               <ImageListItem key={id}>
-                <Box
-                  sx={{
-                    minHeight: {
-                      xs: 150,
-                      sm: 200,
-                      md: 250,
-                    },
-                    position: 'relative',
-                    borderRadius: 1,
-                    overflow: 'hidden',
-                  }}
-                >
-                  <Image
-                    src={imageUrls[0]}
-                    alt={name}
-                    placeholder='empty'
-                    layout='fill'
-                    objectFit='cover'
-                  />
-                </Box>
+                <Link href={routes.item(id)}>
+                  <Box
+                    sx={{
+                      minHeight: {
+                        xs: 150,
+                        sm: 200,
+                        md: 250,
+                      },
+                      position: 'relative',
+                      borderRadius: 1,
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <Image
+                      src={imageUrls[0]}
+                      alt={name}
+                      placeholder='empty'
+                      layout='fill'
+                      objectFit='cover'
+                    />
+                  </Box>
+                </Link>
                 <ImageListItemBar
                   title={<Typography variant='h5'>{name}</Typography>}
                   subtitle={<Typography>{priceToString(price)}</Typography>}
@@ -85,6 +98,7 @@ export default function CategoryPage({ items }: CategoryPageProps) {
         justifyContent: 'center',
       }}
     >
+      <Title />
       <ItemList />
     </Box>
   );

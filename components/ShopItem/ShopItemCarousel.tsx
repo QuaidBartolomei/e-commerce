@@ -20,13 +20,7 @@ export default function ShopItemCarousel(props: Props) {
 
   const Title = () => (
     <Link href={routes.category(category)}>
-      <Typography
-        component='h2'
-        variant='h4'
-        sx={{
-          ml: 1,
-        }}
-      >
+      <Typography component='h2' variant='h4'>
         {title}
       </Typography>
     </Link>
@@ -59,6 +53,7 @@ export default function ShopItemCarousel(props: Props) {
         sx={{
           overflowX: 'scroll',
           mr: 1,
+          py: 2,
         }}
       >
         {items.map((item, key) => (
