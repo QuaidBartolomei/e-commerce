@@ -7,13 +7,22 @@ import routes from 'utils/routes';
 import Image from 'next/image';
 import Box from '@mui/material/Box';
 import { formatItemPrice } from 'utils/shopItem.util';
+import StarIcon from '@mui/icons-material/Star';
 
 const ShopItemCard = ({ item }: { item: Product }) => {
   const { name, imageUrls } = item;
   const image = imageUrls[0];
 
-  const Rating = () => <Typography>{`Rating`}</Typography>;
-  const Name = () => <Typography>{name}</Typography>;
+  const Rating = () => (
+    <Box>
+      <StarIcon sx={{fontSize:16}} />
+      <StarIcon sx={{fontSize:16}} />
+      <StarIcon sx={{fontSize:16}} />
+      <StarIcon sx={{fontSize:16}} />
+      <StarIcon sx={{fontSize:16}} />
+    </Box>
+  );
+  const Name = () => <Typography variant='h5'>{name}</Typography>;
   const Price = () => <Typography>{formatItemPrice(item)}</Typography>;
 
   const Thumbnail = () => (
@@ -43,16 +52,33 @@ const ShopItemCard = ({ item }: { item: Product }) => {
         width: '100%',
       }}
     >
-      <Stack
+      <Box
         sx={{
-          height: '100%',
-          width: '100%',
+          minWidth: {
+            xs: 150,
+            sm: 200,
+            md: 250,
+          },
+          minHeight: {
+            xs: 150,
+            sm: 200,
+            md: 250,
+          },
+          position: 'relative',
+          borderRadius: 1,
+          overflow: 'hidden',
         }}
-        direction='column'
       >
-        <Thumbnail />
-        <Details />
-      </Stack>
+        <Image
+          src={imageUrls[0]}
+          alt={name}
+          placeholder='empty'
+          layout='fill'
+          objectFit='cover'
+        />
+      </Box>
+      <Thumbnail />
+      <Details />
     </Link>
   );
 };
