@@ -5,7 +5,9 @@ import routes from 'utils/routes';
 import Logo from './Logo';
 
 const NavbarTitle = ({ title }: { title?: string }) => {
+
   title = title || 'Clothing';
+
   const CompanyLogo = () => (
     <Logo height='32px' width='32px' stroke='white' strokeWidth={2} />
   );

@@ -12,7 +12,7 @@ const Layout: React.FC = props => {
         flexDirection: 'column',
       }}
     >
-      <NavbarNew />
+      <NavbarNew logoImage='/logo.svg' />
       <Box
         sx={{
           flexGrow: 1,
@@ -23,7 +23,7 @@ const Layout: React.FC = props => {
       >
         {props.children}
       </Box>
-      <Footer copyright='CAB Clothing' />
+      <Footer copyright='Fine Attire' />
     </Box>
   );
 };
