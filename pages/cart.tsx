@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
@@ -41,19 +40,15 @@ export default function CartPage() {
     <CartProvider>
       <Container maxWidth='md'>
         <Stack
-        spacing={4}
+          spacing={4}
           direction='column'
           alignItems='center'
-          justifyContent='center'
           sx={{
             mt: 2,
             mb: 4,
           }}
         >
-          <Typography
-            variant='h4'
-            component='h1'
-          >
+          <Typography variant='h4' component='h1'>
             Shopping Cart
           </Typography>
           <CartItems />

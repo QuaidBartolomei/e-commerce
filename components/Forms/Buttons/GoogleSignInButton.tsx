@@ -1,14 +1,24 @@
-import Button from '@mui/material/Button';
+import Button, { ButtonProps } from '@mui/material/Button';
 import React from 'react';
 import { signInWithGoogle } from 'utils/firebase.utils';
 
-export const GoogleSignInButton = () => (
-  <Button
-    variant='contained'
-    onClick={() => {
-      signInWithGoogle().catch(error => {});
-    }}
-  >
-    Sign In With Google
-  </Button>
-);
+export type GoogleSignInButtonProps = {
+  // props
+} & ButtonProps;
+
+export default function GoogleSignInButton({
+  children = 'Sign In With Google',
+  ...buttonProps
+}: GoogleSignInButtonProps) {
+  return (
+    <Button
+      variant='contained'
+      onClick={() => {
+        signInWithGoogle().catch(error => {});
+      }}
+      {...buttonProps}
+    >
+      {children}
+    </Button>
+  );
+}

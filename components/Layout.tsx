@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { Footer } from 'components/Footer';
-import Navbar from 'components/Navbar/Navbar';
 import React from 'react';
+import Navbar from 'components/Navbar/Navbar';
 
 const Layout: React.FC = props => {
   return (
@@ -12,7 +12,7 @@ const Layout: React.FC = props => {
         flexDirection: 'column',
       }}
     >
-      <Navbar />
+      <Navbar logoImage='/logo.svg' />
       <Box
         sx={{
           flexGrow: 1,
@@ -23,7 +23,7 @@ const Layout: React.FC = props => {
       >
         {props.children}
       </Box>
-      <Footer copyright='CAB Clothing' />
+      <Footer copyright='Fine Attire' />
     </Box>
   );
 };

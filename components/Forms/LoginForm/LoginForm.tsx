@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Link from 'components/Link';
 import axios from 'axios';
-import { GoogleSignInButton } from 'components/Forms/Buttons/GoogleSignInButton';
 import { useUserState } from 'components/User/user.context';
 import { Form, Formik } from 'formik';
 import React from 'react';
@@ -13,6 +12,8 @@ import * as yup from 'yup';
 import SubmitButton, { SubmitStatus } from '../Buttons/SubmitButton';
 import EmailField from '../Fields/EmailField';
 import PasswordField from '../Fields/PasswordField';
+import Stack from '@mui/material/Stack';
+import GoogleSignInButton from '../Buttons/GoogleSignInButton';
 
 interface LoginFormData {
   email: string;
@@ -35,7 +36,11 @@ const validationSchema = yup.object({
     .required('password is required'),
 });
 
-export default function LoginForm() {
+type Props = {
+  fullWidth?: boolean;
+};
+
+export default function LoginForm({ fullWidth = false }: Props) {
   const [submitState, setSubmitState] = React.useState<SubmitStatus>('ready');
   const { isAuth } = useUserState();
   if (isAuth) return <Button onClick={signout}>Sign Out</Button>;
@@ -46,58 +51,56 @@ export default function LoginForm() {
     if (res.status === 200) setSubmitState('done');
   };
 
-  const ForgotPasswordLink = () => (
-    <Link
-      href={routes.register}
-      sx={{
-        width: '100%',
-        textAlign: 'center',
-      }}
-    >
-      Forgot Password
-    </Link>
-  );
-
-  const CreateNewAccountButton = () => (
-    <Link
-      href={routes.register}
-      sx={{
-        width: '100%',
-        textAlign: 'center',
-      }}
-    >
-      <Button variant='contained' color='secondary'>
-        Create New Account
-      </Button>
-    </Link>
-  );
-
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      <Box
+      <Stack
         component={Form}
+        direction='column'
+        spacing={2}
+        alignItems='center'
         sx={{
           width: '100%',
           maxWidth: 600,
-          display: 'flex',
-          flexDirection: 'column',
-          '>*': {
-            my: 1,
-          },
         }}
       >
         <Typography variant='h5'>Sign In</Typography>
         <EmailField />
         <PasswordField />
-        <SubmitButton status={submitState} />
-        <GoogleSignInButton />
+        <SubmitButton fullWidth={fullWidth} status={submitState} />
+        <GoogleSignInButton fullWidth={fullWidth} />
         <ForgotPasswordLink />
-        <CreateNewAccountButton />
-      </Box>
+        <CreateNewAccountButton fullWidth={fullWidth} />
+      </Stack>
     </Formik>
   );
 }
+
+const CreateNewAccountButton = ({ fullWidth = false }: Props) => (
+  <Link
+    href={routes.register}
+    sx={{
+      width: '100%',
+      textAlign: 'center',
+    }}
+  >
+    <Button fullWidth={fullWidth} variant='contained' color='secondary'>
+      Create New Account
+    </Button>
+  </Link>
+);
+
+const ForgotPasswordLink = ({ fullWidth = false }: Props) => (
+  <Link
+    href={routes.register}
+    sx={{
+      width: '100%',
+      textAlign: 'center',
+    }}
+  >
+    Forgot Password
+  </Link>
+);

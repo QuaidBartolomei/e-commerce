@@ -37,7 +37,7 @@ export default function ItemPage({ item }: Props) {
       >
         <Grid
           item
-          sm={5}
+          md={5}
           xs={12}
           sx={{
             display: 'flex',
@@ -48,15 +48,8 @@ export default function ItemPage({ item }: Props) {
         </Grid>
         <Grid
           item
-          sm={7}
+          md={7}
           xs={12}
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            '>*': {
-              mb: 1,
-            },
-          }}
         >
           <ItemDetailsText item={item} />
         </Grid>

@@ -7,20 +7,20 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Categories } from 'interfaces/shopItem.interface';
 import React from 'react';
 import routes from 'utils/routes';
+import { useNavbarDispatch, useNavbarState } from './useNavbar';
 
+interface Props {}
 
-interface Props {
-  isOpen: boolean;
-  onClose: () => void;
-}
-const NavigationDrawer = (props: Props) => {
-  const { isOpen, onClose } = props;
+const NavigationDrawer = ({}: Props) => {
+  const { showNavDrawer } = useNavbarState();
+  const dispatch = useNavbarDispatch();
+  const onClose = () => dispatch({ type: 'set_showNavDrawer', payload: false });
 
   function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
     return <ListItem button component='a' {...props} />;
   }
   return (
-    <Drawer anchor='left' open={isOpen} onClose={onClose}>
+    <Drawer anchor='left' open={showNavDrawer} onClose={onClose}>
       <List
         component='nav'
         aria-label='main mailbox folders'

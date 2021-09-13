@@ -1,5 +1,5 @@
-import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { Product } from 'interfaces/shopItem.interface';
 import { loremIpsum } from 'lorem-ipsum';
@@ -13,13 +13,11 @@ const ItemDetailsText = ({ item }: { item: Product }) => {
   });
 
   return (
-    <Container
+    <Stack
+      direction='column'
+      spacing={3}
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        '>*': {
-          mt: 3,
-        },
+        mt: { xs: 3, md: 0 },
       }}
     >
       <Typography component='h1' variant='h3'>
@@ -29,7 +27,7 @@ const ItemDetailsText = ({ item }: { item: Product }) => {
       <Divider />
       <AddToCartForm item={item} onAddItem={() => {}} />
       <Typography>{description}</Typography>
-    </Container>
+    </Stack>
   );
 };
 
