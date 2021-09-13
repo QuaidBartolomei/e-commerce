@@ -8,15 +8,6 @@ export type BrandLinkButtonProps = {
 };
 
 export default function BrandLinkButton({ logoImage }: BrandLinkButtonProps) {
-  const CompanyLogo = () => (
-    <Image
-      src={logoImage}
-      layout='fill'
-      objectFit='contain'
-      alt={'brand logo'}
-    />
-  );
-
   return (
     <Link
       href={routes.index}
@@ -31,7 +22,12 @@ export default function BrandLinkButton({ logoImage }: BrandLinkButtonProps) {
       }}
       underline='none'
     >
-      <CompanyLogo />
+      <Image
+        src={logoImage}
+        layout='fill'
+        objectFit='contain'
+        alt={'brand logo'}
+      />
     </Link>
   );
 }

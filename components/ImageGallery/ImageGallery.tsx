@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import React from 'react';
 import { ImageGalleryProvider } from './ImageGalleryState';
 import SelectedImage from './SelectedImage';
@@ -6,10 +6,10 @@ import ThumbnailGrid from './ThumbnailGrid';
 
 type ImageGalleryProps = {
   imageUrls: string[];
-} & React.HTMLProps<HTMLDivElement>;
+} & BoxProps;
 
 export default function ImageGallery(props: ImageGalleryProps) {
-  const { imageUrls, className, children, ...divProps } = props;
+  const { imageUrls, className, children, ...boxProps } = props;
   const filteredUrls = React.useMemo(() => {
     return imageUrls.filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
   }, [imageUrls]);
@@ -20,8 +20,8 @@ export default function ImageGallery(props: ImageGalleryProps) {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
         }}
+        {...boxProps}
       >
         <SelectedImage />
         <ThumbnailGrid />

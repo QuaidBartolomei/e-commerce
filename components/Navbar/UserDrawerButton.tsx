@@ -5,7 +5,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import React from 'react';
 
-export default function UserMenu() {
+export default function UserDrawerButton() {
   const [showNavDrawer, setShowNavDrawer] = React.useState(false);
 
   function UserButton() {
@@ -33,14 +33,10 @@ export default function UserMenu() {
       >
         <Container
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
             pt: 2,
           }}
         >
-          <LoginForm />
+          <LoginForm fullWidth />
         </Container>
       </Drawer>
     </React.Fragment>

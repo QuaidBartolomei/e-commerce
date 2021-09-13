@@ -3,15 +3,17 @@ import React, { createContext, FC, useContext, useReducer } from 'react';
 type State = {
   menuId: string;
   mobileMenuId: string;
-  anchorElement?: AnchorElement;
-  mobileMoreAnchorElement?: AnchorElement;
   logoImage: string;
   title: string;
+  anchorElement?: AnchorElement;
+  mobileMoreAnchorElement?: AnchorElement;
+  showNavDrawer?: boolean;
 };
 
 type Action =
   | { type: 'close_menus' }
   | { type: 'set_anchorElement'; payload: AnchorElement }
+  | { type: 'set_showNavDrawer'; payload: boolean }
   | { type: 'set_mobileMoreAnchorElement'; payload: AnchorElement };
 
 const itemDetailsReducer = (state: State, action: Action): State => {
@@ -21,6 +23,9 @@ const itemDetailsReducer = (state: State, action: Action): State => {
     }
     case 'set_anchorElement': {
       return { ...state, anchorElement: action.payload };
+    }
+    case 'set_showNavDrawer': {
+      return { ...state, showNavDrawer: action.payload };
     }
     case 'set_mobileMoreAnchorElement': {
       return { ...state, mobileMoreAnchorElement: action.payload };

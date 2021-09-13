@@ -17,15 +17,15 @@ export default function SelectedImage() {
         position: 'relative',
         height: {
           xs: 320,
-          sm: 480,
+          md: 480,
         },
         width: {
           xs: '100%',
-          sm: 300,
+          md: 300,
         },
         flexGrow: {
           xs: 1,
-          sm: 0,
+          md: 0,
         },
         mb: 1,
         ':hover': {

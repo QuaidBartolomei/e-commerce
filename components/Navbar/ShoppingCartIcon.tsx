@@ -7,31 +7,24 @@ import routes from 'utils/routes';
 
 const ShoppingCartIconButton = () => {
   const user = useUserState();
-  const [cartSize, setCartSize] = React.useState('...');
+  const [cartSize, setCartSize] = React.useState(0);
 
   useEffect(() => {
-    let newCartSize = user.cart
-      .reduce((total, x) => total + x.quantity, 0)
-      .toString();
-    if (newCartSize == '0') newCartSize = '';
+    const newCartSize = user.cart.reduce((total, x) => total + x.quantity, 0);
     setCartSize(newCartSize), [user.cart];
   }, [setCartSize, user.cart]);
 
   return (
     <Link
       sx={{
-        px: 1,
+        pr: 1,
       }}
       href={routes.cart}
       color='inherit'
     >
-      {cartSize ? (
-        <Badge badgeContent={cartSize} color='error'>
-          <ShoppingCart fontSize='large' />
-        </Badge>
-      ) : (
-        <ShoppingCart fontSize='large' />
-      )}
+      <Badge badgeContent={cartSize} color='error' showZero={false}>
+        <ShoppingCart />
+      </Badge>
     </Link>
   );
 };

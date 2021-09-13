@@ -8,7 +8,7 @@ export type FooterProps = {
 } & BoxProps
 
 export function Footer(props: FooterProps) {
-  const { copyright, className = '', children, ...otherProps } = props;
+  const { copyright, className = '', children, ...boxProps } = props;
   const currentYear = React.useMemo(() => new Date().getFullYear(), []);
 
   return (
@@ -23,8 +23,9 @@ export function Footer(props: FooterProps) {
         alignItems: 'center',
         justifyContent: 'center',
         color: 'white',
+        mt:4
       }}
-      {...otherProps}
+      {...boxProps}
     >
       {children}
       {copyright && (

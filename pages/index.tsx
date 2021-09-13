@@ -1,18 +1,13 @@
-import Container from '@mui/material/Container';
+import Stack from '@mui/material/Stack';
 import BannerImage from 'components/BannerImage';
 import ShopItemCarousel from 'components/ShopItem/ShopItemCarousel';
 import {
   Categories,
   Product,
-  ShopItemCategory,
+  ShopItemCategory
 } from 'interfaces/shopItem.interface';
 import React from 'react';
 import { getShopItems } from 'utils/shopItem.util';
-
-type SortedItems = {
-  category: ShopItemCategory;
-  items: Product[];
-};
 
 type HomepageProps = {
   sortedItems: SortedItems[];
@@ -22,12 +17,13 @@ export default function Homepage({ sortedItems }: HomepageProps) {
   return (
     <>
       <BannerImage />
-      <Container
+      <Stack
+        direction='column'
+        spacing={8}
         sx={{
           px: 2,
-          '> *': {
-            my: 4,
-          },
+          mt: 4,
+          mb: 8,
         }}
       >
         {sortedItems.map(({ category, items }) => (
@@ -38,7 +34,7 @@ export default function Homepage({ sortedItems }: HomepageProps) {
             category={category}
           />
         ))}
-      </Container>
+      </Stack>
     </>
   );
 }
@@ -51,4 +47,9 @@ export const getServerSideProps = async () => {
   }));
   const props: HomepageProps = { sortedItems };
   return { props };
+};
+
+type SortedItems = {
+  category: ShopItemCategory;
+  items: Product[];
 };
