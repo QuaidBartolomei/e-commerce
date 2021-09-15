@@ -3,13 +3,14 @@ import '@fontsource/roboto';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import Layout from 'components/Layout';
-import { UserProvider } from 'components/User/user.context';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from 'react-redux';
 import createEmotionCache from 'utils/createEmotionCache';
 import 'utils/firebase.utils';
+import { store } from '../redux/store';
 import { theme } from '../utils/_theme';
 
 const queryClient = new QueryClient();
@@ -32,11 +33,11 @@ export default function MyApp(props: MyAppProps) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <QueryClientProvider client={queryClient}>
-          <UserProvider>
+          <Provider store={store}>
             <Layout>
               <Component {...pageProps} />
             </Layout>
-          </UserProvider>
+          </Provider>
         </QueryClientProvider>
       </ThemeProvider>
     </CacheProvider>
