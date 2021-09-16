@@ -6,7 +6,6 @@ type Action =
   | { type: 'login'; payload: CartItemData[] }
   | { type: 'logout' }
   | { type: 'remove_item'; payload: string }
-  | { type: 'update_cart'; payload: CartItemData[] }
   | { type: 'change_item_quantity'; payload: { id: string; quantity: number } };
 
 export function userReducer(state: UserState, action: Action): UserState {
@@ -14,7 +13,7 @@ export function userReducer(state: UserState, action: Action): UserState {
     case 'add_item': {
       const { id, color, size } = action.payload;
       const existingItem = state.cart.find(
-        (x) => x.id === id && x.color === color && x.size === size
+        x => x.id === id && x.color === color && x.size === size
       );
       if (existingItem) {
         existingItem.quantity++;
@@ -28,13 +27,7 @@ export function userReducer(state: UserState, action: Action): UserState {
     case 'remove_item': {
       return {
         ...state,
-        cart: state.cart.filter((x) => x.id !== action.payload),
-      };
-    }
-    case 'update_cart': {
-      return {
-        ...state,
-        cart: action.payload,
+        cart: state.cart.filter(x => x.id !== action.payload),
       };
     }
     case 'change_item_quantity': {
@@ -42,7 +35,7 @@ export function userReducer(state: UserState, action: Action): UserState {
       return {
         ...state,
         cart: state.cart
-          .map((x) => {
+          .map(x => {
             if (x.id === id)
               return {
                 ...x,
@@ -50,7 +43,7 @@ export function userReducer(state: UserState, action: Action): UserState {
               };
             return x;
           })
-          .filter((x) => x.quantity),
+          .filter(x => x.quantity),
       };
     }
     case 'login': {
