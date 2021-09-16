@@ -23,12 +23,9 @@ export const userSlice = createSlice({
       );
       if (existingItem) {
         existingItem.quantity++;
-        return { ...state, cart: [...state.cart] };
+      } else {
+        state.cart.push(action.payload);
       }
-      return {
-        ...state,
-        cart: [...state.cart, action.payload],
-      };
     },
     removeItem: (state, action: PayloadAction<string>) => {
       return {
