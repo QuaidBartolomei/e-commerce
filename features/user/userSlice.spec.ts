@@ -44,13 +44,13 @@ describe('user reducer', () => {
     });
   });
 
-  it('should handle addItem', () => {
+  it('addItem', () => {
     const actual = userReducer(initialState, addItem(dummyItem));
     expect(actual.cart.length).toEqual(1);
     expect(dummyItemQuantity(actual.cart)).toEqual(2);
   });
 
-  it('should handle changeItemQuantity', () => {
+  it('changeItemQuantity', () => {
     const actual = userReducer(
       initialState,
       changeItemQuantity({ ...dummyItem, quantity: 2 })
@@ -58,7 +58,7 @@ describe('user reducer', () => {
     expect(dummyItemQuantity(actual.cart)).toEqual(2);
   });
 
-  it('should handle removeItem', () => {
+  it('removeItem', () => {
     const actual = userReducer(initialState, removeItem(dummyItem.id));
     expect(actual.cart.length).toEqual(0);
   });

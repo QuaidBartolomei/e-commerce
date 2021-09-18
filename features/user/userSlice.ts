@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartItem } from 'components/Cart/CartItem/CartItem.interface';
 import { CartItemData } from 'interfaces/shopItem.interface';
+import { getLocalStorage } from '../../utils/localStorage.utils';
 
+const STORAGE_KEY = 'authState';
 export interface UserState {
   isAuth: boolean;
   cart: CartItemData[];
 }
-const initialState: UserState = {
+const initialState: UserState = getLocalStorage(STORAGE_KEY) ?? {
   isAuth: false,
   cart: [],
 };

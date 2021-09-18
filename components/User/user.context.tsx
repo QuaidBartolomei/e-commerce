@@ -1,7 +1,7 @@
 import { getAuth } from 'firebase/auth';
 import { CartItemData } from 'interfaces/shopItem.interface';
 import React, { createContext, useEffect, useReducer } from 'react';
-import { getIntialState, persistState } from 'utils/localStorage.utils';
+import { getLocalStorage, persistState } from 'utils/localStorage.utils';
 import { getUserCart, updateCart } from 'utils/user.util';
 import { UserDispatch, userReducer } from './user.reducer';
 
@@ -11,7 +11,7 @@ export interface UserState {
   isAuth: boolean;
   cart: CartItemData[];
 }
-const initialState: UserState = getIntialState(STORAGE_KEY) ?? {
+const initialState: UserState = getLocalStorage(STORAGE_KEY) ?? {
   isAuth: false,
   cart: [],
 };
@@ -19,13 +19,13 @@ const initialState: UserState = getIntialState(STORAGE_KEY) ?? {
 const UserStateContext = createContext<UserState | undefined>(undefined);
 const UserDispatchContext = createContext<UserDispatch | undefined>(undefined);
 
-export const UserProvider: React.FC = (props) => {
+export const UserProvider: React.FC = props => {
   const [state, dispatch] = useReducer(userReducer, initialState);
 
   useEffect(() => persistState(STORAGE_KEY, state), [state]);
 
   useEffect(() => {
-    const unsub = getAuth().onAuthStateChanged(async (user) => {
+    const unsub = getAuth().onAuthStateChanged(async user => {
       if (!user) {
         if (state.isAuth) dispatch({ type: 'logout' });
         return;
@@ -37,7 +37,7 @@ export const UserProvider: React.FC = (props) => {
     return () => {
       unsub();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
