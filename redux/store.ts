@@ -5,12 +5,14 @@ import userSlice from 'features/user/userSlice';
 const STORAGE_KEY = 'store';
 
 export const getStore = () => {
-  return configureStore({
+  const store = configureStore({
     reducer: {
       user: userSlice,
     },
     preloadedState: getLocalStorage(STORAGE_KEY) ?? {},
   });
+  store.subscribe(() => {});
+  return store;
 };
 
 const store = configureStore({

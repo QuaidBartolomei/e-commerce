@@ -10,10 +10,11 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import createEmotionCache from 'utils/createEmotionCache';
 import 'utils/firebase.utils';
-import { store } from '../redux/store';
+import { getStore } from '../redux/store';
 import { theme } from '../utils/_theme';
 
 const queryClient = new QueryClient();
+const store = getStore();
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

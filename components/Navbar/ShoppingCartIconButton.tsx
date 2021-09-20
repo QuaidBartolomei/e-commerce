@@ -1,18 +1,19 @@
 import Badge from '@mui/material/Badge';
 import Link from 'components/Link';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
-import { useUserState } from 'components/User/user.context';
 import React, { useEffect } from 'react';
 import routes from 'utils/routes';
+import { useAppSelector } from 'redux/hooks';
+import { selectCart } from 'features/user/userSlice';
 
 const ShoppingCartIconButton = () => {
-  const user = useUserState();
+  const cart = useAppSelector(selectCart);
   const [cartSize, setCartSize] = React.useState(0);
 
   useEffect(() => {
-    const newCartSize = user.cart.reduce((total, x) => total + x.quantity, 0);
-    setCartSize(newCartSize), [user.cart];
-  }, [setCartSize, user.cart]);
+    const newCartSize = cart.reduce((total, x) => total + x.quantity, 0);
+    setCartSize(newCartSize), [cart];
+  }, [setCartSize, cart]);
 
   return (
     <Link
