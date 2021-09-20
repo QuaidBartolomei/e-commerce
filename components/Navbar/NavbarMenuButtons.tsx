@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 import * as React from 'react';
 import ShoppingCartIconButton from './ShoppingCartIcon';
-import UserDrawerButton from './UserDrawerButton';
+import UserDrawerButton from '../User/UserDrawerButton';
 
 export default function NavbarMenuButtons() {
   return (

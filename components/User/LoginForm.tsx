@@ -1,19 +1,18 @@
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Link from 'components/Link';
 import axios from 'axios';
-import { useUserState } from 'components/User/user.context';
+import Link from 'components/Link';
+import { selectIsAuth } from 'features/user/userSlice';
 import { Form, Formik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
+import { useAppSelector } from 'redux/hooks';
 import routes from 'utils/routes';
 import { signout } from 'utils/user.util';
 import * as yup from 'yup';
-import SubmitButton, { SubmitStatus } from '../Buttons/SubmitButton';
-import EmailField from '../Fields/EmailField';
-import PasswordField from '../Fields/PasswordField';
-import Stack from '@mui/material/Stack';
-import GoogleSignInButton from '../Buttons/GoogleSignInButton';
+import GoogleSignInButton from '../Forms/Buttons/GoogleSignInButton';
+import SubmitButton, { SubmitStatus } from '../Forms/Buttons/SubmitButton';
+import { EmailField, PasswordField } from '../Forms/Fields';
 
 interface LoginFormData {
   email: string;
@@ -41,8 +40,8 @@ type Props = {
 };
 
 export default function LoginForm({ fullWidth = false }: Props) {
-  const [submitState, setSubmitState] = React.useState<SubmitStatus>('ready');
-  const { isAuth } = useUserState();
+  const [submitState, setSubmitState] = useState<SubmitStatus>('ready');
+  const isAuth = useAppSelector(selectIsAuth);
   if (isAuth) return <Button onClick={signout}>Sign Out</Button>;
 
   const onSubmit = async (values: LoginFormData) => {

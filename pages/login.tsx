@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import LoginForm from 'components/Forms/LoginForm/LoginForm';
+import LoginForm from 'components/User/LoginForm';
 import { useUserState } from 'components/User/user.context';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
