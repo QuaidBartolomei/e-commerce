@@ -14,7 +14,6 @@ type JestConfig = Omit<InitialOptionsTsJest, 'projects'> & {
 };
 
 const config: JestConfig = {
-  preset: 'ts-jest',
   collectCoverageFrom: ['**/*.(ts|tsx)'],
   coverageReporters: ['lcov', 'text'],
   cacheDirectory: '.jest/cache',
@@ -23,6 +22,7 @@ const config: JestConfig = {
   testMatch: ['<rootDir>/**/*.(spec|test).*'],
   transform: tsjPreset.transform,
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  modulePaths: ['<rootDir>'],
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
 };
 

@@ -1,21 +1,22 @@
-import {
-  configureStore,
-  ThunkAction,
-  Action,
-  Middleware,
-} from '@reduxjs/toolkit';
-import userSlice from '../features/user/userSlice';
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { getLocalStorage } from 'utils/localStorage.utils';
+import userSlice from 'features/user/userSlice';
 
-export const Logger: Middleware = api => next => action => {
-  // Do stuff
-  return next(action);
+const STORAGE_KEY = 'store';
+
+export const getStore = () => {
+  return configureStore({
+    reducer: {
+      user: userSlice,
+    },
+    preloadedState: getLocalStorage(STORAGE_KEY) ?? {},
+  });
 };
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     user: userSlice,
   },
-  middleware: [Logger],
 });
 
 export type AppDispatch = typeof store.dispatch;

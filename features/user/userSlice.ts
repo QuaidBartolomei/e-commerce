@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartItem } from 'components/Cart/CartItem/CartItem.interface';
 import { CartItemData } from 'interfaces/shopItem.interface';
 import { RootState } from 'redux/store';
-import { getLocalStorage } from '../../utils/localStorage.utils';
+import { getLocalStorage } from 'utils/localStorage.utils';
 
 const STORAGE_KEY = 'authState';
 export interface UserState {
