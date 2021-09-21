@@ -5,16 +5,15 @@ import { ThemeProvider } from '@mui/material/styles';
 import Layout from 'components/Layout';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
+import { store } from 'redux/store';
 import createEmotionCache from 'utils/createEmotionCache';
 import 'utils/firebase.utils';
-import { getStore } from '../redux/store';
 import { theme } from '../utils/_theme';
 
 const queryClient = new QueryClient();
-const store = getStore();
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -25,6 +24,7 @@ interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
