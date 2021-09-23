@@ -2,12 +2,12 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { FlexCol, FlexRow } from 'components/Flexbox';
 import Link from 'components/Link';
-import { useUserDispatch } from 'components/User/user.context';
+import { changeItemQuantity } from 'features/user/userSlice';
 import { CartItemData } from 'interfaces/shopItem.interface';
 import React from 'react';
 import routes from 'utils/routes';
 import { formatItemPrice } from 'utils/shopItem.util';
-import RemoveButton from '../../Forms/Buttons/RemoveButton';
+import { RemoveButton } from 'components/Forms/Buttons';
 import QuantitySelect from '../../Forms/Fields/QuantitySelect';
 import ThumbnailImage from './ThumbnailImage';
 
@@ -18,13 +18,9 @@ interface Props {
 export default function CartItem({ item }: Props) {
   const { size, color, quantity, id, name, imageUrls } = item;
   const itemLink = routes.item(id);
-  const userDispatch = useUserDispatch();
 
   function onChangeQuantity(newQuantity: number) {
-    userDispatch({
-      type: 'change_item_quantity',
-      payload: { id, quantity: newQuantity },
-    });
+    changeItemQuantity({ ...item, quantity: newQuantity });
   }
 
   const Name = () => (

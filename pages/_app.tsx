@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import Layout from 'components/Layout';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { store } from 'redux/store';
