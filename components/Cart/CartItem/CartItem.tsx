@@ -8,7 +8,7 @@ import React from 'react';
 import routes from 'utils/routes';
 import { formatItemPrice } from 'utils/shopItem.util';
 import { RemoveButton } from 'components/Forms/Buttons';
-import QuantitySelect from '../../Forms/Fields/QuantitySelect';
+import QuantitySelect from 'components/Forms/Fields/QuantitySelect';
 import ThumbnailImage from './ThumbnailImage';
 
 interface Props {
@@ -62,7 +62,7 @@ export default function CartItem({ item }: Props) {
             <Name />
             <Details />
           </Stack>
-          <FlexRow sx={{}}>
+          <FlexRow>
             <QuantitySelect quantity={quantity} onChange={onChangeQuantity} />
             <Price />
           </FlexRow>

@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import ItemAddedAlert from 'components/Alerts/ItemAddedAlert';
-import { useUserDispatch } from 'components/User/user.context';
+import { addItem } from 'features/user/userSlice';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { Product } from 'interfaces/shopItem.interface';
 import React, { useState } from 'react';
@@ -10,7 +10,7 @@ import { FormikSelectionInput } from '../Fields/FormikSelectionInput';
 
 export type AddItemFormProps = {
   item: Product;
-  onAddItem: () => void;
+  onAddItem?: () => void;
 };
 
 type AddToCartFormData = {
@@ -18,8 +18,10 @@ type AddToCartFormData = {
   color: string;
 };
 
-export default function AddToCartForm({ item, onAddItem }: AddItemFormProps) {
-  const userDispatch = useUserDispatch();
+export default function AddToCartForm({
+  item,
+  onAddItem = () => {},
+}: AddItemFormProps) {
   const sizes = getSizes(item);
   const colors = getColors(item);
   const [showAlert, setShowAlert] = useState(false);
@@ -33,9 +35,11 @@ export default function AddToCartForm({ item, onAddItem }: AddItemFormProps) {
     { size, color }: AddToCartFormData,
     helpers: FormikHelpers<AddToCartFormData>
   ) => {
-    userDispatch({
-      type: 'add_item',
-      payload: { ...item, color, size, quantity: 1 },
+    addItem({
+      ...item,
+      color,
+      size,
+      quantity: 1,
     });
     onAddItem();
     setShowAlert(true);

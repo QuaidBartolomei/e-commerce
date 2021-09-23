@@ -7,7 +7,13 @@ export const dummyItem: CartItem = {
   category: 'Hats',
   color: 'Blue',
   imageUrls: [],
-  inventory: [],
+  inventory: [
+    {
+      color: 'blue',
+      size: 'large',
+      stock: 1,
+    },
+  ],
   name: 'test',
   price: 1,
   quantity: 1,
@@ -18,7 +24,13 @@ export const dummyItemB: CartItem = {
   category: 'Hats',
   color: 'Blue',
   imageUrls: [],
-  inventory: [],
+  inventory: [
+    {
+      color: 'blue',
+      size: 'large',
+      stock: 1,
+    },
+  ],
   name: 'test',
   price: 1,
   quantity: 1,

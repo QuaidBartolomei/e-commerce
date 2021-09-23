@@ -1,6 +1,5 @@
-import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { useFormikContext } from 'formik';
+import Button from '@mui/material/Button';
 import React from 'react';
 
 export type AddToCartButtonProps = {
@@ -8,7 +7,6 @@ export type AddToCartButtonProps = {
 };
 
 export default function AddToCartButton({}: AddToCartButtonProps) {
-  const { submitCount } = useFormikContext();
   return (
     <Button
       variant='outlined'
