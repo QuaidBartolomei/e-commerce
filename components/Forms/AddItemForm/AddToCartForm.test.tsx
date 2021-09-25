@@ -1,16 +1,11 @@
-import {
-  cleanup,
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-} from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { addItem } from 'features/user/userSlice';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from 'redux/store';
 import { dummyItem } from 'utils/test.utils';
 import AddToCartForm from './AddToCartForm';
-import userEvent from '@testing-library/user-event';
 
 const item = dummyItem;
 
@@ -32,9 +27,13 @@ describe('CartItem component', () => {
   test('submit button should add item to cart', async () => {
     const submitButton = screen.getByText('Add To Cart');
     expect(submitButton);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(0);
+
+    userEvent.click(submitButton);
 
     await waitFor(() => {
-      userEvent.click(submitButton);
+      const alertText = 'Item added to cart!';
+      expect(screen.getByText(alertText));
     });
   });
 });

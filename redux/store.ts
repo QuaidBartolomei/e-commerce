@@ -1,9 +1,11 @@
 import {
   Action,
+  combineReducers,
   configureStore,
   Middleware,
   ThunkAction,
 } from '@reduxjs/toolkit';
+import cartSlice, { cartPageSlice } from 'features/cart/cartSlice';
 import userSlice from 'features/user/userSlice';
 import { getLocalStorage, persistState } from 'utils/localStorage.utils';
 
@@ -13,18 +15,16 @@ const persistStateMiddleware: Middleware = storeAPI => next => action => {
   const oldState = storeAPI.getState();
   const result = next(action);
   const newState = storeAPI.getState();
-  console.log('old state:', oldState);
-  console.log('new state:', newState);
   const stateDidChange = oldState !== newState;
-  console.log('state did change:', stateDidChange);
   if (stateDidChange) persistState(STORAGE_KEY, newState);
   return result;
 };
 
 export const store = configureStore({
-  reducer: {
+  reducer: combineReducers({
     user: userSlice,
-  },
+    cartPage: cartSlice,
+  }),
   preloadedState: getLocalStorage(STORAGE_KEY) ?? {},
   middleware: [persistStateMiddleware],
 });

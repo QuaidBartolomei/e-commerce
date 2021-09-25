@@ -1,24 +1,19 @@
 import AlertDialog from 'components/Alerts/AlertDialog';
-import { useUserDispatch } from 'components/User/user.context';
 import React from 'react';
-import { useCart } from '../Cart/useCart';
+import { removeItem } from 'features/user/userSlice';
+import { selectItemToRemove, setItemToRemove } from 'features/cart/cartSlice';
+import { useAppSelector } from 'redux/hooks';
 
 interface Props {}
 
 export default function RemoveItemWarning(props: Props) {
-  const userDispatch = useUserDispatch();
-  const cart = useCart();
+  const itemToRemove = useAppSelector(selectItemToRemove);
   return (
     <AlertDialog
-      onCancel={() =>
-        cart.dispatch({ payload: '', type: 'set_item_to_remove' })
-      }
-      open={Boolean(cart.itemToRemove)}
+      onCancel={() => setItemToRemove('')}
+      open={Boolean(itemToRemove)}
       onConfirm={() => {
-        userDispatch({
-          type: 'remove_item',
-          payload: cart.itemToRemove,
-        });
+        removeItem(itemToRemove);
       }}
       title='Remove item from cart?'
     />

@@ -1,4 +1,3 @@
-import { defaults as tsjPreset } from 'ts-jest/presets';
 import type { Config } from '@jest/types';
 import type { InitialOptionsTsJest } from 'ts-jest/dist/types';
 
@@ -44,7 +43,7 @@ const config: JestConfig = {
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   setupFiles: ['jest-localstorage-mock'],
-  resetMocks: false,
+  resetMocks: true,
 };
 
 export default config;

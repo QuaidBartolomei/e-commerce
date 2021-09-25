@@ -1,5 +1,10 @@
-import { CartItem } from 'components/Cart/CartItem/CartItem.interface';
-import { dummyItem, dummyItemB, initialUserState } from 'utils/test.utils';
+import { CartItem } from 'features/cart/CartItem/CartItem.interface';
+import {
+  dummyItem,
+  dummyItemB,
+  initialStore,
+  initialUserState,
+} from 'utils/test.utils';
 import userReducer, {
   addItem,
   changeItemQuantity,
@@ -27,6 +32,12 @@ describe('user reducer', () => {
     expect(dummyItemQuantity(actual.cart)).toEqual(2);
   });
 
+  it('addItem with empty cart', () => {
+    const actual = userReducer({ isAuth: false, cart: [] }, addItem(dummyItem));
+    expect(actual.cart.length).toEqual(1);
+    expect(dummyItemQuantity(actual.cart)).toEqual(1);
+  });
+
   it('changeItemQuantity', () => {
     const actual = userReducer(
       initialUserState,
@@ -52,13 +63,17 @@ describe('user reducer', () => {
 
   it('selectIsAuth', () => {
     const isAuth = selectIsAuth({
+      ...initialStore,
       user: { ...initialUserState, isAuth: true },
     });
     expect(isAuth).toBe(true);
   });
 
   it('selectCart', () => {
-    const cart = selectCart({ user: initialUserState });
+    const cart = selectCart({
+      ...initialStore,
+      user: initialUserState,
+    });
     expect(cart).toStrictEqual(initialUserState.cart);
   });
 });

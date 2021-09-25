@@ -1,5 +1,5 @@
 import { getLocalStorage } from 'utils/localStorage.utils';
-import { initialStore } from 'utils/test.utils';
+import { dummyItem, initialStore } from 'utils/test.utils';
 
 const KEY = 'store';
 
@@ -18,10 +18,20 @@ describe('store is created correctly', () => {
     expect(localStorage.setItem).toHaveBeenLastCalledWith('test', testData);
 
     store.dispatch({ type: 'user/login', payload: [] });
-    const newData = { user: { isAuth: true, cart: [] } };
+    const newData = { ...store.getState(), user: { isAuth: true, cart: [] } };
     expect(localStorage.setItem).toHaveBeenLastCalledWith(
       KEY,
       JSON.stringify(newData)
+    );
+
+    store.dispatch({ type: 'user/addItem', payload: dummyItem });
+    const addItemRes = {
+      ...store.getState(),
+      user: { isAuth: true, cart: [dummyItem] },
+    };
+    expect(localStorage.setItem).toHaveBeenLastCalledWith(
+      KEY,
+      JSON.stringify(addItemRes)
     );
   });
 });

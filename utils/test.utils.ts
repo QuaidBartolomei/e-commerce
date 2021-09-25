@@ -1,4 +1,5 @@
-import { CartItem } from 'components/Cart/CartItem/CartItem.interface';
+import { CartItem } from 'features/cart/CartItem/CartItem.interface';
+import { CartPageState } from 'features/cart/cartSlice';
 import { UserState } from 'features/user/userSlice';
 import { RootState } from 'redux/store';
 
@@ -42,6 +43,11 @@ export const initialUserState: UserState = {
   cart: [dummyItem],
 };
 
+export const initialCartPageState: CartPageState = {
+  itemToRemove: '',
+};
+
 export const initialStore: RootState = {
+  cartPage: initialCartPageState,
   user: initialUserState,
 };

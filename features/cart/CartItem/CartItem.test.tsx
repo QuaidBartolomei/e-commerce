@@ -18,11 +18,8 @@ describe('CartItem component', () => {
   });
   afterAll(cleanup);
 
-  test('should render item name', () => {
+  test('should render item properties', () => {
     expect(screen.getByText(item.name)).toBeDefined();
-  });
-
-  test('should render item price', () => {
     expect(screen.getByText(formatItemPrice(item))).toBeDefined();
   });
 });

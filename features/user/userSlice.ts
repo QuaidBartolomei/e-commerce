@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CartItem } from 'components/Cart/CartItem/CartItem.interface';
+import { CartItem } from 'features/cart/CartItem/CartItem.interface';
 import { CartItemData } from 'interfaces/shopItem.interface';
 import { RootState } from 'redux/store';
 

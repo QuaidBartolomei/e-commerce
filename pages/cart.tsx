@@ -3,18 +3,17 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import RemoveItemWarning from 'components/Alerts/RemoveItemWarning';
-import CartItem from 'components/Cart/CartItem/CartItem';
-import EmptyCart from 'components/Cart/EmptyCart';
-import { CartProvider } from 'components/Cart/useCart';
+import EmptyCart from 'features/cart/EmptyCart';
 import { FlexCol } from 'components/Flexbox';
 import CheckoutButton from 'components/Forms/Buttons/CheckoutButton';
-import { useUserState } from 'components/User/user.context';
 import React from 'react';
 import { getCartTotal } from 'utils/shopItem.util';
+import CartItem from 'features/cart/CartItem/CartItem';
+import { useAppSelector } from 'redux/hooks';
+import { selectCart } from 'features/user/userSlice';
 
 export default function CartPage() {
-  const user = useUserState();
-  const { cart } = user;
+  const cart = useAppSelector(selectCart);
   const cartTotal = getCartTotal(cart);
 
   const Subtotal = () => (
@@ -37,7 +36,7 @@ export default function CartPage() {
   );
 
   return (
-    <CartProvider>
+    <>
       <Container maxWidth='md'>
         <Stack
           spacing={4}
@@ -64,6 +63,6 @@ export default function CartPage() {
         </Stack>
       </Container>
       <RemoveItemWarning />
-    </CartProvider>
+    </>
   );
 }
