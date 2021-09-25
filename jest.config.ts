@@ -14,6 +14,7 @@ type JestConfig = Omit<InitialOptionsTsJest, 'projects'> & {
 
 const config: JestConfig = {
   modulePaths: ['<rootDir>', '<rootDir>/node_modules/'],
+  injectGlobals: true,
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
@@ -43,7 +44,7 @@ const config: JestConfig = {
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   setupFiles: ['jest-localstorage-mock'],
-  resetMocks: true,
+  resetMocks: false,
 };
 
 export default config;

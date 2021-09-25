@@ -26,10 +26,15 @@ describe('user reducer', () => {
     });
   });
 
-  it('addItem', () => {
+  it('addItem to existing', () => {
     const actual = userReducer(initialUserState, addItem(dummyItem));
     expect(actual.cart.length).toEqual(1);
     expect(dummyItemQuantity(actual.cart)).toEqual(2);
+  });
+
+  it('addItem new', () => {
+    const actual = userReducer(initialUserState, addItem(dummyItemB));
+    expect(actual.cart.length).toEqual(2);
   });
 
   it('addItem with empty cart', () => {

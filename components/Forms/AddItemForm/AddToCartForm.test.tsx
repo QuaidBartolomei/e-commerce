@@ -1,8 +1,9 @@
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { addItem } from 'features/user/userSlice';
+import { selectCart } from 'features/user/userSlice';
 import React from 'react';
 import { Provider } from 'react-redux';
+import { useAppSelector } from 'redux/hooks';
 import { store } from 'redux/store';
 import { dummyItem } from 'utils/test.utils';
 import AddToCartForm from './AddToCartForm';

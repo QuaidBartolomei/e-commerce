@@ -11,13 +11,10 @@ export type OrderReviewItemProps = { item: CartItemData };
 export default function OrderReviewItem({ item }: OrderReviewItemProps) {
   const { id, quantity } = item;
 
-  const { isLoading, isError, data } = useQuery(
-    `cartIaatem_${id}`,
-    async () => {
-      const data = await getDataById(DbCollections.Items, id);
-      return data as Product;
-    }
-  );
+  const { isLoading, isError, data } = useQuery(`cartItem_${id}`, async () => {
+    const data = await getDataById(DbCollections.Items, id);
+    return data as Product;
+  });
 
   console.log(data);
   if (isError) return <div>An error has occurred: </div>;

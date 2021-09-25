@@ -15,7 +15,7 @@ import {
   ShopItemCategory,
 } from 'interfaces/shopItem.interface';
 import shortid from 'shortid';
-import { DbCollections, getDataById } from 'utils/firebase.utils';
+import { DbCollections } from 'utils/firebase.utils';
 
 const db = getFirestore();
 

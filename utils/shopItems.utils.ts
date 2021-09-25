@@ -1,6 +1,4 @@
-import { UserDispatch } from 'components/User/user.reducer';
 import {
-  CartItemData,
   Categories,
   Product,
   ProductInventory,

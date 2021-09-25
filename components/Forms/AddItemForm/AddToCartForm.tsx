@@ -4,6 +4,7 @@ import { addItem } from 'features/user/userSlice';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { Product } from 'interfaces/shopItem.interface';
 import React, { useState } from 'react';
+import { useAppDispatch } from 'redux/hooks';
 import { getColors, getSizes } from 'utils/shopItems.utils';
 import AddToCartButton from '../Buttons/AddToCartButton';
 import { FormikSelectionInput } from '../Fields/FormikSelectionInput';
@@ -31,16 +32,20 @@ export default function AddToCartForm({
     color: colors[0],
   };
 
+  const dispatch = useAppDispatch();
+
   const onSubmit = (
     { size, color }: AddToCartFormData,
     helpers: FormikHelpers<AddToCartFormData>
   ) => {
-    addItem({
-      ...item,
-      color,
-      size,
-      quantity: 1,
-    });
+    dispatch(
+      addItem({
+        ...item,
+        color,
+        size,
+        quantity: 1,
+      })
+    );
     onAddItem();
     setShowAlert(true);
     helpers.setSubmitting(false);

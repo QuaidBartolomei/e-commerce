@@ -7,7 +7,9 @@ export const dummyItem: CartItem = {
   id: '1',
   category: 'Hats',
   color: 'Blue',
-  imageUrls: [],
+  imageUrls: [
+    'https://firebasestorage.googleapis.com/v0/b/e-commerce-a8505.appspot.com/o/images%2Ffedora.jpg?alt=media&token=84bd83a0-c6ed-41eb-bab3-863262ebe778',
+  ],
   inventory: [
     {
       color: 'blue',
@@ -24,7 +26,9 @@ export const dummyItemB: CartItem = {
   id: '2',
   category: 'Hats',
   color: 'Blue',
-  imageUrls: [],
+  imageUrls: [
+    'https://firebasestorage.googleapis.com/v0/b/e-commerce-a8505.appspot.com/o/images%2Ffedora.jpg?alt=media&token=84bd83a0-c6ed-41eb-bab3-863262ebe778',
+  ],
   inventory: [
     {
       color: 'blue',

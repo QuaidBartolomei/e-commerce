@@ -2,8 +2,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import { useUserState } from 'components/User/user.context';
+import { selectCart } from 'features/user/userSlice';
 import React from 'react';
+import { useAppSelector } from 'redux/hooks';
 import { getCartTotal } from 'utils/shopItem.util';
 import OrderReviewItem from './OrderReviewItem';
 
@@ -12,7 +13,7 @@ export type OrderSummaryProps = {
 };
 
 export default function OrderSummary({}: OrderSummaryProps) {
-  const { cart } = useUserState();
+  const cart = useAppSelector(selectCart);
 
   const CartItems = () => (
     <React.Fragment>
