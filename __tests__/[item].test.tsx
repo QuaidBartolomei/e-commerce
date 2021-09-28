@@ -20,15 +20,10 @@ const useComponent = () =>
     </Provider>
   );
 
+afterEach(cleanup);
+
 describe('Item page', () => {
-  afterEach(cleanup);
-
-  it('renders index page', () => {
-    useComponent();
-    expect(true);
-  });
-
-  test('should render Add To Cart button', () => {
+  test('Item adds to cart', () => {
     const { getByText } = useComponent();
     const submitButton = getByText('Add To Cart');
     expect(submitButton);
