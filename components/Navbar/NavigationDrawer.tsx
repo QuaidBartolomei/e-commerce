@@ -4,7 +4,7 @@ import ListItem, { ListItemProps } from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Categories } from 'interfaces/shopItem.interface';
+import { Categories } from 'features/shop-item/shopItem.interface';
 import React from 'react';
 import routes from 'utils/routes';
 import { useNavbarDispatch, useNavbarState } from './useNavbar';

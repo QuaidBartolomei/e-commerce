@@ -1,7 +1,7 @@
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import { CartItemData, Product } from 'interfaces/shopItem.interface';
+import { CartItemData, Product } from 'features/shop-item/shopItem.interface';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { DbCollections, getDataById } from 'utils/firebase.utils';

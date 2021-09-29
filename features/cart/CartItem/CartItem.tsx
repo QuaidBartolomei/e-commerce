@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import { FlexCol, FlexRow } from 'components/Flexbox';
 import Link from 'components/Link';
 import { changeItemQuantity } from 'features/user/userSlice';
-import { CartItemData } from 'interfaces/shopItem.interface';
+import { CartItemData } from 'features/shop-item/shopItem.interface';
 import React from 'react';
 import routes from 'utils/routes';
 import { formatItemPrice } from 'utils/shopItem.util';

@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'components/Link';
-import { Product } from 'interfaces/shopItem.interface';
+import { Product } from 'features/shop-item/shopItem.interface';
 import React from 'react';
 import routes from 'utils/routes';
 import Image from 'next/image';
@@ -15,11 +15,11 @@ const ShopItemCard = ({ item }: { item: Product }) => {
 
   const Rating = () => (
     <Box>
-      <StarIcon sx={{fontSize:16}} />
-      <StarIcon sx={{fontSize:16}} />
-      <StarIcon sx={{fontSize:16}} />
-      <StarIcon sx={{fontSize:16}} />
-      <StarIcon sx={{fontSize:16}} />
+      <StarIcon sx={{ fontSize: 16 }} />
+      <StarIcon sx={{ fontSize: 16 }} />
+      <StarIcon sx={{ fontSize: 16 }} />
+      <StarIcon sx={{ fontSize: 16 }} />
+      <StarIcon sx={{ fontSize: 16 }} />
     </Box>
   );
   const Name = () => <Typography variant='h5'>{name}</Typography>;

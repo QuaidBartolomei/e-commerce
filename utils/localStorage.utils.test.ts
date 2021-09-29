@@ -1,4 +1,4 @@
-import { getLocalStorage, persistState } from '../localStorage.utils';
+import { getLocalStorage, persistState } from './localStorage.utils';
 
 describe('local storage util functions', () => {
   test('should save to localStorage', () => {

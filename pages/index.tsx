@@ -5,7 +5,7 @@ import {
   Categories,
   Product,
   ShopItemCategory,
-} from 'interfaces/shopItem.interface';
+} from 'features/shop-item/shopItem.interface';
 import React from 'react';
 import { getShopItems } from 'utils/shopItem.util';
 

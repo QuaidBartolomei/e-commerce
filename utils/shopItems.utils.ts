@@ -3,7 +3,7 @@ import {
   Product,
   ProductInventory,
   ShopItemCategory,
-} from 'interfaces/shopItem.interface';
+} from 'features/shop-item/shopItem.interface';
 import shortid from 'shortid';
 import { randomNumber, randomValue } from './js.utils';
 import { addShopItem } from './shopItem.util';

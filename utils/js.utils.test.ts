@@ -1,4 +1,4 @@
-import { maxMin, randomNumber } from '../js.utils';
+import { maxMin, randomNumber } from './js.utils';
 
 type TestCase = {
   controlValue?: number;

@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
-import { CartItemData } from 'interfaces/shopItem.interface';
+import { CartItemData } from 'features/shop-item/shopItem.interface';
 import { DbCollections, getDataById, getDocById } from 'utils/firebase.utils';
 
 const db = getFirestore();

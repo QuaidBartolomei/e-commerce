@@ -13,7 +13,7 @@ import {
   CartItemData,
   Product,
   ShopItemCategory,
-} from 'interfaces/shopItem.interface';
+} from 'features/shop-item/shopItem.interface';
 import shortid from 'shortid';
 import { DbCollections } from 'utils/firebase.utils';
 

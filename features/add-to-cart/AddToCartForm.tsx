@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import ItemAddedAlert from 'features/add-to-cart/ItemAddedAlert';
 import { addItem } from 'features/user/userSlice';
 import { Form, Formik, FormikHelpers } from 'formik';
-import { Product } from 'interfaces/shopItem.interface';
+import { Product } from 'features/shop-item/shopItem.interface';
 import React, { useState } from 'react';
 import { useAppDispatch } from 'redux/hooks';
 import { getColors, getSizes } from 'utils/shopItems.utils';

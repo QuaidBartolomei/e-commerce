@@ -1,8 +1,8 @@
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import ImageGallery from 'components/ImageGallery/ImageGallery';
-import ItemDetailsText from 'components/ShopItem/ItemDetailsText';
-import { Product } from 'interfaces/shopItem.interface';
+import ImageGallery from 'features/image-gallery/ImageGallery';
+import ItemDetailsText from 'features/shop-item/ItemDetailsText';
+import { Product } from 'features/shop-item/shopItem.interface';
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import { DbCollections, getDataById } from 'utils/firebase.utils';
@@ -46,11 +46,7 @@ export default function ItemPage({ item }: Props) {
         >
           <ImageGallery imageUrls={item.imageUrls} />
         </Grid>
-        <Grid
-          item
-          md={7}
-          xs={12}
-        >
+        <Grid item md={7} xs={12}>
           <ItemDetailsText item={item} />
         </Grid>
       </Grid>

@@ -7,7 +7,10 @@ import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Link from 'components/Link';
-import { Product, ShopItemCategory } from 'interfaces/shopItem.interface';
+import {
+  Product,
+  ShopItemCategory,
+} from 'features/shop-item/shopItem.interface';
 import Image from 'next/image';
 import React from 'react';
 import routes from 'utils/routes';
@@ -25,10 +28,7 @@ export default function CategoryPage({ items }: CategoryPageProps) {
   const categoryName = items[0]?.category ?? '';
 
   const Title = () => (
-    <Typography
-      component='h2'
-      variant='h4'
-    >
+    <Typography component='h2' variant='h4'>
       {categoryName}
     </Typography>
   );

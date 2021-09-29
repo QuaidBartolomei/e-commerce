@@ -2,7 +2,7 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import AddToCartForm from 'features/add-to-cart/AddToCartForm';
-import { Product } from 'interfaces/shopItem.interface';
+import { Product } from 'features/shop-item/shopItem.interface';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
 
