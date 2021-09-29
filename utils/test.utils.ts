@@ -1,5 +1,5 @@
 import { CartItem } from 'features/cart/CartItem/CartItem.interface';
-import { CartPageState } from 'features/cart/cartSlice';
+import { CartPageState } from 'features/cart/cartPageSlice';
 import { UserState } from 'features/user/userSlice';
 import { RootState } from 'redux/store';
 

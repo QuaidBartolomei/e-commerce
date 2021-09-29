@@ -2,7 +2,7 @@ import cartReducer, {
   CartPageState,
   selectItemToRemove,
   setItemToRemove,
-} from 'features/cart/cartSlice';
+} from 'features/cart/cartPageSlice';
 import { dummyItem, initialStore } from 'utils/test.utils';
 
 const initialCartState: CartPageState = { itemToRemove: '' };

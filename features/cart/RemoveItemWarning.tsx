@@ -1,7 +1,10 @@
 import AlertDialog from 'components/AlertDialog';
 import React from 'react';
 import { removeItem } from 'features/user/userSlice';
-import { selectItemToRemove, setItemToRemove } from 'features/cart/cartSlice';
+import {
+  selectItemToRemove,
+  setItemToRemove,
+} from 'features/cart/cartPageSlice';
 import { useAppSelector } from 'redux/hooks';
 
 interface Props {}
