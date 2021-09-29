@@ -6,7 +6,7 @@ import { selectCart } from 'features/user/userSlice';
 import React from 'react';
 import { useAppSelector } from 'redux/hooks';
 import { getCartTotal } from 'utils/shopItem.util';
-import OrderReviewItem from './OrderReviewItem';
+import OrderReviewItem from '../../features/checkout/OrderReviewItem';
 
 export type OrderSummaryProps = {
   // props

@@ -1,10 +1,10 @@
 import Stack from '@mui/material/Stack';
 import BannerImage from 'components/BannerImage';
-import ShopItemCarousel from 'components/ShopItem/ShopItemCarousel';
+import ShopItemCarousel from 'features/shop-item/ShopItemCarousel';
 import {
   Categories,
   Product,
-  ShopItemCategory
+  ShopItemCategory,
 } from 'interfaces/shopItem.interface';
 import React from 'react';
 import { getShopItems } from 'utils/shopItem.util';

@@ -2,6 +2,11 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
+import GoogleSignInButton from 'components/Forms/Buttons/GoogleSignInButton';
+import SubmitButton, {
+  SubmitStatus,
+} from 'components/Forms/Buttons/SubmitButton';
+import { EmailField, PasswordField } from 'components/Forms/Fields';
 import Link from 'components/Link';
 import { selectIsAuth } from 'features/user/userSlice';
 import { Form, Formik } from 'formik';
@@ -10,9 +15,6 @@ import { useAppSelector } from 'redux/hooks';
 import routes from 'utils/routes';
 import { signout } from 'utils/user.util';
 import * as yup from 'yup';
-import GoogleSignInButton from '../Forms/Buttons/GoogleSignInButton';
-import SubmitButton, { SubmitStatus } from '../Forms/Buttons/SubmitButton';
-import { EmailField, PasswordField } from '../Forms/Fields';
 
 interface LoginFormData {
   email: string;

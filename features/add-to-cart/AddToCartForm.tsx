@@ -1,13 +1,13 @@
 import Box from '@mui/material/Box';
-import ItemAddedAlert from 'components/Alerts/ItemAddedAlert';
+import ItemAddedAlert from 'features/add-to-cart/ItemAddedAlert';
 import { addItem } from 'features/user/userSlice';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { Product } from 'interfaces/shopItem.interface';
 import React, { useState } from 'react';
 import { useAppDispatch } from 'redux/hooks';
 import { getColors, getSizes } from 'utils/shopItems.utils';
-import AddToCartButton from '../Buttons/AddToCartButton';
-import { FormikSelectionInput } from '../Fields/FormikSelectionInput';
+import AddToCartButton from './AddToCartButton';
+import { FormikSelectionInput } from 'components/Forms/Fields/FormikSelectionInput';
 
 export type AddItemFormProps = {
   item: Product;

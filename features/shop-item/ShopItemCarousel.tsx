@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'components/Link';
-import ShopItemCard from 'components/ShopItem/ShopItemCard';
+import ShopItemCard from 'features/shop-item/ShopItemCard';
 import { Product, ShopItemCategory } from 'interfaces/shopItem.interface';
 import React from 'react';
 import routes from 'utils/routes';

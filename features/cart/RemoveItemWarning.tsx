@@ -1,4 +1,4 @@
-import AlertDialog from 'components/Alerts/AlertDialog';
+import AlertDialog from 'components/AlertDialog';
 import React from 'react';
 import { removeItem } from 'features/user/userSlice';
 import { selectItemToRemove, setItemToRemove } from 'features/cart/cartSlice';

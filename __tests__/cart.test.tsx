@@ -19,7 +19,12 @@ const useComponent = () =>
 afterEach(cleanup);
 
 describe('Cart page', () => {
-  test('Item adds to cart', () => {
+  test('empty cart displays message', () => {
+    const { getByText } = useComponent();
+    expect(getByText('empty', { exact: false }));
+  });
+
+  test('empty cart displays message', () => {
     const { getByText } = useComponent();
     expect(getByText('empty', { exact: false }));
   });

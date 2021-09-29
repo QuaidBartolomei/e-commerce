@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import RegisterForm from 'components/Forms/RegisterForm/RegisterForm';
+import RegisterForm from 'features/user/RegisterForm';
 import React from 'react';
 
 const Registration = () => {

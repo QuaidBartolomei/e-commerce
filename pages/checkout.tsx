@@ -5,10 +5,10 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
-import Review from 'components/Checkout/Review';
+import Review from 'features/checkout/Review';
 import { CheckoutPageStateProvider } from 'components/CheckoutPageState';
-import AddressForm from 'components/Forms/AddressForm';
-import PaymentForm from 'components/Forms/PaymentForm';
+import AddressForm from 'features/checkout/AddressForm';
+import PaymentForm from 'features/checkout/PaymentForm';
 import React from 'react';
 import { theme } from '../utils/_theme';
 

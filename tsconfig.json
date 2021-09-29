@@ -21,6 +21,11 @@
     "noFallthroughCasesInSwitch": true,
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "__tests__/index.spec.cy"
+  ],
   "exclude": ["node_modules"]
 }

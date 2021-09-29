@@ -1,5 +1,4 @@
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { cleanup, render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from 'redux/store';

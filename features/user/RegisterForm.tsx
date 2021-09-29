@@ -1,13 +1,15 @@
 import Box from '@mui/material/Box';
 import axios from 'axios';
+import SubmitButton, {
+  SubmitStatus,
+} from 'components/Forms/Buttons/SubmitButton';
+import { PasswordField } from 'components/Forms/Fields';
+import ConfirmPasswordField from 'components/Forms/Fields/ConfirmPasswordField';
 import EmailField from 'components/Forms/Fields/EmailField';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import routes from 'utils/routes';
 import * as yup from 'yup';
-import SubmitButton, { SubmitStatus } from '../Buttons/SubmitButton';
-import ConfirmPasswordField from '../Fields/ConfirmPasswordField';
-import PasswordField from '../Fields/PasswordField';
 
 interface FormData {
   email: string;

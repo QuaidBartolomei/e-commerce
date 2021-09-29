@@ -2,7 +2,7 @@ import Container from '@mui/material/Container';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LoginForm from 'components/User/LoginForm';
+import LoginForm from 'features/user/LoginForm';
 import React from 'react';
 
 export default function UserDrawerButton() {

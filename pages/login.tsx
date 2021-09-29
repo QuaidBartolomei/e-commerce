@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import LoginForm from 'components/User/LoginForm';
+import LoginForm from 'features/user/LoginForm';
 import { selectIsAuth } from 'features/user/userSlice';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
