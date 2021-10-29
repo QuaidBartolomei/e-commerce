@@ -17,12 +17,14 @@ export enum DbCollections {
   Items = 'items',
 }
 
+const projectId = process.env.NEXT_PUBLIC_projectId;
+
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_authDomain,
-  databaseURL: process.env.NEXT_PUBLIC_databaseURL,
-  projectId: process.env.NEXT_PUBLIC_projectId,
-  storageBucket: process.env.NEXT_PUBLIC_storageBucket,
+  projectId,
+  authDomain: `${projectId}.firebaseapp.com`,
+  databaseURL: `https://${projectId}.firebaseio.com`,
+  storageBucket: `${projectId}.appspot.com`,
   messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
   appId: process.env.NEXT_PUBLIC_appId,
 };
@@ -49,7 +51,7 @@ export async function signOut() {
 
 export async function getDocById(collectionName: string, id: string) {
   const docRef = doc(db, collectionName, id);
-     return await getDoc(docRef);
+  return await getDoc(docRef);
 }
 
 export async function getDataById(collectionName: string, id: string) {
