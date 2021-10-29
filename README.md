@@ -7,7 +7,7 @@
 
   <h3 align="center">Fine Attire</h3>
   <p align="center">
-E-commerce example project made with NextJs, Typescript, and Material-UI
+E-commerce example project made with NextJs, Typescript, Material-UI, and Firebase
 <br />
 <br />
 <a href="https://e-commerce-indol.vercel.app">View Demo</a>
@@ -24,13 +24,6 @@ E-commerce example project made with NextJs, Typescript, and Material-UI
 - [Contributing](#contributing)
 - [License](#license)
 
-<!-- ABOUT THE PROJECT -->
-
-### Built With
-
-- [NextJs](https://getbootstrap.com)
-- [Material-UI](https://jquery.com)
-
 <!-- GETTING STARTED -->
 
 ## Getting Started
@@ -44,15 +37,15 @@ E-commerce example project made with NextJs, Typescript, and Material-UI
 
 ### Installation
 
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/quaidbartolomei/fine-attire.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Add your firebase credentials to a `.env` file based on `.env.template`
+3. Add your firebase credentials to a `.env` file based on `.env.template`
 
 <!-- USAGE EXAMPLES -->
 
