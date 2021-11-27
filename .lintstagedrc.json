@@ -1,0 +1,4 @@
+{
+  "**/package.json": "npx sort-package-json",
+  "*": "prettier --ignore-unknown --write"
+}

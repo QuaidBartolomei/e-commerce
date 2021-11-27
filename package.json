@@ -9,7 +9,8 @@
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "cypress": "cypress open",
-    "format": "prettier ./ --write --ignore-unknown"
+    "format": "prettier ./ --write --ignore-unknown",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/cache": "^11.4.0",
@@ -63,9 +64,12 @@
     "react-test-renderer": "^17.0.2",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
+    "prettier": "2.5.0",
+    "sort-package-json": "^1.53.1",
     "tsconfig-paths-webpack-plugin": "^3.5.1",
-    "typescript": "^4.4.3",
-    "prettier": "2.5.0"
+    "typescript": "^4.4.3"
   },
   "eslintConfig": {
     "extends": "next"
@@ -79,5 +83,9 @@
     "development": [
       "defaults"
     ]
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.--ignore-unknown": "prettier --write"
   }
 }
