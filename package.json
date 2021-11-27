@@ -6,11 +6,9 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"storybook": "start-storybook -p 6006",
 		"test": "jest --watch",
 		"test:ci": "jest --ci",
-		"cypress": "cypress open",
-		"build-storybook": "build-storybook"
+		"cypress": "cypress open"
 	},
 	"dependencies": {
 		"@emotion/cache": "^11.4.0",
