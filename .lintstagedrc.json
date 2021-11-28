@@ -1,4 +1,5 @@
 {
   "**/package.json": "npx sort-package-json",
+  "**/*.{ts,tsx}": "eslint --fix --cache --quiet",
   "*": "prettier --ignore-unknown --write"
 }
