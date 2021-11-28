@@ -12,9 +12,6 @@
     "test": "jest --watch",
     "test:ci": "jest --ci"
   },
-  "eslintConfig": {
-    "extends": "next"
-  },
   "dependencies": {
     "@emotion/cache": "^11.4.0",
     "@emotion/react": "^11.4.1",
