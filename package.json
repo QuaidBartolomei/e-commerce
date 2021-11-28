@@ -12,10 +12,6 @@
     "test": "jest --watch",
     "test:ci": "jest --ci"
   },
-  "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.--ignore-unknown": "prettier --write"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
