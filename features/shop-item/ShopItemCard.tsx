@@ -1,17 +1,17 @@
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Link from 'components/Link';
-import { Product } from 'features/shop-item/shopItem.interface';
-import React from 'react';
-import routes from 'utils/routes';
-import Image from 'next/image';
-import Box from '@mui/material/Box';
-import { formatItemPrice } from 'utils/shopItem.util';
-import StarIcon from '@mui/icons-material/Star';
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import Link from 'components/Link'
+import { Product } from 'features/shop-item/shopItem.interface'
+import React from 'react'
+import routes from 'utils/routes'
+import Image from 'next/image'
+import Box from '@mui/material/Box'
+import { formatItemPrice } from 'utils/shopItem.util'
+import StarIcon from '@mui/icons-material/Star'
 
 const ShopItemCard = ({ item }: { item: Product }) => {
-  const { name, imageUrls } = item;
-  const image = imageUrls[0];
+  const { name, imageUrls } = item
+  const image = imageUrls[0]
 
   const Rating = () => (
     <Box>
@@ -21,9 +21,9 @@ const ShopItemCard = ({ item }: { item: Product }) => {
       <StarIcon sx={{ fontSize: 16 }} />
       <StarIcon sx={{ fontSize: 16 }} />
     </Box>
-  );
-  const Name = () => <Typography variant='h5'>{name}</Typography>;
-  const Price = () => <Typography>{formatItemPrice(item)}</Typography>;
+  )
+  const Name = () => <Typography variant="h5">{name}</Typography>
+  const Price = () => <Typography>{formatItemPrice(item)}</Typography>
 
   const Thumbnail = () => (
     <Box
@@ -32,17 +32,17 @@ const ShopItemCard = ({ item }: { item: Product }) => {
         flexGrow: 1,
       }}
     >
-      <Image src={image} layout='fill' alt={name} />
+      <Image src={image} layout="fill" alt={name} />
     </Box>
-  );
+  )
 
   const Details = () => (
-    <Stack direction='column'>
+    <Stack direction="column">
       <Name />
       <Rating />
       <Price />
     </Stack>
-  );
+  )
 
   return (
     <Link
@@ -72,15 +72,15 @@ const ShopItemCard = ({ item }: { item: Product }) => {
         <Image
           src={imageUrls[0]}
           alt={name}
-          placeholder='empty'
-          layout='fill'
-          objectFit='cover'
+          placeholder="empty"
+          layout="fill"
+          objectFit="cover"
         />
       </Box>
       <Thumbnail />
       <Details />
     </Link>
-  );
-};
+  )
+}
 
-export default ShopItemCard;
+export default ShopItemCard

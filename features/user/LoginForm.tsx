@@ -1,30 +1,30 @@
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import axios from 'axios';
-import GoogleSignInButton from 'components/Forms/Buttons/GoogleSignInButton';
+import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import axios from 'axios'
+import GoogleSignInButton from 'components/Forms/Buttons/GoogleSignInButton'
 import SubmitButton, {
   SubmitStatus,
-} from 'components/Forms/Buttons/SubmitButton';
-import { EmailField, PasswordField } from 'components/Forms/Fields';
-import Link from 'components/Link';
-import { selectIsAuth } from 'features/user/userSlice';
-import { Form, Formik } from 'formik';
-import React, { useState } from 'react';
-import { useAppSelector } from 'redux/hooks';
-import routes from 'utils/routes';
-import { signout } from 'utils/user.util';
-import * as yup from 'yup';
+} from 'components/Forms/Buttons/SubmitButton'
+import { EmailField, PasswordField } from 'components/Forms/Fields'
+import Link from 'components/Link'
+import { selectIsAuth } from 'features/user/userSlice'
+import { Form, Formik } from 'formik'
+import React, { useState } from 'react'
+import { useAppSelector } from 'redux/hooks'
+import routes from 'utils/routes'
+import { signout } from 'utils/user.util'
+import * as yup from 'yup'
 
 interface LoginFormData {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 const initialValues: LoginFormData = {
   email: '',
   password: '',
-};
+}
 
 const validationSchema = yup.object({
   email: yup
@@ -35,22 +35,22 @@ const validationSchema = yup.object({
     .string()
     .min(8, 'Password should be of minimum 50 characters length')
     .required('password is required'),
-});
+})
 
 type Props = {
-  fullWidth?: boolean;
-};
+  fullWidth?: boolean
+}
 
 export default function LoginForm({ fullWidth = false }: Props) {
-  const [submitState, setSubmitState] = useState<SubmitStatus>('ready');
-  const isAuth = useAppSelector(selectIsAuth);
-  if (isAuth) return <Button onClick={signout}>Sign Out</Button>;
+  const [submitState, setSubmitState] = useState<SubmitStatus>('ready')
+  const isAuth = useAppSelector(selectIsAuth)
+  if (isAuth) return <Button onClick={signout}>Sign Out</Button>
 
   const onSubmit = async (values: LoginFormData) => {
-    setSubmitState('submitting');
-    const res = await axios.post(routes.api.login, values);
-    if (res.status === 200) setSubmitState('done');
-  };
+    setSubmitState('submitting')
+    const res = await axios.post(routes.api.login, values)
+    if (res.status === 200) setSubmitState('done')
+  }
 
   return (
     <Formik
@@ -60,15 +60,15 @@ export default function LoginForm({ fullWidth = false }: Props) {
     >
       <Stack
         component={Form}
-        direction='column'
+        direction="column"
         spacing={2}
-        alignItems='center'
+        alignItems="center"
         sx={{
           width: '100%',
           maxWidth: 600,
         }}
       >
-        <Typography variant='h5'>Sign In</Typography>
+        <Typography variant="h5">Sign In</Typography>
         <EmailField />
         <PasswordField />
         <SubmitButton fullWidth={fullWidth} status={submitState} />
@@ -77,7 +77,7 @@ export default function LoginForm({ fullWidth = false }: Props) {
         <CreateNewAccountButton fullWidth={fullWidth} />
       </Stack>
     </Formik>
-  );
+  )
 }
 
 const CreateNewAccountButton = ({ fullWidth = false }: Props) => (
@@ -88,11 +88,11 @@ const CreateNewAccountButton = ({ fullWidth = false }: Props) => (
       textAlign: 'center',
     }}
   >
-    <Button fullWidth={fullWidth} variant='contained' color='secondary'>
+    <Button fullWidth={fullWidth} variant="contained" color="secondary">
       Create New Account
     </Button>
   </Link>
-);
+)
 
 const ForgotPasswordLink = ({ fullWidth = false }: Props) => (
   <Link
@@ -104,4 +104,4 @@ const ForgotPasswordLink = ({ fullWidth = false }: Props) => (
   >
     Forgot Password
   </Link>
-);
+)

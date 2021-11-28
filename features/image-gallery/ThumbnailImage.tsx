@@ -1,20 +1,20 @@
-import Paper from '@mui/material/Paper';
-import Image from 'next/image';
-import React from 'react';
-import { useImageGalleryDispatch } from './ImageGalleryState';
+import Paper from '@mui/material/Paper'
+import Image from 'next/image'
+import React from 'react'
+import { useImageGalleryDispatch } from './ImageGalleryState'
 
 type ThumbnailImageProps = {
-  image: string;
-  selected: boolean;
-};
+  image: string
+  selected: boolean
+}
 
 export default function ThumbnailImage({
   image,
   selected,
 }: ThumbnailImageProps) {
-  const dispatch = useImageGalleryDispatch();
-  const [isHover, setIsHover] = React.useState(false);
-  const elevated = isHover || selected;
+  const dispatch = useImageGalleryDispatch()
+  const [isHover, setIsHover] = React.useState(false)
+  const elevated = isHover || selected
   return (
     <Paper
       sx={{
@@ -34,10 +34,10 @@ export default function ThumbnailImage({
       <Image
         unoptimized
         src={image}
-        layout='fill'
-        objectFit='cover'
-        alt='product'
+        layout="fill"
+        objectFit="cover"
+        alt="product"
       />
     </Paper>
-  );
+  )
 }

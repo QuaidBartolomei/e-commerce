@@ -1,17 +1,17 @@
-import Link from 'components/Link';
-import Image from 'next/image';
-import React from 'react';
-import routes from 'utils/routes';
+import Link from 'components/Link'
+import Image from 'next/image'
+import React from 'react'
+import routes from 'utils/routes'
 
 export type BrandLinkButtonProps = {
-  logoImage: string;
-};
+  logoImage: string
+}
 
 export default function BrandLinkButton({ logoImage }: BrandLinkButtonProps) {
   return (
     <Link
       href={routes.index}
-      color='inherit'
+      color="inherit"
       sx={{
         position: 'relative',
         flexDirection: 'row',
@@ -20,14 +20,14 @@ export default function BrandLinkButton({ logoImage }: BrandLinkButtonProps) {
         height: 40,
         width: 100,
       }}
-      underline='none'
+      underline="none"
     >
       <Image
         src={logoImage}
-        layout='fill'
-        objectFit='contain'
+        layout="fill"
+        objectFit="contain"
         alt={'brand logo'}
       />
     </Link>
-  );
+  )
 }

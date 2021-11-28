@@ -1,16 +1,16 @@
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Toolbar from '@mui/material/Toolbar';
-import React from 'react';
-import BrandLinkButton from './BrandLinkButton';
-import NavbarMenuButtons from './NavbarMenuButtons';
-import NavigationDrawerButton from './NavigationDrawerButton';
-import SearchBar from './SearchBar';
+import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
+import Toolbar from '@mui/material/Toolbar'
+import React from 'react'
+import BrandLinkButton from './BrandLinkButton'
+import NavbarMenuButtons from './NavbarMenuButtons'
+import NavigationDrawerButton from './NavigationDrawerButton'
+import SearchBar from './SearchBar'
 
 export type NavbarMobileProps = {
-  logoImage?: string;
-  title?: string;
-};
+  logoImage?: string
+  title?: string
+}
 
 export default function NavbarMobile({ logoImage = '' }: NavbarMobileProps) {
   return (
@@ -20,11 +20,11 @@ export default function NavbarMobile({ logoImage = '' }: NavbarMobileProps) {
           sx={{
             width: '100%',
           }}
-          direction='column'
+          direction="column"
         >
           <Stack
-            direction='row'
-            alignItems='center'
+            direction="row"
+            alignItems="center"
             sx={{
               width: '100%',
             }}
@@ -39,5 +39,5 @@ export default function NavbarMobile({ logoImage = '' }: NavbarMobileProps) {
         </Stack>
       </Toolbar>
     </>
-  );
+  )
 }

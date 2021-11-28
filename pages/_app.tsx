@@ -1,35 +1,35 @@
-import { CacheProvider, EmotionCache } from '@emotion/react';
-import '@fontsource/roboto';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import Layout from 'components/Layout';
-import type { AppProps } from 'next/app';
-import Head from 'next/head';
-import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { Provider } from 'react-redux';
-import { store } from 'redux/store';
-import createEmotionCache from 'utils/createEmotionCache';
-import 'utils/firebase.utils';
-import { theme } from '../utils/_theme';
+import { CacheProvider, EmotionCache } from '@emotion/react'
+import '@fontsource/roboto'
+import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider } from '@mui/material/styles'
+import Layout from 'components/Layout'
+import type { AppProps } from 'next/app'
+import Head from 'next/head'
+import React from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { Provider } from 'react-redux'
+import { store } from 'redux/store'
+import createEmotionCache from 'utils/createEmotionCache'
+import 'utils/firebase.utils'
+import { theme } from '../utils/_theme'
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
 // Client-side cache, shared for the whole session of the user in the browser.
-const clientSideEmotionCache = createEmotionCache();
+const clientSideEmotionCache = createEmotionCache()
 
 interface MyAppProps extends AppProps {
-  emotionCache?: EmotionCache;
+  emotionCache?: EmotionCache
 }
 
 export default function MyApp(props: MyAppProps) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 
   return (
     <CacheProvider value={emotionCache}>
       <Head>
         <title>Fine Attire</title>
-        <meta name='viewport' content='initial-scale=1, width=device-width' />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -42,5 +42,5 @@ export default function MyApp(props: MyAppProps) {
         </QueryClientProvider>
       </ThemeProvider>
     </CacheProvider>
-  );
+  )
 }

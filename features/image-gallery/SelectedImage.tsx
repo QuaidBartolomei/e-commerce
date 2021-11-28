@@ -1,15 +1,15 @@
-import Link from 'components/Link';
-import Image from 'next/image';
-import React from 'react';
-import { useImageGalleryState } from './ImageGalleryState';
+import Link from 'components/Link'
+import Image from 'next/image'
+import React from 'react'
+import { useImageGalleryState } from './ImageGalleryState'
 
 export default function SelectedImage() {
-  const { selectedImage } = useImageGalleryState();
+  const { selectedImage } = useImageGalleryState()
   return (
     <Link
       href={selectedImage}
-      rel='noreferrer noopener'
-      target='_blank'
+      rel="noreferrer noopener"
+      target="_blank"
       sx={{
         display: 'flex',
         justifyContent: 'center',
@@ -35,11 +35,11 @@ export default function SelectedImage() {
     >
       <Image
         src={selectedImage}
-        layout='fill'
-        objectFit='contain'
-        alt='product'
+        layout="fill"
+        objectFit="contain"
+        alt="product"
         unoptimized
       />
     </Link>
-  );
+  )
 }

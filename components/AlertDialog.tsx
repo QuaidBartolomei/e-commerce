@@ -1,15 +1,15 @@
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogTitle from '@mui/material/DialogTitle';
-import React, { useState } from 'react';
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogTitle from '@mui/material/DialogTitle'
+import React, { useState } from 'react'
 
 interface Props {
-  open?: boolean;
-  title?: string;
-  text?: string;
-  onCancel?: () => void;
-  onConfirm: () => void;
+  open?: boolean
+  title?: string
+  text?: string
+  onCancel?: () => void
+  onConfirm: () => void
 }
 
 export default function AlertDialog(props: Props) {
@@ -19,25 +19,25 @@ export default function AlertDialog(props: Props) {
     text = 'Confirm',
     onCancel,
     onConfirm,
-  } = props;
+  } = props
 
-  const [openState, setOpenState] = useState(open);
+  const [openState, setOpenState] = useState(open)
 
   return (
     <Dialog
       open={openState}
       onClose={onCancel}
-      aria-labelledby='alert-dialog-title'
+      aria-labelledby="alert-dialog-title"
     >
-      <DialogTitle id='alert-dialog-title'>{title}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogActions>
-        <Button onClick={() => setOpenState(false)} color='primary'>
+        <Button onClick={() => setOpenState(false)} color="primary">
           Cancel
         </Button>
-        <Button onClick={onConfirm} color='primary' autoFocus>
+        <Button onClick={onConfirm} color="primary" autoFocus>
           {text}
         </Button>
       </DialogActions>
     </Dialog>
-  );
+  )
 }

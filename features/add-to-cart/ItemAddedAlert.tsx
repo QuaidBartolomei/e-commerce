@@ -1,21 +1,21 @@
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
-import React from 'react';
+import Alert from '@mui/material/Alert'
+import Snackbar from '@mui/material/Snackbar'
+import React from 'react'
 
 export type ItemAddedAlertProps = {
-  show?: boolean;
-};
+  show?: boolean
+}
 
 export default function ItemAddedAlert({ show = false }: ItemAddedAlertProps) {
-  const [showAlert, setShowAlert] = React.useState(false);
+  const [showAlert, setShowAlert] = React.useState(false)
 
   React.useEffect(() => {
-    setShowAlert(show);
-  }, [show]);
+    setShowAlert(show)
+  }, [show])
 
   function handleClose(event?: React.SyntheticEvent, reason?: string) {
-    if (reason === 'clickaway') return;
-    setShowAlert(false);
+    if (reason === 'clickaway') return
+    setShowAlert(false)
   }
 
   return (
@@ -30,12 +30,12 @@ export default function ItemAddedAlert({ show = false }: ItemAddedAlertProps) {
     >
       <Alert
         elevation={6}
-        variant='filled'
+        variant="filled"
         onClose={handleClose}
-        severity='success'
+        severity="success"
       >
         Item added to cart!
       </Alert>
     </Snackbar>
-  );
+  )
 }

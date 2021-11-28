@@ -1,2 +1,2 @@
-import RemoveButton from './RemoveButton';
-export { RemoveButton };
+import RemoveButton from './RemoveButton'
+export { RemoveButton }

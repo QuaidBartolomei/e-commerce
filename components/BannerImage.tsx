@@ -1,16 +1,16 @@
-import Paper from '@mui/material/Paper';
-import React from 'react';
-import { theme } from 'utils/_theme';
+import Paper from '@mui/material/Paper'
+import React from 'react'
+import { theme } from 'utils/_theme'
 
-const bannerImage = 'assets/banner.jpg';
+const bannerImage = 'assets/banner.jpg'
 const gradientColors: string[] = [
   theme.palette.primary.main + '91',
   theme.palette.primary.dark + 'bf',
-];
+]
 
 const backgroundGradient = `linear-gradient(to top,
   ${gradientColors.join(',')}),
-  url("${bannerImage}")`;
+  url("${bannerImage}")`
 
 export default function BannerImage() {
   return (
@@ -25,5 +25,5 @@ export default function BannerImage() {
       }}
       square={true}
     ></Paper>
-  );
+  )
 }

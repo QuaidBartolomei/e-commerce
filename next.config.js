@@ -6,4 +6,4 @@ module.exports = {
       'https://firebasestorage.googleapis.com/',
     ],
   },
-};
+}

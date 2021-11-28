@@ -1,11 +1,11 @@
-import React, { PropsWithChildren } from 'react';
-import Box from '@mui/material/Box';
-import ButtonBase from '@mui/material/ButtonBase';
+import React, { PropsWithChildren } from 'react'
+import Box from '@mui/material/Box'
+import ButtonBase from '@mui/material/ButtonBase'
 
 export type ThumbnailImageProps = {
-  href: string;
-  imageUrls: string[];
-};
+  href: string
+  imageUrls: string[]
+}
 
 export default function ThumbnailImage({
   href,
@@ -41,5 +41,5 @@ export default function ThumbnailImage({
         }}
       />
     </ButtonBase>
-  );
+  )
 }

@@ -1,15 +1,15 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from 'redux/store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from 'redux/store'
 
 export interface CartPageState {
-  itemToRemove: string;
+  itemToRemove: string
 }
 const initialState: CartPageState = {
   itemToRemove: '',
-};
+}
 
 export const selectItemToRemove = (state: RootState) =>
-  state.cartPage.itemToRemove;
+  state.cartPage.itemToRemove
 
 export const cartPageSlice = createSlice({
   name: 'cartPage',
@@ -17,11 +17,11 @@ export const cartPageSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     setItemToRemove: (state, action: PayloadAction<string>) => {
-      state.itemToRemove = action.payload;
+      state.itemToRemove = action.payload
     },
   },
-});
+})
 
-export const { setItemToRemove } = cartPageSlice.actions;
+export const { setItemToRemove } = cartPageSlice.actions
 
-export default cartPageSlice.reducer;
+export default cartPageSlice.reducer

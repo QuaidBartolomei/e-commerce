@@ -1,15 +1,15 @@
-import TextField, { TextFieldProps } from '@mui/material/TextField';
-import { useField } from 'formik';
-import React from 'react';
+import TextField, { TextFieldProps } from '@mui/material/TextField'
+import { useField } from 'formik'
+import React from 'react'
 
 export type FormikTextFieldProps = {
   // props
-} & TextFieldProps;
+} & TextFieldProps
 
 export function FormikTextField(props: FormikTextFieldProps) {
-  const { name = 'MISSING_NAME' } = props;
-  const [field, meta,helpers] = useField(name);
-  const { touched, error } = meta;
+  const { name = 'MISSING_NAME' } = props
+  const [field, meta, helpers] = useField(name)
+  const { touched, error } = meta
   return (
     <TextField
       {...props}
@@ -17,5 +17,5 @@ export function FormikTextField(props: FormikTextFieldProps) {
       error={touched && Boolean(error)}
       helperText={touched && error}
     />
-  );
+  )
 }

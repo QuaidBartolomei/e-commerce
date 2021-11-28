@@ -1,16 +1,16 @@
-import type { Config } from '@jest/types';
-import type { InitialOptionsTsJest } from 'ts-jest/dist/types';
+import type { Config } from '@jest/types'
+import type { InitialOptionsTsJest } from 'ts-jest/dist/types'
 
 // there are some typing issues in the jest/types library we fix here
 type JestConfig = Omit<InitialOptionsTsJest, 'projects'> & {
   projects?: Partial<
     | (Omit<Omit<Config.ProjectConfig, 'transfrom'>, 'moduleNameMapper'> & {
-        transform: any;
-        moduleNameMapper: Record<any, any>;
+        transform: any
+        moduleNameMapper: Record<any, any>
       })
     | Config.Glob
-  >[];
-};
+  >[]
+}
 
 const config: JestConfig = {
   modulePaths: ['<rootDir>', '<rootDir>/node_modules/'],
@@ -50,6 +50,6 @@ const config: JestConfig = {
   setupFiles: ['jest-localstorage-mock'],
 
   resetMocks: false,
-};
+}
 
-export default config;
+export default config

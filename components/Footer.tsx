@@ -1,19 +1,19 @@
-import Box, { BoxProps } from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import React from 'react';
-import { theme } from 'utils/_theme';
+import Box, { BoxProps } from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import React from 'react'
+import { theme } from 'utils/_theme'
 
 export type FooterProps = {
-  copyright?: string;
+  copyright?: string
 } & BoxProps
 
 export function Footer(props: FooterProps) {
-  const { copyright, className = '', children, ...boxProps } = props;
-  const currentYear = React.useMemo(() => new Date().getFullYear(), []);
+  const { copyright, className = '', children, ...boxProps } = props
+  const currentYear = React.useMemo(() => new Date().getFullYear(), [])
 
   return (
     <Box
-      component='footer'
+      component="footer"
       sx={{
         height: 100,
         width: '100%',
@@ -23,7 +23,7 @@ export function Footer(props: FooterProps) {
         alignItems: 'center',
         justifyContent: 'center',
         color: 'white',
-        mt:4
+        mt: 4,
       }}
       {...boxProps}
     >
@@ -34,5 +34,5 @@ export function Footer(props: FooterProps) {
         </Typography>
       )}
     </Box>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-import Box from '@mui/material/Box';
-import ButtonBase, { ButtonBaseProps } from '@mui/material/ButtonBase';
-import React from 'react';
+import Box from '@mui/material/Box'
+import ButtonBase, { ButtonBaseProps } from '@mui/material/ButtonBase'
+import React from 'react'
 
 export type ImageButtonProps = {
-  src: string;
-} & ButtonBaseProps;
+  src: string
+} & ButtonBaseProps
 
 export default function ImageButton({ src, ...buttonProps }: ImageButtonProps) {
   return (
@@ -22,5 +22,5 @@ export default function ImageButton({ src, ...buttonProps }: ImageButtonProps) {
         }}
       />
     </ButtonBase>
-  );
+  )
 }

@@ -1,18 +1,18 @@
-import Box, { BoxProps } from '@mui/material/Box';
-import React from 'react';
-import { ImageGalleryProvider } from './ImageGalleryState';
-import SelectedImage from './SelectedImage';
-import ThumbnailGrid from './ThumbnailGrid';
+import Box, { BoxProps } from '@mui/material/Box'
+import React from 'react'
+import { ImageGalleryProvider } from './ImageGalleryState'
+import SelectedImage from './SelectedImage'
+import ThumbnailGrid from './ThumbnailGrid'
 
 type ImageGalleryProps = {
-  imageUrls: string[];
-} & BoxProps;
+  imageUrls: string[]
+} & BoxProps
 
 export default function ImageGallery(props: ImageGalleryProps) {
-  const { imageUrls, className, children, ...boxProps } = props;
+  const { imageUrls, className, children, ...boxProps } = props
   const filteredUrls = React.useMemo(() => {
-    return imageUrls.filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
-  }, [imageUrls]);
+    return imageUrls.filter((v, i, a) => a.indexOf(v) === i) // remove duplicates
+  }, [imageUrls])
   return (
     <ImageGalleryProvider imageUrls={filteredUrls}>
       <Box
@@ -27,5 +27,5 @@ export default function ImageGallery(props: ImageGalleryProps) {
         <ThumbnailGrid />
       </Box>
     </ImageGalleryProvider>
-  );
+  )
 }

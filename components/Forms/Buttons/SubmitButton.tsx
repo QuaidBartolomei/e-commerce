@@ -1,21 +1,20 @@
-import Button, { ButtonProps } from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import DoneIcon from '@mui/icons-material/Done';
-import SendIcon from '@mui/icons-material/Send';
-import React from 'react';
+import Button, { ButtonProps } from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
+import DoneIcon from '@mui/icons-material/Done'
+import SendIcon from '@mui/icons-material/Send'
+import React from 'react'
 
-
-export type SubmitStatus = 'ready' | 'submitting' | 'done';
+export type SubmitStatus = 'ready' | 'submitting' | 'done'
 
 type StateOptions = {
-  text: string;
-  icon: JSX.Element;
-};
+  text: string
+  icon: JSX.Element
+}
 
 interface SubmitButtonOptions {
-  ready: StateOptions;
-  submitting: StateOptions;
-  done: StateOptions;
+  ready: StateOptions
+  submitting: StateOptions
+  done: StateOptions
 }
 
 const defaultOptions: SubmitButtonOptions = {
@@ -31,19 +30,19 @@ const defaultOptions: SubmitButtonOptions = {
     text: 'Done',
     icon: <DoneIcon />,
   },
-};
+}
 
 export type SubmitButtonProps = ButtonProps & {
-  status?: SubmitStatus;
-  options?: Partial<SubmitButtonOptions>;
-};
+  status?: SubmitStatus
+  options?: Partial<SubmitButtonOptions>
+}
 
 export default function SubmitButton({
   status = 'ready',
   options,
   ...buttonProps
 }: SubmitButtonProps) {
-  const newOptions = { ...defaultOptions, ...options };
+  const newOptions = { ...defaultOptions, ...options }
 
   const states = {
     ready: {
@@ -64,18 +63,18 @@ export default function SubmitButton({
         backgroundColor: 'success.main',
       },
     },
-  };
-  const { children, ...props } = states[status];
+  }
+  const { children, ...props } = states[status]
 
   return (
     <Button
-      variant='contained'
-      color='primary'
-      type='submit'
+      variant="contained"
+      color="primary"
+      type="submit"
       {...buttonProps}
       {...props}
     >
       {children}
     </Button>
-  );
+  )
 }

@@ -1,19 +1,19 @@
-import Badge from '@mui/material/Badge';
-import Link from 'components/Link';
-import ShoppingCart from '@mui/icons-material/ShoppingCart';
-import React, { useEffect } from 'react';
-import routes from 'utils/routes';
-import { useAppSelector } from 'redux/hooks';
-import { selectCart } from 'features/user/userSlice';
+import Badge from '@mui/material/Badge'
+import Link from 'components/Link'
+import ShoppingCart from '@mui/icons-material/ShoppingCart'
+import React, { useEffect } from 'react'
+import routes from 'utils/routes'
+import { useAppSelector } from 'redux/hooks'
+import { selectCart } from 'features/user/userSlice'
 
 const ShoppingCartIconButton = () => {
-  const cart = useAppSelector(selectCart);
-  const [cartSize, setCartSize] = React.useState(0);
+  const cart = useAppSelector(selectCart)
+  const [cartSize, setCartSize] = React.useState(0)
 
   useEffect(() => {
-    const newCartSize = cart.reduce((total, x) => total + x.quantity, 0);
-    setCartSize(newCartSize), [cart];
-  }, [setCartSize, cart]);
+    const newCartSize = cart.reduce((total, x) => total + x.quantity, 0)
+    setCartSize(newCartSize), [cart]
+  }, [setCartSize, cart])
 
   return (
     <Link
@@ -21,13 +21,13 @@ const ShoppingCartIconButton = () => {
         pr: 1,
       }}
       href={routes.cart}
-      color='inherit'
+      color="inherit"
     >
-      <Badge badgeContent={cartSize} color='error' showZero={false}>
+      <Badge badgeContent={cartSize} color="error" showZero={false}>
         <ShoppingCart />
       </Badge>
     </Link>
-  );
-};
+  )
+}
 
-export default ShoppingCartIconButton;
+export default ShoppingCartIconButton

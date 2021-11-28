@@ -1,9 +1,9 @@
-import Box from '@mui/material/Box';
-import { Footer } from 'components/Footer';
-import React from 'react';
-import Navbar from 'components/Navbar/Navbar';
+import Box from '@mui/material/Box'
+import { Footer } from 'components/Footer'
+import React from 'react'
+import Navbar from 'components/Navbar/Navbar'
 
-const Layout: React.FC = props => {
+const Layout: React.FC = (props) => {
   return (
     <Box
       sx={{
@@ -12,7 +12,7 @@ const Layout: React.FC = props => {
         flexDirection: 'column',
       }}
     >
-      <Navbar logoImage='/logo.svg' />
+      <Navbar logoImage="/logo.svg" />
       <Box
         sx={{
           flexGrow: 1,
@@ -23,9 +23,9 @@ const Layout: React.FC = props => {
       >
         {props.children}
       </Box>
-      <Footer copyright='Fine Attire' />
+      <Footer copyright="Fine Attire" />
     </Box>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

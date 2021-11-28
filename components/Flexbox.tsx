@@ -1,13 +1,13 @@
-import React from 'react';
-import Box, { BoxProps } from '@mui/material/Box';
+import React from 'react'
+import Box, { BoxProps } from '@mui/material/Box'
 
 export type FlexboxProps = {
-  wrap?: boolean;
-  dir?: 'row' | 'col' | 'column';
-  justify?: 'start' | 'end' | 'center';
-  align?: 'start' | 'end' | 'center';
-  grow?: number | boolean;
-} & BoxProps;
+  wrap?: boolean
+  dir?: 'row' | 'col' | 'column'
+  justify?: 'start' | 'end' | 'center'
+  align?: 'start' | 'end' | 'center'
+  grow?: number | boolean
+} & BoxProps
 
 export function Flexbox(props: FlexboxProps) {
   const {
@@ -19,21 +19,21 @@ export function Flexbox(props: FlexboxProps) {
     children,
     sx,
     ...boxProps
-  } = props;
+  } = props
 
-  const flexDirection = dir === 'col' || dir === 'column' ? 'column' : dir;
+  const flexDirection = dir === 'col' || dir === 'column' ? 'column' : dir
 
   const justifyContent =
     justify === 'start'
       ? 'flex-start'
       : justify === 'end'
       ? 'flex-end'
-      : justify;
+      : justify
 
   const alignItems =
-    align === 'start' ? 'flex-start' : align === 'end' ? 'flex-end' : align;
+    align === 'start' ? 'flex-start' : align === 'end' ? 'flex-end' : align
 
-  const flexGrow = grow === true ? 1 : grow === false ? 0 : grow;
+  const flexGrow = grow === true ? 1 : grow === false ? 0 : grow
 
   return (
     <Box
@@ -50,25 +50,25 @@ export function Flexbox(props: FlexboxProps) {
     >
       {children}
     </Box>
-  );
+  )
 }
 
-export type FlexRowProps = FlexboxProps;
+export type FlexRowProps = FlexboxProps
 export function FlexRow(props: FlexRowProps) {
-  const { children, ...otherProps } = props;
+  const { children, ...otherProps } = props
   return (
-    <Flexbox dir='row' {...otherProps}>
+    <Flexbox dir="row" {...otherProps}>
       {children}
     </Flexbox>
-  );
+  )
 }
 
-export type FlexColProps = FlexboxProps;
+export type FlexColProps = FlexboxProps
 export function FlexCol(props: FlexColProps) {
-  const { children, ...otherProps } = props;
+  const { children, ...otherProps } = props
   return (
-    <Flexbox dir='col' {...otherProps}>
+    <Flexbox dir="col" {...otherProps}>
       {children}
     </Flexbox>
-  );
+  )
 }

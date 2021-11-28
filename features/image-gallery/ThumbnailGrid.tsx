@@ -1,10 +1,10 @@
-import Box from '@mui/material/Box';
-import React from 'react';
-import { useImageGalleryState } from './ImageGalleryState';
-import ThumbnailImage from './ThumbnailImage';
+import Box from '@mui/material/Box'
+import React from 'react'
+import { useImageGalleryState } from './ImageGalleryState'
+import ThumbnailImage from './ThumbnailImage'
 
 const ThumbnailGrid = () => {
-  const { selectedImage, imageUrls } = useImageGalleryState();
+  const { selectedImage, imageUrls } = useImageGalleryState()
 
   return (
     <Box
@@ -26,7 +26,7 @@ const ThumbnailGrid = () => {
         />
       ))}
     </Box>
-  );
-};
+  )
+}
 
-export default ThumbnailGrid;
+export default ThumbnailGrid
