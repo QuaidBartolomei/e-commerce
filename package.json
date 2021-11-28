@@ -7,6 +7,7 @@
     "cypress": "cypress open",
     "dev": "next dev",
     "format": "prettier ./ --write --ignore-unknown",
+    "lint": "eslint . --fix --cache",
     "prepare": "husky install",
     "start": "next start",
     "test": "jest --watch",
