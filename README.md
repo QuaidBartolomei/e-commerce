@@ -4,14 +4,16 @@
 <br />
 <p align="center">
 
-  <h3 align="center">Fine Attire</h3>
+ <h1 align="center">Fine Attire</h3>
+
+[ ![Screenshot](cypress/screenshots/index.spec.ts/screenshot.png) ](https://e-commerce-indol.vercel.app)
+
   <p align="center">
 E-commerce example project made with NextJs, Typescript, Material-UI, and Firebase
-<br />
-<br />
-<a href="https://e-commerce-indol.vercel.app">View Demo</a>
-
-</p>
+    <br />
+    <br />
+    <a href="https://e-commerce-indol.vercel.app">View Demo</a>
+  </p>
 
 ### Table of Contents
 
