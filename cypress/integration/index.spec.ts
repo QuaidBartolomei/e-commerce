@@ -12,6 +12,7 @@ describe('Navigation', () => {
     cy.get(`a[href*="${routes.item(itemId)}"]`).click()
 
     // The new url should include "/about"
-    cy.url().should('include', '/item')
+    cy.url().should('contain', '/item')
+    cy.screenshot('screenshot')
   })
 })
